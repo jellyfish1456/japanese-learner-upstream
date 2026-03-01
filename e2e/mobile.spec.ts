@@ -245,11 +245,13 @@ test.describe("Mobile - Scrolling", () => {
 });
 
 test.describe("Mobile - Height & Content Fit", () => {
-  test("study page uses dynamic viewport height (dvh)", async ({ page }) => {
+  test("study page uses fixed dynamic viewport height (dvh)", async ({ page }) => {
     await goToStudySession(page);
     const container = page.locator("main > div.flex.flex-col");
     const style = await container.getAttribute("style");
     expect(style).toContain("100dvh");
+    // Should use height (not minHeight) to prevent overflow scrolling
+    expect(style).toMatch(/\bheight:/);
   });
 
   test("flashcard has minimum height for readability", async ({ page }) => {
@@ -265,6 +267,35 @@ test.describe("Mobile - Height & Content Fit", () => {
     await goToStudySession(page);
     // Progress counter should be visible
     await expect(page.getByText(/^0\s*\/\s*3$/)).toBeVisible();
+  });
+
+  test("progress bar remains visible after flipping and rating cards", async ({ page }) => {
+    await goToStudySession(page);
+    await expect(page.getByText(/^0\s*\/\s*3$/)).toBeVisible();
+
+    // Flip card and check progress bar is still in viewport
+    await page.locator(".perspective").tap();
+    await expect(page.getByRole("button", { name: "記住了" })).toBeVisible();
+    await expect(page.getByText(/^0\s*\/\s*3$/)).toBeInViewport();
+
+    // Rate the card and check progress bar on next card
+    await page.getByRole("button", { name: "記住了" }).tap();
+    await page.waitForTimeout(300);
+    await expect(page.getByText(/^1\s*\/\s*3$/)).toBeInViewport();
+
+    // Flip and rate the second card
+    await page.locator(".perspective").tap();
+    await expect(page.getByText(/^1\s*\/\s*3$/)).toBeInViewport();
+    await page.getByRole("button", { name: "還好" }).tap();
+    await page.waitForTimeout(300);
+    await expect(page.getByText(/^2\s*\/\s*3$/)).toBeInViewport();
+  });
+
+  test("page is not scrollable during study session on mobile", async ({ page }) => {
+    await goToStudySession(page);
+    // Body overflow should be hidden to prevent accidental scroll
+    const overflow = await page.evaluate(() => document.body.style.overflow);
+    expect(overflow).toBe("hidden");
   });
 
   test("learn page card and buttons fit within viewport", async ({ page }) => {

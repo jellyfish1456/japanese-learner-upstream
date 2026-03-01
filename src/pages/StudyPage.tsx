@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useDatasetById } from "../hooks/useDatasets";
 import { useStudySession } from "../hooks/useStudySession";
@@ -64,6 +65,17 @@ export default function StudyPage() {
 
   const { settings } = useSettings();
 
+  // Prevent page-level scrolling during study session.
+  // On mobile, min-h-screen (100vh) > 100dvh causing scrollable overflow.
+  // Accidental scroll while tapping/swiping can push the progress bar out of view.
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, []);
+
   const { targetRef: swipeRef, swipeState } = useSwipe({
     onSwipe: rate,
     enabled: !isSessionComplete && !!currentCard,
@@ -126,10 +138,10 @@ export default function StudyPage() {
   const modeLabel = isMultiMode && currentModeLabel ? MODE_LABELS[currentModeLabel] ?? currentModeLabel : undefined;
 
   return (
-    <div className="flex flex-col" style={{ minHeight: "calc(100dvh - 56px - 48px)" }}>
+    <div className="flex flex-col" style={{ height: "calc(100dvh - 56px - 48px)" }}>
       <ProgressBar current={currentIndex} total={totalCards} modeLabel={modeLabel} />
 
-      <div key={currentIndex} className="slide-in flex-1" ref={swipeRef}>
+      <div key={currentIndex} className="slide-in flex-1 min-h-0" ref={swipeRef}>
         <Flashcard
           content={currentCard.flashcard}
           isFlipped={isFlipped}
