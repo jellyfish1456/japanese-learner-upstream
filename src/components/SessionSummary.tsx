@@ -5,10 +5,21 @@ interface SessionSummaryProps {
   onStudyAgain: () => void;
   onGoHome: () => void;
   nextAction?: { label: string; onClick: () => void };
+  uniqueCardCount?: number;
+  modesCount?: number;
 }
 
-export default function SessionSummary({ result, onStudyAgain, onGoHome, nextAction }: SessionSummaryProps) {
+export default function SessionSummary({
+  result,
+  onStudyAgain,
+  onGoHome,
+  nextAction,
+  uniqueCardCount,
+  modesCount,
+}: SessionSummaryProps) {
   const { total, good, hard, again } = result;
+
+  const isMultiMode = uniqueCardCount != null && modesCount != null && modesCount > 1;
 
   return (
     <div className="text-center">
@@ -33,7 +44,11 @@ export default function SessionSummary({ result, onStudyAgain, onGoHome, nextAct
 
       {/* Progress bar */}
       <div className="mb-8">
-        <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">本次共複習 {total} 張卡片</div>
+        <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+          {isMultiMode
+            ? `${uniqueCardCount} 張卡片 × ${modesCount} 種模式 = ${total} 次測驗`
+            : `本次共複習 ${total} 張卡片`}
+        </div>
         <div className="flex h-3 rounded-full overflow-hidden bg-gray-100 dark:bg-gray-700">
           {good > 0 && (
             <div

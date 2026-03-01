@@ -4,6 +4,10 @@ import {
   saveProgress,
   loadSettings,
   saveSettings,
+  makeProgressKey,
+  parseProgressKey,
+  loadTestModes,
+  saveTestModes,
 } from "../storage";
 import type { ProgressStore } from "../../types";
 
@@ -103,5 +107,69 @@ describe("storage - settings", () => {
   it("should persist showSwipeAssist as false", () => {
     saveSettings({ defaultSessionSize: 20, showSwipeAssist: false });
     expect(loadSettings().showSwipeAssist).toBe(false);
+  });
+});
+
+describe("makeProgressKey / parseProgressKey", () => {
+  it("should return plain cardId when no mode provided", () => {
+    expect(makeProgressKey("card-1")).toBe("card-1");
+  });
+
+  it("should return composite key when mode provided", () => {
+    expect(makeProgressKey("card-1", "kanji-to-chinese")).toBe("card-1::kanji-to-chinese");
+  });
+
+  it("should parse plain cardId", () => {
+    expect(parseProgressKey("card-1")).toEqual({ cardId: "card-1" });
+  });
+
+  it("should parse composite key", () => {
+    expect(parseProgressKey("card-1::kanji-to-chinese")).toEqual({
+      cardId: "card-1",
+      mode: "kanji-to-chinese",
+    });
+  });
+
+  it("should handle cardId containing colons", () => {
+    // Only the first :: is the separator
+    expect(parseProgressKey("a::b::c")).toEqual({ cardId: "a", mode: "b::c" });
+  });
+});
+
+describe("storage - test modes", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("should return null when no modes stored", () => {
+    expect(loadTestModes("vocabulary")).toBeNull();
+  });
+
+  it("should save and load a single mode string", () => {
+    saveTestModes("vocabulary", "kanji-to-chinese");
+    expect(loadTestModes("vocabulary")).toBe("kanji-to-chinese");
+  });
+
+  it("should save and load an array of modes", () => {
+    saveTestModes("vocabulary", ["kanji-to-chinese", "hiragana-to-chinese"]);
+    expect(loadTestModes("vocabulary")).toEqual(["kanji-to-chinese", "hiragana-to-chinese"]);
+  });
+
+  it("should store modes per category independently", () => {
+    saveTestModes("vocabulary", "kanji-to-chinese");
+    saveTestModes("grammar", ["grammar-to-chinese", "fill-in-grammar"]);
+    expect(loadTestModes("vocabulary")).toBe("kanji-to-chinese");
+    expect(loadTestModes("grammar")).toEqual(["grammar-to-chinese", "fill-in-grammar"]);
+  });
+
+  it("should handle corrupted JSON gracefully", () => {
+    localStorage.setItem("jp-learner:test-mode", "not valid json{{{");
+    expect(loadTestModes("vocabulary")).toBeNull();
+  });
+
+  it("should be backward compatible with old single-string format", () => {
+    // Simulate old format stored by saveTestMode
+    localStorage.setItem("jp-learner:test-mode", JSON.stringify({ vocabulary: "random" }));
+    expect(loadTestModes("vocabulary")).toBe("random");
   });
 });

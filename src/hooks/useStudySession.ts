@@ -14,16 +14,18 @@ import { useProgress } from "./useProgress";
 import { isDue } from "../lib/sm2";
 import { shuffle } from "../lib/shuffle";
 import { buildVocabCard, buildGrammarCard } from "../lib/flashcard";
+import { makeProgressKey } from "../lib/storage";
 
 interface StudyCard {
   item: DataItem;
   flashcard: FlashcardContent;
   exampleIndex?: number;
+  mode?: string; // The concrete mode used for this presentation
 }
 
 export function useStudySession(
   dataset: LoadedDataset | undefined,
-  mode: TestMode,
+  modes: string | string[],
   sessionSize: number,
   sessionType: SessionType = "due",
   specificCardIds?: string[],
@@ -31,48 +33,100 @@ export function useStudySession(
   const { progress, rateCard } = useProgress();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
-  const [results, setResults] = useState<{ cardId: string; rating: Rating }[]>([]);
+  const [results, setResults] = useState<{ cardId: string; rating: Rating; mode?: string }[]>([]);
   const [requeue, setRequeue] = useState<StudyCard[]>([]);
   const [isComplete, setIsComplete] = useState(false);
 
-  // Build the initial card queue
+  // Determine if this is a multi-mode session
+  const isMultiMode = Array.isArray(modes) && modes.length > 1;
+  const modeArray = Array.isArray(modes) ? modes : [modes];
+
+  // Build the initial card queue.
+  //
+  // Single-mode: each item produces one StudyCard.
+  // Multi-mode (綜合模式): each item produces N StudyCards (one per mode).
+  //   Cards are grouped by mode in canonical order so the user practices
+  //   one skill at a time — e.g. all 漢字→中文 first, then 假名→中文,
+  //   then 中文→日文. Items are shuffled within each mode group.
+  //   Only the specific failed (card, mode) pair is requeued on "again".
   const initialCards: StudyCard[] = useMemo(() => {
     if (!dataset) return [];
 
+    const resolvedModes = Array.isArray(modes) ? modes : [modes];
+
     if (specificCardIds) {
-      // Specific card IDs — filter and preserve order from specificCardIds
+      // Specific card IDs — filter and preserve order
       const idToOrder = new Map(specificCardIds.map((id, i) => [id, i]));
       const filtered = dataset.data
         .filter((item) => idToOrder.has(item.id))
         .sort((a, b) => (idToOrder.get(a.id) ?? 0) - (idToOrder.get(b.id) ?? 0));
+
+      if (resolvedModes.length > 1) {
+        // Multi-mode: group by mode in canonical order, items shuffled within each group
+        const shuffledFiltered = shuffle(filtered);
+        const cards: StudyCard[] = [];
+        for (const m of resolvedModes) {
+          for (const item of shuffledFiltered) {
+            const flashcard = buildCard(item, dataset.category, m as TestMode);
+            cards.push({ item, flashcard, mode: m });
+          }
+        }
+        return cards;
+      }
+
       return filtered.map((item) => {
-        const flashcard = buildCard(item, dataset.category, mode);
-        return { item, flashcard };
+        const flashcard = buildCard(item, dataset.category, resolvedModes[0] as TestMode);
+        return { item, flashcard, mode: resolvedModes[0] };
       });
     }
 
     // Filter cards based on session type
-    const items =
-      sessionType === "random"
-        ? dataset.data // All cards for random mode
-        : dataset.data.filter((item) => isDue(progress[item.id])); // Only due cards
+    let items: DataItem[];
+    if (sessionType === "random") {
+      items = dataset.data;
+    } else if (resolvedModes.length > 1) {
+      // Multi-mode due: card is due if ANY mode's composite key is due
+      items = dataset.data.filter((item) =>
+        resolvedModes.some((m) => isDue(progress[makeProgressKey(item.id, m)])),
+      );
+    } else {
+      items = dataset.data.filter((item) => isDue(progress[item.id]));
+    }
 
     const shuffled = shuffle(items);
     const selected = shuffled.slice(0, sessionSize);
 
+    if (resolvedModes.length > 1) {
+      // Multi-mode: group by mode in canonical order, items shuffled within each group
+      const cards: StudyCard[] = [];
+      for (const m of resolvedModes) {
+        for (const item of selected) {
+          const flashcard = buildCard(item, dataset.category, m as TestMode);
+          cards.push({ item, flashcard, mode: m });
+        }
+      }
+      return cards; // selected is already shuffled above
+    }
+
     return selected.map((item) => {
-      const flashcard = buildCard(item, dataset.category, mode);
-      return { item, flashcard };
+      const flashcard = buildCard(item, dataset.category, resolvedModes[0] as TestMode);
+      return { item, flashcard, mode: resolvedModes[0] };
     });
   // Only compute once on mount (deps intentionally exclude progress to avoid re-shuffle)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataset?.id, mode, sessionSize, sessionType]);
+  }, [dataset?.id, modes, sessionSize, sessionType]);
 
   // Combined queue: initial cards + requeued cards
   const allCards = useMemo(() => [...initialCards, ...requeue], [initialCards, requeue]);
 
   const currentCard = allCards[currentIndex] as StudyCard | undefined;
   const totalCards = allCards.length;
+
+  // Unique card count (for multi-mode summary)
+  const uniqueCardCount = useMemo(() => {
+    const ids = new Set(initialCards.map((c) => c.item.id));
+    return ids.size;
+  }, [initialCards]);
 
   const flip = useCallback(() => {
     setIsFlipped((prev) => !prev);
@@ -83,10 +137,14 @@ export function useStudySession(
       if (!currentCard || !dataset) return;
 
       const cardId = currentCard.item.id;
-      rateCard(cardId, dataset.id, rating);
-      setResults((prev) => [...prev, { cardId, rating }]);
+      const cardMode = currentCard.mode;
 
-      // Re-queue "again" cards
+      // Use composite key for multi-mode, plain cardId for single-mode
+      const progressKey = isMultiMode && cardMode ? makeProgressKey(cardId, cardMode) : cardId;
+      rateCard(progressKey, dataset.id, rating);
+      setResults((prev) => [...prev, { cardId, rating, mode: cardMode }]);
+
+      // Re-queue "again" cards — only the failed (card, mode) presentation
       if (rating === "again") {
         setRequeue((prev) => [...prev, currentCard]);
       }
@@ -102,11 +160,14 @@ export function useStudySession(
       setCurrentIndex(nextIndex);
       setIsFlipped(false);
     },
-    [currentCard, dataset, currentIndex, allCards.length, totalCards, rateCard],
+    [currentCard, dataset, currentIndex, allCards.length, totalCards, rateCard, isMultiMode],
   );
 
   // Check completion whenever currentIndex changes
   const isSessionComplete = isComplete || (currentIndex >= allCards.length && allCards.length > 0);
+
+  // Current mode label for display
+  const currentModeLabel = currentCard?.mode;
 
   const sessionResult: SessionResult = useMemo(() => {
     const good = results.filter((r) => r.rating === "good").length;
@@ -124,6 +185,10 @@ export function useStudySession(
     sessionResult,
     flip,
     rate,
+    isMultiMode,
+    currentModeLabel,
+    uniqueCardCount,
+    modesCount: modeArray.length,
   };
 }
 

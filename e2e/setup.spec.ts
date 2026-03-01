@@ -14,13 +14,41 @@ test.describe("Setup Page - Vocabulary", () => {
     await expect(page.getByText("3 張卡片")).toBeVisible();
   });
 
-  test("should display vocab test mode options", async ({ page }) => {
-    const select = page.getByRole("combobox");
-    await expect(select).toBeVisible();
-    await expect(select).toContainText("漢字 → 中文");
-    await expect(select).toContainText("假名 → 中文");
-    await expect(select).toContainText("中文 → 日文");
-    await expect(select).toContainText("隨機");
+  test("should display vocab test mode chips", async ({ page }) => {
+    await expect(page.getByTestId("mode-chip-all")).toBeVisible();
+    await expect(page.getByTestId("mode-chip-kanji-to-chinese")).toBeVisible();
+    await expect(page.getByTestId("mode-chip-hiragana-to-chinese")).toBeVisible();
+    await expect(page.getByTestId("mode-chip-chinese-to-japanese")).toBeVisible();
+    await expect(page.getByTestId("mode-chip-random")).toBeVisible();
+  });
+
+  test("should allow multi-select of mode chips", async ({ page }) => {
+    // Click hiragana-to-chinese (already has kanji-to-chinese selected by default)
+    await page.getByTestId("mode-chip-hiragana-to-chinese").click();
+
+    // Both should be active (dark bg)
+    await expect(page.getByTestId("mode-chip-kanji-to-chinese")).toHaveClass(/bg-gray-900|dark:bg-white/);
+    await expect(page.getByTestId("mode-chip-hiragana-to-chinese")).toHaveClass(/bg-gray-900|dark:bg-white/);
+  });
+
+  test("should toggle all modes with all-mode chip", async ({ page }) => {
+    await page.getByTestId("mode-chip-all").click();
+
+    // All concrete mode chips should be active
+    await expect(page.getByTestId("mode-chip-kanji-to-chinese")).toHaveClass(/bg-gray-900/);
+    await expect(page.getByTestId("mode-chip-hiragana-to-chinese")).toHaveClass(/bg-gray-900/);
+    await expect(page.getByTestId("mode-chip-chinese-to-japanese")).toHaveClass(/bg-gray-900/);
+
+    // Multi-mode hint should be visible
+    await expect(page.getByText(/3 種模式各測驗一次/)).toBeVisible();
+  });
+
+  test("should make random mutually exclusive with concrete modes", async ({ page }) => {
+    await page.getByTestId("mode-chip-random").click();
+
+    // Random should be active, concrete modes should not
+    await expect(page.getByTestId("mode-chip-random")).toHaveClass(/bg-gray-900/);
+    await expect(page.getByTestId("mode-chip-kanji-to-chinese")).not.toHaveClass(/bg-gray-900/);
   });
 
   test("should display session size options", async ({ page }) => {
@@ -69,13 +97,12 @@ test.describe("Setup Page - Grammar", () => {
     await expect(page).toHaveURL(/\/study\/test-grammar$/);
   });
 
-  test("should display grammar test mode options", async ({ page }) => {
-    const select = page.getByRole("combobox");
-    await expect(select).toBeVisible();
-    await expect(select).toContainText("文法 → 中文");
-    await expect(select).toContainText("例句 → 中文");
-    await expect(select).toContainText("中文 → 文法");
-    await expect(select).toContainText("填空 → 文法");
-    await expect(select).toContainText("隨機");
+  test("should display grammar test mode chips", async ({ page }) => {
+    await expect(page.getByTestId("mode-chip-all")).toBeVisible();
+    await expect(page.getByTestId("mode-chip-grammar-to-chinese")).toBeVisible();
+    await expect(page.getByTestId("mode-chip-example-to-chinese")).toBeVisible();
+    await expect(page.getByTestId("mode-chip-chinese-to-grammar")).toBeVisible();
+    await expect(page.getByTestId("mode-chip-fill-in-grammar")).toBeVisible();
+    await expect(page.getByTestId("mode-chip-random")).toBeVisible();
   });
 });

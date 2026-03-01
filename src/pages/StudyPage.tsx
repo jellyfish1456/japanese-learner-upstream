@@ -8,12 +8,19 @@ import Flashcard from "../components/Flashcard";
 import RatingButtons from "../components/RatingButtons";
 import ProgressBar from "../components/ProgressBar";
 import SessionSummary from "../components/SessionSummary";
-import type { TestMode, SessionType } from "../types";
+import type { SessionType } from "../types";
+import { VOCAB_TEST_MODES, GRAMMAR_TEST_MODES } from "../types";
 
 interface ReturnTo {
   dayIndex: number;
   totalDays: number;
   datasetId: string;
+}
+
+// Build a mode value → label map for display
+const MODE_LABELS: Record<string, string> = {};
+for (const m of [...VOCAB_TEST_MODES, ...GRAMMAR_TEST_MODES]) {
+  MODE_LABELS[m.value] = m.label;
 }
 
 export default function StudyPage() {
@@ -22,14 +29,14 @@ export default function StudyPage() {
   const navigate = useNavigate();
   const dataset = useDatasetById(datasetId ?? "");
 
-  const { mode, sessionSize, sessionType, specificCardIds, returnTo } = (location.state as {
-    mode: TestMode;
+  const { modes, sessionSize, sessionType, specificCardIds, returnTo } = (location.state as {
+    modes: string | string[];
     sessionSize: number;
     sessionType?: SessionType;
     specificCardIds?: string[];
     returnTo?: ReturnTo;
   }) ?? {
-    mode: "kanji-to-chinese" as TestMode,
+    modes: "kanji-to-chinese" as string,
     sessionSize: 20,
   };
 
@@ -42,7 +49,11 @@ export default function StudyPage() {
     sessionResult,
     flip,
     rate,
-  } = useStudySession(dataset, mode, sessionSize, sessionType ?? "due", specificCardIds);
+    isMultiMode,
+    currentModeLabel,
+    uniqueCardCount,
+    modesCount,
+  } = useStudySession(dataset, modes, sessionSize, sessionType ?? "due", specificCardIds);
 
   useKeyboard({
     isFlipped,
@@ -89,6 +100,8 @@ export default function StudyPage() {
         }}
         onGoHome={() => navigate("/", { replace: true })}
         nextAction={nextAction}
+        uniqueCardCount={isMultiMode ? uniqueCardCount : undefined}
+        modesCount={isMultiMode ? modesCount : undefined}
       />
     );
   }
@@ -109,9 +122,12 @@ export default function StudyPage() {
     );
   }
 
+  // Resolve mode label for display
+  const modeLabel = isMultiMode && currentModeLabel ? MODE_LABELS[currentModeLabel] ?? currentModeLabel : undefined;
+
   return (
     <div className="flex flex-col" style={{ minHeight: "calc(100dvh - 56px - 48px)" }}>
-      <ProgressBar current={currentIndex} total={totalCards} />
+      <ProgressBar current={currentIndex} total={totalCards} modeLabel={modeLabel} />
 
       <div key={currentIndex} className="slide-in flex-1" ref={swipeRef}>
         <Flashcard

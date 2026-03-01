@@ -46,6 +46,23 @@ export type GrammarTestMode =
 
 export type TestMode = VocabTestMode | GrammarTestMode;
 
+export type ConcreteVocabTestMode = Exclude<VocabTestMode, "random">;
+export type ConcreteGrammarTestMode = Exclude<GrammarTestMode, "random">;
+export type ConcreteTestMode = ConcreteVocabTestMode | ConcreteGrammarTestMode;
+
+export const CONCRETE_VOCAB_MODES: ConcreteVocabTestMode[] = [
+  "kanji-to-chinese",
+  "hiragana-to-chinese",
+  "chinese-to-japanese",
+];
+
+export const CONCRETE_GRAMMAR_MODES: ConcreteGrammarTestMode[] = [
+  "grammar-to-chinese",
+  "example-to-chinese",
+  "chinese-to-grammar",
+  "fill-in-grammar",
+];
+
 export const VOCAB_TEST_MODES: { value: VocabTestMode; label: string; description: string }[] = [
   { value: "kanji-to-chinese", label: "漢字 → 中文", description: "看漢字，回想中文意思" },
   { value: "hiragana-to-chinese", label: "假名 → 中文", description: "看假名，回想中文意思" },
@@ -106,7 +123,7 @@ export interface SessionResult {
   good: number;
   hard: number;
   again: number;
-  cards: { cardId: string; rating: Rating }[];
+  cards: { cardId: string; rating: Rating; mode?: string }[];
 }
 
 // ========== Study Plan Types ==========

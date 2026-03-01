@@ -4,7 +4,7 @@ import { useDatasetById } from "../hooks/useDatasets";
 import { useStudyPlan } from "../hooks/useStudyPlan";
 import LearnCard from "../components/LearnCard";
 import ProgressBar from "../components/ProgressBar";
-import { loadTestMode } from "../lib/storage";
+import { loadTestModes } from "../lib/storage";
 import { VOCAB_TEST_MODES, GRAMMAR_TEST_MODES } from "../types";
 
 interface LearnLocationState {
@@ -83,15 +83,23 @@ export default function LearnPage() {
   const navigateToExam = useCallback(() => {
     if (!dataset) return;
     const category = dataset.category;
-    const modes = category === "vocabulary" ? VOCAB_TEST_MODES : GRAMMAR_TEST_MODES;
-    const savedMode = loadTestMode(category);
-    const mode = (savedMode && modes.some((m) => m.value === savedMode))
-      ? savedMode
-      : modes[0].value;
+    const modeOptions = category === "vocabulary" ? VOCAB_TEST_MODES : GRAMMAR_TEST_MODES;
+    const saved = loadTestModes(category);
+
+    // Resolve modes: support both saved string and string[]
+    let resolvedModes: string | string[];
+    if (saved == null) {
+      resolvedModes = modeOptions[0].value;
+    } else if (Array.isArray(saved)) {
+      const valid = saved.filter((s) => modeOptions.some((m) => m.value === s));
+      resolvedModes = valid.length === 0 ? modeOptions[0].value : valid.length === 1 ? valid[0] : valid;
+    } else {
+      resolvedModes = modeOptions.some((m) => m.value === saved) ? saved : modeOptions[0].value;
+    }
 
     navigate(`/study/${datasetId}/session`, {
       state: {
-        mode,
+        modes: resolvedModes,
         sessionSize: dayCardIds.length,
         sessionType: "specific",
         specificCardIds: dayCardIds,

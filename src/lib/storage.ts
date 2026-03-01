@@ -43,31 +43,58 @@ export function saveSettings(settings: AppSettings): void {
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
 }
 
+// ========== Progress Key Helpers (multi-mode) ==========
+
+export function makeProgressKey(cardId: string, mode?: string): string {
+  return mode ? `${cardId}::${mode}` : cardId;
+}
+
+export function parseProgressKey(key: string): { cardId: string; mode?: string } {
+  const idx = key.indexOf("::");
+  if (idx === -1) return { cardId: key };
+  return { cardId: key.slice(0, idx), mode: key.slice(idx + 2) };
+}
+
 // ========== Test Mode Preference ==========
 
 const TEST_MODE_KEY = "jp-learner:test-mode";
 
-export function loadTestMode(category: "vocabulary" | "grammar"): string | null {
+export function loadTestModes(category: "vocabulary" | "grammar"): string | string[] | null {
   try {
     const raw = localStorage.getItem(TEST_MODE_KEY);
     if (!raw) return null;
     const stored = JSON.parse(raw);
-    return stored[category] ?? null;
+    const val = stored[category];
+    if (val == null) return null;
+    // Backward compatible: old string values still load correctly
+    return val;
   } catch {
     return null;
   }
 }
 
-export function saveTestMode(category: "vocabulary" | "grammar", mode: string): void {
+export function saveTestModes(category: "vocabulary" | "grammar", modes: string | string[]): void {
   try {
     const raw = localStorage.getItem(TEST_MODE_KEY);
     const stored = raw ? JSON.parse(raw) : {};
-    stored[category] = mode;
+    stored[category] = modes;
     localStorage.setItem(TEST_MODE_KEY, JSON.stringify(stored));
   } catch {
     // ignore
   }
 }
+
+/** @deprecated Use loadTestModes instead */
+export const loadTestMode = (category: "vocabulary" | "grammar"): string | null => {
+  const val = loadTestModes(category);
+  if (Array.isArray(val)) return val[0] ?? null;
+  return val;
+};
+
+/** @deprecated Use saveTestModes instead */
+export const saveTestMode = (category: "vocabulary" | "grammar", mode: string): void => {
+  saveTestModes(category, mode);
+};
 
 // ========== Study Plan ==========
 

@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDatasetById } from "../hooks/useDatasets";
-import { loadProgress, loadTestMode, saveTestMode } from "../lib/storage";
-import { getDatasetStats } from "../lib/stats";
+import { loadProgress, loadTestModes, saveTestModes } from "../lib/storage";
+import { getDatasetStats, getMultiModeDatasetStats } from "../lib/stats";
 import ModeSelector from "../components/ModeSelector";
 import DatasetStatsDisplay from "../components/DatasetStats";
-import type { TestMode, SessionType } from "../types";
-import { VOCAB_TEST_MODES, GRAMMAR_TEST_MODES } from "../types";
+import type { SessionType, ConcreteTestMode } from "../types";
+import {
+  VOCAB_TEST_MODES,
+  GRAMMAR_TEST_MODES,
+  CONCRETE_VOCAB_MODES,
+  CONCRETE_GRAMMAR_MODES,
+} from "../types";
 
 const SESSION_SIZES = [10, 20, 30];
 
@@ -18,15 +23,28 @@ export default function SetupPage() {
   const category = dataset?.category ?? "vocabulary";
   const isVocab = category === "vocabulary";
   const modes = isVocab ? VOCAB_TEST_MODES : GRAMMAR_TEST_MODES;
-  const savedMode = loadTestMode(category);
-  const defaultMode = (savedMode && modes.some((m) => m.value === savedMode)) ? savedMode : modes[0].value;
+  const concreteModes = isVocab ? CONCRETE_VOCAB_MODES : CONCRETE_GRAMMAR_MODES;
 
-  const [selectedMode, setSelectedMode] = useState<string>(defaultMode);
-
-  const handleModeChange = (mode: TestMode) => {
-    setSelectedMode(mode);
-    saveTestMode(category, mode);
+  const saved = loadTestModes(category);
+  // Resolve default: use saved value if it's valid, otherwise first mode
+  const resolveDefault = (): string | string[] => {
+    if (saved == null) return modes[0].value;
+    if (Array.isArray(saved)) {
+      const valid = saved.filter((s) => modes.some((m) => m.value === s));
+      if (valid.length === 0) return modes[0].value;
+      return valid.length === 1 ? valid[0] : valid;
+    }
+    if (modes.some((m) => m.value === saved)) return saved;
+    return modes[0].value;
   };
+
+  const [selectedModes, setSelectedModes] = useState<string | string[]>(resolveDefault);
+
+  const handleModeChange = (newModes: string | string[]) => {
+    setSelectedModes(newModes);
+    saveTestModes(category, newModes);
+  };
+
   const [sessionSize, setSessionSize] = useState(20);
 
   if (!dataset) {
@@ -38,11 +56,17 @@ export default function SetupPage() {
   }
 
   const progress = loadProgress();
-  const stats = getDatasetStats(dataset.data, progress);
+
+  // Use multi-mode stats when multiple concrete modes selected
+  const selectedArray = Array.isArray(selectedModes) ? selectedModes : [selectedModes];
+  const isMultiMode = selectedArray.length > 1 && !selectedArray.includes("random");
+  const stats = isMultiMode
+    ? getMultiModeDatasetStats(dataset.data, progress, selectedArray as ConcreteTestMode[])
+    : getDatasetStats(dataset.data, progress);
 
   const handleStart = (sessionType: SessionType) => {
     navigate(`/study/${datasetId}/session`, {
-      state: { mode: selectedMode, sessionSize, sessionType },
+      state: { modes: selectedModes, sessionSize, sessionType },
     });
   };
 
@@ -79,9 +103,14 @@ export default function SetupPage() {
         <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">測驗模式</h3>
         <ModeSelector
           modes={modes}
-          selected={selectedMode}
+          selected={selectedModes}
           onChange={handleModeChange}
         />
+        {isMultiMode && (
+          <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
+            每張卡片將以 {selectedArray.length} 種模式各測驗一次
+          </p>
+        )}
       </div>
 
       {/* Session size */}
