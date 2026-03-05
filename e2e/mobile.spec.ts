@@ -455,7 +455,7 @@ test.describe("Mobile - Navigation", () => {
     await page.goto("/");
     await page.getByRole("button", { name: "設定" }).tap();
     await expect(page).toHaveURL(/\/settings$/);
-    await expect(page.getByRole("heading", { name: "設定" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "設定", exact: true })).toBeVisible();
   });
 });
 

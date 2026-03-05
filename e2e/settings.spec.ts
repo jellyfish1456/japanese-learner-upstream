@@ -11,7 +11,7 @@ test.describe("Settings Page", () => {
     await expect(settingsBtn).toBeVisible();
     await settingsBtn.click();
     await expect(page).toHaveURL(/\/settings$/);
-    await expect(page.getByRole("heading", { name: "設定" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "設定", exact: true })).toBeVisible();
   });
 
   test("should toggle dark mode from settings page", async ({ page }) => {

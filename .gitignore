@@ -32,3 +32,5 @@ data/test-*.json
 *.njsproj
 *.sln
 *.sw?
+
+.env

@@ -1,4 +1,6 @@
 import type { ProgressStore, StudyPlan, CustomDataStore, Category } from "../types";
+import type { SyncMetadata } from "./google/syncTypes";
+import { SYNC_META_KEY } from "./google/syncTypes";
 
 const PROGRESS_KEY = "jp-learner:progress";
 const SETTINGS_KEY = "jp-learner:settings";
@@ -17,6 +19,7 @@ export function loadProgress(): ProgressStore {
 
 export function saveProgress(progress: ProgressStore): void {
   localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+  notifySyncNeeded();
 }
 
 // ========== Settings ==========
@@ -42,6 +45,7 @@ export function loadSettings(): AppSettings {
 
 export function saveSettings(settings: AppSettings): void {
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+  notifySyncNeeded();
 }
 
 // ========== Progress Key Helpers (multi-mode) ==========
@@ -80,6 +84,7 @@ export function saveTestModes(category: Category, modes: string | string[]): voi
     const stored = raw ? JSON.parse(raw) : {};
     stored[category] = modes;
     localStorage.setItem(TEST_MODE_KEY, JSON.stringify(stored));
+    notifySyncNeeded();
   } catch {
     // ignore
   }
@@ -114,10 +119,12 @@ export function loadStudyPlan(datasetId: string): StudyPlan | null {
 
 export function saveStudyPlan(plan: StudyPlan): void {
   localStorage.setItem(studyPlanKey(plan.datasetId), JSON.stringify(plan));
+  notifySyncNeeded();
 }
 
 export function clearStudyPlan(datasetId: string): void {
   localStorage.removeItem(studyPlanKey(datasetId));
+  notifySyncNeeded();
 }
 
 // ========== Custom Data ==========
@@ -151,6 +158,7 @@ export function loadCustomData(): CustomDataStore {
 export function saveCustomData(store: CustomDataStore): void {
   localStorage.setItem(CUSTOM_DATA_KEY, JSON.stringify(store));
   notifyCustomDataChange();
+  notifySyncNeeded();
 }
 
 export function generateId(prefix: string): string {
@@ -158,3 +166,63 @@ export function generateId(prefix: string): string {
   const rand = Math.random().toString(36).slice(2, 6);
   return `${prefix}-${ts}-${rand}`;
 }
+
+// ========== Sync Notification ==========
+
+const syncListeners = new Set<() => void>();
+
+export function subscribeSyncNeeded(cb: () => void): () => void {
+  syncListeners.add(cb);
+  return () => syncListeners.delete(cb);
+}
+
+export function notifySyncNeeded(): void {
+  syncListeners.forEach((fn) => {
+    try { fn(); } catch { /* listener errors must not break callers */ }
+  });
+}
+
+// ========== Sync Metadata ==========
+
+export function loadSyncMetadata(): SyncMetadata | null {
+  try {
+    const raw = localStorage.getItem(SYNC_META_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function saveSyncMetadata(meta: SyncMetadata): void {
+  localStorage.setItem(SYNC_META_KEY, JSON.stringify(meta));
+}
+
+export function clearSyncMetadata(): void {
+  localStorage.removeItem(SYNC_META_KEY);
+}
+
+// ========== Study Plan Key Enumeration (for sync) ==========
+
+export const STUDY_PLAN_PREFIX = "jp-learner:study-plan-";
+
+export function getAllStudyPlanKeys(): string[] {
+  const keys: string[] = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key?.startsWith(STUDY_PLAN_PREFIX)) keys.push(key);
+  }
+  return keys;
+}
+
+export function getDatasetIdFromPlanKey(key: string): string {
+  return key.slice(STUDY_PLAN_PREFIX.length);
+}
+
+// ========== Raw localStorage Keys (for sync engine) ==========
+
+export const STORAGE_KEYS = {
+  progress: PROGRESS_KEY,
+  settings: SETTINGS_KEY,
+  customData: CUSTOM_DATA_KEY,
+  testMode: TEST_MODE_KEY,
+} as const;

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useDarkMode } from "../hooks/useDarkMode";
 import { useSettings } from "../hooks/useSettings";
+import SyncSection from "../components/SyncSection";
 
 function ToggleSwitch({ checked, onChange }: { checked: boolean; onChange: () => void }) {
   return (
@@ -30,6 +31,14 @@ export default function SettingsPage() {
     <div>
       <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-6">設定</h2>
 
+      {/* Google Drive Sync */}
+      <div className="mb-6">
+        <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">Google 雲端同步</h3>
+        <SyncSection />
+      </div>
+
+      {/* General Settings */}
+      <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">一般設定</h3>
       <div className="space-y-1">
         <div className="flex items-center justify-between py-4 px-4 bg-white dark:bg-gray-800 rounded-t-xl border border-gray-200 dark:border-gray-700">
           <div>

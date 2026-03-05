@@ -19,6 +19,7 @@ A flashcard web app for learning Japanese vocabulary and grammar, built for Trad
 - **Progress Statistics** - Track learned, due, and mastered cards per dataset with visual progress bars
 - **Random Review** - Review all cards in a shuffled order even when no cards are due
 - **Pronunciation** - Text-to-speech for Japanese words using the Web Speech API
+- **Google Drive Sync** - Sync progress, settings, and custom datasets across devices via Google Drive (optional, requires Google account)
 - **Offline-First** - All progress stored in browser localStorage; no backend required
 - **Dark Mode** - Toggle between light and dark themes via header or settings page
 - **Responsive Design** - Mobile-friendly with centered layout on desktop
@@ -77,14 +78,25 @@ npm run test:e2e:ui   # Playwright interactive UI mode
 npm run lint
 ```
 
+### Google Drive Sync (Optional)
+
+To enable Google Drive sync, set up a Google Cloud project with OAuth2 credentials:
+
+1. Create a project in [Google Cloud Console](https://console.cloud.google.com/)
+2. Enable the Google Drive API
+3. Create an OAuth 2.0 Client ID (Web application type)
+4. Add your app URL to authorized JavaScript origins
+5. Copy `.env.example` to `.env` and set `VITE_GOOGLE_CLIENT_ID`
+
 ## Project Structure
 
 ```
 data/                   JSON datasets (n5_vocab.json, grammar-n3.json, etc.)
 src/
   components/           Reusable UI components (Flashcard, RatingButtons, ModeSelector, etc.)
-  hooks/                Custom React hooks (useStudySession, useProgress, useDatasetCrud, etc.)
+  hooks/                Custom React hooks (useStudySession, useProgress, useDatasetCrud, useGoogleSync, etc.)
   lib/                  Core logic (SM-2 algorithm, grammar parser, storage, category, stats)
+    google/             Google Drive sync (GIS auth, Drive API wrapper, sync engine)
   pages/                Route-level page components
   types/                TypeScript type definitions
 e2e/                    Playwright end-to-end tests

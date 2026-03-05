@@ -54,16 +54,22 @@ japanese-learner/
 │   │   ├── useKeyboard.ts          # Keyboard shortcuts
 │   │   ├── useSwipe.ts             # Touch/mouse drag gestures
 │   │   ├── useSettings.ts          # Settings hook
+│   │   ├── useGoogleSync.ts         # Google Drive sync hook
 │   │   └── useDarkMode.ts          # Dark mode state
 │   ├── lib/
 │   │   ├── sm2.ts                  # SM-2 spaced repetition algorithm
 │   │   ├── shuffle.ts              # Fisher-Yates shuffle
 │   │   ├── grammar.ts              # Parse bracket markers in sentences
 │   │   ├── flashcard.ts            # Build front/back card content per mode
-│   │   ├── storage.ts              # localStorage helpers (progress, settings, custom data)
+│   │   ├── storage.ts              # localStorage helpers (progress, settings, custom data, sync)
 │   │   ├── stats.ts                # Dataset statistics computation
 │   │   ├── category.ts             # Shared category labels and colors
-│   │   └── studyPlan.ts            # Daily plan creation logic
+│   │   ├── studyPlan.ts            # Daily plan creation logic
+│   │   └── google/
+│   │       ├── syncTypes.ts        # Type definitions for Google Drive sync
+│   │       ├── gis.ts              # Google Identity Services OAuth2 auth
+│   │       ├── driveApi.ts         # Drive REST API v3 wrapper (raw fetch)
+│   │       └── syncEngine.ts       # Pull/push orchestration + debouncer
 │   └── types/
 │       └── index.ts                # All TypeScript types/interfaces/constants
 ├── e2e/
@@ -421,3 +427,49 @@ Tests live alongside source in `src/**/*.test.ts(x)` and `src/**/__tests__/*.tes
 Tests in `e2e/`. Global setup copies fixture data (`test-vocab.json`, `test-grammar.json`, `test-mix.json`) from `e2e/fixtures/` into `data/` before tests.
 
 Test suites: home, learn, manage, mix, mobile, navigation, pronunciation, settings, setup, study, swipe.
+
+---
+
+## 11. Google Drive Sync
+
+### 11.1 Overview
+
+Client-side Google Drive sync using Google Identity Services (GIS) OAuth2 token flow. No backend required — all auth and API calls happen in the browser via raw `fetch()` to Drive API v3.
+
+### 11.2 Architecture
+
+```
+SettingsPage → SyncSection UI → useGoogleSync hook → syncEngine.ts → driveApi.ts → GIS auth (gis.ts)
+```
+
+### 11.3 Drive Folder Structure
+
+```
+Google Drive Root/
+  Japanese Learner/
+    progress.json        ← jp-learner:progress
+    custom-data.json     ← jp-learner:custom-data
+    settings.json        ← jp-learner:settings
+    test-modes.json      ← jp-learner:test-mode
+    study-plans.json     ← all jp-learner:study-plan-* keys consolidated
+```
+
+### 11.4 Sync Behavior
+
+- **Auto-pull on app load** (if connected): download from cloud → overwrite local → page reload
+- **Auto-push on data change** (if connected): debounced 30s push after any localStorage write
+- **Manual sync from cloud**: pull → reload
+- **Manual push to cloud**: push current local data
+- **First connect**: pull (empty cloud) → push (upload local as initial state)
+- **Conflict resolution**: cloud wins (cloud overwrites local on pull)
+
+### 11.5 Auth & Token Management
+
+- GIS script loaded lazily (only on first sync interaction)
+- OAuth2 browser flow: no refresh tokens; on expiry, user clicks sign-in again (consent remembered)
+- Auth state persisted to `jp-learner:google-auth` in localStorage
+- Sync metadata (folderId, fileIds) persisted to `jp-learner:sync-meta`
+
+### 11.6 Environment Setup
+
+Requires `VITE_GOOGLE_CLIENT_ID` environment variable. See `.env.example`.
