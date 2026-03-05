@@ -9,8 +9,6 @@ import type { SessionType, ConcreteTestMode } from "../types";
 import {
   VOCAB_TEST_MODES,
   GRAMMAR_TEST_MODES,
-  CONCRETE_VOCAB_MODES,
-  CONCRETE_GRAMMAR_MODES,
 } from "../types";
 
 const SESSION_SIZES = [10, 20, 30];
@@ -23,7 +21,6 @@ export default function SetupPage() {
   const category = dataset?.category ?? "vocabulary";
   const isVocab = category === "vocabulary";
   const modes = isVocab ? VOCAB_TEST_MODES : GRAMMAR_TEST_MODES;
-  const concreteModes = isVocab ? CONCRETE_VOCAB_MODES : CONCRETE_GRAMMAR_MODES;
 
   const saved = loadTestModes(category);
   // Resolve default: use saved value if it's valid, otherwise first mode
@@ -78,7 +75,15 @@ export default function SetupPage() {
     <div>
       {/* Dataset info */}
       <div className="mb-4">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50">{dataset.name}</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50">{dataset.name}</h2>
+          <button
+            onClick={() => navigate(`/manage/${datasetId}`)}
+            className="text-sm text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300"
+          >
+            管理
+          </button>
+        </div>
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
           {dataset.level} · {dataset.data.length} 張卡片
         </p>

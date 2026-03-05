@@ -476,3 +476,46 @@ When **disabled**:
 src/pages/SettingsPage.tsx       # Settings page with toggle rows
 src/hooks/useSettings.ts         # React hook wrapping loadSettings/saveSettings
 ```
+
+---
+
+## 15. Dataset Management — CRUD (Phase 7)
+
+Allows users to create, edit, and delete both datasets and individual items (vocabulary + grammar). All changes are persisted in localStorage.
+
+### 15.1 Data Storage Strategy
+
+- New localStorage key: `jp-learner:custom-data`
+- Stores a `CustomDataStore` with a `datasets` record of user-managed datasets
+- **Built-in datasets** (from `data/*.json`): remain unchanged until modified. When a user edits/adds/deletes items in a built-in dataset, the entire dataset is copied to localStorage. From that point on, the local copy is used instead of the built-in one.
+- **Custom datasets**: entirely user-created, stored only in localStorage
+- A "reset to default" option is available for modified built-in datasets
+
+### 15.2 Routes
+
+```
+/manage/new                      → DatasetCreatePage (create new dataset)
+/manage/:datasetId               → DatasetEditPage (list/manage items in a dataset)
+/manage/:datasetId/item          → ItemEditPage (add new item)
+/manage/:datasetId/item/:itemId  → ItemEditPage (edit existing item)
+```
+
+### 15.3 Integration Points
+
+- **HomePage**: "+ 新增學習集" button above dataset list; edit icon on each DatasetCard
+- **SetupPage**: "管理" link next to dataset name header
+- **LearnPage**: edit and delete buttons below each card during browsing
+
+### 15.4 New Files
+
+```
+src/types/index.ts               # CustomDataStore interface (added)
+src/lib/storage.ts               # Custom data load/save + pub/sub notifications (added)
+src/hooks/useDatasets.ts         # Refactored to merge built-in + custom data via useSyncExternalStore
+src/hooks/useDatasetCrud.ts      # CRUD operations hook
+src/components/ConfirmDialog.tsx # Delete confirmation modal
+src/components/ItemForm.tsx      # Form for vocab/grammar items (with grammar examples)
+src/pages/DatasetCreatePage.tsx  # Create new dataset page
+src/pages/DatasetEditPage.tsx    # Dataset item list with edit/delete actions
+src/pages/ItemEditPage.tsx       # Add or edit a single item
+```

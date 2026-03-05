@@ -7,6 +7,9 @@ import LearnSetupPage from "./pages/LearnSetupPage";
 import LearnPage from "./pages/LearnPage";
 import SettingsPage from "./pages/SettingsPage";
 import AboutPage from "./pages/AboutPage";
+import DatasetCreatePage from "./pages/DatasetCreatePage";
+import DatasetEditPage from "./pages/DatasetEditPage";
+import ItemEditPage from "./pages/ItemEditPage";
 
 export default function App() {
   return (
@@ -18,6 +21,10 @@ export default function App() {
           <Route path="/study/:datasetId/session" element={<StudyPage />} />
           <Route path="/learn/:datasetId" element={<LearnSetupPage />} />
           <Route path="/learn/:datasetId/session" element={<LearnPage />} />
+          <Route path="/manage/new" element={<DatasetCreatePage />} />
+          <Route path="/manage/:datasetId" element={<DatasetEditPage />} />
+          <Route path="/manage/:datasetId/item" element={<ItemEditPage />} />
+          <Route path="/manage/:datasetId/item/:itemId" element={<ItemEditPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/about" element={<AboutPage />} />
         </Routes>

@@ -1,7 +1,8 @@
-import type { ProgressStore, StudyPlan } from "../types";
+import type { ProgressStore, StudyPlan, CustomDataStore } from "../types";
 
 const PROGRESS_KEY = "jp-learner:progress";
 const SETTINGS_KEY = "jp-learner:settings";
+const CUSTOM_DATA_KEY = "jp-learner:custom-data";
 
 // ========== Progress ==========
 
@@ -117,4 +118,43 @@ export function saveStudyPlan(plan: StudyPlan): void {
 
 export function clearStudyPlan(datasetId: string): void {
   localStorage.removeItem(studyPlanKey(datasetId));
+}
+
+// ========== Custom Data ==========
+
+const customDataListeners = new Set<() => void>();
+let customDataVersion = 0;
+
+export function subscribeCustomData(cb: () => void): () => void {
+  customDataListeners.add(cb);
+  return () => customDataListeners.delete(cb);
+}
+
+export function getCustomDataSnapshot(): number {
+  return customDataVersion;
+}
+
+function notifyCustomDataChange(): void {
+  customDataVersion++;
+  customDataListeners.forEach((fn) => fn());
+}
+
+export function loadCustomData(): CustomDataStore {
+  try {
+    const raw = localStorage.getItem(CUSTOM_DATA_KEY);
+    return raw ? JSON.parse(raw) : { datasets: {} };
+  } catch {
+    return { datasets: {} };
+  }
+}
+
+export function saveCustomData(store: CustomDataStore): void {
+  localStorage.setItem(CUSTOM_DATA_KEY, JSON.stringify(store));
+  notifyCustomDataChange();
+}
+
+export function generateId(prefix: string): string {
+  const ts = Date.now();
+  const rand = Math.random().toString(36).slice(2, 6);
+  return `${prefix}-${ts}-${rand}`;
 }

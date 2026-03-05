@@ -135,6 +135,13 @@ export interface StudyPlan {
   createdAt: string;     // ISO date
 }
 
+// ========== Custom Data Store ==========
+
+export interface CustomDataStore {
+  /** All user-managed datasets (both user-created and copied-from-builtin) */
+  datasets: Record<string, Dataset>;
+}
+
 // ========== Dataset Metadata (for listing) ==========
 
 export type SessionType = "due" | "random" | "specific";

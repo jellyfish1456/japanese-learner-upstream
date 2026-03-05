@@ -1,5 +1,6 @@
+import { useSyncExternalStore } from "react";
 import type { Dataset, DatasetMeta } from "../types";
-import { loadProgress } from "../lib/storage";
+import { loadProgress, loadCustomData, subscribeCustomData, getCustomDataSnapshot } from "../lib/storage";
 import { getDatasetStats } from "../lib/stats";
 
 // Eagerly import all JSON files from the data directory (synchronous)
@@ -13,10 +14,11 @@ function getDatasetId(path: string): string {
 
 export interface LoadedDataset extends Dataset {
   id: string;
+  isCustom?: boolean;
 }
 
-// Build the dataset list once at module load time (synchronous)
-const allDatasets: LoadedDataset[] = Object.entries(dataModules).map(([path, mod]) => {
+// Build the built-in dataset list once at module load time (synchronous)
+const builtinDatasets: LoadedDataset[] = Object.entries(dataModules).map(([path, mod]) => {
   const ds = (mod as { default?: Dataset }).default ?? (mod as Dataset);
   return {
     ...ds,
@@ -24,21 +26,56 @@ const allDatasets: LoadedDataset[] = Object.entries(dataModules).map(([path, mod
   };
 });
 
+/** Set of built-in dataset IDs for quick lookup */
+const builtinIds = new Set(builtinDatasets.map((ds) => ds.id));
+
+export function isBuiltinDataset(id: string): boolean {
+  return builtinIds.has(id);
+}
+
+function getMergedDatasets(): LoadedDataset[] {
+  const customStore = loadCustomData();
+  const customIds = new Set(Object.keys(customStore.datasets));
+
+  // For each built-in dataset: use custom copy if it exists, otherwise use built-in
+  const merged: LoadedDataset[] = builtinDatasets.map((ds) => {
+    if (customIds.has(ds.id)) {
+      return { ...customStore.datasets[ds.id], id: ds.id, isCustom: true };
+    }
+    return ds;
+  });
+
+  // Add purely custom datasets (IDs not in built-in set)
+  for (const [id, ds] of Object.entries(customStore.datasets)) {
+    if (!builtinIds.has(id)) {
+      merged.push({ ...ds, id, isCustom: true });
+    }
+  }
+
+  return merged;
+}
+
 export function useDatasets(): LoadedDataset[] {
-  return allDatasets;
+  // Re-render when custom data changes
+  useSyncExternalStore(subscribeCustomData, getCustomDataSnapshot);
+  return getMergedDatasets();
 }
 
 export function useDatasetById(id: string): LoadedDataset | undefined {
-  return allDatasets.find((ds) => ds.id === id);
+  useSyncExternalStore(subscribeCustomData, getCustomDataSnapshot);
+  return getMergedDatasets().find((ds) => ds.id === id);
 }
 
 export function useDatasetMetas(
   categoryFilter?: string,
   levelFilter?: string,
 ): DatasetMeta[] {
-  // No useMemo — always reads fresh progress from localStorage
+  useSyncExternalStore(subscribeCustomData, getCustomDataSnapshot);
+
+  // Always reads fresh progress from localStorage
   // so that due counts update after study sessions.
   const progress = loadProgress();
+  const allDatasets = getMergedDatasets();
 
   return allDatasets
     .filter((ds) => {
