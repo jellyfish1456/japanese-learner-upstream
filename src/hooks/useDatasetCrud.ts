@@ -1,4 +1,4 @@
-import type { Dataset, DataItem, VocabItem, GrammarItem } from "../types";
+import type { Dataset, DataItem, VocabItem, GrammarItem, Category } from "../types";
 import { loadCustomData, saveCustomData, generateId } from "../lib/storage";
 import { isBuiltinDataset } from "./useDatasets";
 
@@ -24,7 +24,7 @@ export function useDatasetCrud() {
   // that returns functions. The functions will read fresh data each time.
 
   return {
-    createDataset(name: string, category: "vocabulary" | "grammar", level: string): string {
+    createDataset(name: string, category: Category, level: string): string {
       const id = generateId(`custom-${category}`);
       const store = loadCustomData();
       store.datasets[id] = { name, category, level, data: [] };

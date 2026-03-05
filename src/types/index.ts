@@ -1,5 +1,7 @@
 // ========== Dataset Types ==========
 
+export type Category = "vocabulary" | "grammar" | "mix";
+
 export interface VocabItem {
   id: string;
   japanese: string;
@@ -23,9 +25,14 @@ export interface GrammarItem {
 
 export type DataItem = VocabItem | GrammarItem;
 
+/** Type guard: VocabItem has `hiragana`, GrammarItem does not */
+export function isVocabItem(item: DataItem): item is VocabItem {
+  return "hiragana" in item;
+}
+
 export interface Dataset<T extends DataItem = DataItem> {
   name: string;
-  category: "vocabulary" | "grammar";
+  category: Category;
   level: string;
   data: T[];
 }
@@ -77,6 +84,24 @@ export const GRAMMAR_TEST_MODES: { value: GrammarTestMode; label: string; descri
   { value: "fill-in-grammar", label: "填空 → 文法", description: "看挖空例句和中文翻譯，回想文法" },
   { value: "random", label: "隨機", description: "每張卡片隨機選擇模式" },
 ];
+
+// ========== Mix Mode Types ==========
+
+/** All 7 concrete modes + random, for mix datasets */
+export const MIX_TEST_MODES: { value: string; label: string; description: string; group: "vocab" | "grammar" }[] = [
+  { value: "kanji-to-chinese", label: "漢字 → 中文", description: "看漢字，回想中文意思", group: "vocab" },
+  { value: "hiragana-to-chinese", label: "假名 → 中文", description: "看假名，回想中文意思", group: "vocab" },
+  { value: "chinese-to-japanese", label: "中文 → 日文", description: "看中文，回想日文寫法", group: "vocab" },
+  { value: "grammar-to-chinese", label: "文法 → 中文", description: "看文法句型，回想中文意思", group: "grammar" },
+  { value: "example-to-chinese", label: "例句 → 中文", description: "看例句（標記文法），回想中文意思", group: "grammar" },
+  { value: "chinese-to-grammar", label: "中文 → 文法", description: "看中文意思，回想日文文法", group: "grammar" },
+  { value: "fill-in-grammar", label: "填空 → 文法", description: "看挖空例句和中文翻譯，回想文法", group: "grammar" },
+];
+
+export const MIX_DEFAULT_MODES: string[] = ["kanji-to-chinese", "grammar-to-chinese"];
+
+export const VOCAB_MODE_VALUES = new Set<string>(["kanji-to-chinese", "hiragana-to-chinese", "chinese-to-japanese"]);
+export const GRAMMAR_MODE_VALUES = new Set<string>(["grammar-to-chinese", "example-to-chinese", "chinese-to-grammar", "fill-in-grammar"]);
 
 // ========== Flashcard Types ==========
 
@@ -149,7 +174,7 @@ export type SessionType = "due" | "random" | "specific";
 export interface DatasetMeta {
   id: string;             // filename-derived identifier
   name: string;
-  category: "vocabulary" | "grammar";
+  category: Category;
   level: string;
   totalCards: number;
   dueCards: number;

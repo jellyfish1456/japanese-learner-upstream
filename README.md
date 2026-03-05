@@ -8,14 +8,17 @@ A flashcard web app for learning Japanese vocabulary and grammar, built for Trad
 
 - **Spaced Repetition** - SM-2 algorithm (Anki-style) schedules cards based on your performance, surfacing difficult cards more often
 - **Multiple Test Modes** - Vocabulary: Kanji-to-Chinese, Hiragana-to-Chinese, Chinese-to-Japanese. Grammar: Pattern-to-Chinese, Example-to-Chinese, Chinese-to-Grammar, Fill-in-the-blank
-- **Learning Mode** - Browse cards sequentially with full content visible (no flipping, no rating) for initial study
+- **Mix (綜合) Datasets** - Combine vocabulary and grammar items in a single dataset; each item is automatically tested with its applicable modes
+- **Learning Mode** - Browse cards sequentially with full content visible (no flipping, no rating) for initial study; supports daily plans (分天計畫)
+- **Dataset Management** - Create, edit, and delete custom datasets and items; modify built-in datasets with reset-to-default option
 - **Swipe Gestures** - Swipe left (don't know), down (hard), right (got it) as an alternative to tapping rating buttons; optional color overlay + text assist (toggleable in settings)
 - **Keyboard Shortcuts** - Navigate and rate cards with keyboard for efficient desktop use
 - **Settings Page** - Configure dark mode and swipe assist (color overlay + hint text during swipe)
 - **Grammar Highlighting** - Bracket notation (e.g., `【grammar】`) renders grammar parts with colored highlights or blanks for fill-in mode
-- **Dataset Filtering** - Filter datasets by category (vocabulary/grammar) and JLPT level
+- **Dataset Filtering** - Filter datasets by category (vocabulary/grammar/mix) and JLPT level
 - **Progress Statistics** - Track learned, due, and mastered cards per dataset with visual progress bars
 - **Random Review** - Review all cards in a shuffled order even when no cards are due
+- **Pronunciation** - Text-to-speech for Japanese words using the Web Speech API
 - **Offline-First** - All progress stored in browser localStorage; no backend required
 - **Dark Mode** - Toggle between light and dark themes via header or settings page
 - **Responsive Design** - Mobile-friendly with centered layout on desktop
@@ -77,21 +80,22 @@ npm run lint
 ## Project Structure
 
 ```
-data/                   JSON datasets (vocab-n3.json, grammar-n3.json, etc.)
+data/                   JSON datasets (n5_vocab.json, grammar-n3.json, etc.)
 src/
-  components/           Reusable UI components (Flashcard, RatingButtons, etc.)
-  hooks/                Custom React hooks (useStudySession, useProgress, etc.)
-  lib/                  Core logic (SM-2 algorithm, grammar parser, storage)
-  pages/                Route-level page components (HomePage, SetupPage, StudyPage, LearnPage, SettingsPage)
+  components/           Reusable UI components (Flashcard, RatingButtons, ModeSelector, etc.)
+  hooks/                Custom React hooks (useStudySession, useProgress, useDatasetCrud, etc.)
+  lib/                  Core logic (SM-2 algorithm, grammar parser, storage, category, stats)
+  pages/                Route-level page components
   types/                TypeScript type definitions
 e2e/                    Playwright end-to-end tests
+  fixtures/             Test fixture data (test-vocab.json, test-grammar.json, test-mix.json)
 ```
 
 ## Data Format
 
-Datasets are JSON files in the `data/` directory. Each file follows this structure:
+Datasets are JSON files in the `data/` directory. Three categories are supported:
 
-**Vocabulary:**
+**Vocabulary (`category: "vocabulary"`):**
 ```json
 {
   "name": "N3 Vocabulary",
@@ -109,7 +113,7 @@ Datasets are JSON files in the `data/` directory. Each file follows this structu
 }
 ```
 
-**Grammar:**
+**Grammar (`category: "grammar"`):**
 ```json
 {
   "name": "N3 Grammar",
@@ -131,6 +135,21 @@ Datasets are JSON files in the `data/` directory. Each file follows this structu
   ]
 }
 ```
+
+**Mix (`category: "mix"`):**
+```json
+{
+  "name": "N3 綜合",
+  "category": "mix",
+  "level": "N3",
+  "data": [
+    { "id": "v1", "japanese": "勉強", "hiragana": "べんきょう", "simple_chinese": "學習", "full_explanation": "..." },
+    { "id": "g1", "japanese": "ている", "simple_chinese": "正在～", "full_explanation": "...", "examples": [...] }
+  ]
+}
+```
+
+Mix datasets contain both vocabulary and grammar items. Item type is detected at runtime by checking for the `hiragana` field (present only on vocabulary items). Each item is tested only with its applicable modes.
 
 Grammar examples use `【bracket】` notation to mark grammar points, supporting multiple brackets per sentence for multi-part patterns.
 

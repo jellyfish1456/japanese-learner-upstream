@@ -8,7 +8,10 @@ import type {
   FlashcardContent,
   SessionResult,
   SessionType,
+  VocabTestMode,
+  GrammarTestMode,
 } from "../types";
+import { isVocabItem, VOCAB_MODE_VALUES, GRAMMAR_MODE_VALUES } from "../types";
 import type { LoadedDataset } from "./useDatasets";
 import { useProgress } from "./useProgress";
 import { isDue } from "../lib/sm2";
@@ -67,6 +70,9 @@ export function useStudySession(
         const cards: StudyCard[] = [];
         for (const m of resolvedModes) {
           for (const item of shuffledFiltered) {
+            // For mix: skip inapplicable (item, mode) pairs
+            const applicable = getApplicableModes(item, [m], dataset.category);
+            if (applicable.length === 0) continue;
             const flashcard = buildCard(item, dataset.category, m as TestMode);
             cards.push({ item, flashcard, mode: m });
           }
@@ -74,7 +80,11 @@ export function useStudySession(
         return cards;
       }
 
-      return filtered.map((item) => {
+      // Single mode: for mix, only include items matching the mode type
+      const singleFiltered = dataset.category === "mix"
+        ? filtered.filter((item) => getApplicableModes(item, [resolvedModes[0]], dataset.category).length > 0)
+        : filtered;
+      return singleFiltered.map((item) => {
         const flashcard = buildCard(item, dataset.category, resolvedModes[0] as TestMode);
         return { item, flashcard, mode: resolvedModes[0] };
       });
@@ -85,12 +95,18 @@ export function useStudySession(
     if (sessionType === "random") {
       items = dataset.data;
     } else if (resolvedModes.length > 1) {
-      // Multi-mode due: card is due if ANY mode's composite key is due
-      items = dataset.data.filter((item) =>
-        resolvedModes.some((m) => isDue(progress[makeProgressKey(item.id, m)])),
-      );
+      // Multi-mode due: card is due if ANY applicable mode's composite key is due
+      items = dataset.data.filter((item) => {
+        const applicable = getApplicableModes(item, resolvedModes, dataset.category);
+        return applicable.some((m) => isDue(progress[makeProgressKey(item.id, m)]));
+      });
     } else {
       items = dataset.data.filter((item) => isDue(progress[item.id]));
+    }
+
+    // For mix single-mode: only include items matching the mode type
+    if (dataset.category === "mix" && resolvedModes.length === 1) {
+      items = items.filter((item) => getApplicableModes(item, resolvedModes, dataset.category).length > 0);
     }
 
     const shuffled = shuffle(items);
@@ -101,6 +117,9 @@ export function useStudySession(
       const cards: StudyCard[] = [];
       for (const m of resolvedModes) {
         for (const item of selected) {
+          // For mix: skip inapplicable (item, mode) pairs
+          const applicable = getApplicableModes(item, [m], dataset.category);
+          if (applicable.length === 0) continue;
           const flashcard = buildCard(item, dataset.category, m as TestMode);
           cards.push({ item, flashcard, mode: m });
         }
@@ -192,23 +211,40 @@ export function useStudySession(
   };
 }
 
+/** For mix datasets, return only modes applicable to the given item type */
+function getApplicableModes(item: DataItem, modes: string[], category: string): string[] {
+  if (category !== "mix") return modes;
+  const isVocab = isVocabItem(item);
+  return modes.filter((m) => isVocab ? VOCAB_MODE_VALUES.has(m) : GRAMMAR_MODE_VALUES.has(m));
+}
+
 function buildCard(
   item: DataItem,
-  category: "vocabulary" | "grammar",
+  category: string,
   mode: TestMode,
 ): FlashcardContent {
+  // For mix, detect per-item type
+  if (category === "mix") {
+    if (isVocabItem(item)) {
+      return buildVocabCard(item, mode as VocabTestMode);
+    } else {
+      const grammarItem = item as GrammarItem;
+      const exampleIndex =
+        grammarItem.examples?.length > 0
+          ? Math.floor(Math.random() * grammarItem.examples.length)
+          : 0;
+      return buildGrammarCard(grammarItem, mode as GrammarTestMode, exampleIndex);
+    }
+  }
+
   if (category === "vocabulary") {
-    return buildVocabCard(item as VocabItem, mode as import("../types").VocabTestMode);
+    return buildVocabCard(item as VocabItem, mode as VocabTestMode);
   } else {
     const grammarItem = item as GrammarItem;
     const exampleIndex =
       grammarItem.examples?.length > 0
         ? Math.floor(Math.random() * grammarItem.examples.length)
         : 0;
-    return buildGrammarCard(
-      grammarItem,
-      mode as import("../types").GrammarTestMode,
-      exampleIndex,
-    );
+    return buildGrammarCard(grammarItem, mode as GrammarTestMode, exampleIndex);
   }
 }

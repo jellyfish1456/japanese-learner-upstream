@@ -2,15 +2,20 @@ interface ModeOption {
   value: string;
   label: string;
   description: string;
+  group?: string;
 }
 
 interface ModeSelectorProps {
   modes: ModeOption[];
   selected: string | string[];
   onChange: (modes: string | string[]) => void;
+  /** Show section labels grouped by mode.group (for mix datasets) */
+  grouped?: boolean;
+  /** Modes to fall back to when deselecting "全部模式". Defaults to first concrete mode. */
+  defaultModes?: string[];
 }
 
-export default function ModeSelector({ modes, selected, onChange }: ModeSelectorProps) {
+export default function ModeSelector({ modes, selected, onChange, grouped, defaultModes }: ModeSelectorProps) {
   // Separate concrete modes from "random"
   const concreteModes = modes.filter((m) => m.value !== "random");
   const randomMode = modes.find((m) => m.value === "random");
@@ -46,8 +51,12 @@ export default function ModeSelector({ modes, selected, onChange }: ModeSelector
 
   const toggleAll = () => {
     if (isAllSelected) {
-      // Deselect all → fall back to first concrete mode
-      onChange(concreteValues[0]);
+      // Deselect all → fall back to defaultModes or first concrete mode
+      if (defaultModes && defaultModes.length > 0) {
+        onChange(defaultModes.length === 1 ? defaultModes[0] : defaultModes);
+      } else {
+        onChange(concreteValues[0]);
+      }
     } else {
       // Select all concrete modes
       onChange(concreteValues);
@@ -60,46 +69,69 @@ export default function ModeSelector({ modes, selected, onChange }: ModeSelector
   const chipInactive =
     "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600";
 
+  // Group modes by their group property when grouped=true
+  const groupLabels: Record<string, string> = { vocab: "詞彙", grammar: "文法" };
+  const groups = grouped
+    ? Array.from(new Set(concreteModes.map((m) => (m as ModeOption).group).filter(Boolean))) as string[]
+    : null;
+
+  const renderChip = (mode: ModeOption) => (
+    <button
+      key={mode.value}
+      type="button"
+      onClick={() => toggleMode(mode.value)}
+      className={`${chipBase} ${
+        !isRandom && selectedSet.has(mode.value) ? chipActive : chipInactive
+      }`}
+      title={mode.description}
+      data-testid={`mode-chip-${mode.value}`}
+    >
+      {mode.label}
+    </button>
+  );
+
   return (
-    <div className="flex flex-wrap gap-2">
-      {/* All mode chip */}
-      <button
-        type="button"
-        onClick={toggleAll}
-        className={`${chipBase} ${isAllSelected ? chipActive : chipInactive}`}
-        title="選擇綜合模式模式"
-        data-testid="mode-chip-all"
-      >
-        綜合模式
-      </button>
-
-      {/* Concrete mode chips */}
-      {concreteModes.map((mode) => (
-        <button
-          key={mode.value}
-          type="button"
-          onClick={() => toggleMode(mode.value)}
-          className={`${chipBase} ${
-            !isRandom && selectedSet.has(mode.value) ? chipActive : chipInactive
-          }`}
-          title={mode.description}
-          data-testid={`mode-chip-${mode.value}`}
-        >
-          {mode.label}
-        </button>
-      ))}
-
-      {/* Random chip — mutually exclusive */}
-      {randomMode && (
+    <div className="space-y-2">
+      <div className="flex flex-wrap gap-2">
+        {/* All mode chip */}
         <button
           type="button"
-          onClick={() => toggleMode("random")}
-          className={`${chipBase} ${isRandom ? chipActive : chipInactive}`}
-          title={randomMode.description}
-          data-testid="mode-chip-random"
+          onClick={toggleAll}
+          className={`${chipBase} ${isAllSelected ? chipActive : chipInactive}`}
+          title="選擇全部模式"
+          data-testid="mode-chip-all"
         >
-          {randomMode.label}
+          全部模式
         </button>
+
+        {/* Random chip — mutually exclusive */}
+        {randomMode && (
+          <button
+            type="button"
+            onClick={() => toggleMode("random")}
+            className={`${chipBase} ${isRandom ? chipActive : chipInactive}`}
+            title={randomMode.description}
+            data-testid="mode-chip-random"
+          >
+            {randomMode.label}
+          </button>
+        )}
+      </div>
+
+      {/* Concrete mode chips — optionally grouped */}
+      {groups ? (
+        groups.map((group) => (
+          <div key={group}>
+            <div className="text-xs font-medium text-gray-400 dark:text-gray-500 mb-1">{groupLabels[group] ?? group}</div>
+            <div className="flex flex-wrap gap-2">
+              {concreteModes.filter((m) => (m as ModeOption).group === group).map(renderChip)}
+            </div>
+          </div>
+        ))
+      ) : (
+        <div className="flex flex-wrap gap-2">
+          {concreteModes.map(renderChip)}
+        </div>
       )}
     </div>
   );

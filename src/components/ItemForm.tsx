@@ -1,8 +1,9 @@
 import { useState } from "react";
-import type { VocabItem, GrammarItem, GrammarExample } from "../types";
+import type { VocabItem, GrammarItem, GrammarExample, Category } from "../types";
+import { isVocabItem } from "../types";
 
 interface ItemFormProps {
-  category: "vocabulary" | "grammar";
+  category: Category;
   initialData?: VocabItem | GrammarItem;
   onSave: (data: Omit<VocabItem, "id"> | Omit<GrammarItem, "id">) => void;
   onCancel: () => void;
@@ -54,7 +55,14 @@ function TextAreaField({ label, value, onChange, placeholder }: {
 }
 
 export default function ItemForm({ category, initialData, onSave, onCancel }: ItemFormProps) {
-  const isVocab = category === "vocabulary";
+  const isMix = category === "mix";
+  // For mix, detect initial item type from data; default to "vocabulary" for new items
+  const initialItemType: "vocabulary" | "grammar" =
+    isMix && initialData
+      ? (isVocabItem(initialData) ? "vocabulary" : "grammar")
+      : (category === "grammar" ? "grammar" : "vocabulary");
+  const [itemType, setItemType] = useState<"vocabulary" | "grammar">(initialItemType);
+  const isVocab = isMix ? itemType === "vocabulary" : category === "vocabulary";
 
   const [japanese, setJapanese] = useState(initialData?.japanese ?? "");
   const [hiragana, setHiragana] = useState(
@@ -65,6 +73,17 @@ export default function ItemForm({ category, initialData, onSave, onCancel }: It
   const [examples, setExamples] = useState<GrammarExample[]>(
     !isVocab ? (initialData as GrammarItem)?.examples ?? [{ sentence: "", chinese: "" }] : [],
   );
+
+  const handleTypeSwitch = (newType: "vocabulary" | "grammar") => {
+    if (newType === itemType) return;
+    setItemType(newType);
+    if (newType === "vocabulary") {
+      setExamples([]);
+    } else {
+      setHiragana("");
+      setExamples([{ sentence: "", chinese: "" }]);
+    }
+  };
 
   const isValid = isVocab
     ? japanese.trim() && hiragana.trim() && simpleChinese.trim()
@@ -107,6 +126,28 @@ export default function ItemForm({ category, initialData, onSave, onCancel }: It
 
   return (
     <div className="space-y-4">
+      {isMix && (
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">項目類型</label>
+          <div className="flex gap-2">
+            {(["vocabulary", "grammar"] as const).map((t) => (
+              <button
+                key={t}
+                type="button"
+                onClick={() => handleTypeSwitch(t)}
+                className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
+                  itemType === t
+                    ? "bg-gray-900 dark:bg-white text-white dark:text-gray-900"
+                    : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+                }`}
+              >
+                {t === "vocabulary" ? "詞彙" : "文法"}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       <InputField label="日文" value={japanese} onChange={setJapanese} required placeholder="例：食べる" />
 
       {isVocab && (

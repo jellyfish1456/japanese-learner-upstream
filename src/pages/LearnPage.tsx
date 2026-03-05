@@ -7,7 +7,7 @@ import LearnCard from "../components/LearnCard";
 import ProgressBar from "../components/ProgressBar";
 import ConfirmDialog from "../components/ConfirmDialog";
 import { loadTestModes } from "../lib/storage";
-import { VOCAB_TEST_MODES, GRAMMAR_TEST_MODES } from "../types";
+import { VOCAB_TEST_MODES, GRAMMAR_TEST_MODES, MIX_TEST_MODES, MIX_DEFAULT_MODES } from "../types";
 
 interface LearnLocationState {
   planType?: "all" | "daily";
@@ -88,18 +88,20 @@ export default function LearnPage() {
   const navigateToExam = useCallback(() => {
     if (!dataset) return;
     const category = dataset.category;
-    const modeOptions = category === "vocabulary" ? VOCAB_TEST_MODES : GRAMMAR_TEST_MODES;
+    const isMix = category === "mix";
+    const modeOptions = isMix ? MIX_TEST_MODES : category === "vocabulary" ? VOCAB_TEST_MODES : GRAMMAR_TEST_MODES;
     const saved = loadTestModes(category);
 
     // Resolve modes: support both saved string and string[]
     let resolvedModes: string | string[];
+    const defaultModes = isMix ? MIX_DEFAULT_MODES : [modeOptions[0].value];
     if (saved == null) {
-      resolvedModes = modeOptions[0].value;
+      resolvedModes = isMix ? MIX_DEFAULT_MODES : modeOptions[0].value;
     } else if (Array.isArray(saved)) {
       const valid = saved.filter((s) => modeOptions.some((m) => m.value === s));
-      resolvedModes = valid.length === 0 ? modeOptions[0].value : valid.length === 1 ? valid[0] : valid;
+      resolvedModes = valid.length === 0 ? (defaultModes.length === 1 ? defaultModes[0] : defaultModes) : valid.length === 1 ? valid[0] : valid;
     } else {
-      resolvedModes = modeOptions.some((m) => m.value === saved) ? saved : modeOptions[0].value;
+      resolvedModes = modeOptions.some((m) => m.value === saved) ? saved : (defaultModes.length === 1 ? defaultModes[0] : defaultModes);
     }
 
     navigate(`/study/${datasetId}/session`, {

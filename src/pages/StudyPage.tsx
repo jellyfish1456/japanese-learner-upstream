@@ -10,7 +10,7 @@ import RatingButtons from "../components/RatingButtons";
 import ProgressBar from "../components/ProgressBar";
 import SessionSummary from "../components/SessionSummary";
 import type { SessionType } from "../types";
-import { VOCAB_TEST_MODES, GRAMMAR_TEST_MODES } from "../types";
+import { VOCAB_TEST_MODES, GRAMMAR_TEST_MODES, MIX_TEST_MODES } from "../types";
 
 interface ReturnTo {
   dayIndex: number;
@@ -20,7 +20,7 @@ interface ReturnTo {
 
 // Build a mode value → label map for display
 const MODE_LABELS: Record<string, string> = {};
-for (const m of [...VOCAB_TEST_MODES, ...GRAMMAR_TEST_MODES]) {
+for (const m of [...VOCAB_TEST_MODES, ...GRAMMAR_TEST_MODES, ...MIX_TEST_MODES]) {
   MODE_LABELS[m.value] = m.label;
 }
 

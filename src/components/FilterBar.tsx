@@ -1,3 +1,5 @@
+import { categoryLabels } from "../lib/category";
+
 interface FilterBarProps {
   categories: string[];
   levels: string[];
@@ -6,12 +8,6 @@ interface FilterBarProps {
   onCategoryChange: (category: string) => void;
   onLevelChange: (level: string) => void;
 }
-
-const categoryLabels: Record<string, string> = {
-  "": "全部",
-  vocabulary: "詞彙",
-  grammar: "文法",
-};
 
 export default function FilterBar({
   categories,

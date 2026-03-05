@@ -18,7 +18,7 @@ test.describe("Dataset Management - Create", () => {
 
     await page.getByPlaceholder("例：N5 動詞").fill("My Custom Vocab");
     // Vocabulary is selected by default
-    await page.getByPlaceholder("例：N5").fill("N5");
+    await page.getByPlaceholder("例：N5", { exact: true }).fill("N5");
     await page.getByRole("button", { name: "建立" }).click();
 
     // Should redirect to the dataset edit page
@@ -32,7 +32,7 @@ test.describe("Dataset Management - Create", () => {
 
     await page.getByPlaceholder("例：N5 動詞").fill("My Grammar Set");
     await page.getByRole("button", { name: "文法" }).click();
-    await page.getByPlaceholder("例：N5").fill("N3");
+    await page.getByPlaceholder("例：N5", { exact: true }).fill("N3");
     await page.getByRole("button", { name: "建立" }).click();
 
     await expect(page).toHaveURL(/\/manage\/custom-grammar-/);
@@ -48,7 +48,7 @@ test.describe("Dataset Management - Create", () => {
     await page.getByPlaceholder("例：N5 動詞").fill("Test");
     await expect(createButton).toBeDisabled();
 
-    await page.getByPlaceholder("例：N5").fill("N5");
+    await page.getByPlaceholder("例：N5", { exact: true }).fill("N5");
     await expect(createButton).toBeEnabled();
   });
 });
@@ -58,12 +58,12 @@ test.describe("Dataset Management - Add Items", () => {
     // Create dataset first
     await page.getByText("+ 新增學習集").click();
     await page.getByPlaceholder("例：N5 動詞").fill("Test Vocab");
-    await page.getByPlaceholder("例：N5").fill("N5");
+    await page.getByPlaceholder("例：N5", { exact: true }).fill("N5");
     await page.getByRole("button", { name: "建立" }).click();
 
     // Add item
     await page.getByRole("button", { name: "+ 新增項目" }).click();
-    await expect(page.getByText("新增項目")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "新增項目" })).toBeVisible();
 
     await page.getByPlaceholder("例：食べる").fill("猫");
     await page.getByPlaceholder("例：たべる").fill("ねこ");
@@ -81,7 +81,7 @@ test.describe("Dataset Management - Add Items", () => {
     await page.getByText("+ 新增學習集").click();
     await page.getByPlaceholder("例：N5 動詞").fill("Grammar");
     await page.getByRole("button", { name: "文法" }).click();
-    await page.getByPlaceholder("例：N5").fill("N3");
+    await page.getByPlaceholder("例：N5", { exact: true }).fill("N3");
     await page.getByRole("button", { name: "建立" }).click();
 
     // Add grammar item
@@ -112,7 +112,7 @@ test.describe("Dataset Management - Edit Items", () => {
     // Create and add an item
     await page.getByText("+ 新增學習集").click();
     await page.getByPlaceholder("例：N5 動詞").fill("Edit Test");
-    await page.getByPlaceholder("例：N5").fill("N5");
+    await page.getByPlaceholder("例：N5", { exact: true }).fill("N5");
     await page.getByRole("button", { name: "建立" }).click();
 
     await page.getByRole("button", { name: "+ 新增項目" }).click();
@@ -142,7 +142,7 @@ test.describe("Dataset Management - Delete Items", () => {
     // Create and add items
     await page.getByText("+ 新增學習集").click();
     await page.getByPlaceholder("例：N5 動詞").fill("Delete Test");
-    await page.getByPlaceholder("例：N5").fill("N5");
+    await page.getByPlaceholder("例：N5", { exact: true }).fill("N5");
     await page.getByRole("button", { name: "建立" }).click();
 
     // Add two items
@@ -163,7 +163,7 @@ test.describe("Dataset Management - Delete Items", () => {
     // Delete the first item
     await page.getByTitle("刪除").first().click();
     await expect(page.getByText("確定要刪除這個項目嗎？")).toBeVisible();
-    await page.getByRole("button", { name: "刪除" }).click();
+    await page.getByRole("dialog").getByRole("button", { name: "刪除" }).click();
 
     await expect(page.getByText("1 個項目")).toBeVisible();
   });
@@ -172,7 +172,7 @@ test.describe("Dataset Management - Delete Items", () => {
     // Create and add an item
     await page.getByText("+ 新增學習集").click();
     await page.getByPlaceholder("例：N5 動詞").fill("Cancel Test");
-    await page.getByPlaceholder("例：N5").fill("N5");
+    await page.getByPlaceholder("例：N5", { exact: true }).fill("N5");
     await page.getByRole("button", { name: "建立" }).click();
 
     await page.getByRole("button", { name: "+ 新增項目" }).click();
@@ -196,13 +196,13 @@ test.describe("Dataset Management - Delete Dataset", () => {
     // Create dataset
     await page.getByText("+ 新增學習集").click();
     await page.getByPlaceholder("例：N5 動詞").fill("To Delete DS");
-    await page.getByPlaceholder("例：N5").fill("N5");
+    await page.getByPlaceholder("例：N5", { exact: true }).fill("N5");
     await page.getByRole("button", { name: "建立" }).click();
 
     // Delete dataset
-    await page.getByRole("button", { name: "刪除學習集" }).click();
+    await page.getByRole("button", { name: "刪除學習集" }).first().click();
     await expect(page.getByText("確定要刪除整個學習集嗎？")).toBeVisible();
-    await page.getByRole("button", { name: "刪除學習集" }).click();
+    await page.getByRole("dialog").getByRole("button", { name: "刪除學習集" }).click();
 
     // Should navigate back to home
     await expect(page).toHaveURL(/\/$/);
@@ -263,7 +263,7 @@ test.describe("Dataset Management - Custom Dataset on HomePage", () => {
     // Create a dataset
     await page.getByText("+ 新增學習集").click();
     await page.getByPlaceholder("例：N5 動詞").fill("My New Set");
-    await page.getByPlaceholder("例：N5").fill("N5");
+    await page.getByPlaceholder("例：N5", { exact: true }).fill("N5");
     await page.getByRole("button", { name: "建立" }).click();
 
     // Add an item so it's visible

@@ -1,23 +1,19 @@
-# Japanese Learner - Development Plan
+# Japanese Learner - System Design
 
 ## Overview
 
-A Quizlet-like flashcard web app for learning Japanese vocabulary and grammar. Built with React + TypeScript + Vite + Tailwind CSS. Data stored as JSON files, progress persisted in browser localStorage.
+A Quizlet-like flashcard web app for learning Japanese vocabulary and grammar. Built with React 19 + TypeScript + Vite + Tailwind CSS v4. Data stored as JSON files, progress persisted in browser localStorage. Deployed to GitHub Pages.
 
 ---
 
-## 1. Project Setup
-
-- Initialize Vite project with React + TypeScript template
-- Install dependencies: `react-router-dom`, `tailwindcss`
-- Configure Tailwind CSS
-- Set up project directory structure:
+## 1. Project Structure
 
 ```
 japanese-learner/
-├── public/
 ├── data/
-│   ├── vocab-n3.json
+│   ├── n5_vocab.json
+│   ├── n4_vocab.json
+│   ├── n3_vocab.json
 │   └── grammar-n3.json
 ├── src/
 │   ├── main.tsx
@@ -25,32 +21,67 @@ japanese-learner/
 │   ├── index.css
 │   ├── components/
 │   │   ├── Layout.tsx              # Centered container, nav bar
-│   │   ├── DatasetCard.tsx         # Dataset selector card
+│   │   ├── DatasetCard.tsx         # Dataset selector card on homepage
 │   │   ├── Flashcard.tsx           # Flip card component
 │   │   ├── ProgressBar.tsx         # Session progress indicator
 │   │   ├── RatingButtons.tsx       # 不會 / 還好 / 記住了
 │   │   ├── SessionSummary.tsx      # End-of-session stats
-│   │   ├── ModeSelector.tsx        # Test mode picker
+│   │   ├── ModeSelector.tsx        # Test mode picker (supports grouped modes for mix)
 │   │   ├── FilterBar.tsx           # Category/level filter
-│   │   └── GrammarHighlight.tsx    # Render bracket-marked grammar
+│   │   ├── GrammarHighlight.tsx    # Render bracket-marked grammar
+│   │   ├── LearnCard.tsx           # Full-content card for learning mode
+│   │   ├── ItemForm.tsx            # Form for vocab/grammar items (with type selector for mix)
+│   │   ├── ConfirmDialog.tsx       # Delete confirmation modal
+│   │   ├── DatasetStats.tsx        # Stats section for SetupPage
+│   │   └── StatsBar.tsx            # Mastery bar on DatasetCard
 │   ├── pages/
 │   │   ├── HomePage.tsx            # Dataset browsing + filters
 │   │   ├── SetupPage.tsx           # Choose test mode before session
 │   │   ├── StudyPage.tsx           # Active flashcard session
-│   │   └── SummaryPage.tsx         # Session results
+│   │   ├── LearnSetupPage.tsx      # Choose learn plan (全部學習 / 分天計畫)
+│   │   ├── LearnPage.tsx           # Learning mode (browse cards)
+│   │   ├── DatasetCreatePage.tsx   # Create new dataset
+│   │   ├── DatasetEditPage.tsx     # List/manage items in a dataset
+│   │   ├── ItemEditPage.tsx        # Add or edit a single item
+│   │   ├── SettingsPage.tsx        # Dark mode, swipe assist toggles
+│   │   └── AboutPage.tsx           # About page
 │   ├── hooks/
-│   │   ├── useDatasets.ts          # Load and filter JSON datasets
+│   │   ├── useDatasets.ts          # Load and merge JSON + custom datasets
 │   │   ├── useStudySession.ts      # Session state, card queue, rating
-│   │   └── useProgress.ts         # Read/write localStorage progress
+│   │   ├── useProgress.ts          # Read/write localStorage progress
+│   │   ├── useDatasetCrud.ts       # CRUD operations for datasets/items
+│   │   ├── useStudyPlan.ts         # Daily learning plan management
+│   │   ├── useKeyboard.ts          # Keyboard shortcuts
+│   │   ├── useSwipe.ts             # Touch/mouse drag gestures
+│   │   ├── useSettings.ts          # Settings hook
+│   │   └── useDarkMode.ts          # Dark mode state
 │   ├── lib/
 │   │   ├── sm2.ts                  # SM-2 spaced repetition algorithm
 │   │   ├── shuffle.ts              # Fisher-Yates shuffle
 │   │   ├── grammar.ts              # Parse bracket markers in sentences
-│   │   └── storage.ts              # localStorage helpers
+│   │   ├── flashcard.ts            # Build front/back card content per mode
+│   │   ├── storage.ts              # localStorage helpers (progress, settings, custom data)
+│   │   ├── stats.ts                # Dataset statistics computation
+│   │   ├── category.ts             # Shared category labels and colors
+│   │   └── studyPlan.ts            # Daily plan creation logic
 │   └── types/
-│       └── index.ts                # All TypeScript types/interfaces
+│       └── index.ts                # All TypeScript types/interfaces/constants
+├── e2e/
+│   ├── fixtures/                   # Test fixture data (test-vocab, test-grammar, test-mix)
+│   ├── global-setup.ts             # Copy fixtures into data/ before tests
+│   ├── global-teardown.ts          # Clean up fixtures after tests
+│   ├── home.spec.ts
+│   ├── learn.spec.ts
+│   ├── manage.spec.ts
+│   ├── mix.spec.ts
+│   ├── mobile.spec.ts
+│   ├── navigation.spec.ts
+│   ├── pronunciation.spec.ts
+│   ├── settings.spec.ts
+│   ├── setup.spec.ts
+│   ├── study.spec.ts
+│   └── swipe.spec.ts
 ├── index.html
-├── tailwind.config.js
 ├── tsconfig.json
 ├── vite.config.ts
 └── package.json
@@ -60,7 +91,21 @@ japanese-learner/
 
 ## 2. Data Schema
 
-### 2.1 Vocabulary Dataset
+### 2.1 Category System
+
+Three dataset categories are supported:
+
+```ts
+type Category = "vocabulary" | "grammar" | "mix";
+```
+
+- **vocabulary** — Items with `japanese`, `hiragana`, `simple_chinese`, `full_explanation`
+- **grammar** — Items with `japanese`, `simple_chinese`, `full_explanation`, `examples[]`
+- **mix** — Contains both vocab and grammar items in a single dataset
+
+Item type detection for mix datasets uses `isVocabItem(item)` which checks `"hiragana" in item` — only vocabulary items have the `hiragana` field.
+
+### 2.2 Vocabulary Dataset
 
 ```jsonc
 {
@@ -79,7 +124,7 @@ japanese-learner/
 }
 ```
 
-### 2.2 Grammar Dataset
+### 2.3 Grammar Dataset
 
 ```jsonc
 {
@@ -98,17 +143,33 @@ japanese-learner/
           "chinese": "讀書讀著讀著就睏了"
         }
       ]
+    }
+  ]
+}
+```
+
+### 2.4 Mix Dataset
+
+```jsonc
+{
+  "name": "N3 綜合",
+  "category": "mix",
+  "level": "N3",
+  "data": [
+    {
+      "id": "mix-v1",
+      "japanese": "勉強",
+      "hiragana": "べんきょう",
+      "simple_chinese": "學習",
+      "full_explanation": "勉強する：學習、用功讀書"
     },
     {
-      "id": "grammar-n3-002",
-      "japanese": "～から～にかけて",
-      "simple_chinese": "從～到～",
-      "full_explanation": "表示從某範圍到另一範圍...",
+      "id": "mix-g1",
+      "japanese": "ている",
+      "simple_chinese": "正在～",
+      "full_explanation": "表示動作正在進行中。",
       "examples": [
-        {
-          "sentence": "東京【から】大阪【にかけて】雨が降るでしょう",
-          "chinese": "從東京到大阪一帶會下雨吧"
-        }
+        { "sentence": "本を読ん【ている】", "chinese": "正在看書" }
       ]
     }
   ]
@@ -121,24 +182,41 @@ Bracket notation: `【grammar part】` supports multiple brackets per sentence f
 
 ## 3. Test Modes
 
-### 3.1 Vocabulary Test Modes
+### 3.1 Vocabulary Test Modes (`VOCAB_TEST_MODES`)
 
 | Mode | Front (Question) | Back (Answer) |
 |------|------------------|---------------|
 | 漢字 → 中文 | Show kanji only | Chinese meaning |
 | 假名 → 中文 | Show hiragana only | Chinese meaning |
-| 中文 → 日文 | Show Chinese meaning | Japanese + hiragana (+ optional full explanation) |
+| 中文 → 日文 | Show Chinese meaning | Japanese + hiragana |
 
-User picks one mode per session during setup.
-
-### 3.2 Grammar Test Modes
+### 3.2 Grammar Test Modes (`GRAMMAR_TEST_MODES`)
 
 | Mode | Front (Question) | Back (Answer) |
 |------|------------------|---------------|
 | 文法 → 中文 | Show grammar pattern | Chinese meaning |
 | 例句 → 中文 | Show example sentence with grammar **highlighted** | Chinese meaning |
-| 中文 → 文法 | Show Chinese meaning | Japanese grammar (+ optional full explanation) |
-| 填空 → 文法 | Show example sentence with grammar **blanked out** + Chinese translation | Japanese grammar (+ optional full explanation) |
+| 中文 → 文法 | Show Chinese meaning | Japanese grammar |
+| 填空 → 文法 | Show example sentence with grammar **blanked out** + Chinese translation | Japanese grammar |
+
+### 3.3 Mix Test Modes (`MIX_TEST_MODES`)
+
+Mix datasets support all 7 modes above, with each mode tagged with `group: "vocab" | "grammar"`. During study sessions, each item is only tested with applicable modes:
+
+- Vocab items → vocab modes only (`VOCAB_MODE_VALUES`)
+- Grammar items → grammar modes only (`GRAMMAR_MODE_VALUES`)
+
+**Default modes:** `MIX_DEFAULT_MODES = ["kanji-to-chinese", "grammar-to-chinese"]`
+
+### 3.4 Multi-Mode Sessions
+
+When multiple modes are selected, each card is tested once per applicable mode. For mix datasets, inapplicable (item, mode) pairs are automatically skipped.
+
+### 3.5 Mix SetupPage UI
+
+- **Compact view (default):** Shows active mode pills + "進階設定" link
+- **Advanced view:** Expands full ModeSelector with grouped sections (詞彙/文法) + "收起" button to collapse
+- The "全部模式" toggle selects/deselects all modes; deselecting falls back to `MIX_DEFAULT_MODES`
 
 ---
 
@@ -151,7 +229,7 @@ Based on Anki's implementation of SuperMemo SM-2.
 ```ts
 interface CardProgress {
   cardId: string;
-  datasetId: string;       // which dataset this card belongs to
+  datasetId: string;
   easeFactor: number;      // default 2.5, min 1.3
   interval: number;        // days until next review
   repetitions: number;     // consecutive correct count
@@ -173,7 +251,7 @@ interface CardProgress {
 ```
 If q < 3 (Again):
   repetitions = 0
-  interval = 1 (review tomorrow / next session)
+  interval = 1
 
 If q >= 3 (Hard or Good):
   if repetitions == 0: interval = 1
@@ -192,47 +270,67 @@ nextReview = today + interval days
 
 1. Load all cards from the selected dataset
 2. Filter cards due for review (nextReview <= today) + new cards (no progress yet)
-3. Shuffle the filtered cards (Fisher-Yates)
-4. Limit session size (e.g., 20 cards per session, configurable)
-5. Cards rated "不會" are re-queued at the end of the current session
+3. For mix datasets in multi-mode, filter to applicable (item, mode) pairs
+4. Shuffle the filtered cards (Fisher-Yates)
+5. Limit session size (e.g., 20 cards per session, configurable)
+6. Cards rated "不會" are re-queued at the end of the current session
 
 ---
 
-## 5. Navigation & Routes
+## 5. Routes & Navigation
 
 ```
-/                           → HomePage (browse datasets, filter by category/level)
-/study/:datasetId           → SetupPage (choose test mode, session size)
-/study/:datasetId/session   → StudyPage (active flashcard session)
-/study/:datasetId/summary   → SummaryPage (session results)
+/                                → HomePage (browse datasets, filter by category/level)
+/study/:datasetId                → SetupPage (mode + session config)
+/study/:datasetId/session        → StudyPage (flashcard test session)
+/learn/:datasetId                → LearnSetupPage (choose 全部學習 or 分天計畫)
+/learn/:datasetId/session        → LearnPage (browse cards with full content)
+/manage/new                      → DatasetCreatePage (create new dataset)
+/manage/:datasetId               → DatasetEditPage (list/manage items)
+/manage/:datasetId/item          → ItemEditPage (add new item)
+/manage/:datasetId/item/:itemId  → ItemEditPage (edit existing item)
+/settings                        → SettingsPage (dark mode, swipe assist)
+/about                           → AboutPage
 ```
 
 ### 5.1 User Flow
 
 ```
 HomePage
-  ├── See all datasets, filter by category (vocabulary/grammar) and level (N5-N1)
-  ├── Each dataset shows: name, level, card count, due count
-  └── Click dataset → SetupPage
+  ├── See all datasets, filter by category (vocabulary/grammar/mix) and level
+  ├── Each dataset shows: name, level, category badge, card count, mastery bar
+  ├── Click dataset → SetupPage
+  └── "+ 新增學習集" → DatasetCreatePage
 
 SetupPage
   ├── Show available test modes for this dataset type
-  ├── Session size slider (10/20/30/all due)
-  └── Start → StudyPage
+  │   ├── vocabulary/grammar: direct ModeSelector
+  │   └── mix: compact pills with "進階設定" toggle for grouped ModeSelector
+  ├── Session size selector (10/20/30/all)
+  ├── "學習模式（瀏覽全部卡片）" → LearnSetupPage
+  ├── "隨機複習（全部卡片）" → StudyPage (random session)
+  ├── "開始複習（待複習）" → StudyPage (due cards only)
+  └── "管理" link → DatasetEditPage
+
+LearnSetupPage
+  ├── "全部學習" — browse all cards at once
+  ├── "分天計畫" — split cards across multiple days
+  └── "開始學習" → LearnPage
+
+LearnPage
+  ├── Progress bar at top
+  ├── Full card content (no flip), navigation buttons
+  ├── Edit/delete buttons per card
+  ├── Keyboard: ← previous, → next
+  └── End: "瀏覽完成" with options to start exam or restart
 
 StudyPage
-  ├── Progress bar at top (e.g., 3/20)
+  ├── Progress bar + mode label at top
   ├── Flashcard in center, tap/click to flip
-  ├── After flip, show 3 rating buttons at bottom
-  ├── Rating advances to next card with animation
+  ├── After flip, show 3 rating buttons
+  ├── Swipe gestures alternative
   ├── "不會" cards re-appear later in session
-  └── All cards done → SummaryPage
-
-SummaryPage
-  ├── Stats: total reviewed, 記住了 / 還好 / 不會 counts
-  ├── List of cards rated 不會 for quick review
-  ├── "再來一次" (Study Again) button
-  └── "回首頁" (Back to Home) button
+  └── All cards done → SessionSummary (inline)
 ```
 
 ---
@@ -241,16 +339,18 @@ SummaryPage
 
 ### 6.1 Responsive Design
 
-- **Mobile**: Full width with padding
-- **Desktop**: Centered container, max-width ~640px (roughly 1/2 screen on 1280px+)
-- Shared layout wrapper handles this automatically
+- **Mobile**: Full width with padding, touch-optimized
+- **Desktop**: Centered container, max-width ~640px
+- Shared `Layout` wrapper handles this automatically
 
 ### 6.2 Key UI Components
 
 - **Flashcard**: Card with flip animation (CSS 3D transform). Front shows question, back shows answer. Tap anywhere to flip.
-- **Rating Buttons**: Three buttons fixed at bottom. Color coded: red (不會), yellow (還好), green (記住了). Only visible after card is flipped.
-- **Grammar Highlight**: Renders 【bracket】 content with colored background highlight. In blank mode, replaces with `____` placeholder.
-- **Progress Bar**: Thin bar at top showing current position in session.
+- **Rating Buttons**: Three buttons at bottom. Color coded: red (不會), yellow (還好), green (記住了). Only visible after card is flipped.
+- **Grammar Highlight**: Renders `【bracket】` content with colored background highlight. In blank mode, replaces with `____` placeholder.
+- **Progress Bar**: Thin bar at top showing current position in session, with optional mode label for multi-mode sessions.
+- **ModeSelector**: Chip-based mode picker. Supports `grouped` prop for mix datasets (visual 詞彙/文法 section labels) and `defaultModes` prop for fallback behavior.
+- **ItemForm**: Form for adding/editing items. For mix datasets, includes a type selector (詞彙/文法) that toggles between vocab and grammar fields.
 
 ### 6.3 Navigation Bar
 
@@ -267,255 +367,57 @@ Key prefix: `jp-learner:`
 ```
 jp-learner:progress         → { [cardId: string]: CardProgress }
 jp-learner:settings         → { defaultSessionSize: number, showSwipeAssist: boolean }
+jp-learner:custom-data      → { datasets: { [datasetId: string]: Dataset } }
+jp-learner:test-modes:*     → saved test mode selections per category
+jp-learner:study-plan:*     → daily learning plans per dataset
 ```
 
 ---
 
-## 8. Implementation Order
+## 8. Dataset Management (CRUD)
 
-### Phase 1: Foundation
-1. Project scaffolding (Vite + React + TS + Tailwind + React Router)
-2. TypeScript types for all data structures
-3. Layout component with responsive centered container
-4. React Router setup with all routes
-
-### Phase 2: Data & Core Logic
-5. Sample JSON datasets (1 vocabulary + 1 grammar, ~5 items each for testing)
-6. Dataset loading hook (`useDatasets`)
-7. SM-2 algorithm implementation (`sm2.ts`)
-8. localStorage helpers and progress hook (`useProgress`)
-9. Grammar bracket parser (`grammar.ts`)
-10. Shuffle utility
-
-### Phase 3: Pages & Components
-11. HomePage — dataset listing with category/level filters
-12. DatasetCard component
-13. SetupPage — mode selection + session config
-14. Flashcard component with flip animation
-15. StudyPage — session logic, card queue, rating flow
-16. RatingButtons component
-17. GrammarHighlight component (highlight + blank modes)
-18. SummaryPage — session results
-
-### Phase 4: Polish
-19. Progress bar during session
-20. Flip and slide animations
-21. Re-queue "不會" cards logic
-22. Mobile touch interactions and responsive fine-tuning
-23. Edge cases: empty datasets, all cards mastered, no due cards
-
----
-
-## 9. Sample Data for Development
-
-Create minimal test data during Phase 2:
-
-- `data/vocab-n3.json` — 5 vocabulary items
-- `data/grammar-n3.json` — 5 grammar items (including multi-bracket patterns)
-
-These serve as both development fixtures and format documentation.
-
----
-
-## 10. Learning Mode (Phase 5)
-
-A read-only browsing mode that shows cards one-by-one with full content visible (no flip, no rating). Designed for initial learning before testing.
-
-### 10.1 Route
-
-```
-/learn/:datasetId           → LearnPage (browse cards sequentially)
-```
-
-### 10.2 User Flow
-
-```
-SetupPage
-  ├── "學習模式" button (alongside 開始測驗)
-  └── Click → LearnPage
-
-LearnPage
-  ├── Progress bar at top (e.g., 2 / 5)
-  ├── Full card content displayed (no flip):
-  │   ├── Vocabulary: japanese + hiragana + chinese + full_explanation
-  │   └── Grammar: japanese + chinese + full_explanation + all examples (highlighted)
-  ├── Navigation: ← 上一張 / 下一張 → buttons
-  ├── Keyboard: Left arrow = previous, Right arrow = next
-  └── End: shows "學習完成" with back options
-```
-
-### 10.3 Card Layout (Learning Mode)
-
-**Vocabulary card** — single view, no flip:
-- Top: Japanese kanji (large)
-- Middle: hiragana reading
-- Below: Chinese meaning (bold)
-- Bottom: full explanation
-
-**Grammar card** — single view, no flip:
-- Top: Grammar pattern (large)
-- Middle: Chinese meaning (bold)
-- Below: full explanation
-- Examples section: each example shows sentence (with grammar highlighted) + Chinese translation
-
----
-
-## 11. Review All / Random Mode (Phase 5)
-
-When all cards in a dataset are already learned (due = 0), users should still be able to study.
-
-### 11.1 Session Types
-
-The SetupPage passes a `sessionType` to the StudyPage via location.state:
-
-| sessionType | Behavior |
-|-------------|----------|
-| `"due"` (default) | Only due/new cards. Current behavior. |
-| `"random"` | All cards, shuffled randomly, ignoring due dates. Still updates SM-2 progress. |
-
-### 11.2 Changes to SetupPage
-
-- Always show both buttons:
-  - "開始測驗" — uses `"due"` session type (only due cards)
-  - "隨機複習" — uses `"random"` session type (all cards, shuffled)
-- When due cards = 0, the "開始測驗" button is disabled with hint text.
-
-### 11.3 Changes to useStudySession
-
-- Accept `sessionType` parameter.
-- When `sessionType === "random"`:
-  - Ignore `isDue()` filter, include all cards.
-  - Still shuffle and limit by sessionSize.
-  - Still track session results for summary display.
-  - Still update SM-2 progress (ratings count).
-
----
-
-## 12. Statistics (Phase 5)
-
-### 12.1 Dataset Statistics on DatasetCard (HomePage)
-
-Each DatasetCard shows a mastery progress bar:
-
-- **已學習**: number of cards that have been rated at least once
-- **熟練度**: progress bar showing percentage of cards with `repetitions >= 3` (well-learned)
-
-### 12.2 Dataset Statistics on SetupPage
-
-A stats section displayed on SetupPage (above mode selection):
-
-| Stat | Description |
-|------|-------------|
-| 總卡片數 | Total cards in dataset |
-| 已學習 | Cards with at least one review |
-| 待複習 | Cards currently due |
-| 已熟練 | Cards with repetitions >= 3 |
-
-### 12.3 Implementation
-
-- Stats are computed from `ProgressStore` in localStorage.
-- A utility function `getDatasetStats(dataset, progress)` returns all stat values.
-- `DatasetMeta` type extended with `learnedCards` and `masteredCards` fields.
-
-### 12.4 New Files
-
-```
-src/lib/stats.ts                # getDatasetStats() utility
-src/components/StatsBar.tsx     # Mastery bar on DatasetCard
-src/components/DatasetStats.tsx # Stats section for SetupPage
-src/components/LearnCard.tsx    # Full-content card for learning mode
-src/pages/LearnPage.tsx         # Learning mode page
-```
-
----
-
-## 13. Updated Route Map
-
-```
-/                                → HomePage
-/study/:datasetId                → SetupPage (mode + session config)
-/study/:datasetId/session        → StudyPage (flashcard test session)
-/learn/:datasetId                → LearnSetupPage (choose learn mode)
-/learn/:datasetId/session        → LearnPage (browse cards with full content)
-/settings                        → SettingsPage (dark mode, swipe assist toggles)
-```
-
----
-
-## 14. Settings Page (Phase 6)
-
-A dedicated settings page accessible via a gear icon in the header navigation bar.
-
-### 14.1 Route
-
-```
-/settings → SettingsPage
-```
-
-### 14.2 Settings
-
-| Setting | Key | Default | Description |
-|---------|-----|---------|-------------|
-| 深色模式 | (dark mode via CSS class) | system | Toggle dark/light theme |
-| 滑動提示 | `showSwipeAssist` | `true` | Show color overlay + label text on card during swipe gestures |
-
-### 14.3 Swipe Assist Behavior
-
-When **enabled** (default):
-- Swiping a card shows a colored overlay (green/red/yellow) with a text label (記住了/不會/還好)
-- Mobile hint text "← 不會 · ↓ 還好 · → 記住了" is shown below the card
-
-When **disabled**:
-- Swiping still works — cards move with drag and trigger ratings normally
-- The color overlay and text label are hidden
-- The mobile hint text is hidden
-
-### 14.4 Files
-
-```
-src/pages/SettingsPage.tsx       # Settings page with toggle rows
-src/hooks/useSettings.ts         # React hook wrapping loadSettings/saveSettings
-```
-
----
-
-## 15. Dataset Management — CRUD (Phase 7)
-
-Allows users to create, edit, and delete both datasets and individual items (vocabulary + grammar). All changes are persisted in localStorage.
-
-### 15.1 Data Storage Strategy
+### 8.1 Data Storage Strategy
 
 - New localStorage key: `jp-learner:custom-data`
 - Stores a `CustomDataStore` with a `datasets` record of user-managed datasets
 - **Built-in datasets** (from `data/*.json`): remain unchanged until modified. When a user edits/adds/deletes items in a built-in dataset, the entire dataset is copied to localStorage. From that point on, the local copy is used instead of the built-in one.
 - **Custom datasets**: entirely user-created, stored only in localStorage
-- A "reset to default" option is available for modified built-in datasets
+- A "還原預設" (reset to default) option is available for modified built-in datasets
 
-### 15.2 Routes
+### 8.2 Category Support
 
-```
-/manage/new                      → DatasetCreatePage (create new dataset)
-/manage/:datasetId               → DatasetEditPage (list/manage items in a dataset)
-/manage/:datasetId/item          → ItemEditPage (add new item)
-/manage/:datasetId/item/:itemId  → ItemEditPage (edit existing item)
-```
+- Users can create datasets of any category: vocabulary, grammar, or mix
+- Mix datasets allow adding both vocab and grammar items via a type selector in the item form
+- Items in mix datasets show type badges (詞/文) on the edit page
 
-### 15.3 Integration Points
+### 8.3 Integration Points
 
 - **HomePage**: "+ 新增學習集" button above dataset list; edit icon on each DatasetCard
 - **SetupPage**: "管理" link next to dataset name header
 - **LearnPage**: edit and delete buttons below each card during browsing
 
-### 15.4 New Files
+---
 
-```
-src/types/index.ts               # CustomDataStore interface (added)
-src/lib/storage.ts               # Custom data load/save + pub/sub notifications (added)
-src/hooks/useDatasets.ts         # Refactored to merge built-in + custom data via useSyncExternalStore
-src/hooks/useDatasetCrud.ts      # CRUD operations hook
-src/components/ConfirmDialog.tsx # Delete confirmation modal
-src/components/ItemForm.tsx      # Form for vocab/grammar items (with grammar examples)
-src/pages/DatasetCreatePage.tsx  # Create new dataset page
-src/pages/DatasetEditPage.tsx    # Dataset item list with edit/delete actions
-src/pages/ItemEditPage.tsx       # Add or edit a single item
-```
+## 9. Settings
+
+| Setting | Key | Default | Description |
+|---------|-----|---------|-------------|
+| 深色模式 | CSS class toggle | system | Toggle dark/light theme |
+| 滑動提示 | `showSwipeAssist` | `true` | Show color overlay + label text on card during swipe gestures |
+
+---
+
+## 10. Testing
+
+### 10.1 Unit Tests (Vitest)
+
+Tests live alongside source in `src/**/*.test.ts(x)` and `src/**/__tests__/*.test.ts(x)`:
+- SM-2 algorithm, grammar parsing, flashcard building, shuffle, storage, stats
+- Mix category: type guards, mode filtering, card building, multi-mode stats
+- Hooks: useDatasetCrud (including mix), useSwipe, useSettings
+
+### 10.2 E2E Tests (Playwright)
+
+Tests in `e2e/`. Global setup copies fixture data (`test-vocab.json`, `test-grammar.json`, `test-mix.json`) from `e2e/fixtures/` into `data/` before tests.
+
+Test suites: home, learn, manage, mix, mobile, navigation, pronunciation, settings, setup, study, swipe.

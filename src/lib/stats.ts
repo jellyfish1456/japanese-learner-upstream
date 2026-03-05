@@ -1,4 +1,5 @@
-import type { DataItem, ProgressStore, CardProgress, ConcreteTestMode } from "../types";
+import type { DataItem, ProgressStore, CardProgress, ConcreteTestMode, Category } from "../types";
+import { isVocabItem, VOCAB_MODE_VALUES, GRAMMAR_MODE_VALUES } from "../types";
 import { isDue } from "./sm2";
 import { makeProgressKey } from "./storage";
 
@@ -50,6 +51,7 @@ export function getMultiModeDatasetStats(
   data: DataItem[],
   progress: ProgressStore,
   modes: ConcreteTestMode[],
+  category?: Category,
 ): DatasetStats {
   const totalCards = data.length;
   let learnedCards = 0;
@@ -57,11 +59,18 @@ export function getMultiModeDatasetStats(
   let masteredCards = 0;
 
   for (const item of data) {
+    // For mix datasets, only check modes applicable to this item's type
+    const applicableModes = category === "mix"
+      ? modes.filter((m) => isVocabItem(item) ? VOCAB_MODE_VALUES.has(m) : GRAMMAR_MODE_VALUES.has(m))
+      : modes;
+
+    if (applicableModes.length === 0) continue;
+
     let anyLearned = false;
     let anyDue = false;
     let allMastered = true;
 
-    for (const mode of modes) {
+    for (const mode of applicableModes) {
       const key = makeProgressKey(item.id, mode);
       const p: CardProgress | undefined = progress[key];
       if (p) {

@@ -4,16 +4,8 @@ import { useDatasetById } from "../hooks/useDatasets";
 import { useDatasetCrud, isBuiltinDataset } from "../hooks/useDatasetCrud";
 import ConfirmDialog from "../components/ConfirmDialog";
 import type { VocabItem, GrammarItem } from "../types";
-
-const categoryLabels: Record<string, string> = {
-  vocabulary: "詞彙",
-  grammar: "文法",
-};
-
-const categoryColors: Record<string, string> = {
-  vocabulary: "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300",
-  grammar: "bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300",
-};
+import { isVocabItem } from "../types";
+import { categoryLabels, categoryColors } from "../lib/category";
 
 export default function DatasetEditPage() {
   const { datasetId } = useParams<{ datasetId: string }>();
@@ -52,13 +44,15 @@ export default function DatasetEditPage() {
     setShowResetConfirm(false);
   };
 
+  const isMix = dataset.category === "mix";
+
   const getItemSummary = (item: VocabItem | GrammarItem) => {
-    if (dataset.category === "vocabulary") {
+    if (dataset.category === "vocabulary" || (isMix && isVocabItem(item))) {
       const v = item as VocabItem;
-      return { primary: v.japanese, secondary: `${v.hiragana} — ${v.simple_chinese}` };
+      return { primary: v.japanese, secondary: `${v.hiragana} — ${v.simple_chinese}`, type: "vocab" as const };
     }
     const g = item as GrammarItem;
-    return { primary: g.japanese, secondary: g.simple_chinese };
+    return { primary: g.japanese, secondary: g.simple_chinese, type: "grammar" as const };
   };
 
   return (
@@ -131,7 +125,18 @@ export default function DatasetEditPage() {
                 className="flex items-center bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 gap-3"
               >
                 <div className="flex-1 min-w-0">
-                  <div className="font-semibold text-gray-900 dark:text-gray-50 truncate">{summary.primary}</div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-semibold text-gray-900 dark:text-gray-50 truncate">{summary.primary}</span>
+                    {isMix && (
+                      <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded-full shrink-0 ${
+                        summary.type === "vocab"
+                          ? "bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300"
+                          : "bg-purple-100 text-purple-600 dark:bg-purple-900 dark:text-purple-300"
+                      }`}>
+                        {summary.type === "vocab" ? "詞" : "文"}
+                      </span>
+                    )}
+                  </div>
                   <div className="text-sm text-gray-500 dark:text-gray-400 truncate">{summary.secondary}</div>
                 </div>
                 <div className="flex gap-1 shrink-0">

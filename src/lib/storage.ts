@@ -1,4 +1,4 @@
-import type { ProgressStore, StudyPlan, CustomDataStore } from "../types";
+import type { ProgressStore, StudyPlan, CustomDataStore, Category } from "../types";
 
 const PROGRESS_KEY = "jp-learner:progress";
 const SETTINGS_KEY = "jp-learner:settings";
@@ -60,7 +60,7 @@ export function parseProgressKey(key: string): { cardId: string; mode?: string }
 
 const TEST_MODE_KEY = "jp-learner:test-mode";
 
-export function loadTestModes(category: "vocabulary" | "grammar"): string | string[] | null {
+export function loadTestModes(category: Category): string | string[] | null {
   try {
     const raw = localStorage.getItem(TEST_MODE_KEY);
     if (!raw) return null;
@@ -74,7 +74,7 @@ export function loadTestModes(category: "vocabulary" | "grammar"): string | stri
   }
 }
 
-export function saveTestModes(category: "vocabulary" | "grammar", modes: string | string[]): void {
+export function saveTestModes(category: Category, modes: string | string[]): void {
   try {
     const raw = localStorage.getItem(TEST_MODE_KEY);
     const stored = raw ? JSON.parse(raw) : {};
@@ -86,14 +86,14 @@ export function saveTestModes(category: "vocabulary" | "grammar", modes: string 
 }
 
 /** @deprecated Use loadTestModes instead */
-export const loadTestMode = (category: "vocabulary" | "grammar"): string | null => {
+export const loadTestMode = (category: Category): string | null => {
   const val = loadTestModes(category);
   if (Array.isArray(val)) return val[0] ?? null;
   return val;
 };
 
 /** @deprecated Use saveTestModes instead */
-export const saveTestMode = (category: "vocabulary" | "grammar", mode: string): void => {
+export const saveTestMode = (category: Category, mode: string): void => {
   saveTestModes(category, mode);
 };
 

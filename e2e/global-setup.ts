@@ -14,4 +14,5 @@ export default function globalSetup() {
 
   cpSync(resolve(fixturesDir, "test-vocab.json"), resolve(dataDir, "test-vocab.json"));
   cpSync(resolve(fixturesDir, "test-grammar.json"), resolve(dataDir, "test-grammar.json"));
+  cpSync(resolve(fixturesDir, "test-mix.json"), resolve(dataDir, "test-mix.json"));
 }

@@ -1,0 +1,33 @@
+{
+  "name": "Test 綜合",
+  "category": "mix",
+  "level": "T1",
+  "data": [
+    {
+      "id": "test-mix-v1",
+      "japanese": "勉強",
+      "hiragana": "べんきょう",
+      "simple_chinese": "學習",
+      "full_explanation": "勉強する：學習、用功讀書"
+    },
+    {
+      "id": "test-mix-g1",
+      "japanese": "ている",
+      "simple_chinese": "正在～",
+      "full_explanation": "表示動作正在進行中。",
+      "examples": [
+        {
+          "sentence": "本を読ん【ている】",
+          "chinese": "正在看書"
+        }
+      ]
+    },
+    {
+      "id": "test-mix-v2",
+      "japanese": "天気",
+      "hiragana": "てんき",
+      "simple_chinese": "天氣",
+      "full_explanation": "今日の天気：今天的天氣"
+    }
+  ]
+}

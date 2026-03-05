@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDatasetCrud } from "../hooks/useDatasetCrud";
+import type { Category } from "../types";
 
 export default function DatasetCreatePage() {
   const navigate = useNavigate();
   const { createDataset } = useDatasetCrud();
 
   const [name, setName] = useState("");
-  const [category, setCategory] = useState<"vocabulary" | "grammar">("vocabulary");
+  const [category, setCategory] = useState<Category>("vocabulary");
   const [level, setLevel] = useState("");
 
   const isValid = name.trim() && level.trim();
@@ -22,7 +23,7 @@ export default function DatasetCreatePage() {
     <div>
       <div className="mb-6">
         <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50">新增學習集</h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">建立一個新的詞彙或文法學習集</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">建立一個新的詞彙、文法或綜合學習集</p>
       </div>
 
       <div className="space-y-4">
@@ -44,7 +45,7 @@ export default function DatasetCreatePage() {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">類型</label>
           <div className="flex gap-2">
-            {(["vocabulary", "grammar"] as const).map((cat) => (
+            {(["vocabulary", "grammar", "mix"] as const).map((cat) => (
               <button
                 key={cat}
                 onClick={() => setCategory(cat)}
@@ -54,7 +55,7 @@ export default function DatasetCreatePage() {
                     : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
                 }`}
               >
-                {cat === "vocabulary" ? "詞彙" : "文法"}
+                {cat === "vocabulary" ? "詞彙" : cat === "grammar" ? "文法" : "綜合"}
               </button>
             ))}
           </div>

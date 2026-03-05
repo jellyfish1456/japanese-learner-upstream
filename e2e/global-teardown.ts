@@ -12,4 +12,5 @@ export default function globalTeardown() {
 
   rmSync(resolve(dataDir, "test-vocab.json"), { force: true });
   rmSync(resolve(dataDir, "test-grammar.json"), { force: true });
+  rmSync(resolve(dataDir, "test-mix.json"), { force: true });
 }

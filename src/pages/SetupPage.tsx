@@ -9,6 +9,8 @@ import type { SessionType, ConcreteTestMode } from "../types";
 import {
   VOCAB_TEST_MODES,
   GRAMMAR_TEST_MODES,
+  MIX_TEST_MODES,
+  MIX_DEFAULT_MODES,
 } from "../types";
 
 const SESSION_SIZES = [10, 20, 30];
@@ -19,23 +21,25 @@ export default function SetupPage() {
   const dataset = useDatasetById(datasetId ?? "");
 
   const category = dataset?.category ?? "vocabulary";
+  const isMix = category === "mix";
   const isVocab = category === "vocabulary";
-  const modes = isVocab ? VOCAB_TEST_MODES : GRAMMAR_TEST_MODES;
+  const modes = isMix ? MIX_TEST_MODES : isVocab ? VOCAB_TEST_MODES : GRAMMAR_TEST_MODES;
 
   const saved = loadTestModes(category);
-  // Resolve default: use saved value if it's valid, otherwise first mode
+  // Resolve default: use saved value if it's valid, otherwise first mode (or MIX_DEFAULT_MODES for mix)
   const resolveDefault = (): string | string[] => {
-    if (saved == null) return modes[0].value;
+    if (saved == null) return isMix ? MIX_DEFAULT_MODES : modes[0].value;
     if (Array.isArray(saved)) {
       const valid = saved.filter((s) => modes.some((m) => m.value === s));
-      if (valid.length === 0) return modes[0].value;
+      if (valid.length === 0) return isMix ? MIX_DEFAULT_MODES : modes[0].value;
       return valid.length === 1 ? valid[0] : valid;
     }
     if (modes.some((m) => m.value === saved)) return saved;
-    return modes[0].value;
+    return isMix ? MIX_DEFAULT_MODES : modes[0].value;
   };
 
   const [selectedModes, setSelectedModes] = useState<string | string[]>(resolveDefault);
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
   const handleModeChange = (newModes: string | string[]) => {
     setSelectedModes(newModes);
@@ -58,7 +62,7 @@ export default function SetupPage() {
   const selectedArray = Array.isArray(selectedModes) ? selectedModes : [selectedModes];
   const isMultiMode = selectedArray.length > 1 && !selectedArray.includes("random");
   const stats = isMultiMode
-    ? getMultiModeDatasetStats(dataset.data, progress, selectedArray as ConcreteTestMode[])
+    ? getMultiModeDatasetStats(dataset.data, progress, selectedArray as ConcreteTestMode[], isMix ? "mix" : undefined)
     : getDatasetStats(dataset.data, progress);
 
   const handleStart = (sessionType: SessionType) => {
@@ -106,14 +110,52 @@ export default function SetupPage() {
       {/* Test mode selection */}
       <div className="mb-6">
         <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">測驗模式</h3>
-        <ModeSelector
-          modes={modes}
-          selected={selectedModes}
-          onChange={handleModeChange}
-        />
+
+        {isMix && !showAdvanced ? (
+          <div>
+            {/* Compact pills for default mix modes */}
+            <div className="flex flex-wrap gap-2">
+              {(Array.isArray(selectedModes) ? selectedModes : [selectedModes]).map((m) => {
+                const mode = MIX_TEST_MODES.find((mt) => mt.value === m);
+                return (
+                  <span key={m} className="px-3 py-2 rounded-xl text-sm font-medium bg-gray-900 dark:bg-white text-white dark:text-gray-900">
+                    {mode?.label ?? m}
+                  </span>
+                );
+              })}
+            </div>
+            <button
+              onClick={() => setShowAdvanced(true)}
+              className="text-sm text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 mt-2 cursor-pointer"
+            >
+              進階設定
+            </button>
+          </div>
+        ) : (
+          <div>
+            <ModeSelector
+              modes={modes}
+              selected={selectedModes}
+              onChange={handleModeChange}
+              grouped={isMix}
+              defaultModes={isMix ? MIX_DEFAULT_MODES : undefined}
+            />
+            {isMix && (
+              <button
+                onClick={() => setShowAdvanced(false)}
+                className="text-sm text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 mt-2 cursor-pointer"
+              >
+                收起
+              </button>
+            )}
+          </div>
+        )}
+
         {isMultiMode && (
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
-            每張卡片將以 {selectedArray.length} 種模式各測驗一次
+            {isMix
+              ? "每張卡片將以適用的模式各測驗一次"
+              : `每張卡片將以 ${selectedArray.length} 種模式各測驗一次`}
           </p>
         )}
       </div>

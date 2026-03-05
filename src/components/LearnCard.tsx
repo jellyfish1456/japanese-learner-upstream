@@ -1,9 +1,10 @@
-import type { VocabItem, GrammarItem, DataItem } from "../types";
+import type { VocabItem, GrammarItem, DataItem, Category } from "../types";
+import { isVocabItem } from "../types";
 import GrammarHighlight from "./GrammarHighlight";
 
 interface LearnCardProps {
   item: DataItem;
-  category: "vocabulary" | "grammar";
+  category: Category;
 }
 
 function VocabLearnCard({ item }: { item: VocabItem }) {
@@ -78,7 +79,7 @@ function GrammarLearnCard({ item }: { item: GrammarItem }) {
 }
 
 export default function LearnCard({ item, category }: LearnCardProps) {
-  if (category === "vocabulary") {
+  if (category === "vocabulary" || (category === "mix" && isVocabItem(item))) {
     return <VocabLearnCard item={item as VocabItem} />;
   }
   return <GrammarLearnCard item={item as GrammarItem} />;

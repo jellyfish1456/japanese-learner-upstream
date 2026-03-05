@@ -1,20 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import type { DatasetMeta } from "../types";
+import { categoryLabels, categoryColors } from "../lib/category";
 import StatsBar from "./StatsBar";
 
 interface DatasetCardProps {
   dataset: DatasetMeta;
 }
-
-const categoryLabels: Record<string, string> = {
-  vocabulary: "詞彙",
-  grammar: "文法",
-};
-
-const categoryColors: Record<string, string> = {
-  vocabulary: "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300",
-  grammar: "bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300",
-};
 
 export default function DatasetCard({ dataset }: DatasetCardProps) {
   const navigate = useNavigate();
