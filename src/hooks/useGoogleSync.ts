@@ -72,10 +72,17 @@ export function useGoogleSync() {
   // Auto-push debouncer
   const debouncerRef = useRef<ReturnType<typeof createAutoPushDebouncer> | null>(null);
 
-  // Shared helper: ensure we have a valid auth token, re-auth if needed
+  // Shared helper: ensure we have a valid auth token, try silent refresh first
   const ensureAuth = useCallback(async (): Promise<{ accessToken: string; email: string } | null> => {
     const auth = loadAuthState();
     if (auth && isTokenValid(auth)) return auth;
+    // Try silent reauth before showing popup
+    try {
+      const silentAuth = await trySilentReauth();
+      if (silentAuth && isTokenValid(silentAuth)) return silentAuth;
+    } catch {
+      // silent reauth failed, fall through to interactive
+    }
     try {
       return await requestAccessToken();
     } catch {
@@ -89,12 +96,23 @@ export function useGoogleSync() {
   }, []);
 
   const doPush = useCallback(async () => {
-    const auth = loadAuthState();
+    let auth = loadAuthState();
     const meta = metaRef.current;
     if (!auth || !meta) return;
     if (!isTokenValid(auth)) {
-      setSyncState((s) => ({ ...s, status: "error", error: "登入已過期，請重新登入" }));
-      return;
+      // Try silent refresh before giving up
+      try {
+        const refreshed = await trySilentReauth();
+        if (refreshed && isTokenValid(refreshed)) {
+          auth = refreshed;
+        } else {
+          setSyncState((s) => ({ ...s, status: "error", error: "登入已過期，請重新登入" }));
+          return;
+        }
+      } catch {
+        setSyncState((s) => ({ ...s, status: "error", error: "登入已過期，請重新登入" }));
+        return;
+      }
     }
     if (syncBusyRef.current) return; // skip if another operation is in progress
 
@@ -133,6 +151,32 @@ export function useGoogleSync() {
     debouncerRef.current = createAutoPushDebouncer(doPush);
     return () => debouncerRef.current?.cancel();
   }, [doPush]);
+
+  // Proactive token refresh: schedule silent reauth 5 min before expiry
+  useEffect(() => {
+    const REFRESH_BUFFER_MS = 5 * 60_000; // 5 minutes before expiry
+
+    const scheduleRefresh = () => {
+      const auth = loadAuthState();
+      if (!auth || !metaRef.current) return undefined;
+      const msUntilExpiry = auth.expiresAt - Date.now();
+      const delay = Math.max(msUntilExpiry - REFRESH_BUFFER_MS, 0);
+      return setTimeout(async () => {
+        try {
+          const refreshed = await trySilentReauth();
+          if (refreshed && isTokenValid(refreshed)) {
+            // Successfully refreshed — schedule the next one
+            timerId = scheduleRefresh();
+          }
+        } catch {
+          // Silent refresh failed; user will be prompted on next action
+        }
+      }, delay);
+    };
+
+    let timerId = scheduleRefresh();
+    return () => { if (timerId) clearTimeout(timerId); };
+  }, [syncState.isConnected]);
 
   // Subscribe to sync notifications
   useEffect(() => {
