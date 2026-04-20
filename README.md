@@ -21,6 +21,7 @@ A flashcard web app for learning Japanese vocabulary and grammar, built for Trad
 - **Pronunciation** - Text-to-speech for Japanese words using the Web Speech API
 - **Google Drive Sync** - Sync progress, settings, and custom datasets across devices via Google Drive (optional, requires Google account)
 - **Offline-First** - All progress stored in browser localStorage; no backend required
+- **Installable (PWA)** - Install to your iPhone/Android/desktop home screen with offline support via service worker
 - **Dark Mode** - Toggle between light and dark themes via header or settings page
 - **Responsive Design** - Mobile-friendly with centered layout on desktop
 
@@ -77,6 +78,18 @@ npm run test:e2e:ui   # Playwright interactive UI mode
 ```bash
 npm run lint
 ```
+
+### Install to Home Screen (PWA)
+
+The app is a Progressive Web App. After visiting the live demo:
+
+- **iPhone / iPad (Safari):** Share button → "Add to Home Screen" (加入主畫面). Launches full-screen like a native app.
+- **Android (Chrome):** menu → "Install app" / "Add to Home screen".
+- **Desktop (Chrome/Edge):** click the install icon in the address bar.
+
+Once installed, the app works offline. Progress is kept in localStorage — use Google Drive Sync (below) as an off-device backup, since iOS Safari may evict site data after ~7 days of no use.
+
+Icons are generated from `scripts/icons/icon.svg` (and `icon-maskable.svg`). Run `scripts/icons/generate.sh` after editing them to regenerate the PNGs in `public/` (macOS `sips` required).
 
 ### Google Drive Sync (Optional)
 

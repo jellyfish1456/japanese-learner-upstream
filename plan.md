@@ -475,3 +475,23 @@ Google Drive Root/
 ### 11.6 Environment Setup
 
 Requires `VITE_GOOGLE_CLIENT_ID` environment variable. See `.env.example`.
+
+## 12. Progressive Web App (PWA)
+
+The app is installable to iOS/Android/desktop home screens. Implemented with `vite-plugin-pwa` (Workbox under the hood).
+
+### 12.1 Manifest & Registration
+- Manifest is generated at build time from `vite.config.ts` (`VitePWA` plugin): `name`, `short_name`, `theme_color: #2563eb`, `background_color: #ffffff`, `display: standalone`, `start_url`/`scope` scoped to `/japanese-learner/`, `orientation: portrait`, `lang: zh-Hant`.
+- Icons: `pwa-192x192.png`, `pwa-512x512.png`, and a `pwa-maskable-512x512.png` (maskable purpose) for Android adaptive icons.
+- Service worker: `registerType: 'autoUpdate'` — clients auto-update on next load. Registered in `src/main.tsx` via `registerSW({ immediate: true })` (types from `vite-plugin-pwa/client` added to `tsconfig.app.json`).
+- Workbox precaches all build assets (`globPatterns: **/*.{js,css,html,svg,png,ico,json,woff2}`) with `navigateFallback: /japanese-learner/index.html` to serve SPA routes offline.
+
+### 12.2 iOS Integration
+- `index.html` declares `viewport-fit=cover`, `theme-color`, `apple-mobile-web-app-capable=yes`, `apple-mobile-web-app-status-bar-style=default`, `apple-mobile-web-app-title=日語卡`, and an `apple-touch-icon` link to `apple-touch-icon-180.png` (180×180, required by iOS).
+- `Layout.tsx` applies `env(safe-area-inset-top/left/right/bottom)` padding so the sticky header and main content respect the notch/home-indicator in standalone mode.
+- `index.css` adds `-webkit-tap-highlight-color: transparent`, `-webkit-text-size-adjust: 100%`, and `overscroll-behavior-y: none` for a cleaner standalone experience.
+- iOS-only caveat: install happens via Safari Share → "Add to Home Screen" (no install prompt). localStorage may be evicted after ~7 days of no use; Google Drive Sync serves as an off-device backup.
+
+### 12.3 Icon Pipeline
+- Sources: `scripts/icons/icon.svg` (standard, rounded background) and `scripts/icons/icon-maskable.svg` (full-bleed for Android adaptive icons with ~80% safe zone).
+- Regenerate with `scripts/icons/generate.sh` (uses macOS `sips`) — writes `favicon.svg`, `apple-touch-icon-180.png`, `pwa-192x192.png`, `pwa-512x512.png`, `pwa-maskable-512x512.png` into `public/`.
