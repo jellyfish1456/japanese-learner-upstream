@@ -3,6 +3,15 @@
 /* Class-based dark mode: toggle .dark on <html> */
 @variant dark (&:where(.dark, .dark *));
 
+/* iOS standalone polish: remove tap highlight, disable pull-to-refresh bounce leak */
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  overscroll-behavior-y: none;
+}
+
 /* Flashcard flip animation */
 .perspective {
   perspective: 1000px;
