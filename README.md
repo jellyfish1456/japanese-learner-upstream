@@ -91,7 +91,7 @@ To enable Google Drive sync, set up a Google Cloud project with OAuth2 credentia
 ## Project Structure
 
 ```
-data/                   JSON datasets (n5_vocab.json, grammar-n3.json, etc.)
+data/                   JSON datasets (n5_vocab.json, grammar-n5.json, grammar-n4.json, grammar-n3.json, etc.)
 src/
   components/           Reusable UI components (Flashcard, RatingButtons, ModeSelector, etc.)
   hooks/                Custom React hooks (useStudySession, useProgress, useDatasetCrud, useGoogleSync, etc.)

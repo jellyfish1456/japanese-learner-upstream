@@ -14,6 +14,8 @@ japanese-learner/
 │   ├── n5_vocab.json
 │   ├── n4_vocab.json
 │   ├── n3_vocab.json
+│   ├── grammar-n5.json
+│   ├── grammar-n4.json
 │   └── grammar-n3.json
 ├── src/
 │   ├── main.tsx
