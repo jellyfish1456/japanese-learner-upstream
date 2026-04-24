@@ -5,7 +5,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/japanese-learner/',
+  base: '/japanese-learner-upstream/',
   plugins: [
     react(),
     tailwindcss(),
@@ -20,8 +20,8 @@ export default defineConfig({
         short_name: '日語卡',
         description: '針對中文使用者的日語單字與文法翻卡學習 App',
         lang: 'zh-Hant',
-        start_url: '/japanese-learner/',
-        scope: '/japanese-learner/',
+        start_url: '/japanese-learner-upstream/',
+        scope: '/japanese-learner-upstream/',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
@@ -47,7 +47,7 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,ico,json,woff2}'],
-        navigateFallback: '/japanese-learner/index.html',
+        navigateFallback: '/japanese-learner-upstream/index.html',
         cleanupOutdatedCaches: true,
       },
       devOptions: {
