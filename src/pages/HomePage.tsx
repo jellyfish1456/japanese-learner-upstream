@@ -61,39 +61,67 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* Daily Dialogue Section */}
+      {/* Daily Dialogue + Listening sections */}
       {dialogueDatasets.length > 0 && (
-        <div className="mt-10">
-          <div className="mb-4">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1">日常對話</h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400">情境會話練習，每句附日文發音</p>
+        <>
+          {/* 日常對話 */}
+          <div className="mt-10">
+            <div className="mb-4">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1">日常對話</h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400">情境會話練習，每句附日文發音</p>
+            </div>
+            <div className="grid grid-cols-3 gap-3">
+              {dialogueDatasets.map((ds) => {
+                const dialogueColors: Record<string, { bg: string; icon: string }> = {
+                  N5: { bg: "bg-green-500 hover:bg-green-600", icon: "🌱" },
+                  N4: { bg: "bg-blue-500 hover:bg-blue-600", icon: "📗" },
+                  N3: { bg: "bg-purple-500 hover:bg-purple-600", icon: "📘" },
+                };
+                const s = dialogueColors[ds.level] ?? { bg: "bg-gray-500 hover:bg-gray-600", icon: "💬" };
+                return (
+                  <button
+                    key={ds.level}
+                    onClick={() => navigate(`/dialogue/${ds.level.toLowerCase()}`)}
+                    className={`${s.bg} text-white rounded-2xl p-4 text-center transition-colors tap-active shadow-sm`}
+                  >
+                    <div className="text-3xl mb-2">{s.icon}</div>
+                    <div className="text-lg font-bold">{ds.level}</div>
+                    <div className="text-xs opacity-80 mt-0.5">{ds.dialogues.length} 個對話</div>
+                  </button>
+                );
+              })}
+            </div>
           </div>
-          <div className="grid grid-cols-3 gap-3">
-            {dialogueDatasets.map((ds) => {
-              const levelColorMap: Record<string, { bg: string; text: string; icon: string }> = {
-                N5: { bg: "bg-green-500 hover:bg-green-600", text: "text-white", icon: "🌱" },
-                N4: { bg: "bg-blue-500 hover:bg-blue-600", text: "text-white", icon: "📗" },
-                N3: { bg: "bg-purple-500 hover:bg-purple-600", text: "text-white", icon: "📘" },
-              };
-              const style = levelColorMap[ds.level] ?? {
-                bg: "bg-gray-500 hover:bg-gray-600",
-                text: "text-white",
-                icon: "💬",
-              };
-              return (
-                <button
-                  key={ds.level}
-                  onClick={() => navigate(`/dialogue/${ds.level.toLowerCase()}`)}
-                  className={`${style.bg} ${style.text} rounded-2xl p-4 text-center transition-colors tap-active shadow-sm`}
-                >
-                  <div className="text-3xl mb-2">{style.icon}</div>
-                  <div className="text-lg font-bold">{ds.level}</div>
-                  <div className="text-xs opacity-80 mt-0.5">{ds.dialogues.length} 個對話</div>
-                </button>
-              );
-            })}
+
+          {/* 聽力練習 */}
+          <div className="mt-8">
+            <div className="mb-4">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1">聽力練習</h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400">聽日文選出正確中文，訓練聽解力</p>
+            </div>
+            <div className="grid grid-cols-3 gap-3">
+              {dialogueDatasets.map((ds) => {
+                const listeningColors: Record<string, { bg: string; icon: string }> = {
+                  N5: { bg: "bg-teal-500 hover:bg-teal-600", icon: "👂" },
+                  N4: { bg: "bg-cyan-500 hover:bg-cyan-600", icon: "🎧" },
+                  N3: { bg: "bg-indigo-500 hover:bg-indigo-600", icon: "🎵" },
+                };
+                const s = listeningColors[ds.level] ?? { bg: "bg-gray-500 hover:bg-gray-600", icon: "🔊" };
+                return (
+                  <button
+                    key={ds.level}
+                    onClick={() => navigate(`/listening/${ds.level.toLowerCase()}`)}
+                    className={`${s.bg} text-white rounded-2xl p-4 text-center transition-colors tap-active shadow-sm`}
+                  >
+                    <div className="text-3xl mb-2">{s.icon}</div>
+                    <div className="text-lg font-bold">{ds.level}</div>
+                    <div className="text-xs opacity-80 mt-0.5">10 題聽力</div>
+                  </button>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );
