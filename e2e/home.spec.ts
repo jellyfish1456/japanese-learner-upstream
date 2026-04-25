@@ -6,7 +6,7 @@ test.describe("Home Page", () => {
   });
 
   test("should display the header title", async ({ page }) => {
-    await expect(page.locator("header h1")).toHaveText("日語學習卡");
+    await expect(page.locator("header h1")).toHaveText("Chris 每日日文學習");
   });
 
   test("should display test dataset cards", async ({ page }) => {

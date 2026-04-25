@@ -16,8 +16,8 @@ export default defineConfig({
         'apple-touch-icon-180.png',
       ],
       manifest: {
-        name: '日語學習卡',
-        short_name: '日語卡',
+        name: 'Chris 每日日文學習',
+        short_name: 'Chris日文',
         description: '針對中文使用者的日語單字與文法翻卡學習 App',
         lang: 'zh-Hant',
         start_url: '/japanese-learner-upstream/',
