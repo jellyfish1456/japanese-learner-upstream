@@ -15,12 +15,20 @@ export interface GrammarExample {
   chinese: string;
 }
 
+export interface SimilarGrammar {
+  japanese: string;
+  difference: string;
+  example?: string;
+  example_chinese?: string;
+}
+
 export interface GrammarItem {
   id: string;
   japanese: string;
   simple_chinese: string;
   full_explanation: string;
   examples: GrammarExample[];
+  similar_grammar?: SimilarGrammar[];
 }
 
 export type DataItem = VocabItem | GrammarItem;
