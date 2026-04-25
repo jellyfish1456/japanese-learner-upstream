@@ -14,7 +14,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: "html",
   use: {
-    baseURL: `http://127.0.0.1:${E2E_PORT}/japanese-learner/`,
+    baseURL: `http://127.0.0.1:${E2E_PORT}/japanese-learner-upstream/`,
     trace: "on-first-retry",
   },
   projects: [
@@ -25,7 +25,7 @@ export default defineConfig({
   ],
   webServer: {
     command: `npx vite --port ${E2E_PORT}`,
-    url: `http://127.0.0.1:${E2E_PORT}/japanese-learner/`,
+    url: `http://127.0.0.1:${E2E_PORT}/japanese-learner-upstream/`,
     reuseExistingServer: false,
   },
 });
