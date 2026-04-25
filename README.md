@@ -2,7 +2,6 @@
 
 A flashcard web app for learning Japanese vocabulary and grammar, built for Traditional Chinese speakers. It features spaced repetition (SM-2 algorithm), multiple test modes, swipe gestures, and offline-capable progress tracking via localStorage.
 
-**Live demo:** [https://tigercosmos.github.io/japanese-learner/](https://tigercosmos.github.io/japanese-learner/)
 
 ## Features
 
