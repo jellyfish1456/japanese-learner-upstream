@@ -1,6 +1,8 @@
+import { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { useDialogueById } from "../hooks/useDialogues";
 import SpeakButton from "../components/SpeakButton";
+import RubyText from "../components/RubyText";
 
 // Speakers are typically "A" and "B" — A on left (blue), B on right (green)
 function isBubbleRight(speaker: string): boolean {
@@ -24,6 +26,91 @@ const levelColors: Record<string, { badge: string; lineA: string; lineB: string 
     lineB: "bg-purple-50 dark:bg-purple-900/30 border-purple-200 dark:border-purple-800",
   },
 };
+
+function DialogueBubble({
+  line,
+  colors,
+}: {
+  line: { speaker: string; japanese: string; chinese: string };
+  colors: { lineA: string; lineB: string };
+}) {
+  const [copied, setCopied] = useState(false);
+  const isRight = isBubbleRight(line.speaker);
+  const bubbleColor = isRight ? colors.lineB : colors.lineA;
+
+  const handleCopy = useCallback(() => {
+    navigator.clipboard.writeText(line.japanese).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    });
+  }, [line.japanese]);
+
+  return (
+    <div className={`flex items-start gap-2 ${isRight ? "flex-row-reverse" : ""}`}>
+      <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white ${isRight ? "bg-green-500 dark:bg-green-600" : "bg-blue-500 dark:bg-blue-600"}`}>
+        {line.speaker}
+      </div>
+      <div
+        onClick={handleCopy}
+        className={`flex-1 max-w-[85%] rounded-2xl border px-4 py-3 ${bubbleColor} ${isRight ? "rounded-tr-sm" : "rounded-tl-sm"} cursor-pointer active:opacity-70 transition-opacity relative`}
+      >
+        {copied && (
+          <span className="absolute top-2 right-3 text-xs bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-400 px-1.5 py-0.5 rounded font-medium">
+            已複製 ✓
+          </span>
+        )}
+        <div className={`flex items-start gap-2 mb-1.5 ${isRight ? "flex-row-reverse" : ""} ${copied ? "pr-14" : ""}`}>
+          <p className="text-base font-medium text-gray-900 dark:text-gray-50 leading-relaxed">
+            <RubyText text={line.japanese} />
+          </p>
+          <div onClick={(e) => e.stopPropagation()}>
+            <SpeakButton text={line.japanese} className="mt-0.5 flex-shrink-0" />
+          </div>
+        </div>
+        <p className={`text-sm text-gray-500 dark:text-gray-400 leading-relaxed ${isRight ? "text-right" : ""}`}>
+          {line.chinese}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function CopyablePhrase({
+  phrase,
+}: {
+  phrase: { japanese: string; chinese: string };
+}) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = useCallback(() => {
+    navigator.clipboard.writeText(phrase.japanese).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    });
+  }, [phrase.japanese]);
+
+  return (
+    <div
+      onClick={handleCopy}
+      className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 cursor-pointer active:opacity-70 transition-opacity relative"
+    >
+      {copied && (
+        <span className="absolute top-2 right-3 text-xs bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-400 px-1.5 py-0.5 rounded font-medium">
+          已複製 ✓
+        </span>
+      )}
+      <div className="flex items-start gap-2 pr-12">
+        <p className="flex-1 text-base font-medium text-gray-900 dark:text-gray-50">
+          <RubyText text={phrase.japanese} />
+        </p>
+        <div onClick={(e) => e.stopPropagation()}>
+          <SpeakButton text={phrase.japanese} />
+        </div>
+      </div>
+      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{phrase.chinese}</p>
+    </div>
+  );
+}
 
 export default function DialoguePage() {
   const { level, dialogueId } = useParams<{ level: string; dialogueId: string }>();
@@ -66,39 +153,9 @@ export default function DialoguePage() {
 
       {/* Dialogue lines */}
       <div className="space-y-3 mb-8">
-        {dialogue.lines.map((line, idx) => {
-          const isRight = isBubbleRight(line.speaker);
-          const bubbleColor = isRight ? colors.lineB : colors.lineA;
-
-          return (
-            <div
-              key={idx}
-              className={`flex items-start gap-2 ${isRight ? "flex-row-reverse" : ""}`}
-            >
-              {/* Speaker avatar */}
-              <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white ${isRight ? "bg-green-500 dark:bg-green-600" : "bg-blue-500 dark:bg-blue-600"}`}>
-                {line.speaker}
-              </div>
-
-              {/* Bubble */}
-              <div
-                className={`flex-1 max-w-[85%] rounded-2xl border px-4 py-3 ${bubbleColor} ${isRight ? "rounded-tr-sm" : "rounded-tl-sm"}`}
-              >
-                {/* Japanese text + speak button */}
-                <div className={`flex items-start gap-2 mb-1.5 ${isRight ? "flex-row-reverse" : ""}`}>
-                  <p className="text-base font-medium text-gray-900 dark:text-gray-50 leading-relaxed">
-                    {line.japanese}
-                  </p>
-                  <SpeakButton text={line.japanese} className="mt-0.5 flex-shrink-0" />
-                </div>
-                {/* Chinese translation */}
-                <p className={`text-sm text-gray-500 dark:text-gray-400 leading-relaxed ${isRight ? "text-right" : ""}`}>
-                  {line.chinese}
-                </p>
-              </div>
-            </div>
-          );
-        })}
+        {dialogue.lines.map((line, idx) => (
+          <DialogueBubble key={idx} line={line} colors={colors} />
+        ))}
       </div>
 
       {/* Key Phrases */}
@@ -109,20 +166,7 @@ export default function DialoguePage() {
           </h3>
           <div className="space-y-2">
             {dialogue.keyPhrases.map((phrase, idx) => (
-              <div
-                key={idx}
-                className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3"
-              >
-                <div className="flex items-start gap-2">
-                  <p className="flex-1 text-base font-medium text-gray-900 dark:text-gray-50">
-                    {phrase.japanese}
-                  </p>
-                  <SpeakButton text={phrase.japanese} />
-                </div>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                  {phrase.chinese}
-                </p>
-              </div>
+              <CopyablePhrase key={idx} phrase={phrase} />
             ))}
           </div>
         </div>

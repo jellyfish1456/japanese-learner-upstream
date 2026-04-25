@@ -1,4 +1,5 @@
 import { getHighlightedParts, getBlankParts } from "../lib/grammar";
+import RubyText from "./RubyText";
 
 interface GrammarHighlightProps {
   sentence: string;
@@ -23,7 +24,7 @@ export default function GrammarHighlight({ sentence, mode }: GrammarHighlightPro
             {part.text}
           </span>
         ) : (
-          <span key={i}>{part.text}</span>
+          <RubyText key={i} text={part.text} />
         ),
       )}
     </span>
