@@ -15,6 +15,7 @@ async function mockSpeechSynthesis(page: Parameters<Parameters<typeof test>[1]>[
     class MockUtterance {
       text: string;
       lang = "";
+      voice: unknown = null;
       onstart: ((e: Event) => void) | null = null;
       onend: ((e: Event) => void) | null = null;
       onerror: ((e: Event) => void) | null = null;
@@ -78,6 +79,16 @@ async function flipCard(page: Parameters<Parameters<typeof test>[1]>[0]) {
   await expect(page.getByRole("button", { name: "記住了" })).toBeVisible({ timeout: 3000 });
 }
 
+/** Get the speak button scoped to the back face of the card. */
+function backSpeakBtn(page: Parameters<Parameters<typeof test>[1]>[0]) {
+  return page.locator(".card-back").getByLabel("播放發音").first();
+}
+
+/** Get the speak button scoped to the front face of the card. */
+function frontSpeakBtn(page: Parameters<Parameters<typeof test>[1]>[0]) {
+  return page.locator(".card-face:not(.card-back)").getByLabel("播放發音").first();
+}
+
 // ---------------------------------------------------------------------------
 
 test.describe("Pronunciation – card state before/after flip", () => {
@@ -94,10 +105,16 @@ test.describe("Pronunciation – card state before/after flip", () => {
     await expect(page.getByRole("button", { name: "記住了" })).toBeVisible();
   });
 
-  test("speaker button appears after flipping in kanji-to-chinese mode", async ({ page }) => {
+  test("speaker button on front face in kanji-to-chinese mode", async ({ page }) => {
+    await startVocabSession(page);
+    // Front face should have a speak button (Japanese text shown)
+    await expect(frontSpeakBtn(page)).toBeAttached();
+  });
+
+  test("speaker button appears on back face after flipping in kanji-to-chinese mode", async ({ page }) => {
     await startVocabSession(page);
     await flipCard(page);
-    await expect(page.getByLabel("播放發音")).toBeVisible();
+    await expect(backSpeakBtn(page)).toBeVisible();
   });
 
   test("speaker button appears after flipping in chinese-to-japanese mode", async ({ page }) => {
@@ -112,7 +129,7 @@ test.describe("Pronunciation – card state before/after flip", () => {
     await page.getByRole("heading", { name: "Test 詞彙" }).click();
     await page.getByText("隨機複習（全部卡片）").click();
     await flipCard(page);
-    await expect(page.getByLabel("播放發音")).toBeVisible();
+    await expect(backSpeakBtn(page)).toBeVisible();
   });
 });
 
@@ -126,7 +143,7 @@ test.describe("Pronunciation – speech synthesis integration", () => {
 
   test("clicking speaker calls speechSynthesis.speak with lang ja-JP", async ({ page }) => {
     await flipCard(page);
-    await page.getByLabel("播放發音").click();
+    await backSpeakBtn(page).click();
 
     const spoken = await page.evaluate(
       () =>
@@ -141,7 +158,7 @@ test.describe("Pronunciation – speech synthesis integration", () => {
 
   test("spoken text is the Japanese word from the fixture", async ({ page }) => {
     await flipCard(page);
-    await page.getByLabel("播放發音").click();
+    await backSpeakBtn(page).click();
 
     const spoken = await page.evaluate(
       () =>
@@ -160,7 +177,7 @@ test.describe("Pronunciation – speech synthesis integration", () => {
     // Rating buttons confirm we are on the back face
     await expect(page.getByRole("button", { name: "記住了" })).toBeVisible();
 
-    await page.getByLabel("播放發音").click();
+    await backSpeakBtn(page).click();
 
     // Card must remain flipped — rating buttons still visible
     await expect(page.getByRole("button", { name: "記住了" })).toBeVisible();
@@ -169,7 +186,7 @@ test.describe("Pronunciation – speech synthesis integration", () => {
   test("speaker button turns blue while speaking", async ({ page }) => {
     await flipCard(page);
 
-    const btn = page.getByLabel("播放發音");
+    const btn = backSpeakBtn(page);
     await expect(btn).toBeVisible();
 
     // Not speaking yet — no blue styling
@@ -195,7 +212,7 @@ test.describe("Pronunciation – Japanese word on back face", () => {
       await flipCard(page);
 
       // The pronunciation row: a span sibling to the speaker button
-      const speakBtn = page.getByLabel("播放發音");
+      const speakBtn = backSpeakBtn(page);
       await expect(speakBtn).toBeVisible();
 
       const pronunciationSpan = speakBtn.locator("..").locator("span");
@@ -223,7 +240,7 @@ test.describe("Pronunciation – Japanese word on back face", () => {
 
     await flipCard(page);
 
-    const speakBtn = page.getByLabel("播放發音");
+    const speakBtn = backSpeakBtn(page);
     await expect(speakBtn).toBeVisible();
 
     // The parent flex row should contain the Japanese word
