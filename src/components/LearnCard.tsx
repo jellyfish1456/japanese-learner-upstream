@@ -68,9 +68,9 @@ function VocabLearnCard({ item }: { item: VocabItem }) {
       <div className="text-center">
         <div className="flex items-center justify-center gap-2">
           {/* Vocab: use existing hiragana as furigana */}
-          <ruby className="text-4xl font-bold text-gray-900 dark:text-gray-50">
+          <ruby className="ruby-large text-4xl font-bold text-gray-900 dark:text-gray-50">
             {item.japanese}
-            <rt className="text-sm font-normal text-gray-400 dark:text-gray-500">{item.hiragana}</rt>
+            <rt>{item.hiragana}</rt>
           </ruby>
           <SpeakButton text={item.japanese} />
         </div>

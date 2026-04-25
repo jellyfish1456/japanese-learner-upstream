@@ -62,3 +62,28 @@ body {
   -webkit-user-select: none;
   user-select: none;
 }
+
+/* Furigana (ruby annotations) */
+ruby {
+  ruby-align: center;
+  line-height: 2.2;
+}
+ruby rt {
+  font-size: 0.55em;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  color: #4b5563;        /* gray-600, readable on white */
+}
+.dark ruby rt {
+  color: #d1d5db;        /* gray-300, clear on dark */
+}
+/* For large headings (vocab card), scale rt proportionally */
+.ruby-large rt {
+  font-size: 0.4em;
+}
+/* Container lines that include ruby need extra line-height */
+.has-ruby {
+  line-height: 2.4;
+}

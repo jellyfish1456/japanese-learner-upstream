@@ -13,6 +13,7 @@ import ItemEditPage from "./pages/ItemEditPage";
 import DialogueListPage from "./pages/DialogueListPage";
 import DialoguePage from "./pages/DialoguePage";
 import ListeningSessionPage from "./pages/ListeningSessionPage";
+import VerbConjugationPage from "./pages/VerbConjugationPage";
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
           <Route path="/dialogue/:level" element={<DialogueListPage />} />
           <Route path="/dialogue/:level/:dialogueId" element={<DialoguePage />} />
           <Route path="/listening/:level" element={<ListeningSessionPage />} />
+          <Route path="/verb-conjugation" element={<VerbConjugationPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/about" element={<AboutPage />} />
         </Routes>

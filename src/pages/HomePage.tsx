@@ -93,6 +93,27 @@ export default function HomePage() {
             </div>
           </div>
 
+          {/* 動詞變化 */}
+          <div className="mt-8">
+            <div className="mb-4">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1">動詞變化</h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400">三類動詞活用規則、常用單字與完整變化表</p>
+            </div>
+            <button
+              onClick={() => navigate("/verb-conjugation")}
+              className="w-full bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-600 hover:to-orange-600 text-white rounded-2xl p-5 flex items-center gap-4 transition-colors tap-active shadow-sm"
+            >
+              <div className="text-4xl">🔄</div>
+              <div className="text-left">
+                <div className="text-lg font-bold">動詞活用表</div>
+                <div className="text-xs opacity-80 mt-0.5">第一類・第二類・第三類　共 28 個常用動詞</div>
+              </div>
+              <svg className="w-5 h-5 ml-auto opacity-60" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+              </svg>
+            </button>
+          </div>
+
           {/* 聽力練習 */}
           <div className="mt-8">
             <div className="mb-4">
