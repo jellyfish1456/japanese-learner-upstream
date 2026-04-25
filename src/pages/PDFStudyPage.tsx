@@ -2,8 +2,27 @@ import { useState, useRef, useCallback } from "react";
 import { loadPDFDatasets, savePDFDataset, deletePDFDataset, type PDFDataset, type PDFCard } from "../lib/storage";
 import SpeakButton from "../components/SpeakButton";
 
-// ─── PDF text extraction via pdfjs ───────────────────────────────────────────
-async function extractTextFromPDF(file: File): Promise<string> {
+// ─── PDF text extraction via pdfjs + OCR fallback ────────────────────────────
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function renderPageToCanvas(page: any): Promise<HTMLCanvasElement> {
+  const viewport = page.getViewport({ scale: 2.0 });
+  const canvas = document.createElement("canvas");
+  canvas.width = viewport.width;
+  canvas.height = viewport.height;
+  const ctx = canvas.getContext("2d")!;
+  await page.render({ canvasContext: ctx, viewport }).promise;
+  return canvas;
+}
+
+async function ocrCanvas(canvas: HTMLCanvasElement): Promise<string> {
+  const Tesseract = await import("tesseract.js");
+  const result = await Tesseract.recognize(canvas, "jpn+chi_tra+eng", {
+    logger: () => {},
+  });
+  return result.data.text;
+}
+
+async function extractTextFromPDF(file: File, onProgress?: (msg: string) => void): Promise<string> {
   const pdfjsLib = await import("pdfjs-dist");
   pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
     "pdfjs-dist/build/pdf.worker.mjs",
@@ -12,11 +31,27 @@ async function extractTextFromPDF(file: File): Promise<string> {
   const arrayBuffer = await file.arrayBuffer();
   const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
   const pages: string[] = [];
+  let usedOcr = false;
+
   for (let i = 1; i <= pdf.numPages; i++) {
+    onProgress?.(`解析第 ${i}/${pdf.numPages} 頁...`);
     const page = await pdf.getPage(i);
     const content = await page.getTextContent();
-    pages.push(content.items.map((item) => ("str" in item ? item.str : "")).join(" "));
+    const text = content.items.map((item) => ("str" in item ? item.str : "")).join(" ").trim();
+
+    if (text.length > 30) {
+      // Normal text PDF
+      pages.push(text);
+    } else {
+      // Image-based page: use OCR
+      usedOcr = true;
+      onProgress?.(`第 ${i} 頁含圖片，執行 OCR 辨識...`);
+      const canvas = await renderPageToCanvas(page);
+      const ocrText = await ocrCanvas(canvas);
+      pages.push(ocrText);
+    }
   }
+  if (usedOcr) onProgress?.("OCR 辨識完成");
   return pages.join("\n");
 }
 
@@ -133,17 +168,19 @@ export default function PDFStudyPage() {
   const [datasets, setDatasets] = useState<PDFDataset[]>(() => loadPDFDatasets());
   const [viewing, setViewing] = useState<PDFDataset | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState("");
   const [error, setError] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const handleFile = useCallback(async (file: File) => {
     if (!file.name.endsWith(".pdf")) { setError("請上傳 PDF 檔案"); return; }
     setUploading(true);
+    setUploadProgress("載入中...");
     setError(null);
     try {
-      const text = await extractTextFromPDF(file);
+      const text = await extractTextFromPDF(file, setUploadProgress);
       const cards = parseTextToCards(text);
-      if (cards.length === 0) { setError("無法從 PDF 中提取內容，請確認 PDF 包含可選取的文字"); setUploading(false); return; }
+      if (cards.length === 0) { setError("無法從 PDF 中提取內容（已嘗試 OCR 辨識）"); setUploading(false); return; }
       const ds: PDFDataset = {
         id: `pdf-${Date.now()}`,
         name: file.name.replace(/\.pdf$/i, ""),
@@ -182,13 +219,13 @@ export default function PDFStudyPage() {
         {uploading ? (
           <>
             <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
-            <span className="text-sm text-gray-500 dark:text-gray-400">解析中...</span>
+            <span className="text-sm text-gray-500 dark:text-gray-400">{uploadProgress || "解析中..."}</span>
           </>
         ) : (
           <>
             <div className="text-3xl">📄</div>
             <div className="text-sm font-semibold text-gray-600 dark:text-gray-300">點擊或拖曳上傳 PDF</div>
-            <div className="text-xs text-gray-400 dark:text-gray-500">支援文字型 PDF（不支援掃描圖片）</div>
+            <div className="text-xs text-gray-400 dark:text-gray-500">支援文字型 PDF，圖片型 PDF 自動 OCR 辨識（含日文/中文）</div>
           </>
         )}
       </div>

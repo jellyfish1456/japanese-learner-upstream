@@ -62,13 +62,16 @@ function CopyableExample({
   );
 }
 
-/** Extract Japanese example sentence from full_explanation (after 例：) */
-function extractExample(text: string): { sentence: string; rest: string } | null {
-  const match = text.match(/例[：:]\s*(.+)/);
-  if (!match) return null;
-  const sentence = match[1].trim();
-  const rest = text.slice(0, match.index).trim();
-  return { sentence, rest };
+/** Extract example sentence + Chinese context from full_explanation */
+function extractExample(text: string): { sentence: string; chineseContext: string } | null {
+  const exMatch = text.match(/例[：:]\s*(.+)/);
+  if (!exMatch) return null;
+  const sentence = exMatch[1].trim();
+  // Extract Chinese meaning from "...：中文意思。例：..."
+  const before = text.slice(0, exMatch.index).trim().replace(/。$/, "");
+  const colonIdx = before.search(/[：:]/);
+  const chineseContext = colonIdx >= 0 ? before.slice(colonIdx + 1).trim() : "";
+  return { sentence, chineseContext };
 }
 
 function VocabLearnCard({ item }: { item: VocabItem }) {
@@ -106,7 +109,10 @@ function VocabLearnCard({ item }: { item: VocabItem }) {
           <div className="border-t border-gray-100 dark:border-gray-700" />
           {example ? (
             <div className="space-y-2">
-              <div className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{example.rest}</div>
+              <div className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                例句 <span className="normal-case font-normal">（點擊複製）</span>
+              </div>
+              {/* Example sentence with furigana + audio */}
               <div
                 onClick={handleCopyExample}
                 className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 cursor-pointer active:opacity-70 transition-opacity select-none group relative"
@@ -116,13 +122,19 @@ function VocabLearnCard({ item }: { item: VocabItem }) {
                   copied ? "opacity-100 bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-400" : "opacity-0 group-hover:opacity-60 bg-gray-200 dark:bg-gray-600 text-gray-500"
                 }`}>{copied ? "已複製 ✓" : "複製"}</span>
                 <div className="flex items-start gap-2 pr-10">
-                  <div className="text-sm text-gray-700 dark:text-gray-200 flex-1">
+                  <div className="text-base text-gray-900 dark:text-gray-50 flex-1 has-ruby leading-relaxed">
                     <RubyText text={example.sentence} />
                   </div>
                   <div onClick={(e) => e.stopPropagation()}>
-                    <SpeakButton text={example.sentence} className="flex-shrink-0" />
+                    <SpeakButton text={example.sentence} className="flex-shrink-0 mt-1" />
                   </div>
                 </div>
+                {/* Chinese context from word meaning */}
+                {example.chineseContext && (
+                  <div className="text-sm text-gray-500 dark:text-gray-400 mt-1.5">
+                    💡 {example.chineseContext}
+                  </div>
+                )}
               </div>
             </div>
           ) : (

@@ -4,6 +4,7 @@ import { useDatasetMetas, useDatasets } from "../hooks/useDatasets";
 import { useDialogueDatasets } from "../hooks/useDialogues";
 import DatasetCard from "../components/DatasetCard";
 import FilterBar from "../components/FilterBar";
+import { loadReviewList } from "../lib/storage";
 
 export default function HomePage() {
   const [categoryFilter, setCategoryFilter] = useState("");
@@ -11,6 +12,13 @@ export default function HomePage() {
   const datasets = useDatasets();
   const metas = useDatasetMetas(categoryFilter || undefined, levelFilter || undefined);
   const navigate = useNavigate();
+
+  // Review list counts per vocab dataset
+  const vocabReviews = useMemo(() => [
+    { level: "N5", datasetId: "n5_vocab", count: loadReviewList("n5_vocab").length },
+    { level: "N4", datasetId: "n4_vocab", count: loadReviewList("n4_vocab").length },
+    { level: "N3", datasetId: "n3_vocab", count: loadReviewList("n3_vocab").length },
+  ].filter((r) => r.count > 0), []);
 
   // Extract unique categories and levels for filter bar
   const dialogueDatasets = useDialogueDatasets();
@@ -58,6 +66,36 @@ export default function HomePage() {
           {metas.map((meta) => (
             <DatasetCard key={meta.id} dataset={meta} />
           ))}
+        </div>
+      )}
+
+      {/* 再複習詞彙 */}
+      {vocabReviews.length > 0 && (
+        <div className="mt-8">
+          <div className="mb-4">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1">⭐ 再複習詞彙</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400">已標記待複習的單字</p>
+          </div>
+          <div className="grid grid-cols-3 gap-3">
+            {vocabReviews.map(({ level, datasetId, count }) => {
+              const colors: Record<string, string> = {
+                N5: "bg-amber-400 hover:bg-amber-500",
+                N4: "bg-amber-500 hover:bg-amber-600",
+                N3: "bg-amber-600 hover:bg-amber-700",
+              };
+              return (
+                <button
+                  key={level}
+                  onClick={() => navigate(`/learn/${datasetId}/session`, { state: { planType: "all", reviewOnly: true } })}
+                  className={`${colors[level] ?? "bg-amber-500"} text-white rounded-2xl p-4 text-center transition-colors tap-active shadow-sm`}
+                >
+                  <div className="text-2xl mb-1">⭐</div>
+                  <div className="text-lg font-bold">{level}</div>
+                  <div className="text-xs opacity-90 mt-0.5">{count} 個單字</div>
+                </button>
+              );
+            })}
+          </div>
         </div>
       )}
 

@@ -218,8 +218,8 @@ test.describe("Learn Mode - Daily Plan", () => {
     // Click day 2 tab
     await page.getByRole("button", { name: /第 2 天/ }).click();
     await page.waitForTimeout(200);
-    // Should show day 2's card (test-vocab-003: 食べる)
-    await expect(page.getByText("食べる")).toBeVisible();
+    // Should show day 2's card (test-vocab-003: 食べる / 吃)
+    await expect(page.getByText("吃")).toBeVisible();
   });
 
   test("shows completion screen after all day cards", async ({ page }) => {
