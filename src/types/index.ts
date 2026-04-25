@@ -109,6 +109,8 @@ export interface FlashcardContent {
   front: {
     primary: string;
     secondary?: string;
+    /** Japanese text to speak on the front face */
+    pronunciation?: string;
   };
   back: {
     primary: string;

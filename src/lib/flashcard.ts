@@ -7,6 +7,13 @@ import type {
 } from "../types";
 
 /**
+ * Strip 【】 grammar markers from an example sentence for TTS.
+ */
+function stripMarkers(sentence: string): string {
+  return sentence.replace(/【/g, "").replace(/】/g, "");
+}
+
+/**
  * Build flashcard content for a vocabulary item based on the test mode.
  */
 export function buildVocabCard(item: VocabItem, mode: VocabTestMode): FlashcardContent {
@@ -17,7 +24,7 @@ export function buildVocabCard(item: VocabItem, mode: VocabTestMode): FlashcardC
   switch (mode) {
     case "kanji-to-chinese":
       return {
-        front: { primary: item.japanese },
+        front: { primary: item.japanese, pronunciation: item.japanese },
         back: {
           primary: item.simple_chinese,
           pronunciation: item.japanese,
@@ -27,7 +34,7 @@ export function buildVocabCard(item: VocabItem, mode: VocabTestMode): FlashcardC
       };
     case "hiragana-to-chinese":
       return {
-        front: { primary: item.hiragana },
+        front: { primary: item.hiragana, pronunciation: item.hiragana },
         back: {
           primary: item.simple_chinese,
           pronunciation: item.japanese,
@@ -71,7 +78,7 @@ export function buildGrammarCard(
   switch (mode) {
     case "grammar-to-chinese":
       return {
-        front: { primary: item.japanese },
+        front: { primary: item.japanese, pronunciation: item.japanese },
         back: {
           primary: item.simple_chinese,
           detail: item.full_explanation || undefined,
@@ -82,10 +89,12 @@ export function buildGrammarCard(
       return {
         front: {
           primary: example ? `__GRAMMAR_HIGHLIGHT__${example.sentence}` : item.japanese,
+          pronunciation: example ? stripMarkers(example.sentence) : item.japanese,
         },
         back: {
           primary: example?.chinese ?? item.simple_chinese,
           secondary: item.japanese + "：" + item.simple_chinese,
+          pronunciation: item.japanese,
           detail: item.full_explanation || undefined,
         },
       };
@@ -95,6 +104,7 @@ export function buildGrammarCard(
         front: { primary: item.simple_chinese },
         back: {
           primary: item.japanese,
+          pronunciation: item.japanese,
           detail: item.full_explanation || undefined,
         },
       };
@@ -107,7 +117,8 @@ export function buildGrammarCard(
         },
         back: {
           primary: item.japanese,
-          secondary: example?.sentence.replace(/【/g, "").replace(/】/g, ""),
+          secondary: example ? stripMarkers(example.sentence) : undefined,
+          pronunciation: example ? stripMarkers(example.sentence) : item.japanese,
           detail: item.full_explanation || undefined,
         },
       };
