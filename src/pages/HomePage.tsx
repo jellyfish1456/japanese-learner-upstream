@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDatasetMetas, useDatasets } from "../hooks/useDatasets";
+import { useDialogueDatasets } from "../hooks/useDialogues";
 import DatasetCard from "../components/DatasetCard";
 import FilterBar from "../components/FilterBar";
 
@@ -12,6 +13,8 @@ export default function HomePage() {
   const navigate = useNavigate();
 
   // Extract unique categories and levels for filter bar
+  const dialogueDatasets = useDialogueDatasets();
+
   const categories = useMemo(
     () => [...new Set(datasets.map((d) => d.category))],
     [datasets],
@@ -55,6 +58,41 @@ export default function HomePage() {
           {metas.map((meta) => (
             <DatasetCard key={meta.id} dataset={meta} />
           ))}
+        </div>
+      )}
+
+      {/* Daily Dialogue Section */}
+      {dialogueDatasets.length > 0 && (
+        <div className="mt-10">
+          <div className="mb-4">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1">日常對話</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400">情境會話練習，每句附日文發音</p>
+          </div>
+          <div className="grid grid-cols-3 gap-3">
+            {dialogueDatasets.map((ds) => {
+              const levelColorMap: Record<string, { bg: string; text: string; icon: string }> = {
+                N5: { bg: "bg-green-500 hover:bg-green-600", text: "text-white", icon: "🌱" },
+                N4: { bg: "bg-blue-500 hover:bg-blue-600", text: "text-white", icon: "📗" },
+                N3: { bg: "bg-purple-500 hover:bg-purple-600", text: "text-white", icon: "📘" },
+              };
+              const style = levelColorMap[ds.level] ?? {
+                bg: "bg-gray-500 hover:bg-gray-600",
+                text: "text-white",
+                icon: "💬",
+              };
+              return (
+                <button
+                  key={ds.level}
+                  onClick={() => navigate(`/dialogue/${ds.level.toLowerCase()}`)}
+                  className={`${style.bg} ${style.text} rounded-2xl p-4 text-center transition-colors tap-active shadow-sm`}
+                >
+                  <div className="text-3xl mb-2">{style.icon}</div>
+                  <div className="text-lg font-bold">{ds.level}</div>
+                  <div className="text-xs opacity-80 mt-0.5">{ds.dialogues.length} 個對話</div>
+                </button>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>

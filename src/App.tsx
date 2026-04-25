@@ -10,6 +10,8 @@ import AboutPage from "./pages/AboutPage";
 import DatasetCreatePage from "./pages/DatasetCreatePage";
 import DatasetEditPage from "./pages/DatasetEditPage";
 import ItemEditPage from "./pages/ItemEditPage";
+import DialogueListPage from "./pages/DialogueListPage";
+import DialoguePage from "./pages/DialoguePage";
 
 export default function App() {
   return (
@@ -25,6 +27,8 @@ export default function App() {
           <Route path="/manage/:datasetId" element={<DatasetEditPage />} />
           <Route path="/manage/:datasetId/item" element={<ItemEditPage />} />
           <Route path="/manage/:datasetId/item/:itemId" element={<ItemEditPage />} />
+          <Route path="/dialogue/:level" element={<DialogueListPage />} />
+          <Route path="/dialogue/:level/:dialogueId" element={<DialoguePage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/about" element={<AboutPage />} />
         </Routes>
