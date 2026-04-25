@@ -56,40 +56,162 @@ async function extractTextFromPDF(file: File, onProgress?: (msg: string) => void
 }
 
 // ─── Parse raw text into Q&A cards ──────────────────────────────────────────
-function parseTextToCards(text: string): PDFCard[] {
+
+/** Clean up OCR/PDF noise from a text string */
+function cleanText(t: string): string {
+  return t
+    .replace(/\r\n/g, "\n")
+    .replace(/\r/g, "\n")
+    .replace(/\f/g, "\n")           // form feeds
+    .replace(/[^\S\n]+/g, " ")      // collapse non-newline whitespace
+    .replace(/\n{3,}/g, "\n\n")     // max 2 consecutive newlines
+    .trim();
+}
+
+/** Attempt to extract cards from LLM-style chat logs (User/Assistant, 人間/AI, etc.) */
+function parseChatLog(text: string): PDFCard[] | null {
+  // Detect if it looks like a chat log
+  const chatPattern = /^(User|Assistant|Human|AI|人間|あなた|Claude|ChatGPT|GPT)[：:：]/im;
+  if (!chatPattern.test(text)) return null;
+
   const cards: PDFCard[] = [];
   let id = Date.now();
 
-  // Split by blank lines or numbered sections
-  const blocks = text
+  // Split on speaker turns
+  const turnPattern = /\n(?=(?:User|Assistant|Human|AI|人間|あなた|Claude|ChatGPT|GPT)[：:：])/gi;
+  const turns = text.split(turnPattern).map((t) => t.trim()).filter(Boolean);
+
+  // Pair User→Assistant turns into Q&A cards
+  for (let i = 0; i < turns.length - 1; i++) {
+    const curr = turns[i];
+    const next = turns[i + 1];
+    const isUser = /^(User|Human|人間|あなた)[：:：]/i.test(curr);
+    const isAssistant = /^(Assistant|AI|Claude|ChatGPT|GPT)[：:：]/i.test(next);
+    if (isUser && isAssistant) {
+      const front = curr.replace(/^[^：:：]+[：:：]\s*/, "").trim();
+      const back = next.replace(/^[^：:：]+[：:：]\s*/, "").trim();
+      if (front.length > 5 && back.length > 5) {
+        // Trim overly long responses — keep first 400 chars
+        cards.push({ id: String(id++), front, back: back.slice(0, 400) });
+        i++; // skip assistant turn
+      }
+    }
+  }
+  return cards.length > 0 ? cards : null;
+}
+
+/** Parse vocab-style lines: word（reading）：meaning or word : meaning */
+function parseVocabLine(line: string): { front: string; back: string } | null {
+  // Pattern: 単語（よみ）：意味 or 単語：意味
+  const vocabMatch = line.match(/^([^\s（(：:]{1,20}(?:[（(][^）)]+[）)])?)\s*[：:]\s*(.+)$/);
+  if (vocabMatch && vocabMatch[1].length <= 30 && vocabMatch[2].length >= 2) {
+    return { front: vocabMatch[1].trim(), back: vocabMatch[2].trim() };
+  }
+  // Pattern: 〜form / grammar pattern：explanation
+  const grammarMatch = line.match(/^([〜～].{1,25})\s*[：:]\s*(.+)$/);
+  if (grammarMatch) {
+    return { front: grammarMatch[1].trim(), back: grammarMatch[2].trim() };
+  }
+  return null;
+}
+
+function parseTextToCards(text: string): PDFCard[] {
+  const cleaned = cleanText(text);
+  let id = Date.now();
+  const cards: PDFCard[] = [];
+
+  // 1. Try chat log format first
+  const chatCards = parseChatLog(cleaned);
+  if (chatCards && chatCards.length >= 2) return chatCards.slice(0, 200);
+
+  // Split into blocks (separated by blank lines)
+  const blocks = cleaned
     .split(/\n{2,}/)
     .map((b) => b.trim())
-    .filter((b) => b.length > 20);
+    .filter((b) => b.length > 10);
 
   for (const block of blocks) {
     const lines = block.split(/\n/).map((l) => l.trim()).filter(Boolean);
     if (lines.length === 0) continue;
 
-    // Detect Q&A pattern: Q: ... A: ... or 問: ... 答: ...
-    const qMatch = block.match(/[Qq問][：:]\s*(.+)/);
-    const aMatch = block.match(/[Aa答][：:]\s*([\s\S]+)/);
+    // 2. Explicit Q&A block: Q:/A: or 問:/答: or 質問:/回答:
+    const qMatch = block.match(/^[Qq問質][：:]\s*(.+?)(?:\n|$)/m);
+    const aMatch = block.match(/[Aa答回][：:]\s*([\s\S]+)/m);
     if (qMatch && aMatch) {
-      cards.push({ id: String(id++), front: qMatch[1].trim(), back: aMatch[1].trim() });
+      const front = qMatch[1].trim();
+      const back = aMatch[1].replace(/^[Aa答回][：:]\s*/, "").trim();
+      if (front && back) {
+        cards.push({ id: String(id++), front, back });
+        continue;
+      }
+    }
+
+    // 3. Numbered item: "1. term：explanation" or "① word meaning"
+    const numberedMatch = lines[0].match(/^[\d①②③④⑤⑥⑦⑧⑨⑩]+[.．。）)]\s*(.+)/);
+    if (numberedMatch) {
+      const rest = numberedMatch[1];
+      const vocab = parseVocabLine(rest);
+      if (vocab) {
+        cards.push({ id: String(id++), ...vocab });
+        continue;
+      }
+      // Treat first line as front, rest as back
+      if (lines.length >= 2) {
+        cards.push({ id: String(id++), front: rest, back: lines.slice(1).join("\n") });
+        continue;
+      }
+    }
+
+    // 4. Markdown header as card front: ## term or ▶ term
+    const headerMatch = lines[0].match(/^(?:#{1,3}|[▶▷●•·・])\s*(.+)/);
+    if (headerMatch && lines.length >= 2) {
+      cards.push({ id: String(id++), front: headerMatch[1].trim(), back: lines.slice(1).join("\n") });
       continue;
     }
 
-    // Detect colon-separated pattern: term : explanation
-    if (lines.length >= 2) {
-      cards.push({ id: String(id++), front: lines[0], back: lines.slice(1).join("\n") });
-    } else {
-      // Single long line: split at first sentence
-      const parts = lines[0].split(/[。？！.?!]/);
-      if (parts.length >= 2) {
-        cards.push({ id: String(id++), front: parts[0].trim(), back: parts.slice(1).join("。").trim() });
+    // 5. Single-line vocab pattern: word：meaning
+    if (lines.length === 1) {
+      const vocab = parseVocabLine(lines[0]);
+      if (vocab) {
+        cards.push({ id: String(id++), ...vocab });
+        continue;
+      }
+      // Long single line: split at first punctuation
+      const parts = lines[0].split(/(?<=[。？！])/);
+      if (parts.length >= 2 && parts[0].length >= 5) {
+        cards.push({ id: String(id++), front: parts[0].trim(), back: parts.slice(1).join("").trim() });
+      }
+      continue;
+    }
+
+    // 6. Multi-line block: check if first line is a vocab term
+    const firstLineVocab = parseVocabLine(lines[0]);
+    if (firstLineVocab) {
+      // First line is already a card; remaining lines may be additional context
+      const back = firstLineVocab.back + (lines.length > 1 ? "\n" + lines.slice(1).join("\n") : "");
+      cards.push({ id: String(id++), front: firstLineVocab.front, back });
+      continue;
+    }
+
+    // 7. First line as front, rest as explanation (general fallback)
+    if (lines[0].length <= 80 && lines.length >= 2) {
+      const back = lines.slice(1).join("\n");
+      if (back.length >= 5) {
+        cards.push({ id: String(id++), front: lines[0], back });
       }
     }
   }
-  return cards.slice(0, 200); // limit 200 cards
+
+  // Deduplicate by front text
+  const seen = new Set<string>();
+  const deduped = cards.filter((c) => {
+    const key = c.front.slice(0, 50);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  return deduped.slice(0, 200);
 }
 
 // ─── Card viewer ─────────────────────────────────────────────────────────────
