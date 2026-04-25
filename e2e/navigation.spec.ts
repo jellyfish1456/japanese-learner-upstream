@@ -52,7 +52,7 @@ test.describe("App Navigation", () => {
     // Navigate within the SPA to a nonexistent dataset
     await page.goto("/");
     await page.evaluate(() => {
-      window.history.pushState({}, "", "/japanese-learner/study/nonexistent-dataset");
+      window.history.pushState({}, "", "/japanese-learner-upstream/study/nonexistent-dataset");
       window.dispatchEvent(new PopStateEvent("popstate"));
     });
     // React Router should render the SetupPage with undefined dataset
@@ -62,7 +62,7 @@ test.describe("App Navigation", () => {
   test("should handle missing dataset in learn mode", async ({ page }) => {
     await page.goto("/");
     await page.evaluate(() => {
-      window.history.pushState({}, "", "/japanese-learner/learn/nonexistent-dataset");
+      window.history.pushState({}, "", "/japanese-learner-upstream/learn/nonexistent-dataset");
       window.dispatchEvent(new PopStateEvent("popstate"));
     });
     await expect(page.getByText("找不到學習集")).toBeVisible({ timeout: 10000 });
