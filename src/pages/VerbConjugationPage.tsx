@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { VERB_GROUPS, FORMS, type VerbGroup, type ConjugatedVerb } from "../data/verbConjugation";
+import { VERB_GROUPS, FORMS, FORM_DETAILS, type VerbGroup, type ConjugatedVerb } from "../data/verbConjugation";
 import SpeakButton from "../components/SpeakButton";
 import RubyText from "../components/RubyText";
 
@@ -156,8 +156,73 @@ function GroupPanel({ group }: { group: VerbGroup }) {
   );
 }
 
+// ─── Form detail view ─────────────────────────────────────────────────────────
+function FormView() {
+  const [activeDay, setActiveDay] = useState(1);
+  const dayForms = FORM_DETAILS.filter(f => f.day === activeDay);
+
+  return (
+    <div>
+      {/* Day tabs */}
+      <div className="flex gap-2 mb-5 overflow-x-auto pb-2">
+        {[1, 2, 3, 4, 5, 6, 7].map((day) => {
+          const forms = FORM_DETAILS.filter(f => f.day === day);
+          const dayLabel = day === 4 || day === 5 || day === 7 ? `Day${day}` : `Day${day}`;
+          return (
+            <button
+              key={day}
+              onClick={() => setActiveDay(day)}
+              className={`px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition-all tap-active ${
+                activeDay === day
+                  ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-sm"
+                  : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+              }`}
+            >
+              <div>{dayLabel}</div>
+              <div className="text-xs mt-0.5 opacity-70">{forms.length > 1 ? `${forms.length}形` : forms[0]?.label}</div>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Form cards */}
+      <div className="space-y-4">
+        {dayForms.map((form) => (
+          <div key={form.key} className={`${form.color} text-white rounded-2xl p-5`}>
+            {/* Header */}
+            <div className="mb-4">
+              <h3 className="text-2xl font-bold mb-1">{form.label}</h3>
+              <p className="text-sm opacity-90">{form.summary}</p>
+            </div>
+
+            {/* Explanation */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-4">
+              <p className="text-sm leading-relaxed">{form.explanation}</p>
+            </div>
+
+            {/* Rules grid */}
+            <div className="grid gap-3">
+              {[
+                { label: "第一類（五段）", rule: form.g1Rule },
+                { label: "第二類（一段）", rule: form.g2Rule },
+                { label: "第三類（不規則）", rule: form.g3Rule },
+              ].map((ruleItem) => (
+                <div key={ruleItem.label} className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
+                  <div className="text-xs font-semibold opacity-80 mb-1">{ruleItem.label}</div>
+                  <div className="text-sm">{ruleItem.rule}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ─── Main page ────────────────────────────────────────────────────────────────
 export default function VerbConjugationPage() {
+  const [mode, setMode] = useState<"group" | "form">("group");
   const [activeGroup, setActiveGroup] = useState(0);
   const group = VERB_GROUPS[activeGroup];
 
@@ -171,34 +236,64 @@ export default function VerbConjugationPage() {
         </p>
       </div>
 
-      {/* Group tabs */}
+      {/* Mode toggle */}
       <div className="flex gap-2 mb-5">
-        {VERB_GROUPS.map((g, i) => (
-          <button
-            key={g.id}
-            onClick={() => setActiveGroup(i)}
-            className={`flex-1 py-2.5 rounded-xl text-sm font-bold transition-all tap-active ${
-              activeGroup === i
-                ? `${g.color} text-white shadow-sm`
-                : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
-            }`}
-          >
-            <div>{g.label}</div>
-            <div className={`text-xs font-normal mt-0.5 ${activeGroup === i ? "opacity-80" : "opacity-60"}`}>
-              {g.id === "g1" ? "五段" : g.id === "g2" ? "一段" : "不規則"}
-            </div>
-          </button>
-        ))}
+        <button
+          onClick={() => setMode("group")}
+          className={`flex-1 py-2.5 rounded-xl text-sm font-bold transition-all tap-active ${
+            mode === "group"
+              ? "bg-blue-500 text-white shadow-sm"
+              : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300"
+          }`}
+        >
+          按類別
+        </button>
+        <button
+          onClick={() => setMode("form")}
+          className={`flex-1 py-2.5 rounded-xl text-sm font-bold transition-all tap-active ${
+            mode === "form"
+              ? "bg-purple-500 text-white shadow-sm"
+              : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300"
+          }`}
+        >
+          按活用形
+        </button>
       </div>
 
-      {/* Group label */}
-      <div className="mb-4">
-        <span className={`text-xs font-bold px-2.5 py-1 rounded-full text-white ${group.color}`}>
-          {group.labelJp}
-        </span>
-      </div>
+      {mode === "form" ? (
+        <FormView />
+      ) : (
+        <>
+          {/* Group tabs */}
+          <div className="flex gap-2 mb-5">
+            {VERB_GROUPS.map((g, i) => (
+              <button
+                key={g.id}
+                onClick={() => setActiveGroup(i)}
+                className={`flex-1 py-2.5 rounded-xl text-sm font-bold transition-all tap-active ${
+                  activeGroup === i
+                    ? `${g.color} text-white shadow-sm`
+                    : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+                }`}
+              >
+                <div>{g.label}</div>
+                <div className={`text-xs font-normal mt-0.5 ${activeGroup === i ? "opacity-80" : "opacity-60"}`}>
+                  {g.id === "g1" ? "五段" : g.id === "g2" ? "一段" : "不規則"}
+                </div>
+              </button>
+            ))}
+          </div>
 
-      <GroupPanel key={group.id} group={group} />
+          {/* Group label */}
+          <div className="mb-4">
+            <span className={`text-xs font-bold px-2.5 py-1 rounded-full text-white ${group.color}`}>
+              {group.labelJp}
+            </span>
+          </div>
+
+          <GroupPanel key={group.id} group={group} />
+        </>
+      )}
     </div>
   );
 }
