@@ -127,16 +127,23 @@ describe("buildGrammarCard", () => {
     expect(card.front.primary).toContain(grammar.japanese);
   });
 
-  it("grammar cards do not set pronunciation", () => {
-    const modes: Parameters<typeof buildGrammarCard>[1][] = [
-      "grammar-to-chinese",
-      "example-to-chinese",
-      "chinese-to-grammar",
-      "fill-in-grammar",
-    ];
-    for (const mode of modes) {
-      const card = buildGrammarCard(sampleGrammar, mode, 0);
-      expect(card.back.pronunciation).toBeUndefined();
-    }
+  it("grammar cards set pronunciation for audio playback", () => {
+    // grammar-to-chinese: front shows the grammar pattern → front.pronunciation set
+    const g2c = buildGrammarCard(sampleGrammar, "grammar-to-chinese");
+    expect(g2c.front.pronunciation).toBe("うちに");
+    expect(g2c.back.pronunciation).toBeUndefined();
+
+    // example-to-chinese: front shows example sentence → stripped of 【】markers
+    const e2c = buildGrammarCard(sampleGrammar, "example-to-chinese", 0);
+    expect(e2c.front.pronunciation).toBe("勉強しているうちに眠くなった");
+    expect(e2c.back.pronunciation).toBe("うちに");
+
+    // chinese-to-grammar: back shows Japanese grammar → back.pronunciation set
+    const c2g = buildGrammarCard(sampleGrammar, "chinese-to-grammar");
+    expect(c2g.back.pronunciation).toBe("うちに");
+
+    // fill-in-grammar: back shows full example sentence (stripped) → back.pronunciation set
+    const fig = buildGrammarCard(sampleGrammar, "fill-in-grammar", 0);
+    expect(fig.back.pronunciation).toBe("勉強しているうちに眠くなった");
   });
 });
