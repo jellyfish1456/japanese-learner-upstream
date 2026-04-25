@@ -27,7 +27,7 @@ function VocabLearnCard({ item }: { item: VocabItem }) {
       {item.full_explanation && (
         <>
           <div className="border-t border-gray-100 dark:border-gray-700" />
-          <div className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{item.full_explanation}</div>
+          <div className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed whitespace-pre-line">{item.full_explanation}</div>
         </>
       )}
     </div>
@@ -53,7 +53,7 @@ function GrammarLearnCard({ item }: { item: GrammarItem }) {
       {item.full_explanation && (
         <>
           <div className="border-t border-gray-100 dark:border-gray-700" />
-          <div className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{item.full_explanation}</div>
+          <div className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed whitespace-pre-line">{item.full_explanation}</div>
         </>
       )}
 

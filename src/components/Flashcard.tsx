@@ -150,7 +150,7 @@ export default function Flashcard({ content, isFlipped, onFlip, swipe, showSwipe
               </div>
             )}
             {content.back.detail && (
-              <div className="text-sm text-gray-400 dark:text-gray-500 mt-4 text-center max-w-sm leading-relaxed">
+              <div className="text-sm text-gray-400 dark:text-gray-500 mt-4 text-left max-w-sm leading-relaxed whitespace-pre-line">
                 {content.back.detail}
               </div>
             )}
