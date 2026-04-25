@@ -90,7 +90,7 @@ test.describe("Mix Dataset - Create", () => {
 
     await expect(page.getByText("1 個項目")).toBeVisible();
     // Should show 文 badge
-    await expect(page.getByText("文")).toBeVisible();
+    await expect(page.getByText("文", { exact: true })).toBeVisible();
   });
 });
 
