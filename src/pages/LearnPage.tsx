@@ -4,7 +4,7 @@ import { useDatasetById } from "../hooks/useDatasets";
 import { useDatasetCrud, isBuiltinDataset } from "../hooks/useDatasetCrud";
 import { useStudyPlan } from "../hooks/useStudyPlan";
 import LearnCard from "../components/LearnCard";
-import ProgressBar from "../components/ProgressBar";
+import SeekableProgressBar from "../components/SeekableProgressBar";
 import ConfirmDialog from "../components/ConfirmDialog";
 import { loadTestModes } from "../lib/storage";
 import { VOCAB_TEST_MODES, GRAMMAR_TEST_MODES, MIX_TEST_MODES, MIX_DEFAULT_MODES } from "../types";
@@ -174,7 +174,7 @@ export default function LearnPage() {
       {/* Day tabs (daily mode only) */}
       {isDaily && <DayTabs plan={plan!} currentDayIndex={currentDayIndex} onSelectDay={selectDay} />}
 
-      <ProgressBar current={currentIndex + 1} total={totalCards} />
+      <SeekableProgressBar current={currentIndex} total={totalCards} onChange={setCurrentIndex} />
 
       {/* Card */}
       {currentItem && (
