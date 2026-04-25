@@ -106,7 +106,7 @@ export default function HomePage() {
               <div className="text-4xl">🔄</div>
               <div className="text-left">
                 <div className="text-lg font-bold">動詞活用表</div>
-                <div className="text-xs opacity-80 mt-0.5">第一類・第二類・第三類　共 28 個常用動詞</div>
+                <div className="text-xs opacity-80 mt-0.5">第一類・第二類・第三類，共 28 個常用動詞</div>
               </div>
               <svg className="w-5 h-5 ml-auto opacity-60" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
