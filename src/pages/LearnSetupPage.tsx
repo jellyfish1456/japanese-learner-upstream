@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDatasetById } from "../hooks/useDatasets";
 import { useStudyPlan } from "../hooks/useStudyPlan";
+import { loadReviewList } from "../lib/storage";
 
 const DAY_OPTIONS = [5, 10, 20, 30, 40, 50, 60];
 
@@ -25,6 +26,7 @@ export default function LearnSetupPage() {
 
   const totalCards = dataset.data.length;
   const allCardIds = dataset.data.map((item) => item.id);
+  const reviewList = loadReviewList(datasetId ?? "");
 
   const cardsPerDay = selectedDays > 0 ? Math.ceil(totalCards / selectedDays) : totalCards;
 
@@ -179,6 +181,15 @@ export default function LearnSetupPage() {
           >
             開始學習
           </button>
+
+          {reviewList.length > 0 && (
+            <button
+              onClick={() => navigate(`/learn/${datasetId}/session`, { state: { planType: "all", reviewOnly: true } })}
+              className="w-full mt-3 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold transition-colors tap-active"
+            >
+              ⭐ 再次複習 ({reviewList.length} 個已標記)
+            </button>
+          )}
         </div>
       )}
     </div>

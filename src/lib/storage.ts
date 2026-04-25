@@ -226,3 +226,72 @@ export const STORAGE_KEYS = {
   customData: CUSTOM_DATA_KEY,
   testMode: TEST_MODE_KEY,
 } as const;
+
+// ========== Review List (再次複習) ==========
+
+const REVIEW_LIST_PREFIX = "jp-learner:review-";
+
+export function loadReviewList(datasetId: string): string[] {
+  try {
+    const raw = localStorage.getItem(REVIEW_LIST_PREFIX + datasetId);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveReviewList(datasetId: string, ids: string[]): void {
+  if (ids.length === 0) {
+    localStorage.removeItem(REVIEW_LIST_PREFIX + datasetId);
+  } else {
+    localStorage.setItem(REVIEW_LIST_PREFIX + datasetId, JSON.stringify(ids));
+  }
+}
+
+export function toggleReviewItem(datasetId: string, itemId: string): string[] {
+  const current = loadReviewList(datasetId);
+  const updated = current.includes(itemId)
+    ? current.filter((id) => id !== itemId)
+    : [...current, itemId];
+  saveReviewList(datasetId, updated);
+  return updated;
+}
+
+// ========== PDF Study Database ==========
+
+export interface PDFCard {
+  id: string;
+  front: string;   // question / term
+  back: string;    // answer / explanation
+}
+
+export interface PDFDataset {
+  id: string;
+  name: string;
+  createdAt: string;
+  cards: PDFCard[];
+}
+
+const PDF_DB_KEY = "jp-learner:pdf-db";
+
+export function loadPDFDatasets(): PDFDataset[] {
+  try {
+    const raw = localStorage.getItem(PDF_DB_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function savePDFDataset(dataset: PDFDataset): void {
+  const all = loadPDFDatasets();
+  const idx = all.findIndex((d) => d.id === dataset.id);
+  if (idx >= 0) all[idx] = dataset;
+  else all.push(dataset);
+  localStorage.setItem(PDF_DB_KEY, JSON.stringify(all));
+}
+
+export function deletePDFDataset(id: string): void {
+  const all = loadPDFDatasets().filter((d) => d.id !== id);
+  localStorage.setItem(PDF_DB_KEY, JSON.stringify(all));
+}

@@ -6,12 +6,13 @@ import { useStudyPlan } from "../hooks/useStudyPlan";
 import LearnCard from "../components/LearnCard";
 import SeekableProgressBar from "../components/SeekableProgressBar";
 import ConfirmDialog from "../components/ConfirmDialog";
-import { loadTestModes } from "../lib/storage";
+import { loadTestModes, loadReviewList, toggleReviewItem } from "../lib/storage";
 import { VOCAB_TEST_MODES, GRAMMAR_TEST_MODES, MIX_TEST_MODES, MIX_DEFAULT_MODES } from "../types";
 
 interface LearnLocationState {
   planType?: "all" | "daily";
   dayIndex?: number;
+  reviewOnly?: boolean;
 }
 
 export default function LearnPage() {
@@ -23,8 +24,14 @@ export default function LearnPage() {
   const { plan } = useStudyPlan(datasetId ?? "");
 
   const [deleteItemId, setDeleteItemId] = useState<string | null>(null);
+  const [reviewList, setReviewList] = useState<string[]>(() => loadReviewList(datasetId ?? ""));
 
-  const { planType = "all", dayIndex: initialDayIndex = 0 } =
+  const handleToggleReview = useCallback((itemId: string) => {
+    const updated = toggleReviewItem(datasetId ?? "", itemId);
+    setReviewList(updated);
+  }, [datasetId]);
+
+  const { planType = "all", dayIndex: initialDayIndex = 0, reviewOnly = false } =
     (location.state as LearnLocationState) ?? {};
 
   const [currentDayIndex, setCurrentDayIndex] = useState(initialDayIndex);
@@ -42,7 +49,11 @@ export default function LearnPage() {
   let dayCards = allDataItems;
   let dayCardIds: string[] = allDataItems.map((item) => item.id);
 
-  if (isDaily) {
+  if (reviewOnly && reviewList.length > 0) {
+    const reviewSet = new Set(reviewList);
+    dayCards = allDataItems.filter((item) => reviewSet.has(item.id));
+    dayCardIds = dayCards.map((item) => item.id);
+  } else if (isDaily) {
     const dayCardIdSet = plan!.cardIds[currentDayIndex] ?? [];
     const idToIndex = new Map(dayCardIdSet.map((id, i) => [id, i]));
     const filtered = allDataItems
@@ -149,6 +160,14 @@ export default function LearnPage() {
             >
               從頭看今天
             </button>
+            {reviewList.length > 0 && (
+              <button
+                onClick={() => navigate(`/learn/${datasetId}/session`, { state: { planType: "all", reviewOnly: true } })}
+                className="py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold transition-colors tap-active"
+              >
+                ⭐ 再次複習 ({reviewList.length} 個)
+              </button>
+            )}
             <button
               onClick={navigateToExam}
               className="py-3 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-semibold hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors tap-active"
@@ -174,6 +193,12 @@ export default function LearnPage() {
       {/* Day tabs (daily mode only) */}
       {isDaily && <DayTabs plan={plan!} currentDayIndex={currentDayIndex} onSelectDay={selectDay} />}
 
+      {reviewOnly && (
+        <div className="flex items-center gap-2 mb-3 px-1">
+          <span className="text-amber-500">⭐</span>
+          <span className="text-sm font-semibold text-amber-600 dark:text-amber-400">再次複習模式 — {reviewList.length} 個</span>
+        </div>
+      )}
       <SeekableProgressBar current={currentIndex} total={totalCards} onChange={setCurrentIndex} />
 
       {/* Card */}
@@ -182,6 +207,16 @@ export default function LearnPage() {
           <LearnCard item={currentItem} category={dataset.category} />
           {/* Edit / Delete buttons */}
           <div className="flex justify-end gap-1 mt-2">
+            {/* Re-review bookmark */}
+            <button
+              onClick={() => handleToggleReview(currentItem.id)}
+              className={`p-2 transition-colors ${reviewList.includes(currentItem.id) ? "text-amber-500" : "text-gray-300 dark:text-gray-600 hover:text-amber-400"}`}
+              title="加入再次複習"
+            >
+              <svg className="w-4 h-4" fill={reviewList.includes(currentItem.id) ? "currentColor" : "none"} viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+              </svg>
+            </button>
             <button
               onClick={() => navigate(`/manage/${datasetId}/item/${currentItem.id}`)}
               className="p-2 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"

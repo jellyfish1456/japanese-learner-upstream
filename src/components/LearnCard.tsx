@@ -62,12 +62,31 @@ function CopyableExample({
   );
 }
 
+/** Extract Japanese example sentence from full_explanation (after 例：) */
+function extractExample(text: string): { sentence: string; rest: string } | null {
+  const match = text.match(/例[：:]\s*(.+)/);
+  if (!match) return null;
+  const sentence = match[1].trim();
+  const rest = text.slice(0, match.index).trim();
+  return { sentence, rest };
+}
+
 function VocabLearnCard({ item }: { item: VocabItem }) {
+  const example = item.full_explanation ? extractExample(item.full_explanation) : null;
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyExample = () => {
+    if (!example) return;
+    navigator.clipboard.writeText(example.sentence).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    });
+  };
+
   return (
     <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 space-y-4">
       <div className="text-center">
         <div className="flex items-center justify-center gap-2">
-          {/* Vocab: use existing hiragana as furigana */}
           <ruby className="ruby-large text-4xl font-bold text-gray-900 dark:text-gray-50">
             {item.japanese}
             <rt>{item.hiragana}</rt>
@@ -85,7 +104,30 @@ function VocabLearnCard({ item }: { item: VocabItem }) {
       {item.full_explanation && (
         <>
           <div className="border-t border-gray-100 dark:border-gray-700" />
-          <div className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed whitespace-pre-line">{item.full_explanation}</div>
+          {example ? (
+            <div className="space-y-2">
+              <div className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{example.rest}</div>
+              <div
+                onClick={handleCopyExample}
+                className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 cursor-pointer active:opacity-70 transition-opacity select-none group relative"
+                title="點擊複製"
+              >
+                <span className={`absolute top-2 right-2 text-xs px-1.5 py-0.5 rounded font-medium transition-all duration-200 ${
+                  copied ? "opacity-100 bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-400" : "opacity-0 group-hover:opacity-60 bg-gray-200 dark:bg-gray-600 text-gray-500"
+                }`}>{copied ? "已複製 ✓" : "複製"}</span>
+                <div className="flex items-start gap-2 pr-10">
+                  <div className="text-sm text-gray-700 dark:text-gray-200 flex-1">
+                    <RubyText text={example.sentence} />
+                  </div>
+                  <div onClick={(e) => e.stopPropagation()}>
+                    <SpeakButton text={example.sentence} className="flex-shrink-0" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed whitespace-pre-line">{item.full_explanation}</div>
+          )}
         </>
       )}
     </div>
