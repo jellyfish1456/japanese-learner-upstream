@@ -2,8 +2,9 @@ import { useDarkMode } from "../hooks/useDarkMode";
 import { useSettings } from "../hooks/useSettings";
 import SyncSection from "../components/SyncSection";
 
-const APP_VERSION = "CH20260426-2";
-const HAS_GOOGLE_ID = Boolean(import.meta.env.VITE_GOOGLE_CLIENT_ID);
+const APP_VERSION = "CH20260426-3";
+const HAS_GOOGLE_ID   = Boolean(import.meta.env.VITE_GOOGLE_CLIENT_ID);
+const HAS_CAPTION_PROXY = Boolean(import.meta.env.VITE_CAPTION_PROXY_URL);
 
 function ToggleSwitch({ checked, onChange }: { checked: boolean; onChange: () => void }) {
   return (
@@ -25,6 +26,43 @@ function ToggleSwitch({ checked, onChange }: { checked: boolean; onChange: () =>
 }
 
 const SPEECH_RATES = [0.5, 0.75, 0.9, 1.0, 1.25] as const;
+
+function CaptionProxySetupGuide() {
+  return (
+    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">
+      <div className="flex items-center gap-2">
+        <span className="text-xl">📡</span>
+        <div>
+          <p className="font-semibold text-gray-900 dark:text-gray-50 text-sm">需要設定字幕代理（免費）</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">YouTube CC 字幕需透過伺服器端抓取，約需 3 分鐘完成設定</p>
+        </div>
+      </div>
+      <ol className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+        <li className="flex gap-2">
+          <span className="flex-shrink-0 w-5 h-5 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">1</span>
+          <span>前往 <a href="https://workers.cloudflare.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">workers.cloudflare.com</a>，以 GitHub 帳號免費登入</span>
+        </li>
+        <li className="flex gap-2">
+          <span className="flex-shrink-0 w-5 h-5 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">2</span>
+          <span>Create Application → Create Worker → 將預設程式碼全部替換成 repo 內 <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded text-xs">cloudflare-caption-proxy/worker.js</code> 的內容</span>
+        </li>
+        <li className="flex gap-2">
+          <span className="flex-shrink-0 w-5 h-5 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">3</span>
+          <span>點擊 <strong>Deploy</strong>，複製顯示的 <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded text-xs">*.workers.dev</code> 網址</span>
+        </li>
+        <li className="flex gap-2">
+          <span className="flex-shrink-0 w-5 h-5 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">4</span>
+          <span>GitHub repo → Settings → Secrets → Actions → 新增 <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded text-xs">VITE_CAPTION_PROXY_URL</code>，值為上一步的網址</span>
+        </li>
+        <li className="flex gap-2">
+          <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 text-white text-xs flex items-center justify-center font-bold">5</span>
+          <span>推送任何 commit 觸發重新部署，字幕同步功能即可使用 ✓</span>
+        </li>
+      </ol>
+      <p className="text-xs text-gray-400 dark:text-gray-500">Cloudflare Workers 免費方案每日 100,000 次請求，個人使用完全足夠</p>
+    </div>
+  );
+}
 
 function GoogleSetupGuide() {
   return (
@@ -121,6 +159,22 @@ export default function SettingsPage() {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* YouTube CC Caption Proxy */}
+      <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">YouTube CC 字幕同步</h3>
+      <div className="mb-6">
+        {HAS_CAPTION_PROXY ? (
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 flex items-center gap-3">
+            <span className="text-2xl">✅</span>
+            <div>
+              <p className="font-semibold text-gray-900 dark:text-gray-50 text-sm">字幕代理已啟用</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">貼上影片連結後將自動抓取 CC 字幕並同步顯示</p>
+            </div>
+          </div>
+        ) : (
+          <CaptionProxySetupGuide />
+        )}
       </div>
 
       {/* Google Drive Sync */}

@@ -39,6 +39,8 @@ interface YTCaptionEvent {
   segs?: { utf8?: string }[];
 }
 
+const CAPTION_PROXY = import.meta.env.VITE_CAPTION_PROXY_URL as string | undefined;
+
 // ── Main component ────────────────────────────────────────────────────────────
 export default function ShadowingPage() {
   const { level, articleId } = useParams<{ level: string; articleId: string }>();
@@ -88,21 +90,23 @@ export default function ShadowingPage() {
     };
   }, []);
 
-  // ── Fetch YouTube captions when ytId changes ──────────────────────────────
-  // All setState calls are inside async callbacks — never synchronous in effect body
+  // ── Fetch YouTube captions via proxy when ytId changes ───────────────────
+  // All setState calls inside async callbacks — never synchronous in effect body
   useEffect(() => {
     if (!ytId) return;
+    if (!CAPTION_PROXY) return; // proxy not configured — status stays "loading" to show setup guide
 
     let cancelled = false;
 
-    fetch(`https://www.youtube.com/api/timedtext?v=${ytId}&lang=ja&fmt=json3`)
+    fetch(`${CAPTION_PROXY}?v=${ytId}&lang=ja`)
       .then((r) => {
         if (cancelled) return null;
-        if (!r.ok) throw new Error("not ok");
-        return r.json() as Promise<{ events?: YTCaptionEvent[] }>;
+        if (!r.ok) throw new Error(`proxy ${r.status}`);
+        return r.json() as Promise<{ events?: YTCaptionEvent[]; error?: string }>;
       })
       .then((data) => {
         if (cancelled || !data) return;
+        if (data.error && (!data.events || data.events.length === 0)) throw new Error(data.error);
         const events = data.events ?? [];
         const segs: ShadowingSegment[] = events
           .filter((e) => Array.isArray(e.segs))
@@ -114,7 +118,7 @@ export default function ShadowingPage() {
           }))
           .filter((s) => s.text.length > 0);
 
-        if (segs.length === 0) throw new Error("no captions");
+        if (segs.length === 0) throw new Error("no_captions");
         setYtCaptions(segs);
         setCaptionStatus("ok");
       })
@@ -303,17 +307,22 @@ export default function ShadowingPage() {
               onTimeUpdate={setVideoTime}
               className="mb-2"
             />
-            {captionStatus === "loading" && (
-              <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">⏳ 載入字幕中…</p>
+            {captionStatus === "loading" && !CAPTION_PROXY && (
+              <p className="text-xs text-orange-400 mb-1">
+                ⚠ 字幕代理未設定 — 前往「設定」查看 CC 字幕啟用說明，目前顯示文章內容
+              </p>
+            )}
+            {captionStatus === "loading" && CAPTION_PROXY && (
+              <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">⏳ 載入 CC 字幕中…</p>
             )}
             {captionStatus === "ok" && ytCaptions && (
               <p className="text-xs text-green-500 dark:text-green-400 mb-1">
-                ✓ 已載入 {ytCaptions.length} 條字幕，影片播放時自動同步
+                ✓ 已載入 {ytCaptions.length} 條 CC 字幕，播放時自動同步標記
               </p>
             )}
             {captionStatus === "error" && (
-              <p className="text-xs text-orange-400 dark:text-orange-400 mb-1">
-                ⚠ 字幕同步不可用（CORS 限制）— 顯示文章內容，仍可點擊跟讀
+              <p className="text-xs text-red-400 mb-1">
+                ✗ 字幕載入失敗（影片可能無日文 CC）— 顯示文章內容，仍可點擊跟讀
               </p>
             )}
             <div className="flex items-center justify-between text-xs text-gray-400 dark:text-gray-500">

@@ -15,7 +15,7 @@
 - **Increment rule**: Each session that touches any source file must bump the version before committing.
   - Same date → increment the trailing number (`CH20260426-2` → `CH20260426-3`)
   - New date → reset to `-1` (`CH20260426-3` → `CH20260427-1`)
-- **Current version**: `CH20260426-2`
+- **Current version**: `CH20260426-3`
 - Do this automatically — user will never need to ask again.
 
 ---
@@ -59,9 +59,12 @@
 - `src/pages/ShadowingListPage.tsx`: level-filtered article list
 
 ### YouTube Caption Sync
-- Fetches `https://www.youtube.com/api/timedtext?v={id}&lang=ja&fmt=json3` on video load
+- YouTube requires **signed URLs** from `ytInitialPlayerResponse.captionTracks` — the simple timedtext API no longer works
+- Requires `VITE_CAPTION_PROXY_URL` pointing to a deployed Cloudflare Worker
+- Worker code: `cloudflare-caption-proxy/worker.js` (deploy to workers.cloudflare.com, free)
+- Flow: browser → Worker → `youtube.com/watch` (server-side) → parse `ytInitialPlayerResponse` → fetch signed caption URL → return JSON3
+- When `VITE_CAPTION_PROXY_URL` is not set: SettingsPage shows 5-step setup guide; ShadowingPage falls back to article text
 - JSON3 format: `events[].tStartMs`, `dDurationMs`, `segs[].utf8`
-- On CORS failure: shows warning, falls back to article segments
 
 ### Furigana (Ruby Text)
 - `src/lib/furigana-map.json` (501KB, pre-generated)
@@ -113,4 +116,4 @@ src/
 
 ---
 
-**Last Updated**: 2026-04-26 | **Current Version**: CH20260426-2
+**Last Updated**: 2026-04-26 | **Current Version**: CH20260426-3
