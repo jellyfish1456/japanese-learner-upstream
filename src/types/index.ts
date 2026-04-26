@@ -8,6 +8,7 @@ export interface VocabItem {
   hiragana: string;
   simple_chinese: string;
   full_explanation: string;
+  example_chinese?: string; // Chinese translation for the example sentence
 }
 
 export interface GrammarExample {

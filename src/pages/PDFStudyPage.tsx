@@ -37,7 +37,20 @@ async function extractTextFromPDF(file: File, onProgress?: (msg: string) => void
     onProgress?.(`解析第 ${i}/${pdf.numPages} 頁...`);
     const page = await pdf.getPage(i);
     const content = await page.getTextContent();
-    const text = content.items.map((item) => ("str" in item ? item.str : "")).join(" ").trim();
+    // Reconstruct text preserving line breaks: detect Y-position changes as newlines
+    let lastY: number | null = null;
+    const textParts: string[] = [];
+    for (const item of content.items) {
+      if (!("str" in item) || !item.str) continue;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const y = (item as any).transform?.[5];
+      if (lastY !== null && y !== undefined && Math.abs(y - lastY) > 5) {
+        textParts.push("\n");
+      }
+      textParts.push(item.str);
+      if (y !== undefined) lastY = y;
+    }
+    const text = textParts.join("").trim();
 
     if (text.length > 30) {
       // Normal text PDF
@@ -68,32 +81,58 @@ function cleanText(t: string): string {
     .trim();
 }
 
-/** Attempt to extract cards from LLM-style chat logs (User/Assistant, 人間/AI, etc.) */
+/** Attempt to extract cards from LLM-style chat logs */
 function parseChatLog(text: string): PDFCard[] | null {
-  // Detect if it looks like a chat log
-  const chatPattern = /^(User|Assistant|Human|AI|人間|あなた|Claude|ChatGPT|GPT)[：:：]/im;
-  if (!chatPattern.test(text)) return null;
-
   const cards: PDFCard[] = [];
   let id = Date.now();
 
-  // Split on speaker turns
-  const turnPattern = /\n(?=(?:User|Assistant|Human|AI|人間|あなた|Claude|ChatGPT|GPT)[：:：])/gi;
-  const turns = text.split(turnPattern).map((t) => t.trim()).filter(Boolean);
+  // Pattern A: "Speaker: content" on same line (User: ... / Assistant: ...)
+  const inlinePattern = /^(User|Assistant|Human|AI|人間|あなた|Claude|ChatGPT|GPT|你|我)[：:]/im;
+  // Pattern B: Speaker name on its own line, content on next lines (ChatGPT PDF export)
+  const blockPattern = /^(You|User|ChatGPT|Claude|Assistant|GPT-[34]\S*|Gemini)\s*$/im;
 
-  // Pair User→Assistant turns into Q&A cards
+  if (!inlinePattern.test(text) && !blockPattern.test(text)) return null;
+
+  // Normalize: convert block-style (name on own line) to inline style
+  let normalized = text;
+  if (blockPattern.test(text)) {
+    normalized = text.replace(
+      /^(You|User|ChatGPT|Claude|Assistant|GPT-[34]\S*|Gemini)\s*\n/gim,
+      (_, name) => `${name}：`
+    );
+  }
+
+  const userNames = ["User", "Human", "You", "人間", "あなた", "你", "我"];
+  const assistantNames = ["Assistant", "AI", "Claude", "ChatGPT", "GPT", "Gemini"];
+  const allNames = [...userNames, ...assistantNames].join("|");
+
+  // Split on speaker turns
+  const turnPattern = new RegExp(`\\n(?=(?:${allNames}|GPT-[34]\\S*)[：:])`, "gi");
+  const turns = normalized.split(turnPattern).map((t) => t.trim()).filter(Boolean);
+
+  const isUserTurn = (t: string) => userNames.some((n) => new RegExp(`^${n}[：:]`, "i").test(t));
+  const isAssistantTurn = (t: string) =>
+    assistantNames.some((n) => new RegExp(`^${n}[：:]`, "i").test(t)) ||
+    /^GPT-[34]\S*[：:]/i.test(t);
+
+  const stripSpeaker = (t: string) => t.replace(/^[^：:]+[：:]\s*/, "").trim();
+
+  // Summarize long responses: keep first paragraph or first 500 chars
+  const summarize = (t: string): string => {
+    if (t.length <= 500) return t;
+    // Try to cut at a paragraph break
+    const paraBreak = t.indexOf("\n\n", 200);
+    if (paraBreak > 0 && paraBreak < 600) return t.slice(0, paraBreak).trim() + "\n…（更多內容略）";
+    return t.slice(0, 500).trim() + "…（更多內容略）";
+  };
+
   for (let i = 0; i < turns.length - 1; i++) {
-    const curr = turns[i];
-    const next = turns[i + 1];
-    const isUser = /^(User|Human|人間|あなた)[：:：]/i.test(curr);
-    const isAssistant = /^(Assistant|AI|Claude|ChatGPT|GPT)[：:：]/i.test(next);
-    if (isUser && isAssistant) {
-      const front = curr.replace(/^[^：:：]+[：:：]\s*/, "").trim();
-      const back = next.replace(/^[^：:：]+[：:：]\s*/, "").trim();
-      if (front.length > 5 && back.length > 5) {
-        // Trim overly long responses — keep first 400 chars
-        cards.push({ id: String(id++), front, back: back.slice(0, 400) });
-        i++; // skip assistant turn
+    if (isUserTurn(turns[i]) && isAssistantTurn(turns[i + 1])) {
+      const front = stripSpeaker(turns[i]);
+      const back = summarize(stripSpeaker(turns[i + 1]));
+      if (front.length > 3 && back.length > 5) {
+        cards.push({ id: String(id++), front, back });
+        i++;
       }
     }
   }

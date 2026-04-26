@@ -129,12 +129,16 @@ function VocabLearnCard({ item }: { item: VocabItem }) {
                     <SpeakButton text={example.sentence} className="flex-shrink-0 mt-1" />
                   </div>
                 </div>
-                {/* Chinese context from word meaning */}
-                {example.chineseContext && (
+                {/* Full sentence Chinese translation */}
+                {item.example_chinese ? (
+                  <div className="text-sm text-gray-600 dark:text-gray-300 mt-1.5">
+                    {item.example_chinese}
+                  </div>
+                ) : example.chineseContext ? (
                   <div className="text-sm text-gray-500 dark:text-gray-400 mt-1.5">
                     💡 {example.chineseContext}
                   </div>
-                )}
+                ) : null}
               </div>
             </div>
           ) : (
