@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { shadowingArticles } from "../data/shadowing";
 import type { ShadowingSegment } from "../data/shadowing";
@@ -21,18 +21,22 @@ function getJapaneseVoice(): SpeechSynthesisVoice | null {
 // ── Extract YouTube video ID from URL or plain ID ───────────────────────────
 function parseYouTubeId(input: string): string | null {
   input = input.trim();
-  // Already a bare ID (11 chars, alphanumeric + _ -)
   if (/^[\w-]{11}$/.test(input)) return input;
   try {
     const url = new URL(input.startsWith("http") ? input : "https://" + input);
-    // youtu.be/ID
     if (url.hostname === "youtu.be") return url.pathname.slice(1).split("?")[0].slice(0, 11) || null;
-    // youtube.com/watch?v=ID or /embed/ID or /v/ID
     return url.searchParams.get("v") ??
       (url.pathname.match(/(?:embed|v)\/([^/?]+)/)?.[1] ?? null);
   } catch {
     return null;
   }
+}
+
+// ── YouTube JSON3 caption event ───────────────────────────────────────────────
+interface YTCaptionEvent {
+  tStartMs: number;
+  dDurationMs?: number;
+  segs?: { utf8?: string }[];
 }
 
 // ── Main component ────────────────────────────────────────────────────────────
@@ -46,11 +50,22 @@ export default function ShadowingPage() {
   const [showUrlInput, setShowUrlInput] = useState(false);
   const [videoTime, setVideoTime] = useState(0);
 
+  // YouTube caption state — loading is set eagerly when ytId changes (in event handlers)
+  const [ytCaptions, setYtCaptions] = useState<ShadowingSegment[] | null>(null);
+  const [captionStatus, setCaptionStatus] = useState<"idle" | "loading" | "ok" | "error">(
+    // Lazy init: if the article ships a youtubeId, captions fetch starts immediately
+    () => (article?.youtubeId ? "loading" : "idle")
+  );
+
   // TTS state
-  const [ttsIdx, setTtsIdx] = useState(-1); // -1 = stopped
+  const [ttsIdx, setTtsIdx] = useState(-1);
   const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState<Speed>(0.75);
-  const [voicesReady, setVoicesReady] = useState(false);
+
+  // voicesReady — use lazy initializer so we don't call setState synchronously in an effect
+  const [voicesReady, setVoicesReady] = useState(
+    () => !!(typeof window !== "undefined" && window.speechSynthesis?.getVoices()?.length)
+  );
 
   // Display
   const [showZH, setShowZH] = useState(false);
@@ -60,25 +75,69 @@ export default function ShadowingPage() {
   // For scrolling current segment into view
   const segRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
+  // Stable ref to speakSegment — breaks the useCallback self-reference cycle
+  const speakSegmentRef = useRef<((idx: number) => void) | null>(null);
+
+  // ── Listen for voices (no synchronous setState) ───────────────────────────
   useEffect(() => {
-    const loaded = () => setVoicesReady(true);
-    window.speechSynthesis.getVoices();
-    window.speechSynthesis.addEventListener("voiceschanged", loaded);
-    setVoicesReady(window.speechSynthesis.getVoices().length > 0);
+    const onVoicesChanged = () => setVoicesReady(true);
+    window.speechSynthesis?.addEventListener("voiceschanged", onVoicesChanged);
     return () => {
-      window.speechSynthesis.removeEventListener("voiceschanged", loaded);
-      window.speechSynthesis.cancel();
+      window.speechSynthesis?.removeEventListener("voiceschanged", onVoicesChanged);
+      window.speechSynthesis?.cancel();
     };
   }, []);
 
+  // ── Fetch YouTube captions when ytId changes ──────────────────────────────
+  // All setState calls are inside async callbacks — never synchronous in effect body
+  useEffect(() => {
+    if (!ytId) return;
+
+    let cancelled = false;
+
+    fetch(`https://www.youtube.com/api/timedtext?v=${ytId}&lang=ja&fmt=json3`)
+      .then((r) => {
+        if (cancelled) return null;
+        if (!r.ok) throw new Error("not ok");
+        return r.json() as Promise<{ events?: YTCaptionEvent[] }>;
+      })
+      .then((data) => {
+        if (cancelled || !data) return;
+        const events = data.events ?? [];
+        const segs: ShadowingSegment[] = events
+          .filter((e) => Array.isArray(e.segs))
+          .map((e) => ({
+            text: (e.segs ?? []).map((s) => s.utf8 ?? "").join("").replace(/\n/g, " ").trim(),
+            zh: "",
+            start: e.tStartMs / 1000,
+            end: (e.tStartMs + (e.dDurationMs ?? 3000)) / 1000,
+          }))
+          .filter((s) => s.text.length > 0);
+
+        if (segs.length === 0) throw new Error("no captions");
+        setYtCaptions(segs);
+        setCaptionStatus("ok");
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setYtCaptions(null);
+          setCaptionStatus("error");
+        }
+      });
+
+    return () => { cancelled = true; };
+  }, [ytId]);
+
+  // Segments to display: real YouTube captions (if fetched) or article text
+  const displaySegments: ShadowingSegment[] = ytId && ytCaptions
+    ? ytCaptions
+    : (article?.segments ?? []);
+
   // Determine currently highlighted segment
-  // — if YouTube is playing: match by timestamp
-  // — if TTS: highlight ttsIdx
   const activeIdx = (() => {
-    if (ytId && videoTime > 0 && article) {
-      const segs = article.segments;
-      for (let i = 0; i < segs.length; i++) {
-        const s = segs[i];
+    if (ytId && videoTime > 0) {
+      for (let i = 0; i < displaySegments.length; i++) {
+        const s = displaySegments[i];
         if (s.start != null && s.end != null) {
           if (videoTime >= s.start && videoTime < s.end) return i;
         }
@@ -99,8 +158,9 @@ export default function ShadowingPage() {
   const speakSegment = useCallback((idx: number) => {
     if (!article) return;
     window.speechSynthesis.cancel();
-    const text = article.segments[idx].text;
-    const utt = new SpeechSynthesisUtterance(text);
+    const segs = ytId && ytCaptions ? ytCaptions : article.segments;
+    if (!segs[idx]) return;
+    const utt = new SpeechSynthesisUtterance(segs[idx].text);
     utt.lang = "ja-JP";
     utt.rate = speed;
     if (voicesReady) {
@@ -110,10 +170,10 @@ export default function ShadowingPage() {
     utt.onstart = () => { setTtsIdx(idx); setPlaying(true); };
     utt.onend = () => {
       if (repeatMode) {
-        speakSegment(idx);
-      } else if (autoNext && idx + 1 < article.segments.length) {
+        speakSegmentRef.current?.(idx);
+      } else if (autoNext && idx + 1 < segs.length) {
         setTtsIdx(idx + 1);
-        speakSegment(idx + 1);
+        speakSegmentRef.current?.(idx + 1);
       } else {
         setPlaying(false);
         setTtsIdx(-1);
@@ -121,7 +181,12 @@ export default function ShadowingPage() {
     };
     utt.onerror = () => { setPlaying(false); setTtsIdx(-1); };
     window.speechSynthesis.speak(utt);
-  }, [article, speed, voicesReady, repeatMode, autoNext]);
+  }, [article, speed, voicesReady, repeatMode, autoNext, ytId, ytCaptions]);
+
+  // Keep ref in sync (useLayoutEffect = after render, before paint — safe for refs)
+  useLayoutEffect(() => {
+    speakSegmentRef.current = speakSegment;
+  });
 
   const handleTtsPlay = () => {
     if (playing) {
@@ -148,14 +213,27 @@ export default function ShadowingPage() {
     setSpeed(s);
   };
 
-  // ── YouTube URL submit ─────────────────────────────────────────────────────
+  // ── YouTube URL submit (event handler — setState allowed freely) ───────────
   const handleUrlSubmit = () => {
     const id = parseYouTubeId(urlInput);
     if (id) {
       setYtId(id);
       setUrlInput("");
       setShowUrlInput(false);
+      setVideoTime(0);
+      setTtsIdx(-1);
+      setPlaying(false);
+      // Reset captions before new fetch
+      setYtCaptions(null);
+      setCaptionStatus("loading");
     }
+  };
+
+  const handleRemoveVideo = () => {
+    setYtId("");
+    setVideoTime(0);
+    setYtCaptions(null);
+    setCaptionStatus("idle");
   };
 
   if (!article) {
@@ -190,7 +268,7 @@ export default function ShadowingPage() {
             }`}
           >
             <RubyText text={seg.text} />
-            {isActive && showZH && (
+            {isActive && showZH && seg.zh && (
               <span className="text-sm text-blue-600 dark:text-blue-300 font-normal ml-1">
                 （{seg.zh}）
               </span>
@@ -225,10 +303,23 @@ export default function ShadowingPage() {
               onTimeUpdate={setVideoTime}
               className="mb-2"
             />
+            {captionStatus === "loading" && (
+              <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">⏳ 載入字幕中…</p>
+            )}
+            {captionStatus === "ok" && ytCaptions && (
+              <p className="text-xs text-green-500 dark:text-green-400 mb-1">
+                ✓ 已載入 {ytCaptions.length} 條字幕，影片播放時自動同步
+              </p>
+            )}
+            {captionStatus === "error" && (
+              <p className="text-xs text-orange-400 dark:text-orange-400 mb-1">
+                ⚠ 字幕同步不可用（CORS 限制）— 顯示文章內容，仍可點擊跟讀
+              </p>
+            )}
             <div className="flex items-center justify-between text-xs text-gray-400 dark:text-gray-500">
               <span>▶ 影片播放中，文字會自動跟著標記</span>
               <button
-                onClick={() => { setYtId(""); setVideoTime(0); }}
+                onClick={handleRemoveVideo}
                 className="text-red-400 hover:text-red-500 transition-colors"
               >
                 移除影片
@@ -241,7 +332,7 @@ export default function ShadowingPage() {
               <div>
                 <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">📺 加入 NHK 影片</p>
                 <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
-                  貼上 YouTube 連結，影片播放時文字自動亮起
+                  貼上 YouTube 連結，影片播放時字幕自動亮起
                 </p>
               </div>
               <button
@@ -271,6 +362,7 @@ export default function ShadowingPage() {
             )}
             <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
               推薦頻道：
+              {" "}
               <a
                 href="https://www.youtube.com/@NHK%E6%97%A5%E6%9C%AC%E8%AF%AD"
                 target="_blank"
@@ -279,7 +371,7 @@ export default function ShadowingPage() {
               >
                 NHK日本語
               </a>
-
+              {"　"}
               <a
                 href="https://www.youtube.com/@NHKWorldJapan"
                 target="_blank"
@@ -293,23 +385,27 @@ export default function ShadowingPage() {
         )}
       </div>
 
-      {/* Transcript paragraph */}
+      {/* Transcript / captions paragraph */}
       <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-5 mb-5">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">文章跟讀</span>
-          <button
-            onClick={() => setShowZH(!showZH)}
-            className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-colors ${
-              showZH
-                ? "bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400"
-                : "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
-            }`}
-          >
-            中文 {showZH ? "ON" : "OFF"}
-          </button>
+          <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+            {captionStatus === "ok" ? "影片字幕" : "文章跟讀"}
+          </span>
+          {!ytCaptions && (
+            <button
+              onClick={() => setShowZH(!showZH)}
+              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-colors ${
+                showZH
+                  ? "bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400"
+                  : "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
+              }`}
+            >
+              中文 {showZH ? "ON" : "OFF"}
+            </button>
+          )}
         </div>
-        {renderParagraph(article.segments)}
-        {showZH && activeIdx < 0 && (
+        {renderParagraph(displaySegments)}
+        {showZH && !ytCaptions && activeIdx < 0 && (
           <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700 space-y-1">
             {article.segments.map((seg, idx) => (
               <p key={idx} className="text-xs text-gray-500 dark:text-gray-400">{seg.zh}</p>
@@ -318,7 +414,7 @@ export default function ShadowingPage() {
         )}
       </div>
 
-      {/* TTS Controls (always available even when video is playing) */}
+      {/* TTS Controls */}
       <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">
         <p className="text-xs text-gray-400 dark:text-gray-500 text-center">
           {ytId ? "點擊文字段落跟著朗讀，或使用 TTS 逐句練習" : "點擊任一句跟著朗讀，或按下方播放逐句練習"}

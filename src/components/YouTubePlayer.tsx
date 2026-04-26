@@ -57,11 +57,11 @@ export default function YouTubePlayer({ videoId, onTimeUpdate, onDuration, class
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    setError(false);
     let destroyed = false;
 
     loadYTApi().then(() => {
       if (destroyed || !containerRef.current) return;
+      setError(false);
       const div = document.createElement("div");
       containerRef.current.innerHTML = "";
       containerRef.current.appendChild(div);

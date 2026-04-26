@@ -1,21 +1,11 @@
 import { useState } from "react";
+import { getBestJapaneseVoice } from "../lib/tts";
 import { loadSettings } from "../lib/storage";
 
 interface SpeakButtonProps {
   text: string;
   className?: string;
   rateOverride?: number;
-}
-
-/** Return the best available Japanese TTS voice (prefers high-quality named voices). */
-export function getBestJapaneseVoice(): SpeechSynthesisVoice | null {
-  const voices = window.speechSynthesis.getVoices();
-  const PREFERRED = ["Kyoko", "Google 日本語", "O-Ren", "Otoya", "Hattori"];
-  for (const name of PREFERRED) {
-    const v = voices.find((v) => v.name.includes(name) && v.lang.startsWith("ja"));
-    if (v) return v;
-  }
-  return voices.find((v) => v.lang.startsWith("ja")) ?? null;
 }
 
 export default function SpeakButton({ text, className, rateOverride }: SpeakButtonProps) {

@@ -79,22 +79,22 @@ describe("storage - settings", () => {
   });
 
   it("should return default settings when nothing stored", () => {
-    expect(loadSettings()).toEqual({ defaultSessionSize: 20, showSwipeAssist: true });
+    expect(loadSettings()).toEqual({ defaultSessionSize: 20, showSwipeAssist: true, speechRate: 0.9 });
   });
 
   it("should save and load settings", () => {
-    saveSettings({ defaultSessionSize: 30, showSwipeAssist: false });
-    expect(loadSettings()).toEqual({ defaultSessionSize: 30, showSwipeAssist: false });
+    saveSettings({ defaultSessionSize: 30, showSwipeAssist: false, speechRate: 0.9 });
+    expect(loadSettings()).toEqual({ defaultSessionSize: 30, showSwipeAssist: false, speechRate: 0.9 });
   });
 
   it("should merge with defaults for partial settings", () => {
     localStorage.setItem("jp-learner:settings", JSON.stringify({}));
-    expect(loadSettings()).toEqual({ defaultSessionSize: 20, showSwipeAssist: true });
+    expect(loadSettings()).toEqual({ defaultSessionSize: 20, showSwipeAssist: true, speechRate: 0.9 });
   });
 
   it("should handle corrupted settings gracefully", () => {
     localStorage.setItem("jp-learner:settings", "bad json!");
-    expect(loadSettings()).toEqual({ defaultSessionSize: 20, showSwipeAssist: true });
+    expect(loadSettings()).toEqual({ defaultSessionSize: 20, showSwipeAssist: true, speechRate: 0.9 });
   });
 
   it("should default showSwipeAssist to true when missing from stored settings", () => {

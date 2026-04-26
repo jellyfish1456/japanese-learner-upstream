@@ -12,6 +12,7 @@ describe("useSettings", () => {
     expect(result.current.settings).toEqual({
       defaultSessionSize: 20,
       showSwipeAssist: true,
+      speechRate: 0.9,
     });
   });
 
