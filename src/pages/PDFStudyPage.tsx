@@ -40,6 +40,23 @@ async function extractPageItems(page: any): Promise<PdfItem[]> {
   return items;
 }
 
+/** Find the best X split point for a two-column layout using gap analysis */
+function findColumnSplit(items: PdfItem[]): number | null {
+  const xs = [...new Set(items.map((i) => Math.round(i.x)))].sort((a, b) => a - b);
+  if (xs.length < 4) return null;
+  // Find the largest gap between x positions
+  let maxGap = 0, splitX = 0;
+  for (let i = 1; i < xs.length; i++) {
+    const gap = xs[i] - xs[i - 1];
+    if (gap > maxGap) { maxGap = gap; splitX = (xs[i] + xs[i - 1]) / 2; }
+  }
+  // Only use the split if the gap is significant (>15pt) and splits items roughly in half
+  const leftCount = items.filter((i) => i.x < splitX).length;
+  const rightCount = items.filter((i) => i.x >= splitX).length;
+  const balance = Math.min(leftCount, rightCount) / Math.max(leftCount, rightCount);
+  return maxGap >= 15 && balance >= 0.2 ? splitX : null;
+}
+
 /** Group items into rows by Y-coordinate proximity, then reconstruct page text.
  *  For table-format PDFs (vocabulary lists): outputs "JP\tCN" per row.
  *  For regular text PDFs: outputs lines joined by space. */
@@ -49,8 +66,14 @@ function itemsToText(items: PdfItem[]): string {
   // Sort top-to-bottom, left-to-right
   items.sort((a, b) => b.y - a.y || a.x - b.x);
 
-  // Group into rows (items within 4pt of each other vertically = same row)
-  const ROW_GAP = 4;
+  // Compute median font height (used to scale the row-gap threshold)
+  const heights = items.map((i) => i.h).sort((a, b) => a - b);
+  const medH = heights[Math.floor(heights.length / 2)] || 10;
+
+  // Group into rows: items within (medH * 0.8) vertically = same row.
+  // This is large enough to merge furigana (sits ~0.5×medH above base text)
+  // with the base text into one row.
+  const ROW_GAP = Math.max(6, medH * 0.8);
   const rows: PdfItem[][] = [];
   let curRow: PdfItem[] = [];
   let curY = items[0].y;
@@ -61,68 +84,83 @@ function itemsToText(items: PdfItem[]): string {
       curY = item.y;
     }
     curRow.push(item);
+    // Update curY toward this item (running average keeps us aligned)
+    curY = (curY + item.y) / 2;
   }
   if (curRow.length) rows.push(curRow);
 
-  // Detect if this looks like a two-column vocab table:
-  // many rows have items split between left (<55%) and right (>55%) of page width
-  const pageW = Math.max(...items.map((i) => i.x)) || 1;
-  const splitRows = rows.filter((r) => {
-    const xs = r.map((i) => i.x);
-    return Math.min(...xs) < pageW * 0.5 && Math.max(...xs) > pageW * 0.5;
-  });
-  const isTable = splitRows.length >= 3;
+  // Detect two-column table: try to find a natural X split
+  const colSplit = findColumnSplit(items);
+  const isTwoColumn = colSplit !== null &&
+    rows.filter((r) => {
+      const hasLeft = r.some((i) => i.x < colSplit);
+      const hasRight = r.some((i) => i.x >= colSplit);
+      return hasLeft && hasRight;
+    }).length >= 2;
 
-  if (isTable) {
-    // Vocabulary table mode: merge rows, classify left=JP / right=CN
-    const mid = pageW * 0.5;
-    // First pass: collect JP segments (merge furigana into base word)
+  if (isTwoColumn) {
+    const mid = colSplit!;
     const entries: { jp: string; cn: string }[] = [];
     let pendingJP = "";
+    let pendingReading = "";
+    // Typical font height for main vocab text on this page
+    const mainH = heights[Math.floor(heights.length * 0.75)] || medH;
 
     for (const row of rows) {
-      const left = row.filter((i) => i.x < mid).map((i) => i.str).join("");
-      const right = row.filter((i) => i.x >= mid).map((i) => i.str).join("");
-      const leftTrimmed = left.trim();
-      const rightTrimmed = right.trim();
+      const leftItems = row.filter((i) => i.x < mid);
+      const rightItems = row.filter((i) => i.x >= mid);
+      const leftStr = leftItems.map((i) => i.str).join("").trim();
+      const rightStr = rightItems.map((i) => i.str).join("").trim();
 
-      if (!leftTrimmed && !rightTrimmed) continue;
+      if (!leftStr && !rightStr) continue;
 
-      // Is this row furigana-only? (all hiragana/katakana, short, small font)
-      const isOnlyKana = /^[ぁ-ん゛゜ァ-ンヴーa-zA-Z（）　 ]+$/.test(leftTrimmed);
-      const avgH = row.reduce((s, i) => s + i.h, 0) / row.length;
-      const mainH = Math.max(...items.map((i) => i.h));
-      const isFurigana = isOnlyKana && avgH < mainH * 0.75 && leftTrimmed.length <= 8;
+      // Is the left content furigana? (only kana, short, smaller font than main text)
+      const leftAvgH = leftItems.length
+        ? leftItems.reduce((s, i) => s + i.h, 0) / leftItems.length
+        : 0;
+      const isKanaOnly = /^[ぁ-ん゛゜ァ-ンヴーa-zA-Z\s（）]+$/.test(leftStr);
+      const isFurigana = leftStr.length > 0 && isKanaOnly &&
+        leftStr.length <= 10 && leftAvgH < mainH * 0.85;
 
-      if (isFurigana) {
-        // Furigana row: attach reading to pending JP word
-        if (pendingJP) pendingJP += `（${leftTrimmed}）`;
+      if (isFurigana && !rightStr) {
+        // Pure furigana row — store reading, will attach to the next JP word
+        pendingReading = leftStr;
         continue;
       }
 
-      if (leftTrimmed && rightTrimmed) {
-        // Complete entry in one row
-        if (pendingJP) { entries.push({ jp: pendingJP, cn: "" }); pendingJP = ""; }
-        entries.push({ jp: leftTrimmed, cn: rightTrimmed });
-      } else if (leftTrimmed && !rightTrimmed) {
-        // JP word without meaning on this row (meaning may follow)
+      // Build the JP string, attaching any stored furigana reading
+      let jpWord = leftStr;
+      if (jpWord && pendingReading) {
+        // Only attach reading if the JP word contains kanji
+        if (/[一-龯]/.test(jpWord)) jpWord += `（${pendingReading}）`;
+        pendingReading = "";
+      }
+
+      if (jpWord && rightStr) {
+        // Complete entry: JP word + Chinese meaning in the same row
         if (pendingJP) entries.push({ jp: pendingJP, cn: "" });
-        pendingJP = leftTrimmed;
-      } else if (!leftTrimmed && rightTrimmed) {
-        // Meaning row for the pending JP word
+        entries.push({ jp: jpWord, cn: rightStr });
+        pendingJP = "";
+      } else if (jpWord && !rightStr) {
+        // JP word row with no meaning yet (single-kana section header or pending entry)
+        if (pendingJP) entries.push({ jp: pendingJP, cn: "" });
+        pendingJP = jpWord;
+      } else if (!jpWord && rightStr) {
+        // Meaning-only row (continuation or orphaned Chinese)
         if (pendingJP) {
-          entries.push({ jp: pendingJP, cn: rightTrimmed });
+          entries.push({ jp: pendingJP, cn: rightStr });
           pendingJP = "";
         }
       }
     }
     if (pendingJP) entries.push({ jp: pendingJP, cn: "" });
 
-    // Output as "JP\tCN" lines
-    return entries
-      .filter((e) => e.jp.length >= 1 && /[ぁ-んァ-ン一-龯]/.test(e.jp))
+    // Output as "JP\tCN" lines; skip pure single-kana section headers
+    const result = entries
+      .filter((e) => /[ぁ-んァ-ン一-龯]/.test(e.jp) && e.jp.length >= 2)
       .map((e) => e.cn ? `${e.jp}\t${e.cn}` : e.jp)
       .join("\n");
+    if (result.trim()) return result;
   }
 
   // Regular text mode: join rows as lines
@@ -248,30 +286,71 @@ function parseVocabLine(line: string): { front: string; back: string } | null {
   return null;
 }
 
-/** Parse tab-separated "JP\tCN" lines from vocabulary table PDFs */
+const isJP = (s: string) => /[ぁ-んァ-ン一-龯]/.test(s);
+const isCN = (s: string) => /[一-鿿，；、。（）]/.test(s);
+
+/** Parse tab-separated "JP\tCN" lines (output of two-column table extraction) */
 function parseTabVocabTable(text: string): PDFCard[] | null {
   const lines = text.split("\n").filter(Boolean);
   const tabLines = lines.filter((l) => l.includes("\t"));
-  // Need at least 30% tab lines to qualify as vocab table
-  if (tabLines.length < 5 || tabLines.length < lines.length * 0.25) return null;
+  if (tabLines.length < 3) return null;
 
   let id = Date.now();
   const cards: PDFCard[] = [];
   const seen = new Set<string>();
 
   for (const line of tabLines) {
-    const [jp, cn] = line.split("\t").map((s) => s.trim());
-    if (!jp || !cn) continue;
-    // Skip section headers (single kana character like あ, か, さ...)
-    if (jp.length === 1 && /[ぁ-ん]/.test(jp)) continue;
-    // Skip noise (too short meaning or non-CJK meaning)
-    if (cn.length < 1) continue;
-    // Deduplicate
+    const tabIdx = line.indexOf("\t");
+    const jp = line.slice(0, tabIdx).trim();
+    const cn = line.slice(tabIdx + 1).trim();
+    if (!jp || !cn || !isJP(jp)) continue;
     if (seen.has(jp)) continue;
     seen.add(jp);
     cards.push({ id: String(id++), front: jp, back: cn });
   }
   return cards.length >= 3 ? cards : null;
+}
+
+/** Fallback: parse plain-text vocab list where JP and CN alternate on separate lines
+ *  e.g.:  アイスクリーム\n冰淇淋\n間\nあいだ\n之間，中間 */
+function parseLineVocabList(text: string): PDFCard[] | null {
+  const lines = text.split("\n").map((l) => l.trim()).filter(Boolean);
+  if (lines.length < 6) return null;
+
+  let id = Date.now();
+  const cards: PDFCard[] = [];
+  const seen = new Set<string>();
+  let i = 0;
+
+  while (i < lines.length) {
+    const line = lines[i];
+    // Skip section-header single kana (あ, か...)
+    if (/^[ぁ-ん]$/.test(line)) { i++; continue; }
+    // Skip cover page boilerplate (long non-JP lines)
+    if (line.length > 60 && !isJP(line)) { i++; continue; }
+
+    if (isJP(line) && !isCN(line)) {
+      // This looks like a Japanese word; collect reading lines (pure kana) below
+      let jpWord = line;
+      let j = i + 1;
+      // Skip over furigana-only lines (pure kana, short)
+      while (j < lines.length && /^[ぁ-んァ-ン゛゜ーa-zA-Z\s（）]+$/.test(lines[j]) && lines[j].length <= 12) {
+        j++;
+      }
+      // Next non-kana line should be Chinese meaning
+      if (j < lines.length && isCN(lines[j]) && !isJP(lines[j])) {
+        const cn = lines[j];
+        if (!seen.has(jpWord) && jpWord.length >= 2 && cn.length >= 1) {
+          seen.add(jpWord);
+          cards.push({ id: String(id++), front: jpWord, back: cn });
+        }
+        i = j + 1;
+        continue;
+      }
+    }
+    i++;
+  }
+  return cards.length >= 5 ? cards : null;
 }
 
 function parseTextToCards(text: string): PDFCard[] {
@@ -283,7 +362,11 @@ function parseTextToCards(text: string): PDFCard[] {
   const tabCards = parseTabVocabTable(cleaned);
   if (tabCards && tabCards.length >= 3) return tabCards.slice(0, 500);
 
-  // 2. Try chat log format
+  // 2. Try plain-text alternating JP/CN vocab list
+  const lineCards = parseLineVocabList(cleaned);
+  if (lineCards && lineCards.length >= 5) return lineCards.slice(0, 500);
+
+  // 3. Try chat log format
   const chatCards = parseChatLog(cleaned);
   if (chatCards && chatCards.length >= 2) return chatCards.slice(0, 200);
 
