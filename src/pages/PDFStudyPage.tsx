@@ -163,9 +163,19 @@ function itemsToText(items: PdfItem[]): string {
     if (result.trim()) return result;
   }
 
-  // Regular text mode: join rows as lines
+  // Regular text mode: join rows as lines.
+  // Within each row, add a tab between items that have a large horizontal gap
+  // so that parseTabVocabTable can still pick up two-column content.
   return rows
-    .map((r) => r.map((i) => i.str).join(""))
+    .map((r) => {
+      r.sort((a, b) => a.x - b.x);
+      let out = r[0].str;
+      for (let k = 1; k < r.length; k++) {
+        const xGap = r[k].x - r[k - 1].x;
+        out += xGap > medH * 4 ? "\t" + r[k].str : r[k].str;
+      }
+      return out;
+    })
     .join("\n");
 }
 
@@ -286,8 +296,22 @@ function parseVocabLine(line: string): { front: string; back: string } | null {
   return null;
 }
 
+/** True if string contains hiragana or katakana (unambiguously Japanese) */
+const hasKana = (s: string) => /[ぁ-んァ-ン]/.test(s);
+/** True if string contains any CJK character */
+const hasCJK = (s: string) => /[一-鿿]/.test(s);
+/** True if string contains Chinese-specific punctuation (，；) */
+const hasCNPunct = (s: string) => /[，；]/.test(s);
+
+/** A line is a Japanese word if it contains kana, OR is short kanji without Chinese punctuation */
+const isJPWord = (s: string) =>
+  hasKana(s) || (hasCJK(s) && s.length <= 8 && !hasCNPunct(s));
+
+/** A line is a Chinese meaning if it has Chinese punctuation, or no kana but has CJK chars */
+const isCNMeaning = (s: string) => hasCNPunct(s) || (!hasKana(s) && hasCJK(s));
+
+// Legacy helpers used elsewhere in parsers
 const isJP = (s: string) => /[ぁ-んァ-ン一-龯]/.test(s);
-const isCN = (s: string) => /[一-鿿，；、。（）]/.test(s);
 
 /** Parse tab-separated "JP\tCN" lines (output of two-column table extraction) */
 function parseTabVocabTable(text: string): PDFCard[] | null {
@@ -311,8 +335,9 @@ function parseTabVocabTable(text: string): PDFCard[] | null {
   return cards.length >= 3 ? cards : null;
 }
 
-/** Fallback: parse plain-text vocab list where JP and CN alternate on separate lines
- *  e.g.:  アイスクリーム\n冰淇淋\n間\nあいだ\n之間，中間 */
+/** Parse plain-text vocab list where JP and CN alternate on separate lines.
+ *  Handles:  JP word → (optional kana/reading lines) → CN meaning
+ *  Correctly handles pure-kanji JP words (間, 朝, 足) and words with kanji (会います). */
 function parseLineVocabList(text: string): PDFCard[] | null {
   const lines = text.split("\n").map((l) => l.trim()).filter(Boolean);
   if (lines.length < 6) return null;
@@ -324,23 +349,29 @@ function parseLineVocabList(text: string): PDFCard[] | null {
 
   while (i < lines.length) {
     const line = lines[i];
-    // Skip section-header single kana (あ, か...)
+    // Skip single-kana section headers (あ, い, か, ...)
     if (/^[ぁ-ん]$/.test(line)) { i++; continue; }
-    // Skip cover page boilerplate (long non-JP lines)
-    if (line.length > 60 && !isJP(line)) { i++; continue; }
+    // Skip long boilerplate lines (title/author in Chinese without JP)
+    if (line.length > 50 && !hasKana(line)) { i++; continue; }
 
-    if (isJP(line) && !isCN(line)) {
-      // This looks like a Japanese word; collect reading lines (pure kana) below
+    if (isJPWord(line)) {
       let jpWord = line;
       let j = i + 1;
-      // Skip over furigana-only lines (pure kana, short)
-      while (j < lines.length && /^[ぁ-んァ-ン゛゜ーa-zA-Z\s（）]+$/.test(lines[j]) && lines[j].length <= 12) {
+      // Skip furigana/reading lines: pure kana (optionally with parens), short
+      while (
+        j < lines.length &&
+        /^[ぁ-んァ-ン゛゜ーa-zA-Z\s（）()]+$/.test(lines[j]) &&
+        lines[j].length <= 14
+      ) {
+        // Attach reading to kanji word
+        const reading = lines[j].replace(/[（()）]/g, "").trim();
+        if (reading && hasCJK(jpWord)) jpWord += `（${reading}）`;
         j++;
       }
-      // Next non-kana line should be Chinese meaning
-      if (j < lines.length && isCN(lines[j]) && !isJP(lines[j])) {
+      // Next non-kana line should be the Chinese meaning
+      if (j < lines.length && isCNMeaning(lines[j])) {
         const cn = lines[j];
-        if (!seen.has(jpWord) && jpWord.length >= 2 && cn.length >= 1) {
+        if (!seen.has(jpWord) && jpWord.length >= 1 && cn.length >= 1) {
           seen.add(jpWord);
           cards.push({ id: String(id++), front: jpWord, back: cn });
         }

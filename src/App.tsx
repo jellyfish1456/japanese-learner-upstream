@@ -15,6 +15,8 @@ import DialoguePage from "./pages/DialoguePage";
 import ListeningSessionPage from "./pages/ListeningSessionPage";
 import VerbConjugationPage from "./pages/VerbConjugationPage";
 import PDFStudyPage from "./pages/PDFStudyPage";
+import ShadowingListPage from "./pages/ShadowingListPage";
+import ShadowingPage from "./pages/ShadowingPage";
 
 export default function App() {
   return (
@@ -35,6 +37,8 @@ export default function App() {
           <Route path="/listening/:level" element={<ListeningSessionPage />} />
           <Route path="/verb-conjugation" element={<VerbConjugationPage />} />
           <Route path="/pdf-study" element={<PDFStudyPage />} />
+          <Route path="/shadowing/:level" element={<ShadowingListPage />} />
+          <Route path="/shadowing/:level/:articleId" element={<ShadowingPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/about" element={<AboutPage />} />
         </Routes>

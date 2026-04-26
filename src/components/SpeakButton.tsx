@@ -1,25 +1,37 @@
 import { useState } from "react";
+import { loadSettings } from "../lib/storage";
 
 interface SpeakButtonProps {
   text: string;
   className?: string;
+  rateOverride?: number;
 }
 
-export default function SpeakButton({ text, className }: SpeakButtonProps) {
+/** Return the best available Japanese TTS voice (prefers high-quality named voices). */
+export function getBestJapaneseVoice(): SpeechSynthesisVoice | null {
+  const voices = window.speechSynthesis.getVoices();
+  const PREFERRED = ["Kyoko", "Google 日本語", "O-Ren", "Otoya", "Hattori"];
+  for (const name of PREFERRED) {
+    const v = voices.find((v) => v.name.includes(name) && v.lang.startsWith("ja"));
+    if (v) return v;
+  }
+  return voices.find((v) => v.lang.startsWith("ja")) ?? null;
+}
+
+export default function SpeakButton({ text, className, rateOverride }: SpeakButtonProps) {
   const [speaking, setSpeaking] = useState(false);
 
   const handleSpeak = (e: React.MouseEvent) => {
-    e.stopPropagation(); // prevent card flip
+    e.stopPropagation();
     if (!window.speechSynthesis) return;
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = "ja-JP";
-    // Explicitly pick a Japanese voice so iOS doesn't fall back to the
-    // system-language voice (e.g. Chinese) when lang alone is insufficient.
-    const japaneseVoice = window.speechSynthesis
-      .getVoices()
-      .find((v) => v.lang.startsWith("ja"));
-    if (japaneseVoice) utterance.voice = japaneseVoice;
+    const v = getBestJapaneseVoice();
+    if (v) utterance.voice = v;
+    const settings = loadSettings();
+    utterance.rate = rateOverride ?? settings.speechRate ?? 0.9;
+    utterance.pitch = 1.0;
     utterance.onstart = () => setSpeaking(true);
     utterance.onend = () => setSpeaking(false);
     utterance.onerror = () => setSpeaking(false);

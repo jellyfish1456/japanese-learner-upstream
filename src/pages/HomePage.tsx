@@ -152,25 +152,33 @@ export default function HomePage() {
             </button>
           </div>
 
-          {/* 過去學習資料庫 */}
+          {/* 跟讀練習 Shadowing */}
           <div className="mt-8">
             <div className="mb-4">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1">過去學習資料庫</h2>
-              <p className="text-sm text-gray-500 dark:text-gray-400">上傳 PDF 筆記，自動整理成學習卡片</p>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1">跟讀練習</h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400">逐句跟讀，加強口說與聽力</p>
             </div>
-            <button
-              onClick={() => navigate("/pdf-study")}
-              className="w-full bg-gradient-to-r from-violet-500 to-blue-500 hover:from-violet-600 hover:to-blue-600 text-white rounded-2xl p-5 flex items-center gap-4 transition-colors tap-active shadow-sm"
-            >
-              <div className="text-4xl">📄</div>
-              <div className="text-left">
-                <div className="text-lg font-bold">PDF 學習資料庫</div>
-                <div className="text-xs opacity-80 mt-0.5">上傳 LLM 對話紀錄或筆記 PDF，變成學習卡片</div>
-              </div>
-              <svg className="w-5 h-5 ml-auto opacity-60" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-              </svg>
-            </button>
+            <div className="grid grid-cols-3 gap-3">
+              {(["N5", "N4", "N3"] as const).map((lvl) => {
+                const shadowColors: Record<string, { bg: string; icon: string }> = {
+                  N5: { bg: "bg-green-500 hover:bg-green-600", icon: "🎙️" },
+                  N4: { bg: "bg-blue-500 hover:bg-blue-600", icon: "🎤" },
+                  N3: { bg: "bg-purple-500 hover:bg-purple-600", icon: "🔊" },
+                };
+                const s = shadowColors[lvl];
+                return (
+                  <button
+                    key={lvl}
+                    onClick={() => navigate(`/shadowing/${lvl.toLowerCase()}`)}
+                    className={`${s.bg} text-white rounded-2xl p-4 text-center transition-colors tap-active shadow-sm`}
+                  >
+                    <div className="text-3xl mb-2">{s.icon}</div>
+                    <div className="text-lg font-bold">{lvl}</div>
+                    <div className="text-xs opacity-80 mt-0.5">3 篇文章</div>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* 聽力練習 */}
