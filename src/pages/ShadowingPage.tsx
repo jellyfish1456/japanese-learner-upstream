@@ -1,57 +1,105 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { shadowingArticles } from "../data/shadowing";
+import type { ShadowingSegment } from "../data/shadowing";
 import RubyText from "../components/RubyText";
+import YouTubePlayer from "../components/YouTubePlayer";
 
 const SPEEDS = [0.5, 0.75, 1.0, 1.25] as const;
 type Speed = (typeof SPEEDS)[number];
 
+// ── Voice helpers ────────────────────────────────────────────────────────────
 function getJapaneseVoice(): SpeechSynthesisVoice | null {
   const voices = window.speechSynthesis.getVoices();
-  // Prefer high-quality Japanese voices by priority
-  const priority = ["Kyoko", "Google 日本語", "O-Ren", "Otoya", "Hattori"];
-  for (const name of priority) {
+  for (const name of ["Kyoko", "Google 日本語", "O-Ren", "Otoya", "Hattori"]) {
     const v = voices.find((v) => v.name.includes(name) && v.lang.startsWith("ja"));
     if (v) return v;
   }
   return voices.find((v) => v.lang.startsWith("ja")) ?? null;
 }
 
+// ── Extract YouTube video ID from URL or plain ID ───────────────────────────
+function parseYouTubeId(input: string): string | null {
+  input = input.trim();
+  // Already a bare ID (11 chars, alphanumeric + _ -)
+  if (/^[\w-]{11}$/.test(input)) return input;
+  try {
+    const url = new URL(input.startsWith("http") ? input : "https://" + input);
+    // youtu.be/ID
+    if (url.hostname === "youtu.be") return url.pathname.slice(1).split("?")[0].slice(0, 11) || null;
+    // youtube.com/watch?v=ID or /embed/ID or /v/ID
+    return url.searchParams.get("v") ??
+      (url.pathname.match(/(?:embed|v)\/([^/?]+)/)?.[1] ?? null);
+  } catch {
+    return null;
+  }
+}
+
+// ── Main component ────────────────────────────────────────────────────────────
 export default function ShadowingPage() {
   const { level, articleId } = useParams<{ level: string; articleId: string }>();
   const article = shadowingArticles.find((a) => a.id === articleId);
 
-  const [currentIdx, setCurrentIdx] = useState(0);
+  // YouTube state
+  const [ytId, setYtId] = useState<string>(article?.youtubeId ?? "");
+  const [urlInput, setUrlInput] = useState("");
+  const [showUrlInput, setShowUrlInput] = useState(false);
+  const [videoTime, setVideoTime] = useState(0);
+
+  // TTS state
+  const [ttsIdx, setTtsIdx] = useState(-1); // -1 = stopped
   const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState<Speed>(0.75);
-  const [showZH, setShowZH] = useState(false);
-  const [autoNext, setAutoNext] = useState(true);
-  const [repeatMode, setRepeatMode] = useState(false);
   const [voicesReady, setVoicesReady] = useState(false);
 
-  const sentenceRef = useRef<HTMLDivElement>(null);
+  // Display
+  const [showZH, setShowZH] = useState(false);
+  const [repeatMode, setRepeatMode] = useState(false);
+  const [autoNext, setAutoNext] = useState(true);
 
-  // Load voices (needed on Chrome/Android where voices load async)
+  // For scrolling current segment into view
+  const segRefs = useRef<(HTMLSpanElement | null)[]>([]);
+
   useEffect(() => {
     const loaded = () => setVoicesReady(true);
     window.speechSynthesis.getVoices();
     window.speechSynthesis.addEventListener("voiceschanged", loaded);
     setVoicesReady(window.speechSynthesis.getVoices().length > 0);
-    return () => window.speechSynthesis.removeEventListener("voiceschanged", loaded);
+    return () => {
+      window.speechSynthesis.removeEventListener("voiceschanged", loaded);
+      window.speechSynthesis.cancel();
+    };
   }, []);
 
-  // Stop speech on unmount
-  useEffect(() => () => { window.speechSynthesis.cancel(); }, []);
+  // Determine currently highlighted segment
+  // — if YouTube is playing: match by timestamp
+  // — if TTS: highlight ttsIdx
+  const activeIdx = (() => {
+    if (ytId && videoTime > 0 && article) {
+      const segs = article.segments;
+      for (let i = 0; i < segs.length; i++) {
+        const s = segs[i];
+        if (s.start != null && s.end != null) {
+          if (videoTime >= s.start && videoTime < s.end) return i;
+        }
+      }
+      return -1;
+    }
+    return ttsIdx;
+  })();
 
-  // Scroll current sentence into view
+  // Scroll active segment into view
   useEffect(() => {
-    sentenceRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-  }, [currentIdx]);
+    if (activeIdx >= 0) {
+      segRefs.current[activeIdx]?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [activeIdx]);
 
-  const speakSentence = useCallback((idx: number, autoAdvance: boolean) => {
+  // ── TTS playback ──────────────────────────────────────────────────────────
+  const speakSegment = useCallback((idx: number) => {
     if (!article) return;
     window.speechSynthesis.cancel();
-    const text = article.sentences[idx].jp;
+    const text = article.segments[idx].text;
     const utt = new SpeechSynthesisUtterance(text);
     utt.lang = "ja-JP";
     utt.rate = speed;
@@ -59,58 +107,55 @@ export default function ShadowingPage() {
       const v = getJapaneseVoice();
       if (v) utt.voice = v;
     }
-    utt.onstart = () => setPlaying(true);
+    utt.onstart = () => { setTtsIdx(idx); setPlaying(true); };
     utt.onend = () => {
-      if (autoAdvance && autoNext && !repeatMode) {
-        const next = idx + 1;
-        if (next < article.sentences.length) {
-          setCurrentIdx(next);
-          speakSentence(next, true);
-        } else {
-          setPlaying(false);
-        }
-      } else if (autoAdvance && repeatMode) {
-        // Repeat the same sentence
-        speakSentence(idx, true);
+      if (repeatMode) {
+        speakSegment(idx);
+      } else if (autoNext && idx + 1 < article.segments.length) {
+        setTtsIdx(idx + 1);
+        speakSegment(idx + 1);
       } else {
         setPlaying(false);
+        setTtsIdx(-1);
       }
     };
-    utt.onerror = () => setPlaying(false);
+    utt.onerror = () => { setPlaying(false); setTtsIdx(-1); };
     window.speechSynthesis.speak(utt);
-  }, [article, speed, voicesReady, autoNext, repeatMode]);
+  }, [article, speed, voicesReady, repeatMode, autoNext]);
 
-  const handlePlay = () => {
+  const handleTtsPlay = () => {
     if (playing) {
       window.speechSynthesis.cancel();
       setPlaying(false);
+      setTtsIdx(-1);
     } else {
-      speakSentence(currentIdx, true);
+      const start = ttsIdx >= 0 ? ttsIdx : 0;
+      speakSegment(start);
     }
   };
 
-  const handlePrev = () => {
+  const handleSegmentClick = (idx: number) => {
     window.speechSynthesis.cancel();
+    setTtsIdx(idx);
     setPlaying(false);
-    if (currentIdx > 0) setCurrentIdx(currentIdx - 1);
-  };
-
-  const handleNext = () => {
-    window.speechSynthesis.cancel();
-    setPlaying(false);
-    if (article && currentIdx < article.sentences.length - 1) setCurrentIdx(currentIdx + 1);
-  };
-
-  const handleSelectSentence = (idx: number) => {
-    window.speechSynthesis.cancel();
-    setPlaying(false);
-    setCurrentIdx(idx);
+    speakSegment(idx);
   };
 
   const handleSpeedChange = (s: Speed) => {
     window.speechSynthesis.cancel();
     setPlaying(false);
+    setTtsIdx(-1);
     setSpeed(s);
+  };
+
+  // ── YouTube URL submit ─────────────────────────────────────────────────────
+  const handleUrlSubmit = () => {
+    const id = parseYouTubeId(urlInput);
+    if (id) {
+      setYtId(id);
+      setUrlInput("");
+      setShowUrlInput(false);
+    }
   };
 
   if (!article) {
@@ -122,18 +167,46 @@ export default function ShadowingPage() {
     );
   }
 
-  const levelColor: Record<string, string> = {
-    N5: "bg-green-500",
-    N4: "bg-blue-500",
-    N3: "bg-purple-500",
-  };
   const lvl = level?.toUpperCase() ?? "N5";
+  const levelColor: Record<string, string> = { N5: "bg-green-500", N4: "bg-blue-500", N3: "bg-purple-500" };
+
+  // ── Render paragraph with inline highlighted spans ─────────────────────────
+  const renderParagraph = (segs: ShadowingSegment[]) => (
+    <p className="text-lg leading-[2.6] font-medium text-gray-800 dark:text-gray-200 tracking-wide">
+      {segs.map((seg, idx) => {
+        const isActive = idx === activeIdx;
+        const isPast = activeIdx > 0 && idx < activeIdx;
+        return (
+          <span
+            key={idx}
+            ref={(el) => { segRefs.current[idx] = el; }}
+            onClick={() => handleSegmentClick(idx)}
+            className={`inline cursor-pointer rounded px-0.5 transition-colors duration-200 ${
+              isActive
+                ? "bg-blue-200 dark:bg-blue-700 text-blue-900 dark:text-blue-100"
+                : isPast
+                ? "text-gray-400 dark:text-gray-500"
+                : "hover:bg-gray-100 dark:hover:bg-gray-700"
+            }`}
+          >
+            <RubyText text={seg.text} />
+            {isActive && showZH && (
+              <span className="text-sm text-blue-600 dark:text-blue-300 font-normal ml-1">
+                （{seg.zh}）
+              </span>
+            )}
+            {" "}
+          </span>
+        );
+      })}
+    </p>
+  );
 
   return (
-    <div className="flex flex-col min-h-[calc(100vh-4rem)]">
-      {/* Article header */}
+    <div>
+      {/* Header */}
       <div className="mb-4">
-        <div className="flex items-center gap-2 mb-2">
+        <div className="flex items-center gap-2 mb-1">
           <span className={`${levelColor[lvl] ?? "bg-gray-500"} text-white text-xs font-bold px-2 py-0.5 rounded-full`}>
             {lvl}
           </span>
@@ -143,201 +216,186 @@ export default function ShadowingPage() {
         <p className="text-sm text-gray-500 dark:text-gray-400">{article.title}</p>
       </div>
 
-      {/* Progress */}
-      <div className="mb-4">
-        <div className="flex justify-between text-xs text-gray-400 dark:text-gray-500 mb-1">
-          <span>第 {currentIdx + 1} 句／共 {article.sentences.length} 句</span>
-          <span>{Math.round(((currentIdx + 1) / article.sentences.length) * 100)}%</span>
-        </div>
-        <div className="h-1.5 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-blue-500 rounded-full transition-all duration-300"
-            style={{ width: `${((currentIdx + 1) / article.sentences.length) * 100}%` }}
-          />
-        </div>
-      </div>
-
-      {/* Sentences */}
-      <div className="flex-1 space-y-2 mb-4">
-        {article.sentences.map((sent, idx) => {
-          const isCurrent = idx === currentIdx;
-          const isPast = idx < currentIdx;
-          return (
-            <button
-              key={idx}
-              ref={isCurrent ? (sentenceRef as unknown as React.RefObject<HTMLButtonElement>) : undefined}
-              onClick={() => handleSelectSentence(idx)}
-              className={`w-full text-left rounded-2xl p-4 transition-all tap-active border ${
-                isCurrent
-                  ? "bg-blue-50 dark:bg-blue-900/30 border-blue-300 dark:border-blue-600 shadow-sm"
-                  : isPast
-                  ? "bg-gray-50 dark:bg-gray-800/50 border-gray-100 dark:border-gray-700/50 opacity-60"
-                  : "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
-              }`}
-            >
-              <div className="flex items-start gap-3">
-                {/* Sentence number */}
-                <span
-                  className={`mt-1 flex-shrink-0 w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center ${
-                    isCurrent
-                      ? "bg-blue-500 text-white"
-                      : isPast
-                      ? "bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400"
-                      : "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
-                  }`}
-                >
-                  {idx + 1}
-                </span>
-                <div className="flex-1 min-w-0">
-                  {/* Japanese text with furigana */}
-                  <div className={`text-base font-medium leading-loose ${
-                    isCurrent
-                      ? "text-blue-900 dark:text-blue-100"
-                      : "text-gray-800 dark:text-gray-200"
-                  }`}>
-                    <RubyText text={sent.jp} />
-                  </div>
-                  {/* Chinese translation */}
-                  {(showZH || isCurrent) && (
-                    <div className={`text-sm mt-1 ${
-                      isCurrent
-                        ? "text-blue-600 dark:text-blue-300"
-                        : "text-gray-500 dark:text-gray-400"
-                    }`}>
-                      {sent.zh}
-                    </div>
-                  )}
-                </div>
-                {/* Playing indicator */}
-                {isCurrent && playing && (
-                  <div className="flex items-center gap-0.5 mt-2 flex-shrink-0">
-                    {[0, 1, 2].map((i) => (
-                      <div
-                        key={i}
-                        className="w-1 bg-blue-500 rounded-full animate-bounce"
-                        style={{ height: `${12 + i * 4}px`, animationDelay: `${i * 0.15}s` }}
-                      />
-                    ))}
-                  </div>
-                )}
+      {/* YouTube video section */}
+      <div className="mb-5">
+        {ytId ? (
+          <div>
+            <YouTubePlayer
+              videoId={ytId}
+              onTimeUpdate={setVideoTime}
+              className="mb-2"
+            />
+            <div className="flex items-center justify-between text-xs text-gray-400 dark:text-gray-500">
+              <span>▶ 影片播放中，文字會自動跟著標記</span>
+              <button
+                onClick={() => { setYtId(""); setVideoTime(0); }}
+                className="text-red-400 hover:text-red-500 transition-colors"
+              >
+                移除影片
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-xl p-4">
+            <div className="flex items-center justify-between mb-2">
+              <div>
+                <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">📺 加入 NHK 影片</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
+                  貼上 YouTube 連結，影片播放時文字自動亮起
+                </p>
               </div>
-            </button>
-          );
-        })}
+              <button
+                onClick={() => setShowUrlInput(!showUrlInput)}
+                className="px-3 py-1.5 rounded-lg bg-red-500 hover:bg-red-600 text-white text-xs font-semibold transition-colors tap-active"
+              >
+                貼上連結
+              </button>
+            </div>
+            {showUrlInput && (
+              <div className="flex gap-2 mt-2">
+                <input
+                  type="url"
+                  value={urlInput}
+                  onChange={(e) => setUrlInput(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleUrlSubmit()}
+                  placeholder="https://www.youtube.com/watch?v=..."
+                  className="flex-1 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm text-gray-900 dark:text-gray-100 outline-none focus:ring-2 focus:ring-blue-400"
+                />
+                <button
+                  onClick={handleUrlSubmit}
+                  className="px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold rounded-lg transition-colors tap-active"
+                >
+                  確定
+                </button>
+              </div>
+            )}
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
+              推薦頻道：
+              <a
+                href="https://www.youtube.com/@NHK%E6%97%A5%E6%9C%AC%E8%AF%AD"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:underline"
+              >
+                NHK日本語
+              </a>
+
+              <a
+                href="https://www.youtube.com/@NHKWorldJapan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:underline"
+              >
+                NHK World Japan
+              </a>
+            </p>
+          </div>
+        )}
       </div>
 
-      {/* Controls */}
-      <div className="sticky bottom-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] space-y-3">
+      {/* Transcript paragraph */}
+      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-5 mb-5">
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">文章跟讀</span>
+          <button
+            onClick={() => setShowZH(!showZH)}
+            className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-colors ${
+              showZH
+                ? "bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400"
+                : "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
+            }`}
+          >
+            中文 {showZH ? "ON" : "OFF"}
+          </button>
+        </div>
+        {renderParagraph(article.segments)}
+        {showZH && activeIdx < 0 && (
+          <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700 space-y-1">
+            {article.segments.map((seg, idx) => (
+              <p key={idx} className="text-xs text-gray-500 dark:text-gray-400">{seg.zh}</p>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* TTS Controls (always available even when video is playing) */}
+      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">
+        <p className="text-xs text-gray-400 dark:text-gray-500 text-center">
+          {ytId ? "點擊文字段落跟著朗讀，或使用 TTS 逐句練習" : "點擊任一句跟著朗讀，或按下方播放逐句練習"}
+        </p>
+
         {/* Speed + options */}
-        <div className="flex items-center gap-2 justify-between">
-          {/* Speed selector */}
-          <div className="flex gap-1">
+        <div className="flex items-center gap-2">
+          <div className="flex gap-1 flex-1">
             {SPEEDS.map((s) => (
               <button
                 key={s}
                 onClick={() => handleSpeedChange(s)}
-                className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-colors ${
+                className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
                   speed === s
                     ? "bg-blue-500 text-white"
-                    : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+                    : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300"
                 }`}
               >
                 {s}x
               </button>
             ))}
           </div>
-          {/* Options */}
-          <div className="flex gap-2">
-            {/* Show Chinese */}
-            <button
-              onClick={() => setShowZH(!showZH)}
-              className={`p-1.5 rounded-lg text-xs font-semibold transition-colors ${
-                showZH
-                  ? "bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400"
-                  : "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
-              }`}
-              title="顯示中文"
-            >
-              中
-            </button>
-            {/* Auto-next */}
-            <button
-              onClick={() => setAutoNext(!autoNext)}
-              className={`p-1.5 rounded-lg transition-colors ${
-                autoNext
-                  ? "bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400"
-                  : "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
-              }`}
-              title={autoNext ? "自動播下一句（開）" : "自動播下一句（關）"}
-            >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 010 1.954l-7.108 4.061A1.125 1.125 0 013 16.811V8.69zM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 010 1.954l-7.108 4.061a1.125 1.125 0 01-1.683-.977V8.69z" />
-              </svg>
-            </button>
-            {/* Repeat */}
-            <button
-              onClick={() => setRepeatMode(!repeatMode)}
-              className={`p-1.5 rounded-lg transition-colors ${
-                repeatMode
-                  ? "bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400"
-                  : "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
-              }`}
-              title={repeatMode ? "單句循環（開）" : "單句循環（關）"}
-            >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {/* Main playback controls */}
-        <div className="flex items-center gap-3">
+          {/* Repeat */}
           <button
-            onClick={handlePrev}
-            disabled={currentIdx === 0}
-            className="p-3 rounded-xl border-2 border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 disabled:opacity-30 transition-colors hover:border-gray-300 dark:hover:border-gray-500 tap-active"
-          >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M21 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 010-1.954l7.108-4.061A1.125 1.125 0 0121 8.689v8.122zM11.25 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 010-1.954l7.108-4.061a1.125 1.125 0 011.683.977v8.122z" />
-            </svg>
-          </button>
-
-          <button
-            onClick={handlePlay}
-            className={`flex-1 py-3.5 rounded-xl font-semibold text-white transition-colors tap-active flex items-center justify-center gap-2 ${
-              playing
-                ? "bg-orange-500 hover:bg-orange-600"
-                : "bg-blue-500 hover:bg-blue-600"
+            onClick={() => setRepeatMode(!repeatMode)}
+            title={repeatMode ? "單句循環 ON" : "單句循環 OFF"}
+            className={`p-2 rounded-lg transition-colors ${
+              repeatMode
+                ? "bg-purple-100 dark:bg-purple-900/30 text-purple-500"
+                : "bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500"
             }`}
           >
-            {playing ? (
-              <>
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path fillRule="evenodd" d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z" clipRule="evenodd" />
-                </svg>
-                暫停
-              </>
-            ) : (
-              <>
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
-                </svg>
-                播放跟讀
-              </>
-            )}
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+            </svg>
           </button>
-
+          {/* Auto-next */}
           <button
-            onClick={handleNext}
-            disabled={!article || currentIdx >= article.sentences.length - 1}
-            className="p-3 rounded-xl border-2 border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 disabled:opacity-30 transition-colors hover:border-gray-300 dark:hover:border-gray-500 tap-active"
+            onClick={() => setAutoNext(!autoNext)}
+            title={autoNext ? "自動下一句 ON" : "自動下一句 OFF"}
+            className={`p-2 rounded-lg transition-colors ${
+              autoNext
+                ? "bg-green-100 dark:bg-green-900/30 text-green-500"
+                : "bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500"
+            }`}
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 010 1.954l-7.108 4.061A1.125 1.125 0 013 16.811V8.69zM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 010 1.954l-7.108 4.061a1.125 1.125 0 01-1.683-.977V8.69z" />
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 010 1.954L4.683 15.788A1.125 1.125 0 013 14.811V8.69zM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 010 1.954l-7.108 4.061A1.125 1.125 0 0112.75 14.811V8.69z" />
             </svg>
           </button>
         </div>
+
+        {/* Play button */}
+        <button
+          onClick={handleTtsPlay}
+          className={`w-full py-3 rounded-xl font-semibold text-white transition-colors tap-active flex items-center justify-center gap-2 ${
+            playing
+              ? "bg-orange-500 hover:bg-orange-600"
+              : "bg-blue-500 hover:bg-blue-600"
+          }`}
+        >
+          {playing ? (
+            <>
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path fillRule="evenodd" d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z" clipRule="evenodd" />
+              </svg>
+              停止朗讀
+            </>
+          ) : (
+            <>
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
+              </svg>
+              🎙️ TTS 跟讀
+            </>
+          )}
+        </button>
       </div>
     </div>
   );

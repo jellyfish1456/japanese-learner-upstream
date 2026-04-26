@@ -1,7 +1,9 @@
 import { useDarkMode } from "../hooks/useDarkMode";
 import { useSettings } from "../hooks/useSettings";
+import SyncSection from "../components/SyncSection";
 
-const APP_VERSION = "CH20260426-1";
+const APP_VERSION = "CH20260426-2";
+const HAS_GOOGLE_ID = Boolean(import.meta.env.VITE_GOOGLE_CLIENT_ID);
 
 function ToggleSwitch({ checked, onChange }: { checked: boolean; onChange: () => void }) {
   return (
@@ -23,6 +25,46 @@ function ToggleSwitch({ checked, onChange }: { checked: boolean; onChange: () =>
 }
 
 const SPEECH_RATES = [0.5, 0.75, 0.9, 1.0, 1.25] as const;
+
+function GoogleSetupGuide() {
+  return (
+    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">
+      <div className="flex items-center gap-2">
+        <span className="text-xl">🔑</span>
+        <div>
+          <p className="font-semibold text-gray-900 dark:text-gray-50 text-sm">需要設定 Google OAuth 金鑰</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">完成以下步驟後，同步功能即可使用</p>
+        </div>
+      </div>
+      <ol className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+        <li className="flex gap-2">
+          <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-500 text-white text-xs flex items-center justify-center font-bold">1</span>
+          <span>前往 <a href="https://console.cloud.google.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Google Cloud Console</a> → 建立新專案</span>
+        </li>
+        <li className="flex gap-2">
+          <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-500 text-white text-xs flex items-center justify-center font-bold">2</span>
+          <span>啟用 <strong>Google Drive API</strong> 與 <strong>Google People API</strong></span>
+        </li>
+        <li className="flex gap-2">
+          <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-500 text-white text-xs flex items-center justify-center font-bold">3</span>
+          <span>憑證 → 建立 OAuth 2.0 用戶端 ID（Web 應用程式）</span>
+        </li>
+        <li className="flex gap-2">
+          <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-500 text-white text-xs flex items-center justify-center font-bold">4</span>
+          <span>授權的 JavaScript 來源填入：<code className="bg-gray-100 dark:bg-gray-700 px-1 rounded text-xs">https://jellyfish1456.github.io</code></span>
+        </li>
+        <li className="flex gap-2">
+          <span className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-500 text-white text-xs flex items-center justify-center font-bold">5</span>
+          <span>複製 Client ID，前往 GitHub repo → Settings → Secrets → Actions，新增 <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded text-xs">VITE_GOOGLE_CLIENT_ID</code></span>
+        </li>
+        <li className="flex gap-2">
+          <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 text-white text-xs flex items-center justify-center font-bold">6</span>
+          <span>推送任何 commit 觸發重新部署，同步功能即可啟用 ✓</span>
+        </li>
+      </ol>
+    </div>
+  );
+}
 
 export default function SettingsPage() {
   const { isDark, toggle: toggleDark } = useDarkMode();
@@ -81,30 +123,30 @@ export default function SettingsPage() {
         </div>
       </div>
 
-      {/* Google Drive Sync — disabled notice */}
+      {/* Google Drive Sync */}
       <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">Google 雲端同步</h3>
-      <div className="mb-6 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl p-4 flex items-start gap-3">
-        <span className="text-xl flex-shrink-0">🚧</span>
-        <div>
-          <div className="font-medium text-amber-800 dark:text-amber-300 text-sm">功能暫時停用</div>
-          <div className="text-xs text-amber-700 dark:text-amber-400 mt-0.5">Google Drive 同步目前無法使用，將在後續版本中修復。</div>
-        </div>
+      <div className="mb-6">
+        {HAS_GOOGLE_ID ? (
+          <SyncSection />
+        ) : (
+          <GoogleSetupGuide />
+        )}
       </div>
 
       {/* App info */}
       <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">關於</h3>
       <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-2">
         <div className="flex justify-between items-center">
-          <span className="text-sm text-gray-600 dark:text-gray-300">應用程式版本</span>
+          <span className="text-sm text-gray-600 dark:text-gray-300">版本號</span>
           <span className="text-sm font-mono font-semibold text-blue-600 dark:text-blue-400">{APP_VERSION}</span>
         </div>
         <div className="flex justify-between items-center">
           <span className="text-sm text-gray-600 dark:text-gray-300">名稱</span>
           <span className="text-sm text-gray-700 dark:text-gray-300">Chris 每日日文學習</span>
         </div>
-        <div className="border-t border-gray-100 dark:border-gray-700 pt-2 mt-2">
-          <p className="text-xs text-gray-400 dark:text-gray-500">版本號格式：CH[日期]-[更新次數]</p>
-        </div>
+        <p className="text-xs text-gray-400 dark:text-gray-500 pt-1 border-t border-gray-100 dark:border-gray-700">
+          版本格式：CH[日期]-[更新次數]
+        </p>
       </div>
     </div>
   );
