@@ -22,6 +22,115 @@ async function ocrCanvas(canvas: HTMLCanvasElement): Promise<string> {
   return result.data.text;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type PdfItem = { str: string; x: number; y: number; h: number };
+
+/** Extract one page's text items with position info */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function extractPageItems(page: any): Promise<PdfItem[]> {
+  const content = await page.getTextContent();
+  const items: PdfItem[] = [];
+  for (const item of content.items) {
+    if (!("str" in item) || !item.str.trim()) continue;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const t = (item as any).transform;
+    if (!t) continue;
+    items.push({ str: item.str, x: t[4], y: t[5], h: Math.abs(t[3]) });
+  }
+  return items;
+}
+
+/** Group items into rows by Y-coordinate proximity, then reconstruct page text.
+ *  For table-format PDFs (vocabulary lists): outputs "JP\tCN" per row.
+ *  For regular text PDFs: outputs lines joined by space. */
+function itemsToText(items: PdfItem[]): string {
+  if (items.length === 0) return "";
+
+  // Sort top-to-bottom, left-to-right
+  items.sort((a, b) => b.y - a.y || a.x - b.x);
+
+  // Group into rows (items within 4pt of each other vertically = same row)
+  const ROW_GAP = 4;
+  const rows: PdfItem[][] = [];
+  let curRow: PdfItem[] = [];
+  let curY = items[0].y;
+  for (const item of items) {
+    if (Math.abs(item.y - curY) > ROW_GAP) {
+      if (curRow.length) rows.push(curRow);
+      curRow = [];
+      curY = item.y;
+    }
+    curRow.push(item);
+  }
+  if (curRow.length) rows.push(curRow);
+
+  // Detect if this looks like a two-column vocab table:
+  // many rows have items split between left (<55%) and right (>55%) of page width
+  const pageW = Math.max(...items.map((i) => i.x)) || 1;
+  const splitRows = rows.filter((r) => {
+    const xs = r.map((i) => i.x);
+    return Math.min(...xs) < pageW * 0.5 && Math.max(...xs) > pageW * 0.5;
+  });
+  const isTable = splitRows.length >= 3;
+
+  if (isTable) {
+    // Vocabulary table mode: merge rows, classify left=JP / right=CN
+    const mid = pageW * 0.5;
+    // First pass: collect JP segments (merge furigana into base word)
+    const entries: { jp: string; cn: string }[] = [];
+    let pendingJP = "";
+
+    for (const row of rows) {
+      const left = row.filter((i) => i.x < mid).map((i) => i.str).join("");
+      const right = row.filter((i) => i.x >= mid).map((i) => i.str).join("");
+      const leftTrimmed = left.trim();
+      const rightTrimmed = right.trim();
+
+      if (!leftTrimmed && !rightTrimmed) continue;
+
+      // Is this row furigana-only? (all hiragana/katakana, short, small font)
+      const isOnlyKana = /^[ぁ-ん゛゜ァ-ンヴーa-zA-Z（）　 ]+$/.test(leftTrimmed);
+      const avgH = row.reduce((s, i) => s + i.h, 0) / row.length;
+      const mainH = Math.max(...items.map((i) => i.h));
+      const isFurigana = isOnlyKana && avgH < mainH * 0.75 && leftTrimmed.length <= 8;
+
+      if (isFurigana) {
+        // Furigana row: attach reading to pending JP word
+        if (pendingJP) pendingJP += `（${leftTrimmed}）`;
+        continue;
+      }
+
+      if (leftTrimmed && rightTrimmed) {
+        // Complete entry in one row
+        if (pendingJP) { entries.push({ jp: pendingJP, cn: "" }); pendingJP = ""; }
+        entries.push({ jp: leftTrimmed, cn: rightTrimmed });
+      } else if (leftTrimmed && !rightTrimmed) {
+        // JP word without meaning on this row (meaning may follow)
+        if (pendingJP) entries.push({ jp: pendingJP, cn: "" });
+        pendingJP = leftTrimmed;
+      } else if (!leftTrimmed && rightTrimmed) {
+        // Meaning row for the pending JP word
+        if (pendingJP) {
+          entries.push({ jp: pendingJP, cn: rightTrimmed });
+          pendingJP = "";
+        }
+      }
+    }
+    if (pendingJP) entries.push({ jp: pendingJP, cn: "" });
+
+    // Output as "JP\tCN" lines
+    return entries
+      .filter((e) => e.jp.length >= 1 && /[ぁ-んァ-ン一-龯]/.test(e.jp))
+      .map((e) => e.cn ? `${e.jp}\t${e.cn}` : e.jp)
+      .join("\n");
+  }
+
+  // Regular text mode: join rows as lines
+  return rows
+    .map((r) => r.map((i) => i.str).join(""))
+    .join("\n");
+}
+
 async function extractTextFromPDF(file: File, onProgress?: (msg: string) => void): Promise<string> {
   const pdfjsLib = await import("pdfjs-dist");
   pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
@@ -36,25 +145,10 @@ async function extractTextFromPDF(file: File, onProgress?: (msg: string) => void
   for (let i = 1; i <= pdf.numPages; i++) {
     onProgress?.(`解析第 ${i}/${pdf.numPages} 頁...`);
     const page = await pdf.getPage(i);
-    const content = await page.getTextContent();
-    // Reconstruct text preserving line breaks: detect Y-position changes as newlines
-    let lastY: number | null = null;
-    const textParts: string[] = [];
-    for (const item of content.items) {
-      if (!("str" in item) || !item.str) continue;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const y = (item as any).transform?.[5];
-      if (lastY !== null && y !== undefined && Math.abs(y - lastY) > 5) {
-        textParts.push("\n");
-      }
-      textParts.push(item.str);
-      if (y !== undefined) lastY = y;
-    }
-    const text = textParts.join("").trim();
+    const items = await extractPageItems(page);
 
-    if (text.length > 30) {
-      // Normal text PDF
-      pages.push(text);
+    if (items.length > 3) {
+      pages.push(itemsToText(items));
     } else {
       // Image-based page: use OCR
       usedOcr = true;
@@ -154,12 +248,42 @@ function parseVocabLine(line: string): { front: string; back: string } | null {
   return null;
 }
 
+/** Parse tab-separated "JP\tCN" lines from vocabulary table PDFs */
+function parseTabVocabTable(text: string): PDFCard[] | null {
+  const lines = text.split("\n").filter(Boolean);
+  const tabLines = lines.filter((l) => l.includes("\t"));
+  // Need at least 30% tab lines to qualify as vocab table
+  if (tabLines.length < 5 || tabLines.length < lines.length * 0.25) return null;
+
+  let id = Date.now();
+  const cards: PDFCard[] = [];
+  const seen = new Set<string>();
+
+  for (const line of tabLines) {
+    const [jp, cn] = line.split("\t").map((s) => s.trim());
+    if (!jp || !cn) continue;
+    // Skip section headers (single kana character like あ, か, さ...)
+    if (jp.length === 1 && /[ぁ-ん]/.test(jp)) continue;
+    // Skip noise (too short meaning or non-CJK meaning)
+    if (cn.length < 1) continue;
+    // Deduplicate
+    if (seen.has(jp)) continue;
+    seen.add(jp);
+    cards.push({ id: String(id++), front: jp, back: cn });
+  }
+  return cards.length >= 3 ? cards : null;
+}
+
 function parseTextToCards(text: string): PDFCard[] {
   const cleaned = cleanText(text);
   let id = Date.now();
   const cards: PDFCard[] = [];
 
-  // 1. Try chat log format first
+  // 1. Try vocab table format (JP\tCN) — highest priority for structured PDFs
+  const tabCards = parseTabVocabTable(cleaned);
+  if (tabCards && tabCards.length >= 3) return tabCards.slice(0, 500);
+
+  // 2. Try chat log format
   const chatCards = parseChatLog(cleaned);
   if (chatCards && chatCards.length >= 2) return chatCards.slice(0, 200);
 
@@ -250,7 +374,7 @@ function parseTextToCards(text: string): PDFCard[] {
     return true;
   });
 
-  return deduped.slice(0, 200);
+  return deduped.slice(0, 500);
 }
 
 // ─── Card viewer ─────────────────────────────────────────────────────────────
@@ -259,15 +383,31 @@ function CardViewer({ dataset, onClose }: { dataset: PDFDataset; onClose: () => 
   const card = dataset.cards[index];
   const total = dataset.cards.length;
 
-  // Detect if text has Japanese characters
-  const hasJapanese = (t: string) => /[぀-鿿]/.test(t);
+  const hasJapanese = (t: string) => /[ぁ-んァ-ン一-龯]/.test(t);
+  // Vocab-style card: short front (word/phrase, not a sentence)
+  const isVocabStyle = card.front.length <= 20 && !card.front.includes("。") && hasJapanese(card.front);
+
+  // Extract reading from front if encoded as "word（reading）"
+  const readingMatch = card.front.match(/^([^（]+)（([^）]+)）(.*)$/);
+  const wordDisplay = readingMatch ? readingMatch[1] + readingMatch[3] : card.front;
+  const reading = readingMatch ? readingMatch[2] : "";
+
+  // Keyboard navigation
+  useState(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") setIndex((i) => Math.min(i + 1, total - 1));
+      if (e.key === "ArrowLeft") setIndex((i) => Math.max(i - 1, 0));
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  });
 
   return (
     <div className="fixed inset-0 z-50 bg-white dark:bg-gray-900 flex flex-col">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-700">
         <div>
-          <div className="font-bold text-gray-900 dark:text-gray-50">{dataset.name}</div>
+          <div className="font-bold text-gray-900 dark:text-gray-50 truncate max-w-[200px]">{dataset.name}</div>
           <div className="text-xs text-gray-400 dark:text-gray-500">{index + 1} / {total}</div>
         </div>
         <button onClick={onClose} className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
@@ -285,22 +425,42 @@ function CardViewer({ dataset, onClose }: { dataset: PDFDataset; onClose: () => 
       {/* Card */}
       <div className="flex-1 overflow-y-auto px-4 py-6">
         <div className="max-w-lg mx-auto space-y-4">
-          {/* Front */}
-          <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-2xl p-5">
-            <div className="text-xs font-semibold text-blue-500 dark:text-blue-400 uppercase mb-2">問題</div>
-            <div className="flex items-start gap-2">
-              <div className="text-base text-gray-900 dark:text-gray-50 leading-relaxed flex-1">{card.front}</div>
-              {hasJapanese(card.front) && <SpeakButton text={card.front} className="flex-shrink-0" />}
+          {isVocabStyle ? (
+            /* Vocab style: big word + reading + Chinese meaning */
+            <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 text-center space-y-3">
+              <div className="flex items-center justify-center gap-2">
+                {reading ? (
+                  <ruby className="text-4xl font-bold text-gray-900 dark:text-gray-50" style={{ rubyAlign: "center" }}>
+                    {wordDisplay}<rt className="text-sm">{reading}</rt>
+                  </ruby>
+                ) : (
+                  <span className="text-4xl font-bold text-gray-900 dark:text-gray-50">{wordDisplay}</span>
+                )}
+                {hasJapanese(wordDisplay) && <SpeakButton text={wordDisplay} />}
+              </div>
+              <div className="border-t border-gray-100 dark:border-gray-700 pt-3">
+                <div className="text-xl font-semibold text-blue-700 dark:text-blue-400">{card.back}</div>
+              </div>
             </div>
-          </div>
-          {/* Back */}
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-5">
-            <div className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase mb-2">解答</div>
-            <div className="flex items-start gap-2">
-              <div className="text-sm text-gray-700 dark:text-gray-200 leading-relaxed flex-1 whitespace-pre-wrap">{card.back}</div>
-              {hasJapanese(card.back) && <SpeakButton text={card.back} className="flex-shrink-0" />}
-            </div>
-          </div>
+          ) : (
+            /* Q&A style: front = question, back = answer */
+            <>
+              <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-2xl p-5">
+                <div className="text-xs font-semibold text-blue-500 dark:text-blue-400 uppercase mb-2">問題</div>
+                <div className="flex items-start gap-2">
+                  <div className="text-base text-gray-900 dark:text-gray-50 leading-relaxed flex-1">{card.front}</div>
+                  {hasJapanese(card.front) && <SpeakButton text={card.front} className="flex-shrink-0" />}
+                </div>
+              </div>
+              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-5">
+                <div className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase mb-2">解答</div>
+                <div className="flex items-start gap-2">
+                  <div className="text-sm text-gray-700 dark:text-gray-200 leading-relaxed flex-1 whitespace-pre-wrap">{card.back}</div>
+                  {hasJapanese(card.back) && <SpeakButton text={card.back} className="flex-shrink-0" />}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
