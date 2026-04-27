@@ -41,6 +41,8 @@ export default async function handler(req, res) {
         "Accept-Language": "ja,en-US;q=0.9,en;q=0.8",
         Accept:
           "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        // Bypass YouTube consent screen (EU/region gates)
+        Cookie: "CONSENT=YES+cb; YSC=x; VISITOR_INFO1_LIVE=x",
       },
     });
     const html = await pageRes.text();
@@ -48,7 +50,8 @@ export default async function handler(req, res) {
     // ── 2. Extract ytInitialPlayerResponse using bracket counting ─────────────
     const captionUrl = extractCaptionUrl(html, lang);
     if (!captionUrl) {
-      return res.status(404).json({ events: [], error: "no_captions_found" });
+      // Use 200 (not 404) so client can distinguish "proxy missing" (404) from "no CC" (200+error)
+      return res.status(200).json({ events: [], error: "no_captions_found" });
     }
 
     // ── 3. Fetch the actual caption content (JSON3) ────────────────────────────
