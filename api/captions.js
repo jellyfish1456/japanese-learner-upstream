@@ -61,11 +61,22 @@ export default async function handler(req, res) {
     }
 
     // ── 3. Fetch the actual caption content (JSON3) ────────────────────────────
-    const capRes = await fetch(`${captionUrl}&fmt=json3`);
+    const capFetchUrl = `${captionUrl}&fmt=json3`;
+    const capRes = await fetch(capFetchUrl);
+    const capText = await capRes.text();
     if (!capRes.ok) {
-      return res.status(502).json({ events: [], error: `caption_fetch_${capRes.status}` });
+      return res.status(502).json({ events: [], error: `caption_fetch_${capRes.status}`, _body: capText.slice(0, 200) });
     }
-    const data = await capRes.json();
+    // Debug: return raw text info if JSON parse would fail
+    let data;
+    try {
+      data = JSON.parse(capText);
+    } catch (parseErr) {
+      return res.status(500).json({
+        events: [], error: "caption_json_parse_failed",
+        _debug: { status: capRes.status, bodyLen: capText.length, bodyHead: capText.slice(0, 300), urlHead: capFetchUrl.slice(0, 150) },
+      });
+    }
 
     return res.status(200).json(data);
   } catch (err) {
