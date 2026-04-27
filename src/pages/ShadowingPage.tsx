@@ -60,7 +60,7 @@ export default function ShadowingPage() {
 
   // YouTube caption state — loading is set eagerly when ytId changes (in event handlers)
   const [ytCaptions, setYtCaptions] = useState<ShadowingSegment[] | null>(null);
-  const [captionStatus, setCaptionStatus] = useState<"idle" | "loading" | "ok" | "error">(
+  const [captionStatus, setCaptionStatus] = useState<"idle" | "loading" | "ok" | "error" | "no-proxy">(
     // Lazy init: if the article ships a youtubeId, captions fetch starts immediately
     () => (article?.youtubeId ? "loading" : "idle")
   );
@@ -107,12 +107,16 @@ export default function ShadowingPage() {
     fetch(`${proxyUrl}?v=${ytId}&lang=ja`)
       .then((r) => {
         if (cancelled) return null;
-        if (!r.ok) throw new Error(`proxy ${r.status}`);
+        // 404 = proxy endpoint not deployed (GitHub Pages, not Vercel)
+        if (r.status === 404) throw new Error("no-proxy");
+        if (!r.ok) throw new Error(`http-${r.status}`);
         return r.json() as Promise<{ events?: YTCaptionEvent[]; error?: string }>;
       })
       .then((data) => {
         if (cancelled || !data) return;
-        if (data.error && (!data.events || data.events.length === 0)) throw new Error(data.error);
+        const errCode = data.error;
+        if (errCode === "no_captions_found") throw new Error("no-captions");
+        if (errCode && (!data.events || data.events.length === 0)) throw new Error("error");
         const events = data.events ?? [];
         const segs: ShadowingSegment[] = events
           .filter((e) => Array.isArray(e.segs))
@@ -124,15 +128,15 @@ export default function ShadowingPage() {
           }))
           .filter((s) => s.text.length > 0);
 
-        if (segs.length === 0) throw new Error("no_captions");
+        if (segs.length === 0) throw new Error("no-captions");
         setYtCaptions(segs);
         setCaptionStatus("ok");
       })
-      .catch(() => {
-        if (!cancelled) {
-          setYtCaptions(null);
-          setCaptionStatus("error");
-        }
+      .catch((err: unknown) => {
+        if (cancelled) return;
+        setYtCaptions(null);
+        const msg = err instanceof Error ? err.message : "";
+        setCaptionStatus(msg === "no-proxy" ? "no-proxy" : msg === "no-captions" ? "error" : "error");
       });
 
     return () => { cancelled = true; };
@@ -321,9 +325,14 @@ export default function ShadowingPage() {
                 ✓ 已載入 {ytCaptions.length} 條 CC 字幕，播放時自動同步標記
               </p>
             )}
+            {captionStatus === "no-proxy" && (
+              <p className="text-xs text-orange-400 mb-1">
+                ⚠ 字幕功能需部署至 Vercel — 前往「設定」查看說明，目前仍可 TTS 跟讀
+              </p>
+            )}
             {captionStatus === "error" && (
               <p className="text-xs text-red-400 mb-1">
-                ✗ 字幕載入失敗（影片可能無日文 CC）— 顯示文章內容，仍可點擊跟讀
+                ✗ 此影片無日文 CC 字幕可用 — 仍可使用下方 TTS 跟讀
               </p>
             )}
             <div className="flex items-center justify-between text-xs text-gray-400 dark:text-gray-500">

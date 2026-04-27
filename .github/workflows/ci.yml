@@ -34,6 +34,9 @@ jobs:
 
       - name: E2E tests
         run: npm run test:e2e
+        env:
+          VITE_GOOGLE_CLIENT_ID: test-client-id-for-e2e
+          VITE_CAPTION_PROXY_URL: https://test-proxy.example.com
 
       - name: Build
         run: npm run build
