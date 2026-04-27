@@ -60,28 +60,72 @@ export default async function handler(req, res) {
       });
     }
 
-    // ── 3. Fetch the actual caption content (JSON3) ────────────────────────────
-    const capFetchUrl = `${captionUrl}&fmt=json3`;
-    const capRes = await fetch(capFetchUrl);
-    const capText = await capRes.text();
-    if (!capRes.ok) {
-      return res.status(502).json({ events: [], error: `caption_fetch_${capRes.status}`, _body: capText.slice(0, 200) });
+    // ── 3. Fetch caption content — try json3 first, fall back to ttml/xml ──────
+    // The signed baseUrl may already specify a format; appending &fmt=json3
+    // sometimes causes YouTube to return an empty body, so we try both.
+    let capText = "";
+    let capStatus = 0;
+
+    for (const fmt of ["json3", "vtt", ""]) {
+      const url = fmt ? `${captionUrl}&fmt=${fmt}` : captionUrl;
+      const r = await fetch(url);
+      capStatus = r.status;
+      capText = await r.text();
+      if (r.ok && capText.length > 0) break;
     }
-    // Debug: return raw text info if JSON parse would fail
+
+    if (!capText) {
+      return res.status(502).json({ events: [], error: `caption_empty_${capStatus}` });
+    }
+
+    // Parse: json3 looks like {"events":[...]}, vtt/xml is text we convert
     let data;
-    try {
+    if (capText.trimStart().startsWith("{")) {
       data = JSON.parse(capText);
-    } catch (parseErr) {
-      return res.status(500).json({
-        events: [], error: "caption_json_parse_failed",
-        _debug: { status: capRes.status, bodyLen: capText.length, bodyHead: capText.slice(0, 300), urlHead: capFetchUrl.slice(0, 150) },
-      });
+    } else {
+      // vtt/xml fallback: parse timestamps and text
+      data = { events: parseFallbackCaptions(capText) };
     }
 
     return res.status(200).json(data);
   } catch (err) {
     return res.status(500).json({ events: [], error: String(err), v: HANDLER_VERSION, stack: err?.stack?.slice(0,300) });
   }
+}
+
+/**
+ * Parse VTT or TTML/XML captions into JSON3-compatible events array.
+ * Used as fallback when json3 fmt returns empty body.
+ */
+function parseFallbackCaptions(text) {
+  const events = [];
+  if (text.includes("WEBVTT")) {
+    // VTT format: 00:00:01.000 --> 00:00:04.000\ntext
+    const re = /(\d+):(\d+):(\d+\.\d+)\s+-->\s+(\d+):(\d+):(\d+\.\d+)\n([\s\S]*?)(?=\n\n|\n\d|\n$|$)/g;
+    let m;
+    while ((m = re.exec(text)) !== null) {
+      const toMs = (h, min, s) => (parseInt(h) * 3600 + parseInt(min) * 60 + parseFloat(s)) * 1000;
+      const start = toMs(m[1], m[2], m[3]);
+      const end = toMs(m[4], m[5], m[6]);
+      const txt = m[7].replace(/<[^>]+>/g, "").trim();
+      if (txt) events.push({ tStartMs: start, dDurationMs: end - start, segs: [{ utf8: txt }] });
+    }
+  } else if (text.includes("<text ")) {
+    // TTML/XML: <text start="0:00:01.00" dur="0:00:03.00">text</text>
+    const re = /<text[^>]+start="([^"]+)"[^>]*(?:dur="([^"]+)")?[^>]*>([\s\S]*?)<\/text>/g;
+    const parseTime = (t) => {
+      const p = t.split(":").map(parseFloat);
+      return ((p[0] || 0) * 3600 + (p[1] || 0) * 60 + (p[2] || 0)) * 1000;
+    };
+    let m;
+    while ((m = re.exec(text)) !== null) {
+      const start = parseTime(m[1]);
+      const dur = m[2] ? parseTime(m[2]) : 3000;
+      const txt = m[3].replace(/<[^>]+>/g, "").trim();
+      if (txt) events.push({ tStartMs: start, dDurationMs: dur, segs: [{ utf8: txt }] });
+    }
+  }
+  return events;
 }
 
 /**
