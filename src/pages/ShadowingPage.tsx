@@ -327,7 +327,7 @@ export default function ShadowingPage() {
             )}
             {captionStatus === "no-proxy" && (
               <p className="text-xs text-orange-400 mb-1">
-                ⚠ 字幕功能需部署至 Vercel — 前往「設定」查看說明，目前仍可 TTS 跟讀
+                ⚠ 請在 GitHub Secrets 設定 VITE_CAPTION_PROXY_URL — 前往「設定」查看完整步驟
               </p>
             )}
             {captionStatus === "error" && (

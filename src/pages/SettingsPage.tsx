@@ -2,7 +2,7 @@ import { useDarkMode } from "../hooks/useDarkMode";
 import { useSettings } from "../hooks/useSettings";
 import SyncSection from "../components/SyncSection";
 
-const APP_VERSION = "CH20260427-2";
+const APP_VERSION = "CH20260427-3";
 const HAS_GOOGLE_ID   = Boolean(import.meta.env.VITE_GOOGLE_CLIENT_ID);
 const HAS_CAPTION_PROXY = Boolean(import.meta.env.VITE_CAPTION_PROXY_URL);
 
@@ -33,10 +33,9 @@ function CaptionProxySetupGuide() {
       <div className="flex items-center gap-2">
         <span className="text-xl">📡</span>
         <div>
-          <p className="font-semibold text-gray-900 dark:text-gray-50 text-sm">字幕功能未啟用</p>
+          <p className="font-semibold text-gray-900 dark:text-gray-50 text-sm">CC 字幕代理未設定</p>
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            CC 字幕需透過伺服器抓取（YouTube CORS 限制）。
-            部署到 Vercel 後即自動啟用，約 2 分鐘。
+            需要 4 個步驟，約 3 分鐘完成
           </p>
         </div>
       </div>
@@ -48,27 +47,39 @@ function CaptionProxySetupGuide() {
             <a href="https://vercel.com/new" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
               vercel.com/new
             </a>
-            ，以 GitHub 帳號登入（免費）
+            ，用 GitHub 登入 → Import{" "}
+            <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded text-xs">japanese-learner-upstream</code>
+            {" "}→ Deploy
           </span>
         </li>
         <li className="flex gap-2">
           <span className="flex-shrink-0 w-5 h-5 rounded-full bg-indigo-500 text-white text-xs flex items-center justify-center font-bold">2</span>
           <span>
-            Import Git Repository → 選擇{" "}
-            <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded text-xs">japanese-learner-upstream</code>
+            部署完成後，複製 Vercel 給的網址（例如{" "}
+            <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded text-xs">https://xxx.vercel.app</code>
+            ），在後面加上{" "}
+            <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded text-xs">/api/captions</code>
           </span>
         </li>
         <li className="flex gap-2">
-          <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 text-white text-xs flex items-center justify-center font-bold">3</span>
+          <span className="flex-shrink-0 w-5 h-5 rounded-full bg-indigo-500 text-white text-xs flex items-center justify-center font-bold">3</span>
           <span>
-            直接點擊 <strong>Deploy</strong>（Vercel 自動偵測 Vite，無需額外設定）
-            — 部署完成後字幕功能<strong>自動啟用</strong> ✓
+            GitHub repo →{" "}
+            <strong>Settings → Secrets and variables → Actions</strong>
+            {" "}→ New repository secret<br />
+            名稱：<code className="bg-gray-100 dark:bg-gray-700 px-1 rounded text-xs">VITE_CAPTION_PROXY_URL</code>
+            ，值：上一步的完整網址
+          </span>
+        </li>
+        <li className="flex gap-2">
+          <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 text-white text-xs flex items-center justify-center font-bold">4</span>
+          <span>
+            推送任何 commit 觸發 GitHub Pages 重新部署 → 字幕功能啟用 ✓
           </span>
         </li>
       </ol>
       <p className="text-xs text-gray-400 dark:text-gray-500">
-        Vercel 免費方案，每次 git push 自動重新部署。
-        目前仍可使用 TTS 跟讀功能。
+        已部署 Vercel？直接從步驟 2 開始即可。
       </p>
     </div>
   );
