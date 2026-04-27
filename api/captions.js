@@ -1,0 +1,101 @@
+/**
+ * Vercel Serverless Function — YouTube Caption Proxy
+ *
+ * Why this works:
+ *   YouTube's timedtext API requires *signed* URLs found inside the watch-page
+ *   HTML (ytInitialPlayerResponse.captionTracks[].baseUrl). A browser cannot
+ *   fetch that page (no CORS header), so we fetch it server-side here.
+ *   The signed timedtext URL itself DOES have CORS headers, so after we
+ *   obtain it here, the browser could even fetch it directly — but for
+ *   simplicity we proxy the final caption content too.
+ *
+ * Usage:  GET /api/captions?v=VIDEO_ID[&lang=ja]
+ * Returns: YouTube JSON3 caption data
+ *
+ * Deploy in 2 minutes (free):
+ *   1. Go to vercel.com → sign in with GitHub
+ *   2. "Add New Project" → import this GitHub repo
+ *   3. Click Deploy (Vercel auto-detects Vite)
+ *   4. Done — captions will work automatically on the Vercel URL
+ */
+
+export default async function handler(req, res) {
+  // CORS headers — allow any origin (the browser-side fetch uses this)
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  if (req.method === "OPTIONS") return res.status(200).end();
+
+  const { v: videoId, lang = "ja" } = req.query;
+
+  if (!videoId || !/^[\w-]{11}$/.test(videoId)) {
+    return res.status(400).json({ error: "invalid_video_id" });
+  }
+
+  try {
+    // ── 1. Fetch YouTube watch page (server-to-server, no CORS issue) ────────
+    const pageRes = await fetch(`https://www.youtube.com/watch?v=${videoId}`, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 " +
+          "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Accept-Language": "ja,en-US;q=0.9,en;q=0.8",
+        Accept:
+          "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      },
+    });
+    const html = await pageRes.text();
+
+    // ── 2. Extract ytInitialPlayerResponse using bracket counting ─────────────
+    const captionUrl = extractCaptionUrl(html, lang);
+    if (!captionUrl) {
+      return res.status(404).json({ events: [], error: "no_captions_found" });
+    }
+
+    // ── 3. Fetch the actual caption content (JSON3) ────────────────────────────
+    const capRes = await fetch(`${captionUrl}&fmt=json3`);
+    if (!capRes.ok) {
+      return res.status(502).json({ events: [], error: `caption_fetch_${capRes.status}` });
+    }
+    const data = await capRes.json();
+
+    return res.status(200).json(data);
+  } catch (err) {
+    return res.status(500).json({ events: [], error: String(err) });
+  }
+}
+
+/** Parse ytInitialPlayerResponse from HTML, return signed captionTrack baseUrl */
+function extractCaptionUrl(html, lang) {
+  const markerIdx = html.indexOf("ytInitialPlayerResponse");
+  if (markerIdx < 0) return null;
+
+  const start = html.indexOf("{", markerIdx);
+  if (start < 0) return null;
+
+  // Bracket-count to find the matching closing brace
+  let depth = 0, end = start;
+  for (let i = start; i < html.length; i++) {
+    if (html[i] === "{") depth++;
+    else if (html[i] === "}") {
+      depth--;
+      if (depth === 0) { end = i; break; }
+    }
+  }
+
+  let playerData;
+  try {
+    playerData = JSON.parse(html.slice(start, end + 1));
+  } catch {
+    return null;
+  }
+
+  const tracks =
+    playerData?.captions?.playerCaptionsTracklistRenderer?.captionTracks ?? [];
+
+  const track =
+    tracks.find((t) => t.languageCode === lang) ??
+    tracks.find((t) => t.languageCode.startsWith(lang)) ??
+    tracks[0];
+
+  return track?.baseUrl ?? null;
+}

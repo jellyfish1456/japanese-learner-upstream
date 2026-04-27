@@ -39,7 +39,13 @@ interface YTCaptionEvent {
   segs?: { utf8?: string }[];
 }
 
-const CAPTION_PROXY = import.meta.env.VITE_CAPTION_PROXY_URL as string | undefined;
+// Explicit proxy URL (Cloudflare Worker) or auto-detect /api/captions on the
+// same origin (works automatically when deployed to Vercel).
+// On GitHub Pages the /api/captions path returns 404 → graceful error fallback.
+const EXPLICIT_PROXY = import.meta.env.VITE_CAPTION_PROXY_URL as string | undefined;
+function getCaptionProxyUrl(): string {
+  return EXPLICIT_PROXY ?? `${window.location.origin}/api/captions`;
+}
 
 // ── Main component ────────────────────────────────────────────────────────────
 export default function ShadowingPage() {
@@ -94,11 +100,11 @@ export default function ShadowingPage() {
   // All setState calls inside async callbacks — never synchronous in effect body
   useEffect(() => {
     if (!ytId) return;
-    if (!CAPTION_PROXY) return; // proxy not configured — status stays "loading" to show setup guide
 
     let cancelled = false;
+    const proxyUrl = getCaptionProxyUrl();
 
-    fetch(`${CAPTION_PROXY}?v=${ytId}&lang=ja`)
+    fetch(`${proxyUrl}?v=${ytId}&lang=ja`)
       .then((r) => {
         if (cancelled) return null;
         if (!r.ok) throw new Error(`proxy ${r.status}`);
@@ -307,12 +313,7 @@ export default function ShadowingPage() {
               onTimeUpdate={setVideoTime}
               className="mb-2"
             />
-            {captionStatus === "loading" && !CAPTION_PROXY && (
-              <p className="text-xs text-orange-400 mb-1">
-                ⚠ 字幕代理未設定 — 前往「設定」查看 CC 字幕啟用說明，目前顯示文章內容
-              </p>
-            )}
-            {captionStatus === "loading" && CAPTION_PROXY && (
+            {captionStatus === "loading" && (
               <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">⏳ 載入 CC 字幕中…</p>
             )}
             {captionStatus === "ok" && ytCaptions && (

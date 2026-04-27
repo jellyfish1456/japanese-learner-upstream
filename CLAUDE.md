@@ -15,7 +15,7 @@
 - **Increment rule**: Each session that touches any source file must bump the version before committing.
   - Same date → increment the trailing number (`CH20260426-2` → `CH20260426-3`)
   - New date → reset to `-1` (`CH20260426-3` → `CH20260427-1`)
-- **Current version**: `CH20260426-3`
+- **Current version**: `CH20260427-1`
 - Do this automatically — user will never need to ask again.
 
 ---
@@ -59,12 +59,14 @@
 - `src/pages/ShadowingListPage.tsx`: level-filtered article list
 
 ### YouTube Caption Sync
-- YouTube requires **signed URLs** from `ytInitialPlayerResponse.captionTracks` — the simple timedtext API no longer works
-- Requires `VITE_CAPTION_PROXY_URL` pointing to a deployed Cloudflare Worker
-- Worker code: `cloudflare-caption-proxy/worker.js` (deploy to workers.cloudflare.com, free)
-- Flow: browser → Worker → `youtube.com/watch` (server-side) → parse `ytInitialPlayerResponse` → fetch signed caption URL → return JSON3
-- When `VITE_CAPTION_PROXY_URL` is not set: SettingsPage shows 5-step setup guide; ShadowingPage falls back to article text
+- YouTube requires **signed URLs** from `ytInitialPlayerResponse.captionTracks` — the simple timedtext API no longer works; watch-page has no CORS header
+- **Primary proxy**: `api/captions.js` — Vercel serverless function in this repo; auto-active when deployed on Vercel at `{origin}/api/captions`
+- **Alternate proxy**: `VITE_CAPTION_PROXY_URL` → Cloudflare Worker (`cloudflare-caption-proxy/worker.js`)
+- `ShadowingPage` calls `getCaptionProxyUrl()` = `VITE_CAPTION_PROXY_URL || {window.location.origin}/api/captions`
+- On GitHub Pages the `/api/captions` call returns 404 → error state → shows Vercel setup guide in Settings
+- Flow: browser → proxy (server-side) → `youtube.com/watch` → parse `ytInitialPlayerResponse` → fetch signed timedtext URL → return JSON3
 - JSON3 format: `events[].tStartMs`, `dDurationMs`, `segs[].utf8`
+- `vercel.json`: `buildCommand=npm run build`, `outputDirectory=dist`
 
 ### Furigana (Ruby Text)
 - `src/lib/furigana-map.json` (501KB, pre-generated)
@@ -116,4 +118,4 @@ src/
 
 ---
 
-**Last Updated**: 2026-04-26 | **Current Version**: CH20260426-3
+**Last Updated**: 2026-04-27 | **Current Version**: CH20260427-1
