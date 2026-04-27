@@ -15,7 +15,7 @@
 - **Increment rule**: Each session that touches any source file must bump the version before committing.
   - Same date → increment the trailing number (`CH20260426-2` → `CH20260426-3`)
   - New date → reset to `-1` (`CH20260426-3` → `CH20260427-1`)
-- **Current version**: `CH20260427-1`
+- **Current version**: `CH20260427-2`
 - Do this automatically — user will never need to ask again.
 
 ---
