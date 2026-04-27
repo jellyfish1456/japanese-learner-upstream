@@ -48,12 +48,16 @@ export default async function handler(req, res) {
       },
     });
     const html = await pageRes.text();
+    const markerIdx = html.indexOf("ytInitialPlayerResponse");
+    const ctIdx = html.indexOf("captionTracks");
 
-    // ── 2. Extract ytInitialPlayerResponse using bracket counting ─────────────
+    // ── 2. Extract ytInitialPlayerResponse ────────────────────────────────────
     const captionUrl = extractCaptionUrl(html, lang);
     if (!captionUrl) {
-      // Use 200 (not 404) so client can distinguish "proxy missing" (404) from "no CC" (200+error)
-      return res.status(200).json({ events: [], error: "no_captions_found" });
+      return res.status(200).json({
+        events: [], error: "no_captions_found",
+        _debug: { htmlLen: html.length, markerIdx, ctIdx, v: HANDLER_VERSION },
+      });
     }
 
     // ── 3. Fetch the actual caption content (JSON3) ────────────────────────────
@@ -65,7 +69,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json(data);
   } catch (err) {
-    return res.status(500).json({ events: [], error: String(err), v: HANDLER_VERSION });
+    return res.status(500).json({ events: [], error: String(err), v: HANDLER_VERSION, stack: err?.stack?.slice(0,300) });
   }
 }
 
