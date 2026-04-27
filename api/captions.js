@@ -67,6 +67,29 @@ export default async function handler(req, res) {
   }
 }
 
+/**
+ * String-aware JSON value extractor.
+ * Handles `"{"` and `"\""` inside strings correctly — plain bracket counting fails on those.
+ */
+function extractJsonObject(str, startIdx) {
+  const open = str[startIdx];
+  const close = open === "{" ? "}" : "]";
+  let depth = 0, inString = false, i = startIdx;
+  while (i < str.length) {
+    const c = str[i];
+    if (inString) {
+      if (c === "\\") i++;          // skip escaped char
+      else if (c === '"') inString = false;
+    } else {
+      if (c === '"') inString = true;
+      else if (c === open) depth++;
+      else if (c === close) { depth--; if (depth === 0) return str.slice(startIdx, i + 1); }
+    }
+    i++;
+  }
+  return null;
+}
+
 /** Parse ytInitialPlayerResponse from HTML, return signed captionTrack baseUrl */
 function extractCaptionUrl(html, lang) {
   const markerIdx = html.indexOf("ytInitialPlayerResponse");
@@ -75,19 +98,12 @@ function extractCaptionUrl(html, lang) {
   const start = html.indexOf("{", markerIdx);
   if (start < 0) return null;
 
-  // Bracket-count to find the matching closing brace
-  let depth = 0, end = start;
-  for (let i = start; i < html.length; i++) {
-    if (html[i] === "{") depth++;
-    else if (html[i] === "}") {
-      depth--;
-      if (depth === 0) { end = i; break; }
-    }
-  }
+  const jsonStr = extractJsonObject(html, start);
+  if (!jsonStr) return null;
 
   let playerData;
   try {
-    playerData = JSON.parse(html.slice(start, end + 1));
+    playerData = JSON.parse(jsonStr);
   } catch {
     return null;
   }
