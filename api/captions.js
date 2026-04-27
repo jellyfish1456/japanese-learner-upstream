@@ -19,6 +19,8 @@
  *   4. Done — captions will work automatically on the Vercel URL
  */
 
+const HANDLER_VERSION = "v7";
+
 export default async function handler(req, res) {
   // CORS headers — allow any origin (the browser-side fetch uses this)
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -63,7 +65,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json(data);
   } catch (err) {
-    return res.status(500).json({ events: [], error: String(err) });
+    return res.status(500).json({ events: [], error: String(err), v: HANDLER_VERSION });
   }
 }
 
