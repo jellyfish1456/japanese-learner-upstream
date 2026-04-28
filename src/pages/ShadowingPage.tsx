@@ -5,6 +5,14 @@ import type { ShadowingSegment } from "../data/shadowing";
 import RubyText from "../components/RubyText";
 import YouTubePlayer from "../components/YouTubePlayer";
 
+// Web Speech API STT type stubs
+declare global {
+  interface Window {
+    SpeechRecognition?: typeof SpeechRecognition;
+    webkitSpeechRecognition?: typeof SpeechRecognition;
+  }
+}
+
 const SPEEDS = [0.5, 0.75, 1.0, 1.25] as const;
 type Speed = (typeof SPEEDS)[number];
 
@@ -67,6 +75,11 @@ export default function ShadowingPage() {
     () => (article?.youtubeId ? "loading" : "idle")
   );
 
+  // Live STT (speech-to-text) state — fallback when CC unavailable
+  const [sttActive, setSttActive] = useState(false);
+  const [sttText, setSttText] = useState<string[]>([]);
+  const sttRef = useRef<SpeechRecognition | null>(null);
+
   // TTS state
   const [ttsIdx, setTtsIdx] = useState(-1);
   const [playing, setPlaying] = useState(false);
@@ -87,6 +100,40 @@ export default function ShadowingPage() {
 
   // Stable ref to speakSegment — breaks the useCallback self-reference cycle
   const speakSegmentRef = useRef<((idx: number) => void) | null>(null);
+
+  // ── STT helpers ────────────────────────────────────────────────────────────
+  const startStt = useCallback(() => {
+    const SR = window.SpeechRecognition ?? window.webkitSpeechRecognition;
+    if (!SR) return;
+    const rec = new SR();
+    rec.lang = "ja-JP";
+    rec.continuous = true;
+    rec.interimResults = true;
+    rec.onresult = (e: SpeechRecognitionEvent) => {
+      const lines: string[] = [];
+      for (let i = 0; i < e.results.length; i++) {
+        lines.push(e.results[i][0].transcript);
+      }
+      setSttText(lines);
+    };
+    rec.onend = () => {
+      // auto-restart if still active
+      if (sttRef.current) rec.start();
+    };
+    rec.onerror = () => { setSttActive(false); sttRef.current = null; };
+    rec.start();
+    sttRef.current = rec;
+    setSttActive(true);
+  }, []);
+
+  const stopStt = useCallback(() => {
+    sttRef.current?.stop();
+    sttRef.current = null;
+    setSttActive(false);
+  }, []);
+
+  // Cleanup STT on unmount
+  useEffect(() => () => { sttRef.current?.stop(); }, []);
 
   // ── Listen for voices (no synchronous setState) ───────────────────────────
   useEffect(() => {
@@ -363,20 +410,38 @@ export default function ShadowingPage() {
               </p>
             )}
             {captionStatus === "error" && (
-              <p className="text-xs text-red-400 mb-1">
-                ✗ 此影片無日文 CC 字幕可用 — 仍可使用下方 TTS 跟讀
-              </p>
+              <div className="mb-1">
+                <p className="text-xs text-red-400 mb-2">
+                  ✗ 此影片無法取得 CC 字幕
+                </p>
+                <button
+                  onClick={sttActive ? stopStt : startStt}
+                  className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-colors tap-active flex items-center justify-center gap-2 ${
+                    sttActive
+                      ? "bg-red-500 hover:bg-red-600 text-white"
+                      : "bg-orange-500 hover:bg-orange-600 text-white"
+                  }`}
+                >
+                  {sttActive ? "⏹ 停止辨識" : "🎤 即時語音辨識（需麥克風）"}
+                </button>
+              </div>
             )}
-            {/* ── Current subtitle live display ── */}
-            {captionStatus === "ok" && ytCaptions && (
+            {/* ── Current subtitle / STT live display ── */}
+            {(captionStatus === "ok" || sttActive || sttText.length > 0) && (
               <div className="mt-2 min-h-[60px] rounded-xl bg-black/80 dark:bg-black/90 flex items-center justify-center px-4 py-3">
-                {activeIdx >= 0 && ytCaptions[activeIdx] ? (
+                {captionStatus === "ok" && ytCaptions && activeIdx >= 0 && ytCaptions[activeIdx] ? (
                   <p className="text-white text-base font-semibold text-center leading-snug">
                     {ytCaptions[activeIdx].text}
                   </p>
-                ) : (
+                ) : sttText.length > 0 ? (
+                  <p className="text-white text-base font-semibold text-center leading-snug">
+                    {sttText[sttText.length - 1]}
+                  </p>
+                ) : sttActive ? (
+                  <p className="text-gray-400 text-xs text-center animate-pulse">🎤 聆聽中…播放影片即可辨識</p>
+                ) : captionStatus === "ok" ? (
                   <p className="text-gray-500 text-xs text-center">▶ 播放影片，字幕將即時顯示於此</p>
-                )}
+                ) : null}
               </div>
             )}
             <div className="flex items-center justify-between text-xs text-gray-400 dark:text-gray-500">
@@ -448,12 +513,12 @@ export default function ShadowingPage() {
         )}
       </div>
 
-      {/* Transcript / captions paragraph */}
-      {displaySegments.length > 0 && (
+      {/* Transcript / captions / STT paragraph */}
+      {(displaySegments.length > 0 || sttText.length > 0) && (
         <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-5 mb-5">
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-              {captionStatus === "ok" ? `影片字幕（${ytCaptions?.length ?? 0} 句）` : "文章跟讀"}
+              {sttText.length > 0 && captionStatus !== "ok" ? `語音辨識（${sttText.length} 句）` : captionStatus === "ok" ? `影片字幕（${ytCaptions?.length ?? 0} 句）` : "文章跟讀"}
             </span>
             {!ytCaptions && !isYouTubeMode && (
               <button
@@ -468,7 +533,15 @@ export default function ShadowingPage() {
               </button>
             )}
           </div>
-          {renderParagraph(displaySegments)}
+          {displaySegments.length > 0 ? renderParagraph(displaySegments) : sttText.length > 0 ? (
+            <p className="text-lg leading-[2.6] font-medium text-gray-800 dark:text-gray-200 tracking-wide">
+              {sttText.map((line, i) => (
+                <span key={i} className={`inline rounded px-0.5 ${i === sttText.length - 1 ? "bg-blue-200 dark:bg-blue-700 text-blue-900 dark:text-blue-100" : ""}`}>
+                  <RubyText text={line} />{" "}
+                </span>
+              ))}
+            </p>
+          ) : null}
           {showZH && !ytCaptions && article && activeIdx < 0 && (
             <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700 space-y-1">
               {article.segments.map((seg, idx) => (
