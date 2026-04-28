@@ -99,46 +99,86 @@ export default function ShadowingPage() {
   }, []);
 
   // ── Fetch YouTube captions via proxy when ytId changes ───────────────────
-  // All setState calls inside async callbacks — never synchronous in effect body
+  // Strategy: proxy tries youtube-transcript first. If that fails (transcript
+  // disabled), it returns a signed captionUrl for the browser to fetch directly.
   useEffect(() => {
     if (!ytId) return;
-
     let cancelled = false;
     const proxyUrl = getCaptionProxyUrl();
+
+    function parseEvents(events: YTCaptionEvent[]): ShadowingSegment[] {
+      return events
+        .filter((e) => Array.isArray(e.segs))
+        .map((e) => ({
+          text: (e.segs ?? []).map((s) => s.utf8 ?? "").join("").replace(/\n/g, " ").trim(),
+          zh: "",
+          start: e.tStartMs / 1000,
+          end: (e.tStartMs + (e.dDurationMs ?? 3000)) / 1000,
+        }))
+        .filter((s) => s.text.length > 0);
+    }
 
     fetch(`${proxyUrl}?v=${ytId}&lang=ja`)
       .then((r) => {
         if (cancelled) return null;
-        // 404 = proxy endpoint not deployed (GitHub Pages, not Vercel)
         if (r.status === 404) throw new Error("no-proxy");
         if (!r.ok) throw new Error(`http-${r.status}`);
-        return r.json() as Promise<{ events?: YTCaptionEvent[]; error?: string }>;
+        return r.json() as Promise<{
+          events?: YTCaptionEvent[];
+          error?: string;
+          captionUrl?: string;
+          captionUrlJson3?: string;
+        }>;
       })
       .then((data) => {
         if (cancelled || !data) return;
-        const errCode = data.error;
-        if (errCode === "no_captions_found") throw new Error("no-captions");
-        if (errCode && (!data.events || data.events.length === 0)) throw new Error("error");
-        const events = data.events ?? [];
-        const segs: ShadowingSegment[] = events
-          .filter((e) => Array.isArray(e.segs))
-          .map((e) => ({
-            text: (e.segs ?? []).map((s) => s.utf8 ?? "").join("").replace(/\n/g, " ").trim(),
-            zh: "",
-            start: e.tStartMs / 1000,
-            end: (e.tStartMs + (e.dDurationMs ?? 3000)) / 1000,
-          }))
-          .filter((s) => s.text.length > 0);
 
-        if (segs.length === 0) throw new Error("no-captions");
-        setYtCaptions(segs);
-        setCaptionStatus("ok");
+        // If proxy returned events directly (youtube-transcript succeeded)
+        const events = data.events ?? [];
+        if (events.length > 0) {
+          const segs = parseEvents(events);
+          if (segs.length > 0) { setYtCaptions(segs); setCaptionStatus("ok"); return; }
+        }
+
+        // If proxy returned a signed captionUrl → browser fetches it directly
+        if (data.captionUrlJson3 || data.captionUrl) {
+          const url = data.captionUrlJson3 || data.captionUrl!;
+          return fetch(url)
+            .then((r2) => r2.text())
+            .then((text) => {
+              if (cancelled) return;
+              if (!text || text.length === 0) throw new Error("no-captions");
+              let json3: { events?: YTCaptionEvent[] };
+              if (text.trimStart().startsWith("{")) {
+                json3 = JSON.parse(text);
+              } else {
+                // XML/TTML fallback: parse <text start="..." dur="...">
+                const re = /<text[^>]+start="([^"]+)"[^>]*(?:dur="([^"]+)")?[^>]*>([\s\S]*?)<\/text>/g;
+                const evts: YTCaptionEvent[] = [];
+                let m: RegExpExecArray | null;
+                while ((m = re.exec(text)) !== null) {
+                  const st = parseFloat(m[1]) * 1000;
+                  const dur = m[2] ? parseFloat(m[2]) * 1000 : 3000;
+                  const txt = m[3].replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, "<").replace(/&gt;/g, ">").trim();
+                  if (txt) evts.push({ tStartMs: st, dDurationMs: dur, segs: [{ utf8: txt }] });
+                }
+                json3 = { events: evts };
+              }
+              const segs = parseEvents(json3.events ?? []);
+              if (segs.length === 0) throw new Error("no-captions");
+              setYtCaptions(segs);
+              setCaptionStatus("ok");
+            });
+        }
+
+        if (data.error === "no_captions_found") throw new Error("no-captions");
+        throw new Error("no-captions");
       })
       .catch((err: unknown) => {
         if (cancelled) return;
         setYtCaptions(null);
         const msg = err instanceof Error ? err.message : "";
-        setCaptionStatus(msg === "no-proxy" ? "no-proxy" : msg === "no-captions" ? "error" : "error");
+        setCaptionStatus(msg === "no-proxy" ? "no-proxy" : "error");
       });
 
     return () => { cancelled = true; };
