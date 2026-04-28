@@ -320,11 +320,6 @@ export default function ShadowingPage() {
             {captionStatus === "loading" && (
               <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">⏳ 載入 CC 字幕中…</p>
             )}
-            {captionStatus === "ok" && ytCaptions && (
-              <p className="text-xs text-green-500 dark:text-green-400 mb-1">
-                ✓ 已載入 {ytCaptions.length} 條 CC 字幕，播放時自動同步標記
-              </p>
-            )}
             {captionStatus === "no-proxy" && (
               <p className="text-xs text-orange-400 mb-1">
                 ⚠ 請在 GitHub Secrets 設定 VITE_CAPTION_PROXY_URL — 前往「設定」查看完整步驟
@@ -334,6 +329,18 @@ export default function ShadowingPage() {
               <p className="text-xs text-red-400 mb-1">
                 ✗ 此影片無日文 CC 字幕可用 — 仍可使用下方 TTS 跟讀
               </p>
+            )}
+            {/* ── Current subtitle live display ── */}
+            {captionStatus === "ok" && ytCaptions && (
+              <div className="mt-2 min-h-[60px] rounded-xl bg-black/80 dark:bg-black/90 flex items-center justify-center px-4 py-3">
+                {activeIdx >= 0 && ytCaptions[activeIdx] ? (
+                  <p className="text-white text-base font-semibold text-center leading-snug">
+                    {ytCaptions[activeIdx].text}
+                  </p>
+                ) : (
+                  <p className="text-gray-500 text-xs text-center">▶ 播放影片，字幕將即時顯示於此</p>
+                )}
+              </div>
             )}
             <div className="flex items-center justify-between text-xs text-gray-400 dark:text-gray-500">
               <span>▶ 影片播放中，文字會自動跟著標記</span>
@@ -408,7 +415,7 @@ export default function ShadowingPage() {
       <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-5 mb-5">
         <div className="flex items-center justify-between mb-3">
           <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-            {captionStatus === "ok" ? "影片字幕" : "文章跟讀"}
+            {captionStatus === "ok" ? `影片字幕（${ytCaptions?.length ?? 0} 句）` : "文章跟讀"}
           </span>
           {!ytCaptions && (
             <button
