@@ -37,6 +37,7 @@ export default function App() {
           <Route path="/listening/:level" element={<ListeningSessionPage />} />
           <Route path="/verb-conjugation" element={<VerbConjugationPage />} />
           <Route path="/pdf-study" element={<PDFStudyPage />} />
+          <Route path="/shadowing/youtube" element={<ShadowingPage />} />
           <Route path="/shadowing/:level" element={<ShadowingListPage />} />
           <Route path="/shadowing/:level/:articleId" element={<ShadowingPage />} />
           <Route path="/settings" element={<SettingsPage />} />

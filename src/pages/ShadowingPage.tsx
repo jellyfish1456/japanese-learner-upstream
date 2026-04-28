@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, useCallback, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { shadowingArticles } from "../data/shadowing";
 import type { ShadowingSegment } from "../data/shadowing";
@@ -52,10 +52,12 @@ export default function ShadowingPage() {
   const { level, articleId } = useParams<{ level: string; articleId: string }>();
   const article = shadowingArticles.find((a) => a.id === articleId);
 
+  const isYouTubeMode = !article; // /shadowing/youtube route — no article
+
   // YouTube state
   const [ytId, setYtId] = useState<string>(article?.youtubeId ?? "");
   const [urlInput, setUrlInput] = useState("");
-  const [showUrlInput, setShowUrlInput] = useState(false);
+  const [showUrlInput, setShowUrlInput] = useState(isYouTubeMode);
   const [videoTime, setVideoTime] = useState(0);
 
   // YouTube caption state — loading is set eagerly when ytId changes (in event handlers)
@@ -143,9 +145,10 @@ export default function ShadowingPage() {
   }, [ytId]);
 
   // Segments to display: real YouTube captions (if fetched) or article text
-  const displaySegments: ShadowingSegment[] = ytId && ytCaptions
-    ? ytCaptions
-    : (article?.segments ?? []);
+  const displaySegments: ShadowingSegment[] = useMemo(
+    () => (ytId && ytCaptions ? ytCaptions : (article?.segments ?? [])),
+    [ytId, ytCaptions, article],
+  );
 
   // Determine currently highlighted segment
   const activeIdx = (() => {
@@ -170,9 +173,8 @@ export default function ShadowingPage() {
 
   // ── TTS playback ──────────────────────────────────────────────────────────
   const speakSegment = useCallback((idx: number) => {
-    if (!article) return;
     window.speechSynthesis.cancel();
-    const segs = ytId && ytCaptions ? ytCaptions : article.segments;
+    const segs = displaySegments;
     if (!segs[idx]) return;
     const utt = new SpeechSynthesisUtterance(segs[idx].text);
     utt.lang = "ja-JP";
@@ -195,7 +197,7 @@ export default function ShadowingPage() {
     };
     utt.onerror = () => { setPlaying(false); setTtsIdx(-1); };
     window.speechSynthesis.speak(utt);
-  }, [article, speed, voicesReady, repeatMode, autoNext, ytId, ytCaptions]);
+  }, [displaySegments, speed, voicesReady, repeatMode, autoNext]);
 
   // Keep ref in sync (useLayoutEffect = after render, before paint — safe for refs)
   useLayoutEffect(() => {
@@ -250,17 +252,8 @@ export default function ShadowingPage() {
     setCaptionStatus("idle");
   };
 
-  if (!article) {
-    return (
-      <div className="text-center py-20 text-gray-400 dark:text-gray-500">
-        <div className="text-4xl mb-3">🔍</div>
-        <p>找不到該文章</p>
-      </div>
-    );
-  }
-
-  const lvl = level?.toUpperCase() ?? "N5";
-  const levelColor: Record<string, string> = { N5: "bg-green-500", N4: "bg-blue-500", N3: "bg-purple-500" };
+  const lvl = level?.toUpperCase() ?? "YT";
+  const levelColor: Record<string, string> = { N5: "bg-green-500", N4: "bg-blue-500", N3: "bg-purple-500", YT: "bg-red-500" };
 
   // ── Render paragraph with inline highlighted spans ─────────────────────────
   const renderParagraph = (segs: ShadowingSegment[]) => (
@@ -304,8 +297,12 @@ export default function ShadowingPage() {
           </span>
           <span className="text-xs text-gray-400 dark:text-gray-500">跟讀練習</span>
         </div>
-        <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50">{article.titleZH}</h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400">{article.title}</p>
+        <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50">
+          {isYouTubeMode ? "YouTube 自由跟讀" : article.titleZH}
+        </h2>
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          {isYouTubeMode ? "貼上任何有日文 CC 的 YouTube 影片" : article.title}
+        </p>
       </div>
 
       {/* YouTube video section */}
@@ -412,33 +409,35 @@ export default function ShadowingPage() {
       </div>
 
       {/* Transcript / captions paragraph */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-5 mb-5">
-        <div className="flex items-center justify-between mb-3">
-          <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-            {captionStatus === "ok" ? `影片字幕（${ytCaptions?.length ?? 0} 句）` : "文章跟讀"}
-          </span>
-          {!ytCaptions && (
-            <button
-              onClick={() => setShowZH(!showZH)}
-              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-colors ${
-                showZH
-                  ? "bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400"
-                  : "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
-              }`}
-            >
-              中文 {showZH ? "ON" : "OFF"}
-            </button>
+      {displaySegments.length > 0 && (
+        <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-5 mb-5">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+              {captionStatus === "ok" ? `影片字幕（${ytCaptions?.length ?? 0} 句）` : "文章跟讀"}
+            </span>
+            {!ytCaptions && !isYouTubeMode && (
+              <button
+                onClick={() => setShowZH(!showZH)}
+                className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-colors ${
+                  showZH
+                    ? "bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400"
+                    : "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
+                }`}
+              >
+                中文 {showZH ? "ON" : "OFF"}
+              </button>
+            )}
+          </div>
+          {renderParagraph(displaySegments)}
+          {showZH && !ytCaptions && article && activeIdx < 0 && (
+            <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700 space-y-1">
+              {article.segments.map((seg, idx) => (
+                <p key={idx} className="text-xs text-gray-500 dark:text-gray-400">{seg.zh}</p>
+              ))}
+            </div>
           )}
         </div>
-        {renderParagraph(displaySegments)}
-        {showZH && !ytCaptions && activeIdx < 0 && (
-          <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700 space-y-1">
-            {article.segments.map((seg, idx) => (
-              <p key={idx} className="text-xs text-gray-500 dark:text-gray-400">{seg.zh}</p>
-            ))}
-          </div>
-        )}
-      </div>
+      )}
 
       {/* TTS Controls */}
       <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">

@@ -158,7 +158,18 @@ export default function HomePage() {
               <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1">跟讀練習</h2>
               <p className="text-sm text-gray-500 dark:text-gray-400">逐句跟讀，加強口說與聽力</p>
             </div>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 gap-3">
+              {/* YouTube 自由跟讀 */}
+              <button
+                onClick={() => navigate("/shadowing/youtube")}
+                className="col-span-2 bg-red-500 hover:bg-red-600 text-white rounded-2xl p-4 flex items-center gap-4 transition-colors tap-active shadow-sm"
+              >
+                <span className="text-3xl">📺</span>
+                <div className="text-left">
+                  <div className="text-lg font-bold">YouTube 自由跟讀</div>
+                  <div className="text-xs opacity-80">貼上有日文 CC 的 YouTube 影片</div>
+                </div>
+              </button>
               {(["N5", "N4", "N3"] as const).map((lvl) => {
                 const shadowColors: Record<string, { bg: string; icon: string }> = {
                   N5: { bg: "bg-green-500 hover:bg-green-600", icon: "🎙️" },

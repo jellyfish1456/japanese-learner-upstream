@@ -2,7 +2,7 @@ import { useDarkMode } from "../hooks/useDarkMode";
 import { useSettings } from "../hooks/useSettings";
 import SyncSection from "../components/SyncSection";
 
-const APP_VERSION = "CH20260428-3";
+const APP_VERSION = "CH20260428-4";
 const HAS_GOOGLE_ID   = Boolean(import.meta.env.VITE_GOOGLE_CLIENT_ID);
 const HAS_CAPTION_PROXY = Boolean(import.meta.env.VITE_CAPTION_PROXY_URL);
 
