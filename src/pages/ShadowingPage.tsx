@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { shadowingArticles } from "../data/shadowing";
 import type { ShadowingSegment } from "../data/shadowing";
 import RubyText from "../components/RubyText";
+import RubyTextAuto from "../components/RubyTextAuto";
 import YouTubePlayer from "../components/YouTubePlayer";
 
 // ── SRT parser ───────────────────────────────────────────────────────────────
@@ -420,7 +421,7 @@ export default function ShadowingPage() {
                 : "hover:bg-gray-100 dark:hover:bg-gray-700"
             }`}
           >
-            <RubyText text={seg.text} />
+            {ytCaptions ? <RubyTextAuto text={seg.text} /> : <RubyText text={seg.text} />}
             {isActive && showZH && seg.zh && (
               <span className="text-sm text-blue-600 dark:text-blue-300 font-normal ml-1">
                 （{seg.zh}）
@@ -560,11 +561,11 @@ export default function ShadowingPage() {
               <div className="mt-2 min-h-[60px] rounded-xl bg-black/80 dark:bg-black/90 flex items-center justify-center px-4 py-3">
                 {captionStatus === "ok" && ytCaptions && activeIdx >= 0 && ytCaptions[activeIdx] ? (
                   <p className="text-white text-base font-semibold text-center leading-relaxed">
-                    <RubyText text={ytCaptions[activeIdx].text} />
+                    <RubyTextAuto text={ytCaptions[activeIdx].text} />
                   </p>
                 ) : sttText.length > 0 ? (
                   <p className="text-white text-base font-semibold text-center leading-relaxed">
-                    <RubyText text={sttText[sttText.length - 1]} />
+                    <RubyTextAuto text={sttText[sttText.length - 1]} />
                   </p>
                 ) : sttActive ? (
                   <p className="text-gray-400 text-xs text-center animate-pulse">🎤 聆聽中…播放影片即可辨識</p>
@@ -666,7 +667,7 @@ export default function ShadowingPage() {
             <p className="text-lg leading-[2.6] font-medium text-gray-800 dark:text-gray-200 tracking-wide">
               {sttText.map((line, i) => (
                 <span key={i} className={`inline rounded px-0.5 ${i === sttText.length - 1 ? "bg-blue-200 dark:bg-blue-700 text-blue-900 dark:text-blue-100" : ""}`}>
-                  <RubyText text={line} />{" "}
+                  <RubyTextAuto text={line} />{" "}
                 </span>
               ))}
             </p>
