@@ -26,7 +26,7 @@ export default function ListeningSessionPage() {
   const colors = levelColors[upperLevel] ?? levelColors["N5"];
 
   const { question, index, total, selected, correct, done, answer, next, replay } =
-    useListeningSession(upperLevel, 10);
+    useListeningSession(upperLevel, 15);
 
   if (!question && !done) {
     return (

@@ -876,6 +876,491 @@
           "chinese": "差不多該～了"
         }
       ]
+    },
+    {
+      "id": "dialogue-n4-016",
+      "title": "予約をする",
+      "titleJp": "予約をする",
+      "situation": "打電話預約餐廳",
+      "lines": [
+        {
+          "speaker": "店員",
+          "japanese": "はい、山田レストランでございます。",
+          "chinese": "您好，這裡是山田餐廳。"
+        },
+        {
+          "speaker": "A",
+          "japanese": "今週の土曜日、三名で予約したいのですが。",
+          "chinese": "我想預約本週六，三位。"
+        },
+        {
+          "speaker": "店員",
+          "japanese": "何時頃のご予約でしょうか。",
+          "chinese": "您想預約幾點左右呢？"
+        },
+        {
+          "speaker": "A",
+          "japanese": "七時でお願いできますか。",
+          "chinese": "可以訂七點嗎？"
+        },
+        {
+          "speaker": "店員",
+          "japanese": "七時、三名様ですね。お名前をお聞かせください。",
+          "chinese": "七點、三位。請告訴我您的大名。"
+        },
+        {
+          "speaker": "A",
+          "japanese": "リンと申します。よろしくお願いします。",
+          "chinese": "我叫林。麻煩您了。"
+        }
+      ],
+      "keyPhrases": [
+        {
+          "japanese": "～を予約したいのですが",
+          "chinese": "我想預約～"
+        },
+        {
+          "japanese": "～と申します",
+          "chinese": "我叫做～（謙遜說法）"
+        }
+      ]
+    },
+    {
+      "id": "dialogue-n4-017",
+      "title": "映画の感想",
+      "titleJp": "映画の感想",
+      "situation": "聊聊昨天看的電影感想",
+      "lines": [
+        {
+          "speaker": "A",
+          "japanese": "昨日の映画、どうだった？",
+          "chinese": "昨天的電影怎麼樣？"
+        },
+        {
+          "speaker": "B",
+          "japanese": "すごく感動したよ。泣いてしまった。",
+          "chinese": "非常感動。忍不住哭了。"
+        },
+        {
+          "speaker": "A",
+          "japanese": "そんなに？どんなストーリーなの？",
+          "chinese": "那麼感人？是什麼故事？"
+        },
+        {
+          "speaker": "B",
+          "japanese": "戦争中の親子の話なんだけど、最後が特に泣けた。",
+          "chinese": "是戰爭中父母子女的故事，最後特別催淚。"
+        },
+        {
+          "speaker": "A",
+          "japanese": "ぜひ見てみたいな。一緒に行かない？",
+          "chinese": "我也很想看。要不要一起去？"
+        },
+        {
+          "speaker": "B",
+          "japanese": "もう一回見てもいいよ。来週どう？",
+          "chinese": "我再看一次也沒關係。下週怎麼樣？"
+        }
+      ],
+      "keyPhrases": [
+        {
+          "japanese": "～てしまった",
+          "chinese": "忍不住～了"
+        },
+        {
+          "japanese": "ぜひ～たい",
+          "chinese": "非常想～"
+        }
+      ]
+    },
+    {
+      "id": "dialogue-n4-018",
+      "title": "病院で",
+      "titleJp": "病院で",
+      "situation": "在醫院看診",
+      "lines": [
+        {
+          "speaker": "医者",
+          "japanese": "どうされましたか。",
+          "chinese": "您哪裡不舒服？"
+        },
+        {
+          "speaker": "A",
+          "japanese": "昨日から熱があって、頭も痛いんです。",
+          "chinese": "從昨天開始發燒，頭也很痛。"
+        },
+        {
+          "speaker": "医者",
+          "japanese": "熱は何度ぐらいですか。",
+          "chinese": "發燒大約幾度？"
+        },
+        {
+          "speaker": "A",
+          "japanese": "三十八度三分ありました。",
+          "chinese": "有38.3度。"
+        },
+        {
+          "speaker": "医者",
+          "japanese": "のどを見せてください。少し赤いですね。風邪ですね。",
+          "chinese": "請讓我看一下喉嚨。有點紅。是感冒呢。"
+        },
+        {
+          "speaker": "A",
+          "japanese": "仕事は休んだ方がいいですか。",
+          "chinese": "我最好請假休息嗎？"
+        },
+        {
+          "speaker": "医者",
+          "japanese": "ええ、今日と明日は休んで、ゆっくり休んでください。",
+          "chinese": "是的，今天和明天請假，好好休息。"
+        }
+      ],
+      "keyPhrases": [
+        {
+          "japanese": "熱がある",
+          "chinese": "發燒"
+        },
+        {
+          "japanese": "休んだ方がいい",
+          "chinese": "最好請假休息"
+        }
+      ]
+    },
+    {
+      "id": "dialogue-n4-019",
+      "title": "旅行の計画",
+      "titleJp": "旅行の計画",
+      "situation": "計劃旅行",
+      "lines": [
+        {
+          "speaker": "A",
+          "japanese": "来月の連休、どこかに行かない？",
+          "chinese": "下個月的連假，要不要去哪裡？"
+        },
+        {
+          "speaker": "B",
+          "japanese": "いいね。京都はどう？",
+          "chinese": "好啊。京都怎麼樣？"
+        },
+        {
+          "speaker": "A",
+          "japanese": "いいけど、混んでいるんじゃない？",
+          "chinese": "不錯，但不是很擁擠嗎？"
+        },
+        {
+          "speaker": "B",
+          "japanese": "確かに。じゃ、温泉にしようか。",
+          "chinese": "確實。那，去溫泉怎麼樣？"
+        },
+        {
+          "speaker": "A",
+          "japanese": "温泉、いいね。箱根なんかどうかな。",
+          "chinese": "溫泉不錯。箱根之類的怎麼樣？"
+        },
+        {
+          "speaker": "B",
+          "japanese": "賛成。ホテルを早めに予約しておこう。",
+          "chinese": "贊成。先把飯店早點預訂好吧。"
+        }
+      ],
+      "keyPhrases": [
+        {
+          "japanese": "～はどう？",
+          "chinese": "～怎麼樣？"
+        },
+        {
+          "japanese": "予約しておこう",
+          "chinese": "先預訂好吧"
+        }
+      ]
+    },
+    {
+      "id": "dialogue-n4-020",
+      "title": "アドバイスを求める",
+      "titleJp": "アドバイスを求める",
+      "situation": "向朋友尋求建議",
+      "lines": [
+        {
+          "speaker": "A",
+          "japanese": "最近、仕事がうまくいかなくて悩んでいるんだ。",
+          "chinese": "最近工作不順利，我很苦惱。"
+        },
+        {
+          "speaker": "B",
+          "japanese": "どんなことで困っているの？",
+          "chinese": "是什麼事讓你困擾呢？"
+        },
+        {
+          "speaker": "A",
+          "japanese": "上司とのコミュニケーションが難しくて。",
+          "chinese": "和上司的溝通很困難。"
+        },
+        {
+          "speaker": "B",
+          "japanese": "まず、上司に相談してみたら？",
+          "chinese": "首先，要不要試著跟上司商量看看？"
+        },
+        {
+          "speaker": "A",
+          "japanese": "それが怖くてできないんだ。",
+          "chinese": "就是害怕才做不到啊。"
+        },
+        {
+          "speaker": "B",
+          "japanese": "少しずつ話しかけてみると、変わるかもしれないよ。",
+          "chinese": "慢慢主動跟他說說看，說不定會有改變喔。"
+        }
+      ],
+      "keyPhrases": [
+        {
+          "japanese": "悩んでいる",
+          "chinese": "感到苦惱"
+        },
+        {
+          "japanese": "～てみたら？",
+          "chinese": "要不要試著～看看？"
+        }
+      ]
+    },
+    {
+      "id": "dialogue-n4-021",
+      "title": "服を買いに行く",
+      "titleJp": "服を買いに行く",
+      "situation": "去買衣服",
+      "lines": [
+        {
+          "speaker": "店員",
+          "japanese": "いらっしゃいませ。何かお探しですか。",
+          "chinese": "歡迎光臨。您在找什麼嗎？"
+        },
+        {
+          "speaker": "A",
+          "japanese": "コートを見ているんですが、黒いのはありますか。",
+          "chinese": "我在看大衣，有黑色的嗎？"
+        },
+        {
+          "speaker": "店員",
+          "japanese": "はい、こちらにございます。よろしければ、試着してみてください。",
+          "chinese": "有的，在這邊。如果方便的話，請試穿看看。"
+        },
+        {
+          "speaker": "A",
+          "japanese": "ちょっと大きいですね。Mサイズはありますか。",
+          "chinese": "有點大呢。有M號嗎？"
+        },
+        {
+          "speaker": "店員",
+          "japanese": "少々お待ちください。今お持ちします。",
+          "chinese": "請稍等。我現在去拿來。"
+        },
+        {
+          "speaker": "A",
+          "japanese": "ちょうどいいです。これにします。",
+          "chinese": "正好合適。我就買這件。"
+        }
+      ],
+      "keyPhrases": [
+        {
+          "japanese": "試着してみてください",
+          "chinese": "請試穿看看"
+        },
+        {
+          "japanese": "これにします",
+          "chinese": "我就決定這個了"
+        }
+      ]
+    },
+    {
+      "id": "dialogue-n4-022",
+      "title": "料理を教える",
+      "titleJp": "料理を教える",
+      "situation": "教朋友做料理",
+      "lines": [
+        {
+          "speaker": "A",
+          "japanese": "カレーの作り方を教えてもらえる？",
+          "chinese": "可以教我做咖哩嗎？"
+        },
+        {
+          "speaker": "B",
+          "japanese": "もちろん。まず、野菜を切っておいてね。",
+          "chinese": "當然。首先，先把蔬菜切好喔。"
+        },
+        {
+          "speaker": "A",
+          "japanese": "じゃがいもとにんじんとたまねぎでいい？",
+          "chinese": "馬鈴薯、紅蘿蔔和洋蔥可以嗎？"
+        },
+        {
+          "speaker": "B",
+          "japanese": "うん。切ったら、油で炒めて、水を入れて煮てね。",
+          "chinese": "可以。切完後，用油炒一炒，加水煮。"
+        },
+        {
+          "speaker": "A",
+          "japanese": "どのくらい煮ればいいの？",
+          "chinese": "要煮多久呢？"
+        },
+        {
+          "speaker": "B",
+          "japanese": "野菜が柔らかくなったら、カレールウを入れればできあがりよ。",
+          "chinese": "蔬菜變軟之後，加入咖哩塊就完成了。"
+        }
+      ],
+      "keyPhrases": [
+        {
+          "japanese": "～ておいてね",
+          "chinese": "先把～做好喔"
+        },
+        {
+          "japanese": "～たら、～ればいい",
+          "chinese": "～之後就～就好了"
+        }
+      ]
+    },
+    {
+      "id": "dialogue-n4-023",
+      "title": "引っ越しの報告",
+      "titleJp": "引っ越しの報告",
+      "situation": "告訴朋友搬家了",
+      "lines": [
+        {
+          "speaker": "A",
+          "japanese": "先月、引っ越ししたんだよ。",
+          "chinese": "我上個月搬家了。"
+        },
+        {
+          "speaker": "B",
+          "japanese": "そうなの？どこに引っ越したの？",
+          "chinese": "是嗎？搬去哪裡了？"
+        },
+        {
+          "speaker": "A",
+          "japanese": "渋谷の近くのアパートに引っ越したんだ。",
+          "chinese": "搬到澀谷附近的公寓了。"
+        },
+        {
+          "speaker": "B",
+          "japanese": "駅から遠い？",
+          "chinese": "離車站遠嗎？"
+        },
+        {
+          "speaker": "A",
+          "japanese": "歩いて五分なんだ。すごく便利になったよ。",
+          "chinese": "走路五分鐘。變得非常方便了。"
+        },
+        {
+          "speaker": "B",
+          "japanese": "いいな。今度、遊びに行ってもいい？",
+          "chinese": "真好。下次可以去你家玩嗎？"
+        }
+      ],
+      "keyPhrases": [
+        {
+          "japanese": "引っ越しをする",
+          "chinese": "搬家"
+        },
+        {
+          "japanese": "遊びに行ってもいい？",
+          "chinese": "可以去玩嗎？"
+        }
+      ]
+    },
+    {
+      "id": "dialogue-n4-024",
+      "title": "図書館で",
+      "titleJp": "図書館で",
+      "situation": "在圖書館借書",
+      "lines": [
+        {
+          "speaker": "A",
+          "japanese": "すみません、この本を借りたいんですが。",
+          "chinese": "不好意思，我想借這本書。"
+        },
+        {
+          "speaker": "図書館員",
+          "japanese": "図書館カードはお持ちですか。",
+          "chinese": "您有圖書館卡嗎？"
+        },
+        {
+          "speaker": "A",
+          "japanese": "はい、持っています。",
+          "chinese": "有，我有。"
+        },
+        {
+          "speaker": "図書館員",
+          "japanese": "では、こちらにカードをお出しください。二週間お借りできます。",
+          "chinese": "那麼，請把卡片交給我。可以借兩週。"
+        },
+        {
+          "speaker": "A",
+          "japanese": "延長することはできますか。",
+          "chinese": "可以延長嗎？"
+        },
+        {
+          "speaker": "図書館員",
+          "japanese": "はい、一回だけ延長できますよ。",
+          "chinese": "可以的，只能延長一次喔。"
+        }
+      ],
+      "keyPhrases": [
+        {
+          "japanese": "借りたい",
+          "chinese": "想借"
+        },
+        {
+          "japanese": "延長することができる",
+          "chinese": "可以延長"
+        }
+      ]
+    },
+    {
+      "id": "dialogue-n4-025",
+      "title": "忘れ物",
+      "titleJp": "忘れ物",
+      "situation": "遺失物品，向朋友求助",
+      "lines": [
+        {
+          "speaker": "A",
+          "japanese": "大変！財布をどこかで落としてしまった。",
+          "chinese": "糟了！我把錢包掉在某個地方了。"
+        },
+        {
+          "speaker": "B",
+          "japanese": "えっ、本当に？いつ気がついたの？",
+          "chinese": "咦，真的嗎？什麼時候發現的？"
+        },
+        {
+          "speaker": "A",
+          "japanese": "さっきコンビニで払おうとしたら、なかったんだ。",
+          "chinese": "剛才在便利商店要付錢時，發現不見了。"
+        },
+        {
+          "speaker": "B",
+          "japanese": "さっきどこに行ったか覚えてる？",
+          "chinese": "你記得剛才去了哪裡嗎？"
+        },
+        {
+          "speaker": "A",
+          "japanese": "電車の中に置いてきたかも。駅に電話してみる。",
+          "chinese": "可能是留在電車上了。我試試打電話給車站。"
+        },
+        {
+          "speaker": "B",
+          "japanese": "見つかるといいね。",
+          "chinese": "希望能找到。"
+        }
+      ],
+      "keyPhrases": [
+        {
+          "japanese": "落としてしまった",
+          "chinese": "掉了（感到遺憾）"
+        },
+        {
+          "japanese": "見つかるといいね",
+          "chinese": "希望能找到"
+        }
+      ]
     }
   ]
 }
