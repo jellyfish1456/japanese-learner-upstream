@@ -28,6 +28,14 @@ interface YTPlayer {
   pauseVideo(): void;
   destroy(): void;
   getPlayerState(): number;
+  // Undocumented but widely available — returns full ytInitialPlayerResponse
+  getPlayerResponse(): {
+    captions?: {
+      playerCaptionsTracklistRenderer?: {
+        captionTracks?: { languageCode: string; baseUrl: string }[];
+      };
+    };
+  } | null | undefined;
 }
 
 let ytApiLoading: Promise<void> | null = null;
@@ -47,10 +55,12 @@ interface Props {
   videoId: string;
   onTimeUpdate?: (t: number) => void;
   onDuration?: (d: number) => void;
+  /** Called once when the player has loaded and caption URLs are available */
+  onCaptionUrl?: (url: string) => void;
   className?: string;
 }
 
-export default function YouTubePlayer({ videoId, onTimeUpdate, onDuration, className }: Props) {
+export default function YouTubePlayer({ videoId, onTimeUpdate, onDuration, onCaptionUrl, className }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<YTPlayer | null>(null);
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -79,6 +89,28 @@ export default function YouTubePlayer({ videoId, onTimeUpdate, onDuration, class
           onReady: (e) => {
             if (destroyed) return;
             onDuration?.(e.target.getDuration());
+            // Try to extract caption URL from player response
+            // Give player a moment to fully initialize before calling
+            setTimeout(() => {
+              if (destroyed) return;
+              try {
+                const pr = e.target.getPlayerResponse?.();
+                const tracks =
+                  pr?.captions?.playerCaptionsTracklistRenderer?.captionTracks ?? [];
+                const track =
+                  tracks.find((t) => t.languageCode === "ja") ??
+                  tracks.find((t) => t.languageCode?.startsWith("ja")) ??
+                  tracks[0];
+                if (track?.baseUrl && onCaptionUrl) {
+                  const url = track.baseUrl.startsWith("http")
+                    ? track.baseUrl
+                    : "https://www.youtube.com" + track.baseUrl;
+                  onCaptionUrl(url + (url.includes("fmt=") ? "" : "&fmt=json3"));
+                }
+              } catch {
+                // getPlayerResponse not available — ignore
+              }
+            }, 1500);
           },
           onStateChange: (e) => {
             // state 1 = PLAYING

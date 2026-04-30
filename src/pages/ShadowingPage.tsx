@@ -458,6 +458,50 @@ export default function ShadowingPage() {
             <YouTubePlayer
               videoId={ytId}
               onTimeUpdate={setVideoTime}
+              onCaptionUrl={(url) => {
+                // Only use player-provided URL if proxy already failed
+                if (captionStatus !== "ok") {
+                  setCaptionStatus("loading");
+                  fetch(url, { credentials: "include" })
+                    .then((r) => r.text())
+                    .then((text) => {
+                      if (!text || text.length < 10) return;
+                      const parseEvents = (events: YTCaptionEvent[]) =>
+                        events
+                          .filter((e) => Array.isArray(e.segs))
+                          .map((e) => ({
+                            text: (e.segs ?? []).map((s) => s.utf8 ?? "").join("").replace(/\n/g, " ").trim(),
+                            zh: "",
+                            start: e.tStartMs / 1000,
+                            end: (e.tStartMs + (e.dDurationMs ?? 3000)) / 1000,
+                          }))
+                          .filter((s) => s.text.length > 0);
+                      let json3: { events?: YTCaptionEvent[] };
+                      if (text.trimStart().startsWith("{")) {
+                        json3 = JSON.parse(text);
+                      } else {
+                        const re2 = /<text[^>]+start="([^"]+)"[^>]*(?:dur="([^"]+)")?[^>]*>([\s\S]*?)<\/text>/g;
+                        const evts: YTCaptionEvent[] = [];
+                        let m2: RegExpExecArray | null;
+                        while ((m2 = re2.exec(text)) !== null) {
+                          const st = parseFloat(m2[1]) * 1000;
+                          const dur = m2[2] ? parseFloat(m2[2]) * 1000 : 3000;
+                          const txt = m2[3].replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&#39;/g, "'").trim();
+                          if (txt) evts.push({ tStartMs: st, dDurationMs: dur, segs: [{ utf8: txt }] });
+                        }
+                        json3 = { events: evts };
+                      }
+                      const segs = parseEvents(json3.events ?? []);
+                      if (segs.length > 0) {
+                        setYtCaptions(segs);
+                        setCaptionStatus("ok");
+                      } else {
+                        setCaptionStatus("error");
+                      }
+                    })
+                    .catch(() => setCaptionStatus("error"));
+                }
+              }}
               className="mb-2"
             />
             {captionStatus === "loading" && (
