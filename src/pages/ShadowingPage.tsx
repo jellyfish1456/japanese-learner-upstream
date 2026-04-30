@@ -559,12 +559,12 @@ export default function ShadowingPage() {
             {(captionStatus === "ok" || sttActive || sttText.length > 0) && (
               <div className="mt-2 min-h-[60px] rounded-xl bg-black/80 dark:bg-black/90 flex items-center justify-center px-4 py-3">
                 {captionStatus === "ok" && ytCaptions && activeIdx >= 0 && ytCaptions[activeIdx] ? (
-                  <p className="text-white text-base font-semibold text-center leading-snug">
-                    {ytCaptions[activeIdx].text}
+                  <p className="text-white text-base font-semibold text-center leading-relaxed">
+                    <RubyText text={ytCaptions[activeIdx].text} />
                   </p>
                 ) : sttText.length > 0 ? (
-                  <p className="text-white text-base font-semibold text-center leading-snug">
-                    {sttText[sttText.length - 1]}
+                  <p className="text-white text-base font-semibold text-center leading-relaxed">
+                    <RubyText text={sttText[sttText.length - 1]} />
                   </p>
                 ) : sttActive ? (
                   <p className="text-gray-400 text-xs text-center animate-pulse">🎤 聆聽中…播放影片即可辨識</p>
