@@ -39,7 +39,7 @@ function buildQuestions(
   });
 }
 
-export function useListeningSession(level: string, questionCount = 10) {
+export function useListeningSession(level: string, questionCount = 10, speed = 1.0) {
   const dialogues = useDialoguesByLevel(level);
 
   // Flatten all lines (attach situation as context)
@@ -58,12 +58,15 @@ export function useListeningSession(level: string, questionCount = 10) {
 
   const question = questions[index] ?? null;
   const synthRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const speedRef = useRef<number>(speed);
+  speedRef.current = speed;
 
   const speak = useCallback((text: string) => {
     if (!window.speechSynthesis) return;
     window.speechSynthesis.cancel();
     const utt = new SpeechSynthesisUtterance(text);
     utt.lang = "ja-JP";
+    utt.rate = speedRef.current;
     const voice = window.speechSynthesis.getVoices().find((v) => v.lang.startsWith("ja"));
     if (voice) utt.voice = voice;
     synthRef.current = utt;

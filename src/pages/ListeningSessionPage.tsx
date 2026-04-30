@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useListeningSession } from "../hooks/useListeningSession";
 
@@ -24,9 +25,10 @@ export default function ListeningSessionPage() {
   const navigate = useNavigate();
   const upperLevel = (level ?? "").toUpperCase();
   const colors = levelColors[upperLevel] ?? levelColors["N5"];
+  const [speed, setSpeed] = useState<number>(1.0);
 
   const { question, index, total, selected, correct, done, answer, next, replay } =
-    useListeningSession(upperLevel, 15);
+    useListeningSession(upperLevel, 20, speed);
 
   if (!question && !done) {
     return (
@@ -112,6 +114,23 @@ export default function ListeningSessionPage() {
           </svg>
           再播一次
         </button>
+
+        {/* Speed buttons */}
+        <div className="flex justify-center gap-2 mt-4">
+          {([0.75, 1.0, 1.25] as const).map((s) => (
+            <button
+              key={s}
+              onClick={() => setSpeed(s)}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
+                speed === s
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300"
+              }`}
+            >
+              {s}x
+            </button>
+          ))}
+        </div>
 
         {/* Reveal Japanese after answering */}
         {selected && (

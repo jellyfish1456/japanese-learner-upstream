@@ -1361,6 +1361,281 @@
           "chinese": "希望能找到"
         }
       ]
+    },
+    {
+      "id": "dialogue-n4-026",
+      "title": "アルバイトの面接",
+      "titleJp": "アルバイトの面接",
+      "situation": "參加打工面試",
+      "lines": [
+        {"speaker": "面接官", "japanese": "どうしてこの仕事に応募しましたか。", "chinese": "您為什麼應徵這份工作？"},
+        {"speaker": "山田", "japanese": "接客の仕事に興味があって、経験を積みたいと思いました。", "chinese": "我對服務業感興趣，想累積經驗。"},
+        {"speaker": "面接官", "japanese": "週に何日働けますか。", "chinese": "您一週能工作幾天？"},
+        {"speaker": "山田", "japanese": "週三日から四日は働けます。土日も大丈夫です。", "chinese": "週三到四天可以工作。週六日也沒問題。"},
+        {"speaker": "面接官", "japanese": "何かわからないことはありますか。", "chinese": "有什麼不明白的嗎？"},
+        {"speaker": "山田", "japanese": "研修はどのくらいありますか。", "chinese": "培訓大概有多久？"},
+        {"speaker": "面接官", "japanese": "一週間の研修があります。頑張ってください。", "chinese": "有一週的培訓。請加油。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "応募する", "chinese": "應徵"},
+        {"japanese": "経験を積む", "chinese": "累積經驗"}
+      ]
+    },
+    {
+      "id": "dialogue-n4-027",
+      "title": "日本語の勉強",
+      "titleJp": "日本語の勉強",
+      "situation": "討論學習日語的方法",
+      "lines": [
+        {"speaker": "A", "japanese": "日本語の勉強、どうやってしていますか。", "chinese": "您怎麼學習日語的？"},
+        {"speaker": "B", "japanese": "毎日アプリを使って単語を覚えています。", "chinese": "每天用APP背單字。"},
+        {"speaker": "A", "japanese": "聞く練習はどうしていますか。", "chinese": "聽力練習怎麼做？"},
+        {"speaker": "B", "japanese": "日本のドラマを字幕なしで見るようにしています。", "chinese": "我試著不看字幕看日本連續劇。"},
+        {"speaker": "A", "japanese": "難しくないですか。", "chinese": "不難嗎？"},
+        {"speaker": "B", "japanese": "最初は難しかったですが、だんだん慣れてきました。", "chinese": "一開始很難，但漸漸習慣了。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "～ようにしています", "chinese": "試著～"},
+        {"japanese": "だんだん慣れる", "chinese": "漸漸習慣"}
+      ]
+    },
+    {
+      "id": "dialogue-n4-028",
+      "title": "アパート探し",
+      "titleJp": "アパート探し",
+      "situation": "和房仲討論找公寓",
+      "lines": [
+        {"speaker": "仲介", "japanese": "どんな部屋をお探しですか。", "chinese": "您在找什麼樣的房子？"},
+        {"speaker": "客", "japanese": "一人暮らし用で、駅から近い部屋がいいです。", "chinese": "適合一個人住，離車站近的房間比較好。"},
+        {"speaker": "仲介", "japanese": "予算はおいくらですか。", "chinese": "您的預算是多少？"},
+        {"speaker": "客", "japanese": "月七万円以内に抑えたいです。", "chinese": "想控制在月租七萬日圓以內。"},
+        {"speaker": "仲介", "japanese": "ペットは飼いますか。", "chinese": "您會養寵物嗎？"},
+        {"speaker": "客", "japanese": "いいえ、飼いません。できれば新しい建物がいいです。", "chinese": "不，不養。可以的話想要新建築。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "～以内に抑える", "chinese": "控制在～以內"},
+        {"japanese": "できれば", "chinese": "如果可以的話"}
+      ]
+    },
+    {
+      "id": "dialogue-n4-029",
+      "title": "電車の遅延",
+      "titleJp": "電車の遅延",
+      "situation": "電車誤點，向同事解釋遲到原因",
+      "lines": [
+        {"speaker": "A", "japanese": "遅くなってすみません。電車が遅れてしまって。", "chinese": "抱歉遲到了。電車誤點了。"},
+        {"speaker": "B", "japanese": "大丈夫ですよ。何があったんですか。", "chinese": "沒關係喔。發生什麼事了？"},
+        {"speaker": "A", "japanese": "人身事故で三十分も止まっていました。", "chinese": "因為人員事故停了三十分鐘。"},
+        {"speaker": "B", "japanese": "それは大変でしたね。会議は十分後に始まりますよ。", "chinese": "那真辛苦呢。會議再十分鐘後開始喔。"},
+        {"speaker": "A", "japanese": "よかった。急いで準備します。", "chinese": "太好了。我趕快準備。"},
+        {"speaker": "B", "japanese": "資料はもう用意してあります。", "chinese": "資料已經準備好了。"},
+        {"speaker": "A", "japanese": "ありがとうございます。助かりました。", "chinese": "謝謝您。幫了大忙。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "遅れてしまって", "chinese": "誤點了（表示遺憾）"},
+        {"japanese": "用意してある", "chinese": "已經準備好了"}
+      ]
+    },
+    {
+      "id": "dialogue-n4-030",
+      "title": "ネットショッピング",
+      "titleJp": "ネットショッピング",
+      "situation": "討論網路購物的經驗",
+      "lines": [
+        {"speaker": "A", "japanese": "最近よくネットで買い物しますか。", "chinese": "您最近常在網路上購物嗎？"},
+        {"speaker": "B", "japanese": "はい、便利ですよね。送料無料のサイトをよく使います。", "chinese": "是的，很方便呢。我常用免運費的網站。"},
+        {"speaker": "A", "japanese": "返品はできますか。", "chinese": "可以退貨嗎？"},
+        {"speaker": "B", "japanese": "サイトによって違いますが、だいたい一週間以内なら返せます。", "chinese": "依網站不同而有差異，但大概一週內可以退。"},
+        {"speaker": "A", "japanese": "安全ですか。個人情報が心配です。", "chinese": "安全嗎？我擔心個人資料。"},
+        {"speaker": "B", "japanese": "有名なサイトを選べば大丈夫ですよ。", "chinese": "選擇有名的網站就沒問題喔。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "送料無料", "chinese": "免運費"},
+        {"japanese": "サイトによって違う", "chinese": "依網站不同而有差異"}
+      ]
+    },
+    {
+      "id": "dialogue-n4-031",
+      "title": "プレゼントを贈る",
+      "titleJp": "プレゼントを贈る",
+      "situation": "為朋友挑選並贈送禮物",
+      "lines": [
+        {"speaker": "A", "japanese": "友達の誕生日に何を贈ろうか迷っています。", "chinese": "我在煩惱要送給朋友什麼生日禮物。"},
+        {"speaker": "B", "japanese": "その友達はどんなものが好きですか。", "chinese": "那位朋友喜歡什麼樣的東西？"},
+        {"speaker": "A", "japanese": "料理が好きで、よくお菓子を作っています。", "chinese": "喜歡料理，常做點心。"},
+        {"speaker": "B", "japanese": "じゃあ、製菓道具はどうですか。", "chinese": "那麼，烘焙器具如何？"},
+        {"speaker": "A", "japanese": "いいですね。予算は三千円ぐらいです。", "chinese": "好主意。預算大概三千日圓。"},
+        {"speaker": "B", "japanese": "それなら、かわいいクッキー型セットが買えますよ。", "chinese": "那樣的話，可以買可愛的餅乾模具組合喔。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "迷っています", "chinese": "在猶豫、煩惱"},
+        {"japanese": "予算は～ぐらい", "chinese": "預算大概～"}
+      ]
+    },
+    {
+      "id": "dialogue-n4-032",
+      "title": "趣味のサークル",
+      "titleJp": "趣味のサークル",
+      "situation": "討論加入興趣社團的經驗",
+      "lines": [
+        {"speaker": "A", "japanese": "最近、写真サークルに入ったんです。", "chinese": "最近加入了攝影社。"},
+        {"speaker": "B", "japanese": "どんなサークルですか。", "chinese": "是什麼樣的社團？"},
+        {"speaker": "A", "japanese": "週一回集まって、撮った写真を見せ合います。", "chinese": "每週聚一次，互相看拍的照片。"},
+        {"speaker": "B", "japanese": "楽しそうですね。費用はかかりますか。", "chinese": "聽起來很有趣。需要費用嗎？"},
+        {"speaker": "A", "japanese": "月千円の会費だけです。初心者も歓迎してくれています。", "chinese": "只要月費一千日圓。也歡迎初學者。"},
+        {"speaker": "B", "japanese": "私も入ってみたいな。紹介してもらえますか。", "chinese": "我也想加入看看。可以幫我介紹嗎？"}
+      ],
+      "keyPhrases": [
+        {"japanese": "見せ合う", "chinese": "互相展示"},
+        {"japanese": "紹介してもらえますか", "chinese": "可以幫我介紹嗎"}
+      ]
+    },
+    {
+      "id": "dialogue-n4-033",
+      "title": "留学の準備",
+      "titleJp": "留学の準備",
+      "situation": "準備出國留學",
+      "lines": [
+        {"speaker": "A", "japanese": "来年、日本に留学することになりました。", "chinese": "我決定明年去日本留學了。"},
+        {"speaker": "B", "japanese": "すごいですね。どのくらいの期間ですか。", "chinese": "太厲害了。是多長的期間？"},
+        {"speaker": "A", "japanese": "一年間の予定です。大学の交換留学制度を使います。", "chinese": "預定一年。利用大學的交換留學制度。"},
+        {"speaker": "B", "japanese": "日本語はどのくらいのレベルですか。", "chinese": "日語是什麼程度？"},
+        {"speaker": "A", "japanese": "N3を持っています。向こうでもっと上手になりたいです。", "chinese": "有N3。想在那邊變得更厲害。"},
+        {"speaker": "B", "japanese": "住む場所はもう決まりましたか。", "chinese": "住的地方已經決定了嗎？"},
+        {"speaker": "A", "japanese": "大学の寮に入る予定です。", "chinese": "預定住進大學的宿舍。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "～することになりました", "chinese": "決定要～了"},
+        {"japanese": "交換留学制度", "chinese": "交換留學制度"}
+      ]
+    },
+    {
+      "id": "dialogue-n4-034",
+      "title": "お客さんへの料理",
+      "titleJp": "お客さんへの料理",
+      "situation": "為客人準備料理",
+      "lines": [
+        {"speaker": "A", "japanese": "今週末、友達が家に来るんです。", "chinese": "這週末朋友要來我家。"},
+        {"speaker": "B", "japanese": "何か料理する予定ですか。", "chinese": "有打算做什麼料理嗎？"},
+        {"speaker": "A", "japanese": "はい、すき焼きを作ろうと思っています。", "chinese": "是的，我打算做壽喜燒。"},
+        {"speaker": "B", "japanese": "いいですね。材料はもう揃えましたか。", "chinese": "好啊。食材都備齊了嗎？"},
+        {"speaker": "A", "japanese": "まだです。明日スーパーに買いに行きます。", "chinese": "還沒。明天去超市買。"},
+        {"speaker": "B", "japanese": "お肉はどこのが美味しいか知っていますか。", "chinese": "您知道哪裡的肉比較好吃嗎？"}
+      ],
+      "keyPhrases": [
+        {"japanese": "～しようと思っています", "chinese": "打算～"},
+        {"japanese": "材料を揃える", "chinese": "備齊食材"}
+      ]
+    },
+    {
+      "id": "dialogue-n4-035",
+      "title": "町内会の活動",
+      "titleJp": "町内会の活動",
+      "situation": "討論社區活動",
+      "lines": [
+        {"speaker": "A", "japanese": "今月、町内会の清掃活動があります。", "chinese": "這個月有社區清潔活動。"},
+        {"speaker": "B", "japanese": "何日ですか。", "chinese": "是幾號？"},
+        {"speaker": "A", "japanese": "十五日の日曜日です。朝九時から始まります。", "chinese": "十五日星期日。從早上九點開始。"},
+        {"speaker": "B", "japanese": "参加した方がいいですよね。", "chinese": "最好參加吧。"},
+        {"speaker": "A", "japanese": "そうですね。近所の方と仲良くなるいい機会ですよ。", "chinese": "是呢。是和街坊鄰居打好關係的好機會喔。"},
+        {"speaker": "B", "japanese": "わかりました。道具は自分で持っていきますか。", "chinese": "我明白了。工具要自己帶去嗎？"},
+        {"speaker": "A", "japanese": "軍手とゴミ袋があれば大丈夫です。", "chinese": "有工作手套和垃圾袋就可以了。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "町内会", "chinese": "社區自治會"},
+        {"japanese": "仲良くなる機会", "chinese": "打好關係的機會"}
+      ]
+    },
+    {
+      "id": "dialogue-n4-036",
+      "title": "子供の習い事",
+      "titleJp": "子供の習い事",
+      "situation": "家長討論孩子的課外活動",
+      "lines": [
+        {"speaker": "A", "japanese": "お子さんは何か習い事をしていますか。", "chinese": "您的孩子有學什麼才藝嗎？"},
+        {"speaker": "B", "japanese": "はい、ピアノと水泳を習っています。", "chinese": "有，在學鋼琴和游泳。"},
+        {"speaker": "A", "japanese": "忙しそうですね。本人は楽しんでいますか。", "chinese": "看起來很忙呢。本人玩得開心嗎？"},
+        {"speaker": "B", "japanese": "水泳は大好きみたいです。ピアノは少し嫌がっています。", "chinese": "游泳好像很喜歡。鋼琴有點排斥。"},
+        {"speaker": "A", "japanese": "無理にやらせない方がいいかもしれませんね。", "chinese": "或許不要強迫他做比較好呢。"},
+        {"speaker": "B", "japanese": "そうですね。本人の気持ちを大切にしたいです。", "chinese": "說的對。想重視本人的心情。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "習い事", "chinese": "才藝、課外學習"},
+        {"japanese": "気持ちを大切にする", "chinese": "重視心情"}
+      ]
+    },
+    {
+      "id": "dialogue-n4-037",
+      "title": "職場の昼食",
+      "titleJp": "職場の昼食",
+      "situation": "同事一起討論午餐",
+      "lines": [
+        {"speaker": "A", "japanese": "お昼、一緒に食べに行きませんか。", "chinese": "午飯要不要一起去吃？"},
+        {"speaker": "B", "japanese": "いいですよ。どこに行きますか。", "chinese": "好啊。要去哪裡？"},
+        {"speaker": "A", "japanese": "新しくできたラーメン屋さんはどうですか。", "chinese": "新開的拉麵店怎麼樣？"},
+        {"speaker": "B", "japanese": "あそこは行列ができると聞きましたが。", "chinese": "我聽說那裡會排長龍呢。"},
+        {"speaker": "A", "japanese": "平日の昼は空いているみたいですよ。", "chinese": "平日午餐時間好像比較空。"},
+        {"speaker": "B", "japanese": "じゃあ、行ってみましょう。他の人も誘いますか。", "chinese": "那就去看看吧。要邀其他人嗎？"},
+        {"speaker": "A", "japanese": "三人ぐらいでちょうどいいですね。", "chinese": "三個人左右剛剛好呢。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "行列ができる", "chinese": "排長龍"},
+        {"japanese": "誘う", "chinese": "邀請"}
+      ]
+    },
+    {
+      "id": "dialogue-n4-038",
+      "title": "節約旅行",
+      "titleJp": "節約旅行",
+      "situation": "討論省錢旅行的訣竅",
+      "lines": [
+        {"speaker": "A", "japanese": "来月、一人旅を計画しています。", "chinese": "我計畫下個月一個人去旅行。"},
+        {"speaker": "B", "japanese": "どこに行くんですか。", "chinese": "要去哪裡？"},
+        {"speaker": "A", "japanese": "京都に行こうと思っています。でもお金が心配で。", "chinese": "打算去京都。但是擔心費用。"},
+        {"speaker": "B", "japanese": "ゲストハウスを使うと安く泊まれますよ。", "chinese": "利用青年旅館的話可以便宜住喔。"},
+        {"speaker": "A", "japanese": "食事はどうすればいいですか。", "chinese": "飲食方面怎麼辦好呢？"},
+        {"speaker": "B", "japanese": "朝市や地元のスーパーで買うのがお得です。", "chinese": "在早市或當地超市買是最划算的。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "節約する", "chinese": "節省、省錢"},
+        {"japanese": "～とお得です", "chinese": "～很划算"}
+      ]
+    },
+    {
+      "id": "dialogue-n4-039",
+      "title": "車と運転",
+      "titleJp": "車と運転",
+      "situation": "討論學車與駕照考試",
+      "lines": [
+        {"speaker": "A", "japanese": "最近、自動車学校に通い始めました。", "chinese": "最近開始上駕訓班了。"},
+        {"speaker": "B", "japanese": "免許を取るんですね。難しいですか。", "chinese": "要考駕照呢。難嗎？"},
+        {"speaker": "A", "japanese": "学科試験は難しくないですが、路上教習が大変です。", "chinese": "筆試不難，但路上實習很辛苦。"},
+        {"speaker": "B", "japanese": "どのくらいで取れますか。", "chinese": "大概多久可以拿到？"},
+        {"speaker": "A", "japanese": "早い人で二か月ぐらいだそうです。私は三か月かかりそうです。", "chinese": "快的人說大概兩個月。我好像要三個月。"},
+        {"speaker": "B", "japanese": "取れたら一緒にドライブに行きましょう。", "chinese": "拿到了的話一起去兜風吧。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "自動車学校に通う", "chinese": "上駕訓班"},
+        {"japanese": "学科試験", "chinese": "筆試"}
+      ]
+    },
+    {
+      "id": "dialogue-n4-040",
+      "title": "祭りの準備",
+      "titleJp": "祭りの準備",
+      "situation": "為社區祭典做準備",
+      "lines": [
+        {"speaker": "A", "japanese": "今年の夏祭り、一緒に準備しませんか。", "chinese": "今年的夏日祭典要不要一起準備？"},
+        {"speaker": "B", "japanese": "いいですよ。何をすればいいですか。", "chinese": "好啊。要做什麼？"},
+        {"speaker": "A", "japanese": "屋台の飾りつけと、チラシの配布をお願いしたいんですが。", "chinese": "想請您幫忙攤位布置和發傳單。"},
+        {"speaker": "B", "japanese": "わかりました。チラシは何枚ぐらい必要ですか。", "chinese": "明白了。傳單大概需要幾張？"},
+        {"speaker": "A", "japanese": "三百枚ぐらいあれば足りると思います。", "chinese": "我覺得三百張左右應該夠了。"},
+        {"speaker": "B", "japanese": "では、来週の土曜日に集合しましょう。", "chinese": "那麼，下週六集合吧。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "飾りつけ", "chinese": "布置裝飾"},
+        {"japanese": "チラシの配布", "chinese": "發傳單"}
+      ]
     }
   ]
 }

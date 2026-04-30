@@ -1316,6 +1316,281 @@
           "chinese": "最好早點出門"
         }
       ]
+    },
+    {
+      "id": "dialogue-n5-026",
+      "title": "学校の授業",
+      "titleJp": "学校の授業",
+      "situation": "談論學校課程",
+      "lines": [
+        {"speaker": "A", "japanese": "今日は何の授業がありますか。", "chinese": "今天有什麼課？"},
+        {"speaker": "B", "japanese": "数学と英語があります。", "chinese": "有數學和英語。"},
+        {"speaker": "A", "japanese": "数学は好きですか。", "chinese": "你喜歡數學嗎？"},
+        {"speaker": "B", "japanese": "あまり好きじゃないです。難しいですから。", "chinese": "不太喜歡。因為很難。"},
+        {"speaker": "A", "japanese": "私は好きです。先生がとても親切ですよ。", "chinese": "我喜歡。老師非常親切喔。"},
+        {"speaker": "B", "japanese": "そうですか。一緒に勉強しましょうか。", "chinese": "是這樣啊。我們一起念書吧。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "～があります", "chinese": "有～"},
+        {"japanese": "一緒に～ましょう", "chinese": "一起～吧"}
+      ]
+    },
+    {
+      "id": "dialogue-n5-027",
+      "title": "家族の紹介",
+      "titleJp": "家族の紹介",
+      "situation": "介紹家庭成員",
+      "lines": [
+        {"speaker": "A", "japanese": "ご家族は何人ですか。", "chinese": "您家裡有幾個人？"},
+        {"speaker": "B", "japanese": "四人家族です。父と母と妹がいます。", "chinese": "四口之家。有爸爸、媽媽和妹妹。"},
+        {"speaker": "A", "japanese": "お父さんのお仕事は何ですか。", "chinese": "您爸爸的工作是什麼？"},
+        {"speaker": "B", "japanese": "医者です。忙しいですが、優しいです。", "chinese": "是醫生。雖然忙，但很溫柔。"},
+        {"speaker": "A", "japanese": "妹さんはいくつですか。", "chinese": "妹妹幾歲？"},
+        {"speaker": "B", "japanese": "十歳です。元気な子供ですよ。", "chinese": "十歲。是個很有活力的孩子喔。"},
+        {"speaker": "A", "japanese": "いい家族ですね。", "chinese": "真是個好家庭呢。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "何人家族", "chinese": "幾口之家"},
+        {"japanese": "～がいます", "chinese": "有～（人/動物）"}
+      ]
+    },
+    {
+      "id": "dialogue-n5-028",
+      "title": "色と買い物",
+      "titleJp": "色と買い物",
+      "situation": "在店裡選購衣服顏色",
+      "lines": [
+        {"speaker": "店員", "japanese": "いらっしゃいませ。何かお探しですか。", "chinese": "歡迎光臨。您在找什麼嗎？"},
+        {"speaker": "客", "japanese": "シャツを探しています。", "chinese": "我在找襯衫。"},
+        {"speaker": "店員", "japanese": "どんな色がお好みですか。", "chinese": "您喜歡什麼顏色？"},
+        {"speaker": "客", "japanese": "青か白がいいです。", "chinese": "藍色或白色都好。"},
+        {"speaker": "店員", "japanese": "こちらの青いシャツはいかがですか。", "chinese": "這件藍色襯衫如何？"},
+        {"speaker": "客", "japanese": "きれいな色ですね。これをください。", "chinese": "好漂亮的顏色呢。請給我這個。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "何かお探しですか", "chinese": "您在找什麼嗎"},
+        {"japanese": "これをください", "chinese": "請給我這個"}
+      ]
+    },
+    {
+      "id": "dialogue-n5-029",
+      "title": "天気予報",
+      "titleJp": "天気予報",
+      "situation": "看天氣預報，討論明天的計畫",
+      "lines": [
+        {"speaker": "A", "japanese": "明日の天気はどうですか。", "chinese": "明天的天氣怎麼樣？"},
+        {"speaker": "B", "japanese": "テレビで雨と言っていました。", "chinese": "電視說會下雨。"},
+        {"speaker": "A", "japanese": "そうですか。傘を持っていきますか。", "chinese": "是這樣啊。要帶雨傘去嗎？"},
+        {"speaker": "B", "japanese": "はい、持っていったほうがいいですよ。", "chinese": "是的，最好帶著去喔。"},
+        {"speaker": "A", "japanese": "午後はどうですか。", "chinese": "下午怎麼樣？"},
+        {"speaker": "B", "japanese": "午後から晴れるそうです。", "chinese": "聽說從下午開始會放晴。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "～と言っていました", "chinese": "說了～"},
+        {"japanese": "～そうです", "chinese": "聽說～"}
+      ]
+    },
+    {
+      "id": "dialogue-n5-030",
+      "title": "年齢を聞く",
+      "titleJp": "年齢を聞く",
+      "situation": "詢問年齡並聊起生日",
+      "lines": [
+        {"speaker": "A", "japanese": "田中さん、おいくつですか。", "chinese": "田中先生，您幾歲？"},
+        {"speaker": "B", "japanese": "二十五歳です。Aさんは？", "chinese": "二十五歲。A先生呢？"},
+        {"speaker": "A", "japanese": "私は二十二歳です。誕生日はいつですか。", "chinese": "我是二十二歲。生日是什麼時候？"},
+        {"speaker": "B", "japanese": "三月十日です。もうすぐです。", "chinese": "三月十日。快到了。"},
+        {"speaker": "A", "japanese": "楽しみですね。何か欲しいものはありますか。", "chinese": "真期待呢。有什麼想要的東西嗎？"},
+        {"speaker": "B", "japanese": "新しい本がほしいです。", "chinese": "想要新書。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "おいくつですか", "chinese": "您幾歲？"},
+        {"japanese": "～がほしいです", "chinese": "想要～"}
+      ]
+    },
+    {
+      "id": "dialogue-n5-031",
+      "title": "スポーツと運動",
+      "titleJp": "スポーツと運動",
+      "situation": "討論喜歡的運動",
+      "lines": [
+        {"speaker": "A", "japanese": "週末に何かスポーツをしますか。", "chinese": "週末有做什麼運動嗎？"},
+        {"speaker": "B", "japanese": "はい、サッカーをします。", "chinese": "有，踢足球。"},
+        {"speaker": "A", "japanese": "どこでしますか。", "chinese": "在哪裡踢？"},
+        {"speaker": "B", "japanese": "公園でします。友達と一緒です。", "chinese": "在公園踢。和朋友一起。"},
+        {"speaker": "A", "japanese": "私は水泳が好きです。", "chinese": "我喜歡游泳。"},
+        {"speaker": "B", "japanese": "そうですか。体にいいですね。", "chinese": "是這樣啊。對身體很好呢。"},
+        {"speaker": "A", "japanese": "一緒にスポーツしましょう。", "chinese": "我們一起運動吧。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "～をします", "chinese": "做～"},
+        {"japanese": "体にいい", "chinese": "對身體好"}
+      ]
+    },
+    {
+      "id": "dialogue-n5-032",
+      "title": "動物とペット",
+      "titleJp": "動物とペット",
+      "situation": "討論寵物與動物",
+      "lines": [
+        {"speaker": "A", "japanese": "ペットを飼っていますか。", "chinese": "您有養寵物嗎？"},
+        {"speaker": "B", "japanese": "はい、猫を一匹飼っています。", "chinese": "有，養了一隻貓。"},
+        {"speaker": "A", "japanese": "何という名前ですか。", "chinese": "叫什麼名字？"},
+        {"speaker": "B", "japanese": "ミルクです。白くてかわいいですよ。", "chinese": "叫牛奶。白白的很可愛喔。"},
+        {"speaker": "A", "japanese": "私は犬が好きです。でも、アレルギーがあります。", "chinese": "我喜歡狗。但是有過敏。"},
+        {"speaker": "B", "japanese": "それは残念ですね。", "chinese": "那真可惜呢。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "～を飼っています", "chinese": "養著～"},
+        {"japanese": "何という名前", "chinese": "叫什麼名字"}
+      ]
+    },
+    {
+      "id": "dialogue-n5-033",
+      "title": "掃除と片付け",
+      "titleJp": "掃除と片付け",
+      "situation": "在家打掃整理",
+      "lines": [
+        {"speaker": "A", "japanese": "今日は部屋の掃除をしました。", "chinese": "今天打掃了房間。"},
+        {"speaker": "B", "japanese": "きれいになりましたか。", "chinese": "變乾淨了嗎？"},
+        {"speaker": "A", "japanese": "はい、とてもきれいです。本も整理しました。", "chinese": "是的，非常乾淨。書也整理好了。"},
+        {"speaker": "B", "japanese": "えらいですね。私はまだ掃除していません。", "chinese": "真了不起呢。我還沒打掃。"},
+        {"speaker": "A", "japanese": "週末にしましょうよ。", "chinese": "週末打掃吧。"},
+        {"speaker": "B", "japanese": "そうですね。一緒に手伝います。", "chinese": "說得對。我一起幫忙。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "掃除をします", "chinese": "打掃"},
+        {"japanese": "きれいになる", "chinese": "變乾淨"}
+      ]
+    },
+    {
+      "id": "dialogue-n5-034",
+      "title": "誕生日のお祝い",
+      "titleJp": "誕生日のお祝い",
+      "situation": "為朋友慶祝生日",
+      "lines": [
+        {"speaker": "A", "japanese": "お誕生日おめでとうございます！", "chinese": "生日快樂！"},
+        {"speaker": "B", "japanese": "ありがとうございます。もう二十歳になりました。", "chinese": "謝謝。已經二十歲了。"},
+        {"speaker": "A", "japanese": "これ、プレゼントです。どうぞ。", "chinese": "這是禮物。請收下。"},
+        {"speaker": "B", "japanese": "わあ、ありがとう！何ですか。", "chinese": "哇，謝謝！是什麼？"},
+        {"speaker": "A", "japanese": "開けてみてください。", "chinese": "請打開看看。"},
+        {"speaker": "B", "japanese": "本だ！大好きな作家ですよ。嬉しいです。", "chinese": "是書！是我最喜歡的作家喔。好高興。"},
+        {"speaker": "A", "japanese": "よかった。楽しんでください。", "chinese": "太好了。請好好享受。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "お誕生日おめでとう", "chinese": "生日快樂"},
+        {"japanese": "開けてみてください", "chinese": "請打開看看"}
+      ]
+    },
+    {
+      "id": "dialogue-n5-035",
+      "title": "料理と食事",
+      "titleJp": "料理と食事",
+      "situation": "交流簡單料理食譜",
+      "lines": [
+        {"speaker": "A", "japanese": "昨日、カレーを作りました。", "chinese": "昨天做了咖哩。"},
+        {"speaker": "B", "japanese": "上手に作れましたか。", "chinese": "做得好嗎？"},
+        {"speaker": "A", "japanese": "はい。野菜とお肉をたくさん入れました。", "chinese": "是的。放了很多蔬菜和肉。"},
+        {"speaker": "B", "japanese": "おいしそうですね。作り方を教えてください。", "chinese": "看起來好好吃。請教我做法。"},
+        {"speaker": "A", "japanese": "簡単ですよ。まず、野菜を切ります。", "chinese": "很簡單喔。首先，切蔬菜。"},
+        {"speaker": "B", "japanese": "今度、一緒に作りましょう。", "chinese": "下次一起做吧。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "作り方を教えてください", "chinese": "請教我做法"},
+        {"japanese": "～を切ります", "chinese": "切～"}
+      ]
+    },
+    {
+      "id": "dialogue-n5-036",
+      "title": "交通手段",
+      "titleJp": "交通手段",
+      "situation": "詢問如何搭乘交通工具",
+      "lines": [
+        {"speaker": "A", "japanese": "駅まで何で行きますか。", "chinese": "要怎麼去車站？"},
+        {"speaker": "B", "japanese": "バスで行きます。歩いても十分です。", "chinese": "搭公車去。走路也要十分鐘。"},
+        {"speaker": "A", "japanese": "バスは何番ですか。", "chinese": "公車幾號？"},
+        {"speaker": "B", "japanese": "五番のバスです。三分で来ますよ。", "chinese": "五號公車。三分鐘後會來喔。"},
+        {"speaker": "A", "japanese": "ありがとうございます。一緒に乗りましょう。", "chinese": "謝謝。一起搭吧。"},
+        {"speaker": "B", "japanese": "いいですよ。バス停はあそこです。", "chinese": "好啊。公車站在那裡。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "何で行きますか", "chinese": "要怎麼去"},
+        {"japanese": "～で行きます", "chinese": "搭～去"}
+      ]
+    },
+    {
+      "id": "dialogue-n5-037",
+      "title": "近所の話",
+      "titleJp": "近所の話",
+      "situation": "和鄰居聊天談街坊",
+      "lines": [
+        {"speaker": "A", "japanese": "このあたりに住んでいますか。", "chinese": "您住在這附近嗎？"},
+        {"speaker": "B", "japanese": "はい、近くのアパートに住んでいます。", "chinese": "是的，住在附近的公寓。"},
+        {"speaker": "A", "japanese": "この辺は静かでいいですね。", "chinese": "這一帶很安靜，真好呢。"},
+        {"speaker": "B", "japanese": "そうですね。スーパーも近くにあります。", "chinese": "是呢。超市也在附近。"},
+        {"speaker": "A", "japanese": "公園もありますよ。散歩できますね。", "chinese": "也有公園喔。可以散步呢。"},
+        {"speaker": "B", "japanese": "いいところに住んでいますね。", "chinese": "住在好地方呢。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "～に住んでいます", "chinese": "住在～"},
+        {"japanese": "近くにある", "chinese": "在附近"}
+      ]
+    },
+    {
+      "id": "dialogue-n5-038",
+      "title": "落し物",
+      "titleJp": "落し物",
+      "situation": "尋找遺失物品",
+      "lines": [
+        {"speaker": "A", "japanese": "すみません、財布を落としました。", "chinese": "不好意思，我遺失了錢包。"},
+        {"speaker": "B", "japanese": "どんな財布ですか。", "chinese": "是什麼樣的錢包？"},
+        {"speaker": "A", "japanese": "黒い小さい財布です。", "chinese": "是黑色的小錢包。"},
+        {"speaker": "B", "japanese": "こちらに届いていないですね。警察に行ってください。", "chinese": "這裡沒有送來。請去警察局。"},
+        {"speaker": "A", "japanese": "わかりました。ありがとうございます。", "chinese": "我明白了。謝謝您。"},
+        {"speaker": "B", "japanese": "見つかるといいですね。", "chinese": "希望能找到呢。"},
+        {"speaker": "A", "japanese": "はい、ありがとうございます。", "chinese": "是的，謝謝您。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "～を落としました", "chinese": "遺失了～"},
+        {"japanese": "届いていない", "chinese": "沒有送來"}
+      ]
+    },
+    {
+      "id": "dialogue-n5-039",
+      "title": "体の具合",
+      "titleJp": "体の具合",
+      "situation": "告訴別人身體不舒服",
+      "lines": [
+        {"speaker": "A", "japanese": "顔色が悪いですね。大丈夫ですか。", "chinese": "您臉色不好呢。沒事吧？"},
+        {"speaker": "B", "japanese": "少し頭が痛いです。風邪かもしれません。", "chinese": "有點頭痛。可能是感冒了。"},
+        {"speaker": "A", "japanese": "熱はありますか。", "chinese": "有發燒嗎？"},
+        {"speaker": "B", "japanese": "少しあります。三十七度ぐらいです。", "chinese": "有一點。大概三十七度。"},
+        {"speaker": "A", "japanese": "早く帰って休んでください。", "chinese": "請早點回去休息。"},
+        {"speaker": "B", "japanese": "そうします。ありがとうございます。", "chinese": "我會這樣做。謝謝您。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "頭が痛い", "chinese": "頭痛"},
+        {"japanese": "早く帰って休む", "chinese": "早點回去休息"}
+      ]
+    },
+    {
+      "id": "dialogue-n5-040",
+      "title": "お正月のあいさつ",
+      "titleJp": "お正月のあいさつ",
+      "situation": "新年互相問候",
+      "lines": [
+        {"speaker": "A", "japanese": "明けましておめでとうございます。", "chinese": "新年快樂。"},
+        {"speaker": "B", "japanese": "おめでとうございます。今年もよろしくお願いします。", "chinese": "恭喜恭喜。今年也請多多關照。"},
+        {"speaker": "A", "japanese": "お正月はどうでしたか。", "chinese": "新年過得如何？"},
+        {"speaker": "B", "japanese": "家族と一緒に過ごしました。楽しかったです。", "chinese": "和家人一起度過。很快樂。"},
+        {"speaker": "A", "japanese": "お雑煮を食べましたか。", "chinese": "您吃雜煮湯了嗎？"},
+        {"speaker": "B", "japanese": "はい！おいしかったです。今年もいい年にしましょう。", "chinese": "是的！很好吃。今年也讓我們過個好年吧。"},
+        {"speaker": "A", "japanese": "そうですね。頑張りましょう。", "chinese": "說得對。加油吧。"}
+      ],
+      "keyPhrases": [
+        {"japanese": "明けましておめでとう", "chinese": "新年快樂"},
+        {"japanese": "今年もよろしく", "chinese": "今年也請多關照"}
+      ]
     }
   ]
 }
