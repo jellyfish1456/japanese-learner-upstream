@@ -5,11 +5,50 @@ import type { ShadowingSegment } from "../data/shadowing";
 import RubyText from "../components/RubyText";
 import YouTubePlayer from "../components/YouTubePlayer";
 
+// ── SRT parser ───────────────────────────────────────────────────────────────
+function parseSrt(text: string): ShadowingSegment[] {
+  // Normalise line endings, decode common HTML entities
+  const src = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n")
+    .replace(/&amp;/g, "&").replace(/&#39;/g, "'").replace(/&quot;/g, '"')
+    .replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+
+  const timeRe = /(\d{1,2}):(\d{2}):(\d{2})[,.](\d{3})\s*-->\s*(\d{1,2}):(\d{2}):(\d{2})[,.](\d{3})/;
+  const segs: ShadowingSegment[] = [];
+  const blocks = src.split(/\n\s*\n/);
+  for (const block of blocks) {
+    const lines = block.trim().split("\n");
+    const timeLine = lines.find((l) => timeRe.test(l));
+    if (!timeLine) continue;
+    const m = timeLine.match(timeRe)!;
+    const toSec = (h: string, min: string, s: string, ms: string) =>
+      parseInt(h) * 3600 + parseInt(min) * 60 + parseInt(s) + parseInt(ms) / 1000;
+    const start = toSec(m[1], m[2], m[3], m[4]);
+    const end   = toSec(m[5], m[6], m[7], m[8]);
+    const textLines = lines.filter((l) => !timeRe.test(l) && !/^\d+$/.test(l.trim()) && l.trim());
+    const text = textLines.join(" ").replace(/<[^>]+>/g, "").trim();
+    if (text) segs.push({ text, zh: "", start, end });
+  }
+  return segs;
+}
+
 // Web Speech API STT type stubs
+interface ISpeechRecognition {
+  lang: string;
+  continuous: boolean;
+  interimResults: boolean;
+  onresult: ((e: ISpeechRecognitionEvent) => void) | null;
+  onend: (() => void) | null;
+  onerror: (() => void) | null;
+  start(): void;
+  stop(): void;
+}
+interface ISpeechRecognitionEvent {
+  results: { length: number; [i: number]: { [j: number]: { transcript: string } } };
+}
 declare global {
   interface Window {
-    SpeechRecognition?: typeof SpeechRecognition;
-    webkitSpeechRecognition?: typeof SpeechRecognition;
+    SpeechRecognition?: new () => ISpeechRecognition;
+    webkitSpeechRecognition?: new () => ISpeechRecognition;
   }
 }
 
@@ -75,10 +114,30 @@ export default function ShadowingPage() {
     () => (article?.youtubeId ? "loading" : "idle")
   );
 
+  // SRT file upload
+  const srtInputRef = useRef<HTMLInputElement>(null);
+
+  const handleSrtFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const text = ev.target?.result as string;
+      const segs = parseSrt(text);
+      if (segs.length > 0) {
+        setYtCaptions(segs);
+        setCaptionStatus("ok");
+      }
+    };
+    reader.readAsText(file, "utf-8");
+    // Reset so same file can be re-uploaded
+    e.target.value = "";
+  };
+
   // Live STT (speech-to-text) state — fallback when CC unavailable
   const [sttActive, setSttActive] = useState(false);
   const [sttText, setSttText] = useState<string[]>([]);
-  const sttRef = useRef<SpeechRecognition | null>(null);
+  const sttRef = useRef<ISpeechRecognition | null>(null);
 
   // TTS state
   const [ttsIdx, setTtsIdx] = useState(-1);
@@ -109,7 +168,7 @@ export default function ShadowingPage() {
     rec.lang = "ja-JP";
     rec.continuous = true;
     rec.interimResults = true;
-    rec.onresult = (e: SpeechRecognitionEvent) => {
+    rec.onresult = (e: ISpeechRecognitionEvent) => {
       const lines: string[] = [];
       for (let i = 0; i < e.results.length; i++) {
         lines.push(e.results[i][0].transcript);
@@ -410,10 +469,17 @@ export default function ShadowingPage() {
               </p>
             )}
             {captionStatus === "error" && (
-              <div className="mb-1">
-                <p className="text-xs text-red-400 mb-2">
+              <div className="mb-1 space-y-2">
+                <p className="text-xs text-red-400">
                   ✗ 此影片無法取得 CC 字幕
                 </p>
+                {/* SRT upload (shown on error too) */}
+                <button
+                  onClick={() => srtInputRef.current?.click()}
+                  className="w-full py-2.5 rounded-xl text-sm font-semibold transition-colors tap-active flex items-center justify-center gap-2 bg-indigo-500 hover:bg-indigo-600 text-white"
+                >
+                  📄 上傳字幕檔 (.srt)
+                </button>
                 <button
                   onClick={sttActive ? stopStt : startStt}
                   className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-colors tap-active flex items-center justify-center gap-2 ${
@@ -426,6 +492,25 @@ export default function ShadowingPage() {
                 </button>
               </div>
             )}
+            {/* SRT upload button — available any time a video is loaded (even when CC ok) */}
+            {captionStatus !== "error" && captionStatus !== "loading" && (
+              <div className="mb-1 flex justify-end">
+                <button
+                  onClick={() => srtInputRef.current?.click()}
+                  className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-200 dark:hover:bg-indigo-800/40 transition-colors tap-active"
+                >
+                  📄 上傳 .srt 字幕
+                </button>
+              </div>
+            )}
+            {/* Hidden SRT file input */}
+            <input
+              ref={srtInputRef}
+              type="file"
+              accept=".srt,.txt"
+              className="hidden"
+              onChange={handleSrtFile}
+            />
             {/* ── Current subtitle / STT live display ── */}
             {(captionStatus === "ok" || sttActive || sttText.length > 0) && (
               <div className="mt-2 min-h-[60px] rounded-xl bg-black/80 dark:bg-black/90 flex items-center justify-center px-4 py-3">
