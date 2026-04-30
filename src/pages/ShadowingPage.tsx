@@ -518,13 +518,6 @@ export default function ShadowingPage() {
                 <p className="text-xs text-red-400">
                   ✗ 此影片無法取得 CC 字幕
                 </p>
-                {/* SRT upload (shown on error too) */}
-                <button
-                  onClick={() => srtInputRef.current?.click()}
-                  className="w-full py-2.5 rounded-xl text-sm font-semibold transition-colors tap-active flex items-center justify-center gap-2 bg-indigo-500 hover:bg-indigo-600 text-white"
-                >
-                  📄 上傳字幕檔 (.srt)
-                </button>
                 <button
                   onClick={sttActive ? stopStt : startStt}
                   className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-colors tap-active flex items-center justify-center gap-2 ${
@@ -537,18 +530,7 @@ export default function ShadowingPage() {
                 </button>
               </div>
             )}
-            {/* SRT upload button — available any time a video is loaded (even when CC ok) */}
-            {captionStatus !== "error" && captionStatus !== "loading" && (
-              <div className="mb-1 flex justify-end">
-                <button
-                  onClick={() => srtInputRef.current?.click()}
-                  className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-200 dark:hover:bg-indigo-800/40 transition-colors tap-active"
-                >
-                  📄 上傳 .srt 字幕
-                </button>
-              </div>
-            )}
-            {/* Hidden SRT file input */}
+            {/* Hidden SRT file input (upload UI hidden for now) */}
             <input
               ref={srtInputRef}
               type="file"
