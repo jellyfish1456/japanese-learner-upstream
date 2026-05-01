@@ -214,7 +214,7 @@ export default function HomePage() {
                   >
                     <div className="text-3xl mb-2">{s.icon}</div>
                     <div className="text-lg font-bold">{ds.level}</div>
-                    <div className="text-xs opacity-80 mt-0.5">20 題聽力</div>
+                    <div className="text-xs opacity-80 mt-0.5">100 題聽力</div>
                   </button>
                 );
               })}

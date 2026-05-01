@@ -28,7 +28,7 @@ export default function ListeningSessionPage() {
   const [speed, setSpeed] = useState<number>(1.0);
 
   const { question, index, total, selected, correct, done, answer, next, replay } =
-    useListeningSession(upperLevel, 20, speed);
+    useListeningSession(upperLevel, 100, speed);
 
   if (!question && !done) {
     return (
