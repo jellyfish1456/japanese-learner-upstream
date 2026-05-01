@@ -18,6 +18,8 @@ import PDFStudyPage from "./pages/PDFStudyPage";
 import ShadowingListPage from "./pages/ShadowingListPage";
 import ShadowingPage from "./pages/ShadowingPage";
 import GrammarQuizPage from "./pages/GrammarQuizPage";
+import JapanMapPage from "./pages/JapanMapPage";
+import PrefectureDetailPage from "./pages/PrefectureDetailPage";
 
 export default function App() {
   return (
@@ -42,6 +44,8 @@ export default function App() {
           <Route path="/shadowing/:level" element={<ShadowingListPage />} />
           <Route path="/shadowing/:level/:articleId" element={<ShadowingPage />} />
           <Route path="/grammar/:level" element={<GrammarQuizPage />} />
+          <Route path="/japan-travel" element={<JapanMapPage />} />
+          <Route path="/japan-travel/:prefectureId" element={<PrefectureDetailPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/about" element={<AboutPage />} />
         </Routes>
