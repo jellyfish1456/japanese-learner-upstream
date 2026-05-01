@@ -192,6 +192,35 @@ export default function HomePage() {
             </div>
           </div>
 
+          {/* 克漏字測驗 */}
+          <div className="mt-8">
+            <div className="mb-4">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1">克漏字測驗</h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400">選出正確文法填入空格，每回 20 題</p>
+            </div>
+            <div className="grid grid-cols-3 gap-3">
+              {(["N5", "N4", "N3"] as const).map((lvl) => {
+                const grammarColors: Record<string, { bg: string; icon: string }> = {
+                  N5: { bg: "bg-green-500 hover:bg-green-600", icon: "✏️" },
+                  N4: { bg: "bg-blue-500 hover:bg-blue-600", icon: "📝" },
+                  N3: { bg: "bg-purple-500 hover:bg-purple-600", icon: "🖊️" },
+                };
+                const s = grammarColors[lvl];
+                return (
+                  <button
+                    key={lvl}
+                    onClick={() => navigate(`/grammar/${lvl.toLowerCase()}`)}
+                    className={`${s.bg} text-white rounded-2xl p-4 text-center transition-colors tap-active shadow-sm`}
+                  >
+                    <div className="text-3xl mb-2">{s.icon}</div>
+                    <div className="text-lg font-bold">{lvl}</div>
+                    <div className="text-xs opacity-80 mt-0.5">20 題克漏字</div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
           {/* 聽力練習 */}
           <div className="mt-8">
             <div className="mb-4">
