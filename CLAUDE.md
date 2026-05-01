@@ -7,115 +7,164 @@
 
 ---
 
+## ✅ MANDATORY AFTER EVERY TASK
+
+1. **`npm run build`** — must pass (TypeScript + Vite)
+2. **`npm run lint`** — must pass (zero errors)
+3. **`git push`** — then check `gh run list --limit 1` to confirm CI green
+
+If lint or build fails → fix immediately before pushing.
+
+---
+
 ## ⚙️ Version Control Rule (AUTO-APPLY EVERY SESSION)
 
 **File**: `src/pages/SettingsPage.tsx` → `const APP_VERSION = "CH{DATE}-{N}"`
 
 - Format: `CH` + `YYYYMMDD` + `-` + sequence number starting at `1`
-- **Increment rule**: Each session that touches any source file must bump the version before committing.
-  - Same date → increment the trailing number (`CH20260426-2` → `CH20260426-3`)
-  - New date → reset to `-1` (`CH20260426-3` → `CH20260427-1`)
-- **Current version**: `CH20260427-2`
-- Do this automatically — user will never need to ask again.
+- **Increment rule**: Each commit that touches any source file must bump the version.
+  - Same date → increment trailing number (`CH20260501-4` → `CH20260501-5`)
+  - New date → reset to `-1`
+- **Current version**: `CH20260501-6`
+- Do this automatically — user will never need to ask.
+
+---
+
+## Data Loading Pattern
+
+**ALWAYS use `import.meta.glob`** — never `fetch()` for local JSON data.
+
+```ts
+// ✅ Correct
+const modules = import.meta.glob<MyType>("../../data/subdir/*.json", { eager: true });
+
+// ❌ Wrong — fetch() doesn't work for static assets in this app
+fetch(`${import.meta.env.BASE_URL}data/...`)
+```
+
+See `src/hooks/useDialogues.ts` and `src/hooks/useGrammarQuiz.ts` for reference.
 
 ---
 
 ## Core Features
 
-1. **Learning Datasets** (N5/N4/N3 詞彙+文法)
-   - Vocabulary (vocab-n5.json, vocab-n4.json, vocab-n3.json)
-   - Grammar (grammar-n5.json, grammar-n4.json, grammar-n3.json)
-   - Create/edit custom datasets
+| Feature | Route | Data |
+|---|---|---|
+| Vocab Flashcards | `/study/:id`, `/learn/:id` | `data/n{5,4,3}_vocab.json` |
+| 日常對話 | `/dialogue/:level` | `data/dialogues/dialogue-n{5,4,3}.json` |
+| 聽力練習 | `/listening/:level` | same dialogue JSON, 100q pool, 100/session |
+| 跟讀練習 Shadowing | `/shadowing/:level/:id` | `src/data/shadowing.ts` |
+| YouTube 跟讀 | `/shadowing/youtube` | YouTube CC via proxy |
+| 動詞變化 | `/verb-conjugation` | `src/data/verbConjugation.ts` |
+| **克漏字測驗** | `/grammar/:level` | `data/grammar-quiz/grammar-quiz-n{5,4,3}.json` |
+| Settings | `/settings` | — |
 
-2. **Study Modes**
-   - **Learn Mode**: Flashcard-style with swipeable cards + seekable progress bar
-   - **Study Mode**: Quiz-based review
+---
 
-3. **Daily Dialogue** (日常對話) — N5/N4/N3, chat-bubble UI, per-line TTS
+## Data Files
 
-4. **Listening Practice** (聽力練習) — N5/N4/N3 MCQ
+```
+data/
+  n5_vocab.json / n4_vocab.json / n3_vocab.json
+  grammar-n5.json / grammar-n4.json / grammar-n3.json   ← vocab-style datasets (empty)
+  dialogues/
+    dialogue-n5.json   (100 dialogues, ~616 lines)
+    dialogue-n4.json   (100 dialogues, ~625 lines)
+    dialogue-n3.json   (100 dialogues, ~625 lines)
+  grammar-quiz/
+    grammar-quiz-n5.json   (50 questions)
+    grammar-quiz-n4.json   (50 questions)
+    grammar-quiz-n3.json   (50 questions)
+```
 
-5. **Verb Conjugation** (動詞變化) — 3 groups × 10-11 verbs × 11 forms
-
-6. **Shadowing 跟讀練習** — N5/N4/N3 articles, TTS sentence highlight, YouTube embed + caption sync
-
-7. **Settings** (設定)
-   - Theme, language, speech rate (0.5×–1.25×)
-   - Google Drive sync (requires `VITE_GOOGLE_CLIENT_ID` GitHub secret)
-   - Version display (`APP_VERSION`)
+### Grammar Quiz JSON Format
+```json
+{
+  "name": "N5 克漏字",
+  "level": "N5",
+  "questions": [
+    {
+      "id": "n5-001",
+      "sentence": "私は学校___行きます。",
+      "answer": "に",
+      "choices": ["に", "で", "を", "が"],
+      "grammar": "に（方向）",
+      "explanation": "「に」は移動の方向を表します。"
+    }
+  ]
+}
+```
 
 ---
 
 ## Key Technical Details
 
-### TTS (Web Speech API)
-- `src/lib/tts.ts`: `getBestJapaneseVoice()` — priority: Kyoko > Google 日本語 > O-Ren > Otoya > Hattori > any `ja`
-- `src/components/SpeakButton.tsx`: click-to-speak, reads `speechRate` from `loadSettings()`
-- Rate stored in `AppSettings.speechRate` (default `0.9`)
+### ESLint Rules (CI enforced — fix before pushing)
+- `react-hooks/refs`: never assign `ref.current` during render → use `useEffect`
+  ```ts
+  // ❌ speedRef.current = speed;  ← in render body
+  // ✅ useEffect(() => { speedRef.current = speed; }, [speed]);
+  ```
+- `react-refresh/only-export-components`: never export non-component symbols from `.tsx`
+- Type-only imports: use `import type { Foo }` not `import { Foo }` when `verbatimModuleSyntax` is on
+- No unused `eslint-disable` directives
 
-### Shadowing
-- `src/data/shadowing.ts`: `ShadowingArticle` with `segments[]` (`text`, `zh`, optional `start`/`end` timestamps)
-- `src/pages/ShadowingPage.tsx`: YouTube embed + caption fetch (`youtube.com/api/timedtext`), CORS fallback to article text
-- `src/pages/ShadowingListPage.tsx`: level-filtered article list
+### TTS (Web Speech API)
+- `src/lib/tts.ts`: `getBestJapaneseVoice()` — priority: Kyoko > Google 日本語 > any `ja`
+- `src/components/SpeakButton.tsx`: reads `speechRate` from `loadSettings()`
+- Listening session speed: `useListeningSession(level, 100, speed)` — speedRef updated via `useEffect`
 
 ### YouTube Caption Sync
-- YouTube requires **signed URLs** from `ytInitialPlayerResponse.captionTracks` — the simple timedtext API no longer works; watch-page has no CORS header
-- **Primary proxy**: `api/captions.js` — Vercel serverless function in this repo; auto-active when deployed on Vercel at `{origin}/api/captions`
-- **Alternate proxy**: `VITE_CAPTION_PROXY_URL` → Cloudflare Worker (`cloudflare-caption-proxy/worker.js`)
-- `ShadowingPage` calls `getCaptionProxyUrl()` = `VITE_CAPTION_PROXY_URL || {window.location.origin}/api/captions`
-- On GitHub Pages the `/api/captions` call returns 404 → error state → shows Vercel setup guide in Settings
-- Flow: browser → proxy (server-side) → `youtube.com/watch` → parse `ytInitialPlayerResponse` → fetch signed timedtext URL → return JSON3
-- JSON3 format: `events[].tStartMs`, `dDurationMs`, `segs[].utf8`
-- `vercel.json`: `buildCommand=npm run build`, `outputDirectory=dist`
+- Primary: `api/captions.js` Vercel serverless function
+- Browser fallback: `getPlayerResponse()` from YouTube IFrame API → signed URL → `credentials: 'include'`
+- `VITE_CAPTION_PROXY_URL` env var → GitHub Actions secret
 
 ### Furigana (Ruby Text)
-- `src/lib/furigana-map.json` (501KB, pre-generated)
-- `src/components/RubyText.tsx`: lazy-loads map, renders `<ruby>` tags
-
-### Google Drive Sync
-- `VITE_GOOGLE_CLIENT_ID` env var → GitHub Actions secret
-- If missing: SettingsPage shows 6-step setup guide instead of sync UI
-- `src/lib/google/`: `gis.ts`, `driveApi.ts`, `syncEngine.ts`, `useGoogleSync.ts`
-
-### Storage (`src/lib/storage.ts`)
-- `AppSettings`: `{ defaultSessionSize: number, showSwipeAssist: boolean, speechRate: number }`
-- Defaults: `{ defaultSessionSize: 20, showSwipeAssist: true, speechRate: 0.9 }`
-
-### ESLint Rules (strict — CI enforced)
-- `react-refresh/only-export-components`: never export non-component symbols from `.tsx` files → move helpers to `.ts`
-- `react-hooks/set-state-in-effect`: never call `setState` synchronously in `useEffect` body → use lazy `useState` initializers or async callbacks
-- `react-hooks/refs`: never assign `ref.current` during render → use `useLayoutEffect`
-- `react-hooks/immutability`: `useCallback` cannot reference itself → use `useRef` + `useLayoutEffect` pattern
+- `src/lib/furigana-map.json` (501KB)
+- `src/components/RubyText.tsx` — exact-match lookup
+- `src/components/RubyTextAuto.tsx` — greedy word-level scan via `getFuriganaHtmlAuto()`
 
 ### Routing (`src/App.tsx`)
 ```
-/                        → HomePage
-/shadowing/:level        → ShadowingListPage
-/shadowing/:level/:id    → ShadowingPage
-/settings                → SettingsPage
-...
+/                           → HomePage
+/grammar/:level             → GrammarQuizPage
+/listening/:level           → ListeningSessionPage
+/dialogue/:level            → DialogueListPage
+/shadowing/youtube          → ShadowingPage
+/shadowing/:level           → ShadowingListPage
+/shadowing/:level/:id       → ShadowingPage
+/verb-conjugation           → VerbConjugationPage
+/settings                   → SettingsPage
 ```
+
+### Storage (`src/lib/storage.ts`)
+- `AppSettings`: `{ defaultSessionSize, showSwipeAssist, speechRate }`
+- Defaults: `{ defaultSessionSize: 20, showSwipeAssist: true, speechRate: 0.9 }`
+
+### Google Drive Sync
+- `VITE_GOOGLE_CLIENT_ID` → GitHub secret
+- Missing → SettingsPage shows setup guide
 
 ---
 
 ## File Organization
 ```
 src/
-  pages/       (HomePage, ShadowingPage, ShadowingListPage, SettingsPage, PDFStudyPage, …)
-  components/  (SpeakButton, RubyText, YouTubePlayer, LearnCard, …)
-  hooks/       (useSettings, useDatasets, …)
-  data/        (shadowing.ts, verbConjugation.ts)
-  lib/         (storage.ts, tts.ts, furigana-map.json, google/, …)
-  App.tsx      (Routes)
+  pages/       GrammarQuizPage, ListeningSessionPage, ShadowingPage, HomePage, …
+  components/  SpeakButton, RubyText, RubyTextAuto, YouTubePlayer, …
+  hooks/       useGrammarQuiz, useGrammarSession, useListeningSession, useDialogues, …
+  data/        shadowing.ts, verbConjugation.ts
+  lib/         storage.ts, tts.ts, furigana.ts, furigana-map.json, google/…
+  App.tsx
 ```
 
 ---
 
-## Token-Saving Mode Active
-- Minimal explanations unless requested
-- Output only modified code blocks
-- Report errors directly with fixes
+## Communication Style
+- Reply in **English**, brief, minimal tokens
+- Only show modified code sections, not full files
+- Fix errors immediately without asking
 
 ---
 
-**Last Updated**: 2026-04-27 | **Current Version**: CH20260427-1
+**Last Updated**: 2026-05-01 | **Current Version**: CH20260501-6
