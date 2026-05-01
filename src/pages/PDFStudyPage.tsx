@@ -22,7 +22,6 @@ async function ocrCanvas(canvas: HTMLCanvasElement): Promise<string> {
   return result.data.text;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PdfItem = { str: string; x: number; y: number; h: number };
 
 /** Extract one page's text items with position info */

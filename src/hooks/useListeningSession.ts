@@ -59,7 +59,7 @@ export function useListeningSession(level: string, questionCount = 10, speed = 1
   const question = questions[index] ?? null;
   const synthRef = useRef<SpeechSynthesisUtterance | null>(null);
   const speedRef = useRef<number>(speed);
-  speedRef.current = speed;
+  useEffect(() => { speedRef.current = speed; }, [speed]);
 
   const speak = useCallback((text: string) => {
     if (!window.speechSynthesis) return;
