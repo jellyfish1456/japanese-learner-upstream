@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useGrammarSession } from "../hooks/useGrammarSession";
 import type { GrammarQuestion } from "../hooks/useGrammarSession";
+import { useGrammarSession } from "../hooks/useGrammarSession";
+import { useGrammarQuizByLevel } from "../hooks/useGrammarQuiz";
 
 const levelColors: Record<string, { badge: string; correct: string; wrong: string; accent: string }> = {
   N5: {
@@ -24,7 +24,15 @@ const levelColors: Record<string, { badge: string; correct: string; wrong: strin
   },
 };
 
-function SentenceDisplay({ sentence, selected, answer }: { sentence: string; selected: string | null; answer: string }) {
+function SentenceDisplay({
+  sentence,
+  selected,
+  answer,
+}: {
+  sentence: string;
+  selected: string | null;
+  answer: string;
+}) {
   const parts = sentence.split("___");
   return (
     <p className="text-xl font-medium text-gray-900 dark:text-gray-50 leading-relaxed text-center">
@@ -108,8 +116,6 @@ function QuizContent({ level, questions }: { level: string; questions: GrammarQu
           選出正確答案填入空格
         </p>
         <SentenceDisplay sentence={question.sentence} selected={selected} answer={question.answer} />
-
-        {/* Grammar point & explanation after answer */}
         {selected && (
           <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
             <p className="text-xs font-bold text-blue-500 mb-1">📝 {question.grammar}</p>
@@ -129,7 +135,8 @@ function QuizContent({ level, questions }: { level: string; questions: GrammarQu
             } else if (choice === selected) {
               style = colors.wrong + " border";
             } else {
-              style = "bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 text-gray-400 dark:text-gray-500";
+              style =
+                "bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 text-gray-400 dark:text-gray-500";
             }
           }
           return (
@@ -151,7 +158,6 @@ function QuizContent({ level, questions }: { level: string; questions: GrammarQu
         })}
       </div>
 
-      {/* Next button */}
       {selected && (
         <button
           onClick={next}
@@ -167,24 +173,7 @@ function QuizContent({ level, questions }: { level: string; questions: GrammarQu
 export default function GrammarQuizPage() {
   const { level } = useParams<{ level: string }>();
   const upperLevel = (level ?? "").toUpperCase();
-  const [questions, setQuestions] = useState<GrammarQuestion[] | null>(null);
-
-  useEffect(() => {
-    const path = `${import.meta.env.BASE_URL}data/grammar-quiz/grammar-quiz-${level?.toLowerCase()}.json`;
-    fetch(path)
-      .then((r) => r.json())
-      .then((d) => setQuestions(d.questions ?? []))
-      .catch(() => setQuestions([]));
-  }, [level]);
-
-  if (questions === null) {
-    return (
-      <div className="text-center py-16 text-gray-400 dark:text-gray-500">
-        <div className="text-4xl mb-3">⏳</div>
-        <p>載入中...</p>
-      </div>
-    );
-  }
+  const questions = useGrammarQuizByLevel(upperLevel);
 
   if (questions.length === 0) {
     return (
