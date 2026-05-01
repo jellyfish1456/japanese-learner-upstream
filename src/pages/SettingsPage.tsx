@@ -2,9 +2,25 @@ import { useDarkMode } from "../hooks/useDarkMode";
 import { useSettings } from "../hooks/useSettings";
 import SyncSection from "../components/SyncSection";
 
-const APP_VERSION = "CH20260501-6";
+declare const __BUILD_TIME__: string;
+
+const APP_VERSION = "CH20260501-7";
 const HAS_GOOGLE_ID   = Boolean(import.meta.env.VITE_GOOGLE_CLIENT_ID);
 const HAS_CAPTION_PROXY = Boolean(import.meta.env.VITE_CAPTION_PROXY_URL);
+
+function formatBuildTime(iso: string): string {
+  try {
+    const d = new Date(iso);
+    const y = d.getFullYear();
+    const mo = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    const h = String(d.getHours()).padStart(2, "0");
+    const min = String(d.getMinutes()).padStart(2, "0");
+    return `${y}/${mo}/${day} ${h}:${min}`;
+  } catch {
+    return iso;
+  }
+}
 
 function ToggleSwitch({ checked, onChange }: { checked: boolean; onChange: () => void }) {
   return (
@@ -214,6 +230,10 @@ export default function SettingsPage() {
         <div className="flex justify-between items-center">
           <span className="text-sm text-gray-600 dark:text-gray-300">版本號</span>
           <span className="text-sm font-mono font-semibold text-blue-600 dark:text-blue-400">{APP_VERSION}</span>
+        </div>
+        <div className="flex justify-between items-center">
+          <span className="text-sm text-gray-600 dark:text-gray-300">部署時間</span>
+          <span className="text-sm font-mono text-gray-500 dark:text-gray-400">{formatBuildTime(__BUILD_TIME__)}</span>
         </div>
         <div className="flex justify-between items-center">
           <span className="text-sm text-gray-600 dark:text-gray-300">名稱</span>
