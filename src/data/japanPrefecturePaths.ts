@@ -226,12 +226,13 @@ export function polygonToPath(
 }
 
 // Main map projection constants
-export const MAP_MIN_LON = 129.0;
-export const MAP_MIN_LAT = 30.8;
-export const MAP_SCALE_X = 15.5;
-export const MAP_SCALE_Y = 17.0;
-export const MAP_OFF_X = 8;
-export const MAP_OFF_Y = 5;
-export const MAP_HEIGHT = 250;
-export const MAP_W = 265;
-export const MAP_H = 265;
+// Scale ratio 25/20 ≈ 1/cos(37°N) for correct geographic aspect ratio
+export const MAP_MIN_LON = 128.8;
+export const MAP_MIN_LAT = 30.5;
+export const MAP_SCALE_X = 20;    // px per degree longitude
+export const MAP_SCALE_Y = 25;    // px per degree latitude
+export const MAP_OFF_X = 10;
+export const MAP_OFF_Y = 10;
+export const MAP_HEIGHT = 382;    // (45.5-30.5)*25+10 = 385 → use 382 for tight fit
+export const MAP_W = 358;
+export const MAP_H = 450;         // extra space for Okinawa inset at bottom
