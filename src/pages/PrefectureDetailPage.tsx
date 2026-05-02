@@ -104,17 +104,17 @@ function PrefectureSubMap({
               <g key={city.name}>
                 {city.capital ? (
                   <>
-                    <circle cx={x} cy={y} r={7} fill={color.hover} stroke="white" strokeWidth={1.5} />
+                    <circle cx={x} cy={y} r={8} fill={color.hover} stroke="white" strokeWidth={1.5} />
                     <text x={x} y={y + 1} textAnchor="middle" dominantBaseline="middle"
-                      fontSize={7} fill="white" fontWeight="bold"
+                      fontSize={9} fill="white" fontWeight="bold"
                       style={{ userSelect: "none", pointerEvents: "none" }}>★</text>
                   </>
                 ) : (
-                  <circle cx={x} cy={y} r={4} fill={color.base} stroke="white" strokeWidth={1} />
+                  <circle cx={x} cy={y} r={5} fill={color.base} stroke="white" strokeWidth={1} />
                 )}
                 <text
-                  x={x + (city.capital ? 10 : 7)} y={y + 1}
-                  fontSize={city.capital ? 10 : 8.5}
+                  x={x + (city.capital ? 12 : 8)} y={y + 1}
+                  fontSize={city.capital ? 13 : 11}
                   fill="#1f2937"
                   dominantBaseline="middle"
                   fontWeight={city.capital ? "bold" : "normal"}
@@ -132,11 +132,11 @@ function PrefectureSubMap({
             if (x < 4 || x > W - 4 || y < 4 || y > H - 4) return null;
             return (
               <g key={loc.id} style={{ pointerEvents: "none" }}>
-                <circle cx={x} cy={y} r={6} fill={TYPE_COLOR[loc.type]} stroke="white" strokeWidth={1.5} />
+                <circle cx={x} cy={y} r={8} fill={TYPE_COLOR[loc.type]} stroke="white" strokeWidth={1.5} />
                 <text x={x} y={y + 1} textAnchor="middle" dominantBaseline="middle"
-                  fontSize={6} fill="white" fontWeight="bold"
+                  fontSize={8} fill="white" fontWeight="bold"
                   style={{ userSelect: "none" }}>T</text>
-                <text x={x + 9} y={y + 1} fontSize={8} fill="#dc2626"
+                <text x={x + 11} y={y + 1} fontSize={11} fill="#dc2626"
                   dominantBaseline="middle" fontWeight="bold"
                   style={{ userSelect: "none" }}>TSMC</text>
               </g>
