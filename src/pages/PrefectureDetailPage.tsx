@@ -1,6 +1,134 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { prefectureMap, REGION_HEX } from "../data/japanTravel";
+import { prefecturePolygons } from "../data/japanPrefecturePaths";
+import { subRegionData } from "../data/japanSubRegions";
 
+// ── Sub-prefecture map ──────────────────────────────────────────────────────
+function PrefectureSubMap({
+  id,
+  color,
+}: {
+  id: string;
+  color: { base: string; hover: string };
+}) {
+  const pts = prefecturePolygons[id];
+  const cities = subRegionData[id]?.cities ?? [];
+  if (!pts || pts.length === 0) return null;
+
+  const W = 300, H = 200, PAD = 22;
+
+  const lons = pts.map((p) => p[0]);
+  const lats = pts.map((p) => p[1]);
+  // also include city coords in bounding box
+  cities.forEach((c) => { lons.push(c.lon); lats.push(c.lat); });
+
+  const minLon = Math.min(...lons);
+  const maxLon = Math.max(...lons);
+  const minLat = Math.min(...lats);
+  const maxLat = Math.max(...lats);
+
+  const spanLon = maxLon - minLon || 0.5;
+  const spanLat = maxLat - minLat || 0.5;
+
+  const sx = (W - PAD * 2) / spanLon;
+  const sy = (H - PAD * 2) / spanLat;
+  const s = Math.min(sx, sy);
+
+  const drawW = spanLon * s;
+  const drawH = spanLat * s;
+  const offX = (W - drawW) / 2;
+  const offY = (H - drawH) / 2;
+
+  const toX = (lon: number) => (lon - minLon) * s + offX;
+  const toY = (lat: number) => H - (lat - minLat) * s - offY;
+
+  const pathD =
+    pts
+      .map(([lon, lat], i) => `${i === 0 ? "M" : "L"}${toX(lon).toFixed(1)},${toY(lat).toFixed(1)}`)
+      .join(" ") + " Z";
+
+  return (
+    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 mb-4">
+      <div className="flex items-center gap-2 mb-3">
+        <span className="text-xl">🗺️</span>
+        <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">主要都市マップ</p>
+      </div>
+      <div className="flex justify-center">
+        <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="max-w-full">
+          {/* Prefecture fill */}
+          <path
+            d={pathD}
+            fill={color.base}
+            fillOpacity={0.18}
+            stroke={color.base}
+            strokeWidth={1.8}
+            strokeLinejoin="round"
+          />
+
+          {/* City pins */}
+          {cities.map((city) => {
+            const x = toX(city.lon);
+            const y = toY(city.lat);
+            return (
+              <g key={city.name}>
+                {city.capital ? (
+                  <circle cx={x} cy={y} r={6} fill={color.hover} stroke="white" strokeWidth={1.5} />
+                ) : (
+                  <circle cx={x} cy={y} r={3.5} fill={color.base} stroke="white" strokeWidth={1} />
+                )}
+                <text
+                  x={x + (city.capital ? 9 : 7)}
+                  y={y + 1}
+                  fontSize={city.capital ? 9.5 : 8}
+                  fill="#1f2937"
+                  dominantBaseline="middle"
+                  fontWeight={city.capital ? "bold" : "normal"}
+                  style={{ userSelect: "none" }}
+                >
+                  {city.name}
+                </text>
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+// ── Universities section ────────────────────────────────────────────────────
+function UniversitiesSection({
+  unis,
+  color,
+}: {
+  unis: string[];
+  color: { base: string; hover: string };
+}) {
+  if (!unis.length) return null;
+  return (
+    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 mb-4">
+      <div className="flex items-center gap-2 mb-3">
+        <span className="text-xl">🎓</span>
+        <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">主要大学</p>
+      </div>
+      <div className="space-y-1.5">
+        {unis.map((u, i) => (
+          <div key={i} className="flex items-center gap-2.5">
+            <span
+              className="flex-shrink-0 w-5 h-5 rounded-full text-white text-xs flex items-center justify-center font-bold"
+              style={{ backgroundColor: i === 0 ? color.hover : color.base }}
+            >
+              {i + 1}
+            </span>
+            <span className="text-sm text-gray-700 dark:text-gray-300">{u}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Main page ───────────────────────────────────────────────────────────────
 export default function PrefectureDetailPage() {
   const { prefectureId } = useParams<{ prefectureId: string }>();
   const navigate = useNavigate();
@@ -22,6 +150,7 @@ export default function PrefectureDetailPage() {
   }
 
   const color = REGION_HEX[p.region] ?? { base: "#94a3b8", hover: "#64748b" };
+  const sub = subRegionData[p.id];
 
   const regionEmoji: Record<string, string> = {
     北海道: "🏔️", 東北: "🌸", 関東: "🗼", 中部: "🗻", 近畿: "⛩️",
@@ -30,7 +159,7 @@ export default function PrefectureDetailPage() {
 
   return (
     <div>
-      {/* Back button */}
+      {/* Back */}
       <button
         onClick={() => navigate("/japan-travel")}
         className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 mb-4 transition-colors"
@@ -58,6 +187,9 @@ export default function PrefectureDetailPage() {
         </div>
         <p className="text-sm mt-3 opacity-90 leading-relaxed">{p.desc}</p>
       </div>
+
+      {/* Sub-prefecture map */}
+      <PrefectureSubMap id={p.id} color={color} />
 
       {/* Best season */}
       <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 mb-4 flex items-start gap-3">
@@ -90,7 +222,7 @@ export default function PrefectureDetailPage() {
       </div>
 
       {/* Food */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 mb-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 mb-4">
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xl">🍴</span>
           <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">當地美食</p>
@@ -108,11 +240,14 @@ export default function PrefectureDetailPage() {
         </div>
       </div>
 
-      {/* Navigation buttons */}
-      <div className="flex gap-3">
+      {/* Universities */}
+      {sub && <UniversitiesSection unis={sub.universities} color={color} />}
+
+      {/* Back button */}
+      <div className="pb-4">
         <button
           onClick={() => navigate("/japan-travel")}
-          className="flex-1 py-3 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+          className="w-full py-3 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
         >
           回到地圖
         </button>
