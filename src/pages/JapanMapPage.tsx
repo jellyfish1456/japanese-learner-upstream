@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { prefectures, REGION_HEX } from "../data/japanTravel";
 import { subRegionData } from "../data/japanSubRegions";
@@ -104,6 +104,11 @@ export default function JapanMapPage() {
   const [hovered, setHovered] = useState<string | null>(null);
   const [showTSMC, setShowTSMC] = useState(true);
 
+  // Scroll to top when page mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const hovPref = hovered ? prefectures.find((p) => p.id === hovered) ?? null : null;
   const hovColor = hovPref ? (REGION_HEX[hovPref.region] ?? null) : null;
 
@@ -190,10 +195,10 @@ export default function JapanMapPage() {
                 key={`lbl-${p.id}`}
                 x={lx} y={ly}
                 textAnchor="middle" dominantBaseline="central"
-                fontSize={isHov ? 12 : 9}
+                fontSize={isHov ? 14 : 10.5}
                 fontWeight={isHov ? "bold" : "600"}
                 fill={isHov ? "#0f172a" : "#1e293b"}
-                stroke="white" strokeWidth={isHov ? 3.5 : 2.5}
+                stroke="white" strokeWidth={isHov ? 4 : 3}
                 paintOrder="stroke"
                 style={{ pointerEvents: "none", userSelect: "none", transition: "font-size 0.15s" }}
               >
