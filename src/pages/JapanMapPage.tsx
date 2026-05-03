@@ -1,9 +1,9 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { prefectures, REGION_HEX } from "../data/japanTravel";
 import { subRegionData } from "../data/japanSubRegions";
 import { tsmcLocations, TYPE_LABEL } from "../data/tsmcLocations";
-import { prefecturePolygons } from "../data/japanPrefecturePaths";
+import { prefecturePaths } from "../data/prefectureSvgPaths";
 
 const REGION_ORDER = ["北海道", "東北", "関東", "中部", "近畿", "中国", "四国", "九州", "沖縄"];
 
@@ -35,35 +35,14 @@ const PREF_READING: Record<string, string> = {
 
 // ── Label position offsets [dx, dy] to avoid overlap in crowded areas ───────
 const LABEL_OFFSET: Record<string, [number, number]> = {
-  // Kanto — very dense
-  tokyo:    [18, 8],
-  saitama:  [-2, -6],
-  kanagawa: [18, 14],
-  chiba:    [22, 0],
-  yamanashi:[-12, 5],
-  // Kinki — dense
-  osaka:    [8, 12],
-  nara:     [12, 6],
-  shiga:    [-4, -8],
-  kyoto:    [-18, -4],
-  wakayama: [2, 14],
-  // Chubu — slight spreads
-  toyama:   [0, -5],
-  fukui:    [-8, 5],
-  gifu:     [-2, -3],
-  // Shikoku
-  kagawa:   [0, -6],
-  tokushima:[10, 2],
-  // Kyushu
-  saga:     [-10, 0],
-  nagasaki: [-16, 6],
-  oita:     [10, -2],
+  tokyo: [18, 8], saitama: [-2, -6], kanagawa: [18, 14],
+  chiba: [22, 0], yamanashi: [-12, 5],
+  osaka: [8, 12], nara: [12, 6], shiga: [-4, -8],
+  kyoto: [-18, -4], wakayama: [2, 14],
+  toyama: [0, -5], fukui: [-8, 5], gifu: [-2, -3],
+  kagawa: [0, -6], tokushima: [10, 2],
+  saga: [-10, 0], nagasaki: [-16, 6], oita: [10, -2],
 };
-
-// ── Convert polygon [lon, lat] pairs → SVG points string ────────────────────
-function toSvgPoints(poly: [number, number][]): string {
-  return poly.map(([lon, lat]) => `${imgX(lon).toFixed(1)},${imgY(lat).toFixed(1)}`).join(" ");
-}
 
 // ── Prefecture centroids from capital-city coordinates ──────────────────────
 const CENTROIDS: Record<string, [number, number]> = (() => {
@@ -79,51 +58,10 @@ const CENTROIDS: Record<string, [number, number]> = (() => {
   return map;
 })();
 
-function nearestPref(svgX: number, svgY: number): string | null {
-  let best: string | null = null;
-  let bestDist = Infinity;
-  for (const [id, [cx, cy]] of Object.entries(CENTROIDS)) {
-    const d = (svgX - cx) ** 2 + (svgY - cy) ** 2;
-    if (d < bestDist) { bestDist = d; best = id; }
-  }
-  return best;
-}
-
 export default function JapanMapPage() {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState<string | null>(null);
   const [showTSMC, setShowTSMC] = useState(true);
-
-  const toSVG = useCallback(
-    (clientX: number, clientY: number, el: Element): [number, number] => {
-      const r = el.getBoundingClientRect();
-      return [(clientX - r.left) * (SVG_W / r.width), (clientY - r.top) * (SVG_H / r.height)];
-    }, []
-  );
-
-  const onMove = useCallback(
-    (e: React.MouseEvent<SVGSVGElement>) => {
-      const [sx, sy] = toSVG(e.clientX, e.clientY, e.currentTarget);
-      setHovered(nearestPref(sx, sy));
-    }, [toSVG]
-  );
-
-  const onClick = useCallback(
-    (e: React.MouseEvent<SVGSVGElement>) => {
-      const [sx, sy] = toSVG(e.clientX, e.clientY, e.currentTarget);
-      const id = nearestPref(sx, sy);
-      if (id) navigate(`/japan-travel/${id}`);
-    }, [navigate, toSVG]
-  );
-
-  const onTouch = useCallback(
-    (e: React.TouchEvent<SVGSVGElement>) => {
-      const t = e.changedTouches[0];
-      const [sx, sy] = toSVG(t.clientX, t.clientY, e.currentTarget);
-      const id = nearestPref(sx, sy);
-      if (id) navigate(`/japan-travel/${id}`);
-    }, [navigate, toSVG]
-  );
 
   const hovPref = hovered ? prefectures.find((p) => p.id === hovered) ?? null : null;
   const hovColor = hovPref ? (REGION_HEX[hovPref.region] ?? null) : null;
@@ -151,11 +89,12 @@ export default function JapanMapPage() {
         </button>
       </div>
 
-      {/* Map — Wikipedia SVG background (labels removed) + interactive SVG overlay */}
+      {/* Map — Wikipedia SVG shapes background + accurate GeoJSON overlay */}
       <div
         className="relative w-full overflow-hidden rounded-xl shadow mb-3 -mx-4"
         style={{ aspectRatio: `${SVG_W}/${SVG_H}` }}
       >
+        {/* Base map image (just colored shapes, no labels) */}
         <img
           src="/japanese-learner-upstream/japan-map.svg"
           alt="日本地図"
@@ -164,35 +103,40 @@ export default function JapanMapPage() {
           draggable={false}
         />
 
-        {/* Interactive SVG overlay */}
+        {/* Interactive SVG overlay with accurate GeoJSON paths */}
         <svg
           viewBox={`0 0 ${SVG_W} ${SVG_H}`}
           className="absolute inset-0 w-full h-full"
           style={{ cursor: "pointer", touchAction: "manipulation" }}
-          onMouseMove={onMove}
           onMouseLeave={() => setHovered(null)}
-          onClick={onClick}
-          onTouchEnd={onTouch}
         >
-          {/* ── Prefecture polygon highlight (hovered only) ── */}
-          {hovered && (() => {
-            const poly = prefecturePolygons[hovered];
-            if (!poly) return null;
-            const color = hovColor;
+          {/* ── All 47 prefecture paths — transparent, interactive ── */}
+          {prefectures.map((p) => {
+            const d = prefecturePaths[p.id];
+            if (!d) return null;
+            const isHov = p.id === hovered;
+            const color = REGION_HEX[p.region];
             return (
-              <polygon
-                points={toSvgPoints(poly)}
-                fill={color ? color.hover : "#6366f1"}
-                fillOpacity={0.45}
-                stroke="white"
-                strokeWidth={2.5}
+              <path
+                key={p.id}
+                d={d}
+                fill={isHov && color ? color.hover : "transparent"}
+                fillOpacity={isHov ? 0.50 : 0}
+                stroke={isHov ? "white" : "transparent"}
+                strokeWidth={isHov ? 2.5 : 0}
                 strokeLinejoin="round"
-                style={{ pointerEvents: "none" }}
+                style={{ cursor: "pointer" }}
+                onMouseEnter={() => setHovered(p.id)}
+                onClick={() => navigate(`/japan-travel/${p.id}`)}
+                onTouchEnd={(e) => {
+                  e.preventDefault();
+                  navigate(`/japan-travel/${p.id}`);
+                }}
               />
             );
-          })()}
+          })}
 
-          {/* ── Permanent Japanese labels for all 47 prefectures ── */}
+          {/* ── Japanese kanji labels for all 47 prefectures ── */}
           {prefectures.map((p) => {
             const c = CENTROIDS[p.id];
             if (!c) return null;
@@ -201,26 +145,24 @@ export default function JapanMapPage() {
             const ly = c[1] + oy;
             const isHov = p.id === hovered;
             return (
-              <g key={`label-${p.id}`} style={{ pointerEvents: "none" }}>
-                {/* Kanji label — white outline for readability */}
-                <text
-                  x={lx} y={ly}
-                  textAnchor="middle" dominantBaseline="central"
-                  fontSize={isHov ? 11 : 8.5}
-                  fontWeight={isHov ? "bold" : "600"}
-                  fill={isHov ? "#1e293b" : "#334155"}
-                  stroke="white"
-                  strokeWidth={isHov ? 3 : 2.5}
-                  paintOrder="stroke"
-                  style={{ userSelect: "none", transition: "font-size 0.15s" }}
-                >
-                  {p.nameShort}
-                </text>
-              </g>
+              <text
+                key={`lbl-${p.id}`}
+                x={lx} y={ly}
+                textAnchor="middle" dominantBaseline="central"
+                fontSize={isHov ? 11 : 8.5}
+                fontWeight={isHov ? "bold" : "600"}
+                fill={isHov ? "#1e293b" : "#334155"}
+                stroke="white"
+                strokeWidth={isHov ? 3 : 2.5}
+                paintOrder="stroke"
+                style={{ pointerEvents: "none", userSelect: "none", transition: "font-size 0.15s" }}
+              >
+                {p.nameShort}
+              </text>
             );
           })}
 
-          {/* ── Hover tooltip — furigana pill above label ── */}
+          {/* ── Hover furigana pill ── */}
           {hovered && hovColor && CENTROIDS[hovered] && (() => {
             const c = CENTROIDS[hovered];
             const [ox, oy] = LABEL_OFFSET[hovered] ?? [0, 0];
@@ -231,7 +173,6 @@ export default function JapanMapPage() {
             const pillY = ly - 20;
             return (
               <g style={{ pointerEvents: "none" }}>
-                {/* Furigana pill */}
                 <rect
                   x={lx - pillW / 2} y={pillY - 7}
                   width={pillW} height={14}
