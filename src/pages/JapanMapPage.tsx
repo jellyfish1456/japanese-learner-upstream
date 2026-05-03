@@ -2,7 +2,8 @@ import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { prefectures, REGION_HEX } from "../data/japanTravel";
 import { subRegionData } from "../data/japanSubRegions";
-import { tsmcLocations, TYPE_COLOR, TYPE_LABEL } from "../data/tsmcLocations";
+import { tsmcLocations, TYPE_LABEL } from "../data/tsmcLocations";
+import { prefecturePolygons } from "../data/japanPrefecturePaths";
 
 const REGION_ORDER = ["北海道", "東北", "関東", "中部", "近畿", "中国", "四国", "九州", "沖縄"];
 
@@ -11,6 +12,62 @@ const SVG_W = 570;
 const SVG_H = 755;
 function imgX(lon: number): number { return (lon - 129.0) * 28.7 + 47; }
 function imgY(lat: number): number { return (45.5 - lat) * 50.8 + 8; }
+
+// ── Hiragana readings for hover tooltip furigana ─────────────────────────────
+const PREF_READING: Record<string, string> = {
+  hokkaido: "ほっかいどう",
+  aomori:   "あおもり",
+  iwate:    "いわて",
+  miyagi:   "みやぎ",
+  akita:    "あきた",
+  yamagata: "やまがた",
+  fukushima:"ふくしま",
+  ibaraki:  "いばらき",
+  tochigi:  "とちぎ",
+  gunma:    "ぐんま",
+  saitama:  "さいたま",
+  chiba:    "ちば",
+  tokyo:    "とうきょう",
+  kanagawa: "かながわ",
+  niigata:  "にいがた",
+  toyama:   "とやま",
+  ishikawa: "いしかわ",
+  fukui:    "ふくい",
+  yamanashi:"やまなし",
+  nagano:   "ながの",
+  gifu:     "ぎふ",
+  shizuoka: "しずおか",
+  aichi:    "あいち",
+  mie:      "みえ",
+  shiga:    "しが",
+  kyoto:    "きょうと",
+  osaka:    "おおさか",
+  hyogo:    "ひょうご",
+  nara:     "なら",
+  wakayama: "わかやま",
+  tottori:  "とっとり",
+  shimane:  "しまね",
+  okayama:  "おかやま",
+  hiroshima:"ひろしま",
+  yamaguchi:"やまぐち",
+  tokushima:"とくしま",
+  kagawa:   "かがわ",
+  ehime:    "えひめ",
+  kochi:    "こうち",
+  fukuoka:  "ふくおか",
+  saga:     "さが",
+  nagasaki: "ながさき",
+  kumamoto: "くまもと",
+  oita:     "おおいた",
+  miyazaki: "みやざき",
+  kagoshima:"かごしま",
+  okinawa:  "おきなわ",
+};
+
+// ── Convert polygon [lon, lat] pairs → SVG points string ────────────────────
+function toSvgPoints(poly: [number, number][]): string {
+  return poly.map(([lon, lat]) => `${imgX(lon).toFixed(1)},${imgY(lat).toFixed(1)}`).join(" ");
+}
 
 // ── Prefecture centroids from capital-city coordinates ──────────────────────
 const CENTROIDS: Record<string, [number, number]> = (() => {
@@ -72,9 +129,8 @@ export default function JapanMapPage() {
     }, [navigate, toSVG]
   );
 
-  const hovColor = hovered
-    ? REGION_HEX[prefectures.find((p) => p.id === hovered)?.region ?? ""] ?? null
-    : null;
+  const hovPref = hovered ? prefectures.find((p) => p.id === hovered) ?? null : null;
+  const hovColor = hovPref ? (REGION_HEX[hovPref.region] ?? null) : null;
 
   return (
     <div>
@@ -99,7 +155,7 @@ export default function JapanMapPage() {
         </button>
       </div>
 
-      {/* Map — Wikipedia SVG background + clean hover-only overlay */}
+      {/* Map — Wikipedia SVG background + interactive SVG overlay */}
       <div
         className="relative w-full overflow-hidden rounded-xl shadow mb-3 -mx-4"
         style={{ aspectRatio: `${SVG_W}/${SVG_H}` }}
@@ -112,7 +168,7 @@ export default function JapanMapPage() {
           draggable={false}
         />
 
-        {/* Overlay — NO labels (Wikipedia SVG already has them) — hover tooltip only */}
+        {/* Interactive SVG overlay */}
         <svg
           viewBox={`0 0 ${SVG_W} ${SVG_H}`}
           className="absolute inset-0 w-full h-full"
@@ -122,43 +178,85 @@ export default function JapanMapPage() {
           onClick={onClick}
           onTouchEnd={onTouch}
         >
-          {/* Hover indicator — only shows when hovering */}
+          {/* ── Prefecture polygon highlights ── */}
+          {prefectures.map((p) => {
+            const poly = prefecturePolygons[p.id];
+            if (!poly) return null;
+            const isHov = p.id === hovered;
+            const color = REGION_HEX[p.region];
+            if (!isHov) return null; // only render the hovered one
+            return (
+              <polygon
+                key={p.id}
+                points={toSvgPoints(poly)}
+                fill={color ? color.hover : "#6366f1"}
+                fillOpacity={0.40}
+                stroke={color ? color.hover : "#6366f1"}
+                strokeWidth={2}
+                strokeOpacity={0.8}
+                strokeLinejoin="round"
+                style={{ pointerEvents: "none" }}
+              />
+            );
+          })}
+
+          {/* ── Hover tooltip — kanji + furigana ── */}
           {hovered && hovColor && CENTROIDS[hovered] && (() => {
             const [cx, cy] = CENTROIDS[hovered];
-            const p = prefectures.find((pf) => pf.id === hovered)!;
-            const short = p.nameShort;
-            const pillW = short.length * 11 + 16;
+            const kanji   = hovPref?.nameShort ?? "";
+            const reading = PREF_READING[hovered] ?? "";
+            const pillW   = Math.max(kanji.length * 14 + 20, reading.length * 8 + 20);
+            // Position pill above centroid; flip if too close to top
+            const pillY = cy - 48;
+            const finalY = pillY < 10 ? cy + 10 : pillY;
             return (
               <g style={{ pointerEvents: "none" }}>
-                {/* Glow ring */}
-                <circle cx={cx} cy={cy} r={18} fill={hovColor.base} fillOpacity={0.2} />
-                <circle cx={cx} cy={cy} r={10} fill={hovColor.hover} fillOpacity={0.9}
-                  stroke="white" strokeWidth={2.5} />
-                {/* Name pill */}
-                <rect x={cx - pillW / 2} y={cy - 26} width={pillW} height={18}
-                  rx={9} fill={hovColor.hover} fillOpacity={0.95} />
-                <text x={cx} y={cy - 17} textAnchor="middle" dominantBaseline="middle"
-                  fontSize={10.5} fill="white" fontWeight="bold"
-                  style={{ userSelect: "none" }}>
-                  {short}
+                {/* Centre dot */}
+                <circle cx={cx} cy={cy} r={7} fill={hovColor.hover} fillOpacity={0.95}
+                  stroke="white" strokeWidth={2} />
+                {/* Pill background */}
+                <rect
+                  x={cx - pillW / 2} y={finalY}
+                  width={pillW} height={36}
+                  rx={10} fill={hovColor.hover} fillOpacity={0.95}
+                />
+                {/* Furigana — small hiragana above */}
+                <text
+                  x={cx} y={finalY + 11}
+                  textAnchor="middle" dominantBaseline="middle"
+                  fontSize={9} fill="rgba(255,255,255,0.88)"
+                  style={{ userSelect: "none" }}
+                >
+                  {reading}
+                </text>
+                {/* Kanji — bold below */}
+                <text
+                  x={cx} y={finalY + 26}
+                  textAnchor="middle" dominantBaseline="middle"
+                  fontSize={14} fill="white" fontWeight="bold"
+                  style={{ userSelect: "none" }}
+                >
+                  {kanji}
                 </text>
               </g>
             );
           })()}
 
-          {/* TSMC markers */}
+          {/* ── TSMC 📍 markers ── */}
           {showTSMC && tsmcLocations.map((loc) => {
             const x = imgX(loc.lon);
             const y = imgY(loc.lat);
             if (x < 0 || x > SVG_W || y < 0 || y > SVG_H) return null;
             return (
-              <g key={loc.id} style={{ pointerEvents: "none" }}>
-                <circle cx={x} cy={y} r={8} fill={TYPE_COLOR[loc.type]}
-                  stroke="white" strokeWidth={1.5} />
-                <text x={x} y={y + 1} textAnchor="middle" dominantBaseline="middle"
-                  fontSize={7} fill="white" fontWeight="bold"
-                  style={{ userSelect: "none" }}>T</text>
-              </g>
+              <text
+                key={loc.id}
+                x={x} y={y}
+                textAnchor="middle" dominantBaseline="auto"
+                fontSize={18}
+                style={{ pointerEvents: "none", userSelect: "none" }}
+              >
+                📍
+              </text>
             );
           })}
         </svg>
@@ -185,8 +283,7 @@ export default function JapanMapPage() {
           <div className="space-y-1.5">
             {tsmcLocations.map((loc) => (
               <div key={loc.id} className="flex items-start gap-2">
-                <span className="flex-shrink-0 w-4 h-4 rounded-full mt-0.5 flex items-center justify-center text-white text-xs font-bold"
-                  style={{ backgroundColor: TYPE_COLOR[loc.type] }}>T</span>
+                <span className="text-base leading-none mt-0.5">📍</span>
                 <div>
                   <p className="text-xs font-semibold text-gray-800 dark:text-gray-200">{loc.name}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">{TYPE_LABEL[loc.type]} · {loc.detail}</p>
