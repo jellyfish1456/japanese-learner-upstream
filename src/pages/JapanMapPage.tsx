@@ -1,43 +1,95 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { prefectures, REGION_HEX } from "../data/japanTravel";
-import { prefecturePolygons } from "../data/japanPrefecturePaths";
+import { subRegionData } from "../data/japanSubRegions";
 import { tsmcLocations, TYPE_COLOR, TYPE_LABEL } from "../data/tsmcLocations";
 
 const REGION_ORDER = ["北海道", "東北", "関東", "中部", "近畿", "中国", "四国", "九州", "沖縄"];
 
-// ── Coordinate transform calibrated to public/japan-map.svg (570×755) ─────────
-// Verified: Cape Soya (141.9°E, 45.5°N) → screen (418.5, 8.5)
+// ── Coordinate transform calibrated to public/japan-map.svg (570×755) ──────────
+// Cape Soya (141.9°E, 45.5°N) verified at screen (418.5, 8.5)
 const SVG_W = 570;
 const SVG_H = 755;
 function imgX(lon: number): number { return (lon - 129.0) * 28.7 + 47; }
 function imgY(lat: number): number { return (45.5 - lat) * 50.8 + 8; }
 
-// ── Polygon → SVG path in Wikipedia-SVG coordinate space ─────────────────────
-function polyToPath(pts: [number, number][]): string {
-  return pts
-    .map(([lon, lat], i) => `${i === 0 ? "M" : "L"}${imgX(lon).toFixed(1)},${imgY(lat).toFixed(1)}`)
-    .join(" ") + " Z";
-}
+// ── Prefecture centroids from actual capital city coordinates ────────────────
+// (accurate geographic positions — avoids the polygon-shape misalignment issue)
+const CENTROIDS: Record<string, [number, number]> = (() => {
+  const map: Record<string, [number, number]> = {};
+  for (const p of prefectures) {
+    if (p.id === "okinawa") {
+      // Okinawa appears in the lower-left inset of the Wikipedia SVG
+      map["okinawa"] = [118, 638];
+      continue;
+    }
+    const cap = subRegionData[p.id]?.cities.find((c) => c.capital);
+    if (cap) {
+      map[p.id] = [imgX(cap.lon), imgY(cap.lat)];
+    }
+  }
+  return map;
+})();
 
-// ── Centroid in SVG coordinate space ─────────────────────────────────────────
-function centroid(id: string): [number, number] {
-  const pts = prefecturePolygons[id];
-  if (!pts || pts.length === 0) return [0, 0];
-  const x = pts.reduce((s, [lon]) => s + imgX(lon), 0) / pts.length;
-  const y = pts.reduce((s, [, lat]) => s + imgY(lat), 0) / pts.length;
-  return [x, y];
+// ── Find nearest prefecture by SVG coordinates ───────────────────────────────
+function nearestPref(svgX: number, svgY: number): string | null {
+  // Okinawa inset box: x 28-213, y 572-722 — use box centre for proximity
+  let best: string | null = null;
+  let bestDist = Infinity;
+  for (const [id, [cx, cy]] of Object.entries(CENTROIDS)) {
+    const d = (svgX - cx) ** 2 + (svgY - cy) ** 2;
+    if (d < bestDist) { bestDist = d; best = id; }
+  }
+  return best;
 }
-
-// ── Okinawa inset click area (lower-left of Wikipedia SVG, ~x28-213, y570-725) ─
-const OKI_RECT = { x: 28, y: 572, w: 185, h: 150 };
 
 export default function JapanMapPage() {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState<string | null>(null);
   const [showTSMC, setShowTSMC] = useState(true);
 
-  const mainPrefectures = prefectures.filter((p) => p.id !== "okinawa");
+  // Convert mouse/touch position to SVG coordinate space
+  const toSVGCoords = useCallback(
+    (clientX: number, clientY: number, el: Element): [number, number] => {
+      const r = el.getBoundingClientRect();
+      return [
+        (clientX - r.left) * (SVG_W / r.width),
+        (clientY - r.top) * (SVG_H / r.height),
+      ];
+    },
+    []
+  );
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<SVGSVGElement>) => {
+      const [sx, sy] = toSVGCoords(e.clientX, e.clientY, e.currentTarget);
+      setHovered(nearestPref(sx, sy));
+    },
+    [toSVGCoords]
+  );
+
+  const handleClick = useCallback(
+    (e: React.MouseEvent<SVGSVGElement>) => {
+      const [sx, sy] = toSVGCoords(e.clientX, e.clientY, e.currentTarget);
+      const id = nearestPref(sx, sy);
+      if (id) navigate(`/japan-travel/${id}`);
+    },
+    [navigate, toSVGCoords]
+  );
+
+  const handleTouchEnd = useCallback(
+    (e: React.TouchEvent<SVGSVGElement>) => {
+      const t = e.changedTouches[0];
+      const [sx, sy] = toSVGCoords(t.clientX, t.clientY, e.currentTarget);
+      const id = nearestPref(sx, sy);
+      if (id) navigate(`/japan-travel/${id}`);
+    },
+    [navigate, toSVGCoords]
+  );
+
+  const hovColor = hovered
+    ? REGION_HEX[prefectures.find((p) => p.id === hovered)?.region ?? ""] ?? null
+    : null;
 
   return (
     <div>
@@ -62,9 +114,12 @@ export default function JapanMapPage() {
         </button>
       </div>
 
-      {/* Map — Wikipedia SVG background + interactive SVG overlay */}
-      <div className="relative w-full overflow-hidden rounded-xl shadow mb-3 -mx-4" style={{ aspectRatio: `${SVG_W}/${SVG_H}` }}>
-        {/* Background: Wikipedia high-quality Japan map */}
+      {/* Map */}
+      <div
+        className="relative w-full overflow-hidden rounded-xl shadow mb-3 -mx-4"
+        style={{ aspectRatio: `${SVG_W}/${SVG_H}` }}
+      >
+        {/* Wikipedia high-quality Japan map as background */}
         <img
           src="/japanese-learner-upstream/japan-map.svg"
           alt="日本地図"
@@ -73,120 +128,81 @@ export default function JapanMapPage() {
           draggable={false}
         />
 
-        {/* Interactive overlay */}
+        {/* Interactive SVG overlay — proximity-based, no polygon shapes */}
         <svg
           viewBox={`0 0 ${SVG_W} ${SVG_H}`}
           className="absolute inset-0 w-full h-full"
-          style={{ touchAction: "manipulation" }}
+          style={{ cursor: "pointer", touchAction: "manipulation" }}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={() => setHovered(null)}
+          onClick={handleClick}
+          onTouchEnd={handleTouchEnd}
         >
-          {/* Main 46 prefectures */}
-          {mainPrefectures.map((p) => {
-            const pts = prefecturePolygons[p.id];
-            if (!pts) return null;
-            const d = polyToPath(pts);
-            const colors = REGION_HEX[p.region] ?? { base: "#94a3b8", hover: "#64748b" };
-            const isH = hovered === p.id;
-            const [cx, cy] = centroid(p.id);
-            const short = p.nameShort.replace(/[都道府県]$/, "");
-            const fs = short.length <= 2 ? 12 : 9.5;
-
+          {/* Hovered prefecture highlight ring + label */}
+          {hovered && hovColor && CENTROIDS[hovered] && (() => {
+            const [cx, cy] = CENTROIDS[hovered];
+            const p = prefectures.find((pf) => pf.id === hovered)!;
+            const label = p.nameShort.replace(/[都道府県]$/, "");
             return (
-              <g
-                key={p.id}
-                onClick={() => navigate(`/japan-travel/${p.id}`)}
-                onMouseEnter={() => setHovered(p.id)}
-                onMouseLeave={() => setHovered(null)}
-                onTouchStart={() => setHovered(p.id)}
-                onTouchEnd={() => setHovered(null)}
-                style={{ cursor: "pointer" }}
-              >
-                {/* Hit area + hover fill */}
-                <path
-                  d={d}
-                  fill={colors.base}
-                  fillOpacity={isH ? 0.45 : 0}
-                  stroke={isH ? colors.hover : "transparent"}
-                  strokeWidth={1.5}
-                  strokeLinejoin="round"
-                />
-                {/* Prefecture kanji label */}
-                <text
-                  x={cx}
-                  y={cy + (short.length > 2 ? -4 : 1)}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                  fontSize={fs}
-                  fontWeight="bold"
-                  fill={isH ? "white" : "#1a1a1a"}
-                  stroke={isH ? colors.hover : "rgba(255,255,255,0.85)"}
-                  strokeWidth={isH ? 0 : 3}
-                  paintOrder="stroke"
-                  style={{ pointerEvents: "none", userSelect: "none" }}
-                >
-                  {short.slice(0, 2)}
+              <g style={{ pointerEvents: "none" }}>
+                {/* Outer glow */}
+                <circle cx={cx} cy={cy} r={22} fill={hovColor.base} fillOpacity={0.18} />
+                {/* Main highlight dot */}
+                <circle cx={cx} cy={cy} r={14} fill={hovColor.hover} fillOpacity={0.85}
+                  stroke="white" strokeWidth={2} />
+                {/* Prefecture kanji */}
+                <text x={cx} y={cy + 1} textAnchor="middle" dominantBaseline="middle"
+                  fontSize={label.length <= 2 ? 11 : 9} fontWeight="bold" fill="white"
+                  style={{ userSelect: "none" }}>
+                  {label.slice(0, 2)}
                 </text>
-                {short.length > 2 && (
-                  <text
-                    x={cx}
-                    y={cy + 8}
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    fontSize={8.5}
-                    fontWeight="bold"
-                    fill={isH ? "white" : "#1a1a1a"}
-                    stroke={isH ? colors.hover : "rgba(255,255,255,0.85)"}
-                    strokeWidth={isH ? 0 : 3}
-                    paintOrder="stroke"
-                    style={{ pointerEvents: "none", userSelect: "none" }}
-                  >
-                    {short.slice(2)}
+                {label.length > 2 && (
+                  <text x={cx} y={cy + 10} textAnchor="middle" dominantBaseline="middle"
+                    fontSize={7.5} fontWeight="bold" fill="white"
+                    style={{ userSelect: "none" }}>
+                    {label.slice(2)}
                   </text>
                 )}
-              </g>
-            );
-          })}
-
-          {/* Okinawa inset click area */}
-          {(() => {
-            const colors = REGION_HEX["沖縄"]!;
-            const isH = hovered === "okinawa";
-            return (
-              <g
-                onClick={() => navigate("/japan-travel/okinawa")}
-                onMouseEnter={() => setHovered("okinawa")}
-                onMouseLeave={() => setHovered(null)}
-                onTouchStart={() => setHovered("okinawa")}
-                onTouchEnd={() => setHovered(null)}
-                style={{ cursor: "pointer" }}
-              >
-                <rect
-                  x={OKI_RECT.x} y={OKI_RECT.y}
-                  width={OKI_RECT.w} height={OKI_RECT.h}
-                  fill={isH ? colors.base : "transparent"}
-                  fillOpacity={isH ? 0.35 : 0}
-                  stroke={isH ? colors.hover : "transparent"}
-                  strokeWidth={1.5}
-                  rx={4}
-                />
-                {/* Label near center of inset */}
-                <text
-                  x={OKI_RECT.x + OKI_RECT.w / 2}
-                  y={OKI_RECT.y + OKI_RECT.h / 2}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                  fontSize={12}
-                  fontWeight="bold"
-                  fill={isH ? "white" : "#1a1a1a"}
-                  stroke={isH ? colors.hover : "rgba(255,255,255,0.85)"}
-                  strokeWidth={isH ? 0 : 3}
-                  paintOrder="stroke"
-                  style={{ pointerEvents: "none", userSelect: "none" }}
-                >
-                  沖縄
+                {/* Name tooltip pill */}
+                <rect x={cx - 28} y={cy + 18} width={56} height={15}
+                  rx={7} fill={hovColor.hover} fillOpacity={0.92} />
+                <text x={cx} y={cy + 26} textAnchor="middle" dominantBaseline="middle"
+                  fontSize={8.5} fill="white" fontWeight="bold"
+                  style={{ userSelect: "none" }}>
+                  {p.nameShort}
                 </text>
               </g>
             );
           })()}
+
+          {/* Resting dots — small colored dots at all capital positions */}
+          {prefectures.map((p) => {
+            if (!CENTROIDS[p.id]) return null;
+            const [cx, cy] = CENTROIDS[p.id];
+            const isH = hovered === p.id;
+            if (isH) return null; // drawn above
+            const colors = REGION_HEX[p.region] ?? { base: "#94a3b8", hover: "#64748b" };
+            const label = p.nameShort.replace(/[都道府県]$/, "");
+            return (
+              <g key={p.id} style={{ pointerEvents: "none" }}>
+                <circle cx={cx} cy={cy} r={5} fill={colors.base}
+                  stroke="white" strokeWidth={1.2} fillOpacity={0.85} />
+                <text
+                  x={cx} y={cy - 7}
+                  textAnchor="middle" dominantBaseline="middle"
+                  fontSize={label.length <= 2 ? 9.5 : 8}
+                  fontWeight="bold"
+                  fill="#111"
+                  stroke="rgba(255,255,255,0.9)"
+                  strokeWidth={2.8}
+                  paintOrder="stroke"
+                  style={{ userSelect: "none" }}
+                >
+                  {label.slice(0, 2)}
+                </text>
+              </g>
+            );
+          })}
 
           {/* TSMC markers */}
           {showTSMC &&
@@ -196,13 +212,11 @@ export default function JapanMapPage() {
               if (x < 0 || x > SVG_W || y < 0 || y > SVG_H) return null;
               return (
                 <g key={loc.id} style={{ pointerEvents: "none" }}>
-                  <circle cx={x} cy={y} r={8} fill={TYPE_COLOR[loc.type]} stroke="white" strokeWidth={1.5} />
-                  <text
-                    x={x} y={y + 1}
-                    textAnchor="middle" dominantBaseline="middle"
+                  <circle cx={x} cy={y} r={8} fill={TYPE_COLOR[loc.type]}
+                    stroke="white" strokeWidth={1.5} />
+                  <text x={x} y={y + 1} textAnchor="middle" dominantBaseline="middle"
                     fontSize={7} fill="white" fontWeight="bold"
-                    style={{ userSelect: "none" }}
-                  >
+                    style={{ userSelect: "none" }}>
                     T
                   </text>
                 </g>
