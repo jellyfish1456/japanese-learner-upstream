@@ -7,11 +7,21 @@ import { prefecturePaths } from "../data/prefectureSvgPaths";
 
 const REGION_ORDER = ["北海道", "東北", "関東", "中部", "近畿", "中国", "四国", "九州", "沖縄"];
 
-// ── Wikipedia SVG coordinate transform (570×755) ────────────────────────────
+// ── Coordinate transform (same projection used to generate prefectureSvgPaths)
 const SVG_W = 570;
 const SVG_H = 755;
 function imgX(lon: number): number { return (lon - 129.0) * 28.7 + 47; }
 function imgY(lat: number): number { return (45.5 - lat) * 50.8 + 8; }
+
+// ── Okinawa inset transform ────────────────────────────────────────────────
+// Okinawa's GeoJSON paths sit at ~(x:-127..114, y:903..1098) — way outside the viewBox.
+// Scale 0.55× and translate into lower-right corner.
+const OKI_SCALE = 0.55;
+const OKI_TX = 493.5;
+const OKI_TY = 124.5;
+const OKI_TRANSFORM = `translate(${OKI_TX}, ${OKI_TY}) scale(${OKI_SCALE})`;
+// Inset frame (approximate transformed bbox)
+const OKI_FRAME = { x: 418, y: 615, w: 145, h: 120 };
 
 // ── Hiragana readings ───────────────────────────────────────────────────────
 const PREF_READING: Record<string, string> = {
@@ -33,7 +43,7 @@ const PREF_READING: Record<string, string> = {
   kagoshima: "かごしま", okinawa: "おきなわ",
 };
 
-// ── Label position offsets [dx, dy] to avoid overlap in crowded areas ───────
+// ── Label position offsets [dx, dy] to reduce overlap ──────────────────────
 const LABEL_OFFSET: Record<string, [number, number]> = {
   tokyo: [18, 8], saitama: [-2, -6], kanagawa: [18, 14],
   chiba: [22, 0], yamanashi: [-12, 5],
@@ -44,12 +54,13 @@ const LABEL_OFFSET: Record<string, [number, number]> = {
   saga: [-10, 0], nagasaki: [-16, 6], oita: [10, -2],
 };
 
-// ── Prefecture centroids from capital-city coordinates ──────────────────────
+// ── Prefecture centroids ───────────────────────────────────────────────────
 const CENTROIDS: Record<string, [number, number]> = (() => {
   const map: Record<string, [number, number]> = {};
   for (const p of prefectures) {
     if (p.id === "okinawa") {
-      map["okinawa"] = [118, 638];
+      // Pre-computed: imgX(127.68)*0.55+493.5, imgY(26.34)*0.55+124.5
+      map["okinawa"] = [498, 664];
       continue;
     }
     const cap = subRegionData[p.id]?.cities.find((c) => c.capital);
@@ -57,6 +68,36 @@ const CENTROIDS: Record<string, [number, number]> = (() => {
   }
   return map;
 })();
+
+// ── Render a single prefecture path ────────────────────────────────────────
+function PrefPath({
+  p,
+  isHov,
+  onHover,
+  onNav,
+}: {
+  p: (typeof prefectures)[number];
+  isHov: boolean;
+  onHover: () => void;
+  onNav: () => void;
+}) {
+  const d = prefecturePaths[p.id];
+  if (!d) return null;
+  const color = REGION_HEX[p.region];
+  return (
+    <path
+      d={d}
+      fill={isHov && color ? color.hover : (color ? color.base : "#ccc")}
+      stroke="white"
+      strokeWidth={isHov ? 2.5 : 0.8}
+      strokeLinejoin="round"
+      style={{ cursor: "pointer", transition: "fill 0.15s" }}
+      onMouseEnter={onHover}
+      onClick={onNav}
+      onTouchEnd={(e) => { e.preventDefault(); onNav(); }}
+    />
+  );
+}
 
 export default function JapanMapPage() {
   const navigate = useNavigate();
@@ -89,54 +130,54 @@ export default function JapanMapPage() {
         </button>
       </div>
 
-      {/* Map — Wikipedia SVG shapes background + accurate GeoJSON overlay */}
+      {/* ═══ Map — 100% GeoJSON rendered ═══ */}
       <div
         className="relative w-full overflow-hidden rounded-xl shadow mb-3 -mx-4"
         style={{ aspectRatio: `${SVG_W}/${SVG_H}` }}
       >
-        {/* Base map image (just colored shapes, no labels) */}
-        <img
-          src="/japanese-learner-upstream/japan-map.svg"
-          alt="日本地図"
-          className="absolute inset-0 w-full h-full"
-          style={{ objectFit: "fill" }}
-          draggable={false}
-        />
-
-        {/* Interactive SVG overlay with accurate GeoJSON paths */}
         <svg
           viewBox={`0 0 ${SVG_W} ${SVG_H}`}
-          className="absolute inset-0 w-full h-full"
-          style={{ cursor: "pointer", touchAction: "manipulation" }}
+          className="w-full h-full"
+          style={{ cursor: "pointer", touchAction: "manipulation", backgroundColor: "#e8f4f8" }}
           onMouseLeave={() => setHovered(null)}
         >
-          {/* ── All 47 prefecture paths — transparent, interactive ── */}
-          {prefectures.map((p) => {
-            const d = prefecturePaths[p.id];
-            if (!d) return null;
-            const isHov = p.id === hovered;
-            const color = REGION_HEX[p.region];
-            return (
-              <path
-                key={p.id}
-                d={d}
-                fill={isHov && color ? color.hover : "transparent"}
-                fillOpacity={isHov ? 0.50 : 0}
-                stroke={isHov ? "white" : "transparent"}
-                strokeWidth={isHov ? 2.5 : 0}
-                strokeLinejoin="round"
-                style={{ cursor: "pointer" }}
-                onMouseEnter={() => setHovered(p.id)}
-                onClick={() => navigate(`/japan-travel/${p.id}`)}
-                onTouchEnd={(e) => {
-                  e.preventDefault();
-                  navigate(`/japan-travel/${p.id}`);
-                }}
-              />
-            );
-          })}
+          {/* ── Main-island prefectures (all except Okinawa) ── */}
+          {prefectures.filter((p) => p.id !== "okinawa").map((p) => (
+            <PrefPath
+              key={p.id} p={p}
+              isHov={p.id === hovered}
+              onHover={() => setHovered(p.id)}
+              onNav={() => navigate(`/japan-travel/${p.id}`)}
+            />
+          ))}
 
-          {/* ── Japanese kanji labels for all 47 prefectures ── */}
+          {/* ── Okinawa inset ── */}
+          <g>
+            {/* Inset frame */}
+            <rect
+              x={OKI_FRAME.x} y={OKI_FRAME.y}
+              width={OKI_FRAME.w} height={OKI_FRAME.h}
+              rx={6} fill="none"
+              stroke="#94a3b8" strokeWidth={1} strokeDasharray="4,3"
+            />
+            {/* Okinawa path — transformed into inset area */}
+            <g transform={OKI_TRANSFORM}>
+              {(() => {
+                const p = prefectures.find((pf) => pf.id === "okinawa");
+                if (!p) return null;
+                return (
+                  <PrefPath
+                    p={p}
+                    isHov={hovered === "okinawa"}
+                    onHover={() => setHovered("okinawa")}
+                    onNav={() => navigate("/japan-travel/okinawa")}
+                  />
+                );
+              })()}
+            </g>
+          </g>
+
+          {/* ── Japanese kanji labels (all 47) ── */}
           {prefectures.map((p) => {
             const c = CENTROIDS[p.id];
             if (!c) return null;
@@ -149,11 +190,10 @@ export default function JapanMapPage() {
                 key={`lbl-${p.id}`}
                 x={lx} y={ly}
                 textAnchor="middle" dominantBaseline="central"
-                fontSize={isHov ? 11 : 8.5}
+                fontSize={isHov ? 12 : 9}
                 fontWeight={isHov ? "bold" : "600"}
-                fill={isHov ? "#1e293b" : "#334155"}
-                stroke="white"
-                strokeWidth={isHov ? 3 : 2.5}
+                fill={isHov ? "#0f172a" : "#1e293b"}
+                stroke="white" strokeWidth={isHov ? 3.5 : 2.5}
                 paintOrder="stroke"
                 style={{ pointerEvents: "none", userSelect: "none", transition: "font-size 0.15s" }}
               >
@@ -170,7 +210,7 @@ export default function JapanMapPage() {
             const ly = c[1] + oy;
             const reading = PREF_READING[hovered] ?? "";
             const pillW = reading.length * 8.5 + 14;
-            const pillY = ly - 20;
+            const pillY = ly - 22;
             return (
               <g style={{ pointerEvents: "none" }}>
                 <rect
