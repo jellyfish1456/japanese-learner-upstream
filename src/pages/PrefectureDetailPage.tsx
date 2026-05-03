@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { prefectureMap, REGION_HEX } from "../data/japanTravel";
 import { prefecturePolygons } from "../data/japanPrefecturePaths";
+import { prefecturePaths } from "../data/prefectureSvgPaths";
 import { subRegionData } from "../data/japanSubRegions";
 import { castlesByPrefecture } from "../data/japanCastles";
 import { tsmcLocations, TYPE_COLOR, TYPE_LABEL } from "../data/tsmcLocations";
@@ -27,7 +28,11 @@ function CastleImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-// ── Sub-prefecture map (with Mercator cosLat correction) ───────────────────
+// ── Same projection as JapanMapPage ────────────────────────────────────────
+function svgX(lon: number): number { return (lon - 129.0) * 28.7 + 47; }
+function svgY(lat: number): number { return (45.5 - lat) * 50.8 + 8; }
+
+// ── Sub-prefecture map using the same GeoJSON-derived paths as the main map ─
 function PrefectureSubMap({
   id,
   color,
@@ -35,46 +40,43 @@ function PrefectureSubMap({
   id: string;
   color: { base: string; hover: string };
 }) {
-  const pts = prefecturePolygons[id];
-  const cities = subRegionData[id]?.cities ?? [];
-  const tsmcHere = tsmcLocations.filter((t) => t.prefecture === id);
+  const accuratePath = prefecturePaths[id];   // GeoJSON-accurate SVG path
+  const roughPoly    = prefecturePolygons[id] ?? []; // rough bbox only
+  const cities       = subRegionData[id]?.cities ?? [];
+  const tsmcHere     = tsmcLocations.filter((t) => t.prefecture === id);
 
-  if (!pts || pts.length === 0) return null;
+  if (!accuratePath) return null;
 
-  const W = 320, H = 220, PAD = 24;
+  // ── Compute viewBox from rough polygon + cities ──────────────────────────
+  const allLonLat: [number, number][] = [
+    ...roughPoly,
+    ...cities.map((c) => [c.lon, c.lat] as [number, number]),
+    ...tsmcHere.map((t) => [t.lon, t.lat] as [number, number]),
+  ];
 
-  // Bounding box from polygon only (not cities, to keep polygon centred)
-  const polyLons = pts.map((p) => p[0]);
-  const polyLats = pts.map((p) => p[1]);
-  const minLon = Math.min(...polyLons);
-  const maxLon = Math.max(...polyLons);
-  const minLat = Math.min(...polyLats);
-  const maxLat = Math.max(...polyLats);
+  if (!allLonLat.length) return null;
 
-  // Latitude correction for equirectangular projection
-  const centerLat = (minLat + maxLat) / 2;
-  const cosLat = Math.cos((centerLat * Math.PI) / 180);
+  const xs = allLonLat.map(([lon]) => svgX(lon));
+  const ys = allLonLat.map(([, lat]) => svgY(lat));
 
-  // Span in display-equivalent degrees
-  const spanLon = ((maxLon - minLon) || 0.5) * cosLat;
-  const spanLat = (maxLat - minLat) || 0.5;
+  const PAD = 28;
+  const vbMinX = Math.min(...xs) - PAD;
+  const vbMinY = Math.min(...ys) - PAD;
+  const vbW    = Math.max(...xs) - Math.min(...xs) + PAD * 2;
+  const vbH    = Math.max(...ys) - Math.min(...ys) + PAD * 2;
 
-  const scale = Math.min((W - PAD * 2) / spanLon, (H - PAD * 2) / spanLat);
+  // ── Label placement: left/right based on position within prefecture ──────
+  const capitalCity = cities.find((c) => c.capital);
+  const midX = capitalCity ? svgX(capitalCity.lon) : vbMinX + vbW / 2;
 
-  const drawW = spanLon * scale;
-  const drawH = spanLat * scale;
-  const offX = (W - drawW) / 2;
-  const offY = (H - drawH) / 2;
-
-  const toX = (lon: number) => (lon - minLon) * cosLat * scale + offX;
-  const toY = (lat: number) => H - (lat - minLat) * scale - offY;
-
-  const pathD =
-    pts
-      .map(([lon, lat], i) =>
-        `${i === 0 ? "M" : "L"}${toX(lon).toFixed(1)},${toY(lat).toFixed(1)}`
-      )
-      .join(" ") + " Z";
+  // Scale font sizes proportionally to the viewBox width
+  const fontScale = vbW / 180; // ~1.0 for normal prefectures
+  const capFont   = Math.round(13 * fontScale);
+  const cityFont  = Math.round(11 * fontScale);
+  const starFont  = Math.round(9  * fontScale);
+  const capR      = Math.round(8  * fontScale);
+  const cityR     = Math.round(5  * fontScale);
+  const labelGap  = Math.round(10 * fontScale);
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 mb-4">
@@ -83,41 +85,52 @@ function PrefectureSubMap({
         <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">主要都市マップ</p>
       </div>
       <div className="flex justify-center overflow-hidden">
-        <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="max-w-full">
+        <svg
+          viewBox={`${vbMinX} ${vbMinY} ${vbW} ${vbH}`}
+          className="max-w-full rounded-lg"
+          style={{ width: "100%", maxHeight: 240 }}
+        >
           {/* Sea / background */}
-          <rect x={0} y={0} width={W} height={H} fill="#e0f2fe" rx={8} />
-          {/* Prefecture shape */}
+          <rect x={vbMinX} y={vbMinY} width={vbW} height={vbH} fill="#e0f2fe" />
+          {/* Accurate GeoJSON-derived prefecture shape */}
           <path
-            d={pathD}
+            d={accuratePath}
             fill={color.base}
-            fillOpacity={0.25}
+            fillOpacity={0.3}
             stroke={color.base}
-            strokeWidth={2}
+            strokeWidth={fontScale * 1.5}
             strokeLinejoin="round"
           />
           {/* City pins */}
           {cities.map((city) => {
-            const x = toX(city.lon);
-            const y = toY(city.lat);
-            if (x < 4 || x > W - 4 || y < 4 || y > H - 4) return null;
+            const cx = svgX(city.lon);
+            const cy = svgY(city.lat);
+            // Place label on the side away from centre to reduce overlap
+            const toRight = cx >= midX;
+            const anchor  = toRight ? "start" : "end";
+            const lx      = cx + (toRight ? labelGap : -labelGap);
             return (
               <g key={city.name}>
                 {city.capital ? (
                   <>
-                    <circle cx={x} cy={y} r={8} fill={color.hover} stroke="white" strokeWidth={1.5} />
-                    <text x={x} y={y + 1} textAnchor="middle" dominantBaseline="middle"
-                      fontSize={9} fill="white" fontWeight="bold"
+                    <circle cx={cx} cy={cy} r={capR} fill={color.hover} stroke="white" strokeWidth={fontScale * 1.5} />
+                    <text x={cx} y={cy} textAnchor="middle" dominantBaseline="middle"
+                      fontSize={starFont} fill="white" fontWeight="bold"
                       style={{ userSelect: "none", pointerEvents: "none" }}>★</text>
                   </>
                 ) : (
-                  <circle cx={x} cy={y} r={5} fill={color.base} stroke="white" strokeWidth={1} />
+                  <circle cx={cx} cy={cy} r={cityR} fill={color.base} stroke="white" strokeWidth={fontScale} />
                 )}
                 <text
-                  x={x + (city.capital ? 12 : 8)} y={y + 1}
-                  fontSize={city.capital ? 13 : 11}
+                  x={lx} y={cy}
+                  fontSize={city.capital ? capFont : cityFont}
                   fill="#1f2937"
                   dominantBaseline="middle"
+                  textAnchor={anchor}
                   fontWeight={city.capital ? "bold" : "normal"}
+                  stroke="white"
+                  strokeWidth={fontScale * 2.5}
+                  paintOrder="stroke"
                   style={{ userSelect: "none", pointerEvents: "none" }}
                 >
                   {city.name}
@@ -127,17 +140,20 @@ function PrefectureSubMap({
           })}
           {/* TSMC markers */}
           {tsmcHere.map((loc) => {
-            const x = toX(loc.lon);
-            const y = toY(loc.lat);
-            if (x < 4 || x > W - 4 || y < 4 || y > H - 4) return null;
+            const cx = svgX(loc.lon);
+            const cy = svgY(loc.lat);
+            const toRight = cx >= midX;
+            const anchor  = toRight ? "start" : "end";
+            const lx      = cx + (toRight ? labelGap : -labelGap);
             return (
               <g key={loc.id} style={{ pointerEvents: "none" }}>
-                <circle cx={x} cy={y} r={8} fill={TYPE_COLOR[loc.type]} stroke="white" strokeWidth={1.5} />
-                <text x={x} y={y + 1} textAnchor="middle" dominantBaseline="middle"
-                  fontSize={8} fill="white" fontWeight="bold"
+                <circle cx={cx} cy={cy} r={capR} fill={TYPE_COLOR[loc.type]} stroke="white" strokeWidth={fontScale * 1.5} />
+                <text x={cx} y={cy} textAnchor="middle" dominantBaseline="middle"
+                  fontSize={starFont} fill="white" fontWeight="bold"
                   style={{ userSelect: "none" }}>T</text>
-                <text x={x + 11} y={y + 1} fontSize={11} fill="#dc2626"
-                  dominantBaseline="middle" fontWeight="bold"
+                <text x={lx} y={cy} fontSize={cityFont} fill="#dc2626"
+                  dominantBaseline="middle" textAnchor={anchor} fontWeight="bold"
+                  stroke="white" strokeWidth={fontScale * 2.5} paintOrder="stroke"
                   style={{ userSelect: "none" }}>TSMC</text>
               </g>
             );
@@ -297,6 +313,12 @@ function TSMCSection({ id }: { id: string }) {
 export default function PrefectureDetailPage() {
   const { prefectureId } = useParams<{ prefectureId: string }>();
   const navigate = useNavigate();
+
+  // Scroll to top on every prefecture navigation
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [prefectureId]);
+
   const p = prefectureMap[prefectureId ?? ""];
 
   if (!p) {
