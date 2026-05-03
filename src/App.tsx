@@ -20,6 +20,7 @@ import ShadowingPage from "./pages/ShadowingPage";
 import GrammarQuizPage from "./pages/GrammarQuizPage";
 import JapanMapPage from "./pages/JapanMapPage";
 import PrefectureDetailPage from "./pages/PrefectureDetailPage";
+import SpotDetailPage from "./pages/SpotDetailPage";
 
 export default function App() {
   return (
@@ -46,6 +47,7 @@ export default function App() {
           <Route path="/grammar/:level" element={<GrammarQuizPage />} />
           <Route path="/japan-travel" element={<JapanMapPage />} />
           <Route path="/japan-travel/:prefectureId" element={<PrefectureDetailPage />} />
+          <Route path="/japan-travel/:prefectureId/spot/:spotIndex" element={<SpotDetailPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/about" element={<AboutPage />} />
         </Routes>

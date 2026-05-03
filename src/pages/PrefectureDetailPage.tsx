@@ -65,18 +65,64 @@ function PrefectureSubMap({
   const vbW    = Math.max(...xs) - Math.min(...xs) + PAD * 2;
   const vbH    = Math.max(...ys) - Math.min(...ys) + PAD * 2;
 
-  // ── Label placement: left/right based on position within prefecture ──────
+  // ── Label placement + deconfliction ─────────────────────────────────────
   const capitalCity = cities.find((c) => c.capital);
   const midX = capitalCity ? svgX(capitalCity.lon) : vbMinX + vbW / 2;
 
-  // Scale font sizes proportionally to the viewBox width
+  // Scale font/pin sizes proportionally to the viewBox width
   const fontScale = vbW / 180; // ~1.0 for normal prefectures
-  const capFont   = Math.round(13 * fontScale);
-  const cityFont  = Math.round(11 * fontScale);
-  const starFont  = Math.round(9  * fontScale);
-  const capR      = Math.round(8  * fontScale);
-  const cityR     = Math.round(5  * fontScale);
-  const labelGap  = Math.round(10 * fontScale);
+  const capFont   = Math.max(8, Math.round(13 * fontScale));
+  const cityFont  = Math.max(7, Math.round(11 * fontScale));
+  const starFont  = Math.max(6, Math.round(9  * fontScale));
+  const capR      = Math.max(5, Math.round(8  * fontScale));
+  const cityR     = Math.max(3, Math.round(5  * fontScale));
+  const labelGap  = Math.max(7, Math.round(10 * fontScale));
+
+  // Build per-city info with initial label position
+  type CInfo = {
+    name: string; cx: number; cy: number;
+    toRight: boolean; lx: number; ly: number;
+    isCapital: boolean; isTSMC?: boolean;
+    tsmc?: typeof tsmcHere[0];
+    city?: typeof cities[0];
+  };
+
+  const allPins: CInfo[] = [
+    ...cities.map((c) => {
+      const cx = svgX(c.lon);
+      const cy = svgY(c.lat);
+      const toRight = cx >= midX;
+      return { name: c.name, cx, cy, toRight, lx: cx + (toRight ? labelGap : -labelGap), ly: cy, isCapital: !!c.capital, city: c };
+    }),
+    ...tsmcHere.map((t) => {
+      const cx = svgX(t.lon);
+      const cy = svgY(t.lat);
+      const toRight = cx >= midX;
+      return { name: "TSMC", cx, cy, toRight, lx: cx + (toRight ? labelGap : -labelGap), ly: cy, isCapital: false, isTSMC: true, tsmc: t };
+    }),
+  ];
+
+  // Sort by cy (top→bottom), then deconflict each side independently
+  allPins.sort((a, b) => a.cy - b.cy);
+  const minGap = cityFont * 1.25; // minimum vertical gap between labels
+  for (const side of [true, false]) {
+    const sideGroup = allPins.filter((p) => p.toRight === side);
+    for (let i = 1; i < sideGroup.length; i++) {
+      const prev = sideGroup[i - 1];
+      const curr = sideGroup[i];
+      if (curr.ly - prev.ly < minGap) {
+        // Push the lower label down, and nudge the upper one up symmetrically
+        const overlap = minGap - (curr.ly - prev.ly);
+        prev.ly -= overlap / 2;
+        curr.ly += overlap / 2;
+      }
+    }
+    // Second pass to resolve cascading overlaps
+    for (let i = 1; i < sideGroup.length; i++) {
+      if (sideGroup[i].ly - sideGroup[i - 1].ly < minGap)
+        sideGroup[i].ly = sideGroup[i - 1].ly + minGap;
+    }
+  }
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 mb-4">
@@ -101,63 +147,62 @@ function PrefectureSubMap({
             strokeWidth={fontScale * 1.5}
             strokeLinejoin="round"
           />
+          {/* Leader lines (when label was pushed away from pin) */}
+          {allPins.map((p) => {
+            if (Math.abs(p.ly - p.cy) < minGap * 0.4) return null;
+            const lx = p.lx + (p.toRight ? -labelGap * 0.5 : labelGap * 0.5);
+            return (
+              <line key={`leader-${p.name}-${p.cx}`}
+                x1={p.cx} y1={p.cy} x2={lx} y2={p.ly}
+                stroke={p.isTSMC ? "#dc2626" : "#94a3b8"}
+                strokeWidth={fontScale * 0.6}
+                strokeDasharray={`${fontScale * 2},${fontScale * 1.5}`}
+                opacity={0.6}
+              />
+            );
+          })}
           {/* City pins */}
-          {cities.map((city) => {
-            const cx = svgX(city.lon);
-            const cy = svgY(city.lat);
-            // Place label on the side away from centre to reduce overlap
-            const toRight = cx >= midX;
-            const anchor  = toRight ? "start" : "end";
-            const lx      = cx + (toRight ? labelGap : -labelGap);
-            return (
-              <g key={city.name}>
-                {city.capital ? (
-                  <>
-                    <circle cx={cx} cy={cy} r={capR} fill={color.hover} stroke="white" strokeWidth={fontScale * 1.5} />
-                    <text x={cx} y={cy} textAnchor="middle" dominantBaseline="middle"
-                      fontSize={starFont} fill="white" fontWeight="bold"
-                      style={{ userSelect: "none", pointerEvents: "none" }}>★</text>
-                  </>
-                ) : (
-                  <circle cx={cx} cy={cy} r={cityR} fill={color.base} stroke="white" strokeWidth={fontScale} />
-                )}
-                <text
-                  x={lx} y={cy}
-                  fontSize={city.capital ? capFont : cityFont}
-                  fill="#1f2937"
-                  dominantBaseline="middle"
-                  textAnchor={anchor}
-                  fontWeight={city.capital ? "bold" : "normal"}
-                  stroke="white"
-                  strokeWidth={fontScale * 2.5}
-                  paintOrder="stroke"
-                  style={{ userSelect: "none", pointerEvents: "none" }}
-                >
-                  {city.name}
-                </text>
-              </g>
-            );
-          })}
+          {allPins.filter((p) => !p.isTSMC).map((p) => (
+            <g key={p.name + p.cx}>
+              {p.isCapital ? (
+                <>
+                  <circle cx={p.cx} cy={p.cy} r={capR} fill={color.hover} stroke="white" strokeWidth={fontScale * 1.5} />
+                  <text x={p.cx} y={p.cy} textAnchor="middle" dominantBaseline="middle"
+                    fontSize={starFont} fill="white" fontWeight="bold"
+                    style={{ userSelect: "none", pointerEvents: "none" }}>★</text>
+                </>
+              ) : (
+                <circle cx={p.cx} cy={p.cy} r={cityR} fill={color.base} stroke="white" strokeWidth={fontScale} />
+              )}
+              <text
+                x={p.lx} y={p.ly}
+                fontSize={p.isCapital ? capFont : cityFont}
+                fill="#1f2937"
+                dominantBaseline="middle"
+                textAnchor={p.toRight ? "start" : "end"}
+                fontWeight={p.isCapital ? "bold" : "normal"}
+                stroke="white"
+                strokeWidth={fontScale * 2.5}
+                paintOrder="stroke"
+                style={{ userSelect: "none", pointerEvents: "none" }}
+              >
+                {p.name}
+              </text>
+            </g>
+          ))}
           {/* TSMC markers */}
-          {tsmcHere.map((loc) => {
-            const cx = svgX(loc.lon);
-            const cy = svgY(loc.lat);
-            const toRight = cx >= midX;
-            const anchor  = toRight ? "start" : "end";
-            const lx      = cx + (toRight ? labelGap : -labelGap);
-            return (
-              <g key={loc.id} style={{ pointerEvents: "none" }}>
-                <circle cx={cx} cy={cy} r={capR} fill={TYPE_COLOR[loc.type]} stroke="white" strokeWidth={fontScale * 1.5} />
-                <text x={cx} y={cy} textAnchor="middle" dominantBaseline="middle"
-                  fontSize={starFont} fill="white" fontWeight="bold"
-                  style={{ userSelect: "none" }}>T</text>
-                <text x={lx} y={cy} fontSize={cityFont} fill="#dc2626"
-                  dominantBaseline="middle" textAnchor={anchor} fontWeight="bold"
-                  stroke="white" strokeWidth={fontScale * 2.5} paintOrder="stroke"
-                  style={{ userSelect: "none" }}>TSMC</text>
-              </g>
-            );
-          })}
+          {allPins.filter((p) => p.isTSMC).map((p) => (
+            <g key={`tsmc-${p.cx}`} style={{ pointerEvents: "none" }}>
+              <circle cx={p.cx} cy={p.cy} r={capR} fill={TYPE_COLOR[p.tsmc!.type]} stroke="white" strokeWidth={fontScale * 1.5} />
+              <text x={p.cx} y={p.cy} textAnchor="middle" dominantBaseline="middle"
+                fontSize={starFont} fill="white" fontWeight="bold"
+                style={{ userSelect: "none" }}>T</text>
+              <text x={p.lx} y={p.ly} fontSize={cityFont} fill="#dc2626"
+                dominantBaseline="middle" textAnchor={p.toRight ? "start" : "end"} fontWeight="bold"
+                stroke="white" strokeWidth={fontScale * 2.5} paintOrder="stroke"
+                style={{ userSelect: "none" }}>TSMC</text>
+            </g>
+          ))}
         </svg>
       </div>
       {/* Legend */}
@@ -392,22 +437,31 @@ export default function PrefectureDetailPage() {
         </div>
       </div>
 
-      {/* Spots */}
+      {/* Spots — clickable */}
       <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 mb-4">
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xl">📍</span>
           <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">必訪景點</p>
+          <span className="ml-auto text-xs text-gray-400 dark:text-gray-500">點擊查看詳情 →</span>
         </div>
         <ul className="space-y-2">
           {p.spots.map((spot, i) => (
-            <li key={i} className="flex items-start gap-2.5">
-              <span
-                className="flex-shrink-0 w-5 h-5 rounded-full text-white text-xs flex items-center justify-center font-bold mt-0.5"
-                style={{ backgroundColor: color.base }}
+            <li key={i}>
+              <button
+                onClick={() => navigate(`/japan-travel/${p.id}/spot/${i}`)}
+                className="w-full flex items-center gap-2.5 text-left py-2 px-2 -mx-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors tap-active"
               >
-                {i + 1}
-              </span>
-              <span className="text-sm text-gray-700 dark:text-gray-300">{spot}</span>
+                <span
+                  className="flex-shrink-0 w-5 h-5 rounded-full text-white text-xs flex items-center justify-center font-bold"
+                  style={{ backgroundColor: color.base }}
+                >
+                  {i + 1}
+                </span>
+                <span className="flex-1 text-sm text-gray-700 dark:text-gray-300">{spot}</span>
+                <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+              </button>
             </li>
           ))}
         </ul>
