@@ -175,12 +175,12 @@ function CastlesSection({ id }: { id: string }) {
         <span className="text-xl">🏯</span>
         <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">名城・城郭</p>
       </div>
-      <div className="space-y-4">
+      <div className="space-y-5">
         {castles.map((castle) => (
-          <div key={castle.name}>
+          <div key={castle.name} className="pb-4 border-b border-gray-100 dark:border-gray-700 last:border-b-0 last:pb-0">
             <CastleImage src={castle.imageUrl} alt={castle.name} />
             <div className="mt-2">
-              <div className="flex items-start justify-between gap-2">
+              <div className="flex items-start justify-between gap-2 mb-2">
                 <div>
                   <p className="font-semibold text-gray-900 dark:text-gray-50 text-sm">{castle.name}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">{castle.nameEn}</p>
@@ -199,9 +199,27 @@ function CastlesSection({ id }: { id: string }) {
                   ))}
                 </div>
               </div>
-              <p className="text-xs text-gray-600 dark:text-gray-300 mt-1 leading-relaxed">
+
+              {/* Summary description */}
+              <p className="text-xs text-gray-600 dark:text-gray-300 mt-2 leading-relaxed mb-3">
                 {castle.description}
               </p>
+
+              {/* Castle lord (城主) */}
+              <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-2.5 mb-3 border border-blue-100 dark:border-blue-800">
+                <p className="text-xs font-semibold text-blue-700 dark:text-blue-300 mb-0.5">城主</p>
+                <p className="text-xs text-blue-600 dark:text-blue-200 leading-relaxed">
+                  {castle.lord}
+                </p>
+              </div>
+
+              {/* History (歷史故事) */}
+              <div className="bg-amber-50 dark:bg-amber-900/20 rounded-lg p-3 border border-amber-100 dark:border-amber-800">
+                <p className="text-xs font-semibold text-amber-700 dark:text-amber-300 mb-1.5">歷史</p>
+                <p className="text-xs text-amber-600 dark:text-amber-200 leading-relaxed">
+                  {castle.history}
+                </p>
+              </div>
             </div>
           </div>
         ))}
