@@ -13,55 +13,51 @@ const SVG_H = 755;
 function imgX(lon: number): number { return (lon - 129.0) * 28.7 + 47; }
 function imgY(lat: number): number { return (45.5 - lat) * 50.8 + 8; }
 
-// ── Hiragana readings for hover tooltip furigana ─────────────────────────────
+// ── Hiragana readings ───────────────────────────────────────────────────────
 const PREF_READING: Record<string, string> = {
-  hokkaido: "ほっかいどう",
-  aomori:   "あおもり",
-  iwate:    "いわて",
-  miyagi:   "みやぎ",
-  akita:    "あきた",
-  yamagata: "やまがた",
-  fukushima:"ふくしま",
-  ibaraki:  "いばらき",
-  tochigi:  "とちぎ",
-  gunma:    "ぐんま",
-  saitama:  "さいたま",
-  chiba:    "ちば",
-  tokyo:    "とうきょう",
-  kanagawa: "かながわ",
-  niigata:  "にいがた",
-  toyama:   "とやま",
-  ishikawa: "いしかわ",
-  fukui:    "ふくい",
-  yamanashi:"やまなし",
-  nagano:   "ながの",
-  gifu:     "ぎふ",
-  shizuoka: "しずおか",
-  aichi:    "あいち",
-  mie:      "みえ",
-  shiga:    "しが",
-  kyoto:    "きょうと",
-  osaka:    "おおさか",
-  hyogo:    "ひょうご",
-  nara:     "なら",
-  wakayama: "わかやま",
-  tottori:  "とっとり",
-  shimane:  "しまね",
-  okayama:  "おかやま",
-  hiroshima:"ひろしま",
-  yamaguchi:"やまぐち",
-  tokushima:"とくしま",
-  kagawa:   "かがわ",
-  ehime:    "えひめ",
-  kochi:    "こうち",
-  fukuoka:  "ふくおか",
-  saga:     "さが",
-  nagasaki: "ながさき",
-  kumamoto: "くまもと",
-  oita:     "おおいた",
-  miyazaki: "みやざき",
-  kagoshima:"かごしま",
-  okinawa:  "おきなわ",
+  hokkaido: "ほっかいどう", aomori: "あおもり", iwate: "いわて",
+  miyagi: "みやぎ", akita: "あきた", yamagata: "やまがた",
+  fukushima: "ふくしま", ibaraki: "いばらき", tochigi: "とちぎ",
+  gunma: "ぐんま", saitama: "さいたま", chiba: "ちば",
+  tokyo: "とうきょう", kanagawa: "かながわ", niigata: "にいがた",
+  toyama: "とやま", ishikawa: "いしかわ", fukui: "ふくい",
+  yamanashi: "やまなし", nagano: "ながの", gifu: "ぎふ",
+  shizuoka: "しずおか", aichi: "あいち", mie: "みえ",
+  shiga: "しが", kyoto: "きょうと", osaka: "おおさか",
+  hyogo: "ひょうご", nara: "なら", wakayama: "わかやま",
+  tottori: "とっとり", shimane: "しまね", okayama: "おかやま",
+  hiroshima: "ひろしま", yamaguchi: "やまぐち", tokushima: "とくしま",
+  kagawa: "かがわ", ehime: "えひめ", kochi: "こうち",
+  fukuoka: "ふくおか", saga: "さが", nagasaki: "ながさき",
+  kumamoto: "くまもと", oita: "おおいた", miyazaki: "みやざき",
+  kagoshima: "かごしま", okinawa: "おきなわ",
+};
+
+// ── Label position offsets [dx, dy] to avoid overlap in crowded areas ───────
+const LABEL_OFFSET: Record<string, [number, number]> = {
+  // Kanto — very dense
+  tokyo:    [18, 8],
+  saitama:  [-2, -6],
+  kanagawa: [18, 14],
+  chiba:    [22, 0],
+  yamanashi:[-12, 5],
+  // Kinki — dense
+  osaka:    [8, 12],
+  nara:     [12, 6],
+  shiga:    [-4, -8],
+  kyoto:    [-18, -4],
+  wakayama: [2, 14],
+  // Chubu — slight spreads
+  toyama:   [0, -5],
+  fukui:    [-8, 5],
+  gifu:     [-2, -3],
+  // Shikoku
+  kagawa:   [0, -6],
+  tokushima:[10, 2],
+  // Kyushu
+  saga:     [-10, 0],
+  nagasaki: [-16, 6],
+  oita:     [10, -2],
 };
 
 // ── Convert polygon [lon, lat] pairs → SVG points string ────────────────────
@@ -155,7 +151,7 @@ export default function JapanMapPage() {
         </button>
       </div>
 
-      {/* Map — Wikipedia SVG background + interactive SVG overlay */}
+      {/* Map — Wikipedia SVG background (labels removed) + interactive SVG overlay */}
       <div
         className="relative w-full overflow-hidden rounded-xl shadow mb-3 -mx-4"
         style={{ aspectRatio: `${SVG_W}/${SVG_H}` }}
@@ -178,65 +174,76 @@ export default function JapanMapPage() {
           onClick={onClick}
           onTouchEnd={onTouch}
         >
-          {/* ── Prefecture polygon highlights ── */}
-          {prefectures.map((p) => {
-            const poly = prefecturePolygons[p.id];
+          {/* ── Prefecture polygon highlight (hovered only) ── */}
+          {hovered && (() => {
+            const poly = prefecturePolygons[hovered];
             if (!poly) return null;
-            const isHov = p.id === hovered;
-            const color = REGION_HEX[p.region];
-            if (!isHov) return null; // only render the hovered one
+            const color = hovColor;
             return (
               <polygon
-                key={p.id}
                 points={toSvgPoints(poly)}
                 fill={color ? color.hover : "#6366f1"}
-                fillOpacity={0.40}
-                stroke={color ? color.hover : "#6366f1"}
-                strokeWidth={2}
-                strokeOpacity={0.8}
+                fillOpacity={0.45}
+                stroke="white"
+                strokeWidth={2.5}
                 strokeLinejoin="round"
                 style={{ pointerEvents: "none" }}
               />
             );
+          })()}
+
+          {/* ── Permanent Japanese labels for all 47 prefectures ── */}
+          {prefectures.map((p) => {
+            const c = CENTROIDS[p.id];
+            if (!c) return null;
+            const [ox, oy] = LABEL_OFFSET[p.id] ?? [0, 0];
+            const lx = c[0] + ox;
+            const ly = c[1] + oy;
+            const isHov = p.id === hovered;
+            return (
+              <g key={`label-${p.id}`} style={{ pointerEvents: "none" }}>
+                {/* Kanji label — white outline for readability */}
+                <text
+                  x={lx} y={ly}
+                  textAnchor="middle" dominantBaseline="central"
+                  fontSize={isHov ? 11 : 8.5}
+                  fontWeight={isHov ? "bold" : "600"}
+                  fill={isHov ? "#1e293b" : "#334155"}
+                  stroke="white"
+                  strokeWidth={isHov ? 3 : 2.5}
+                  paintOrder="stroke"
+                  style={{ userSelect: "none", transition: "font-size 0.15s" }}
+                >
+                  {p.nameShort}
+                </text>
+              </g>
+            );
           })}
 
-          {/* ── Hover tooltip — kanji + furigana ── */}
+          {/* ── Hover tooltip — furigana pill above label ── */}
           {hovered && hovColor && CENTROIDS[hovered] && (() => {
-            const [cx, cy] = CENTROIDS[hovered];
-            const kanji   = hovPref?.nameShort ?? "";
+            const c = CENTROIDS[hovered];
+            const [ox, oy] = LABEL_OFFSET[hovered] ?? [0, 0];
+            const lx = c[0] + ox;
+            const ly = c[1] + oy;
             const reading = PREF_READING[hovered] ?? "";
-            const pillW   = Math.max(kanji.length * 14 + 20, reading.length * 8 + 20);
-            // Position pill above centroid; flip if too close to top
-            const pillY = cy - 48;
-            const finalY = pillY < 10 ? cy + 10 : pillY;
+            const pillW = reading.length * 8.5 + 14;
+            const pillY = ly - 20;
             return (
               <g style={{ pointerEvents: "none" }}>
-                {/* Centre dot */}
-                <circle cx={cx} cy={cy} r={7} fill={hovColor.hover} fillOpacity={0.95}
-                  stroke="white" strokeWidth={2} />
-                {/* Pill background */}
+                {/* Furigana pill */}
                 <rect
-                  x={cx - pillW / 2} y={finalY}
-                  width={pillW} height={36}
-                  rx={10} fill={hovColor.hover} fillOpacity={0.95}
+                  x={lx - pillW / 2} y={pillY - 7}
+                  width={pillW} height={14}
+                  rx={7} fill={hovColor.hover} fillOpacity={0.92}
                 />
-                {/* Furigana — small hiragana above */}
                 <text
-                  x={cx} y={finalY + 11}
-                  textAnchor="middle" dominantBaseline="middle"
-                  fontSize={9} fill="rgba(255,255,255,0.88)"
+                  x={lx} y={pillY}
+                  textAnchor="middle" dominantBaseline="central"
+                  fontSize={8} fill="white"
                   style={{ userSelect: "none" }}
                 >
                   {reading}
-                </text>
-                {/* Kanji — bold below */}
-                <text
-                  x={cx} y={finalY + 26}
-                  textAnchor="middle" dominantBaseline="middle"
-                  fontSize={14} fill="white" fontWeight="bold"
-                  style={{ userSelect: "none" }}
-                >
-                  {kanji}
                 </text>
               </g>
             );
