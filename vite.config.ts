@@ -52,6 +52,7 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,svg,png,ico,json,woff2}'],
         navigateFallback: '/japanese-learner-upstream/index.html',
         cleanupOutdatedCaches: true,
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024, // 4 MiB
       },
       devOptions: {
         enabled: false,
