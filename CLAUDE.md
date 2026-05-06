@@ -25,7 +25,7 @@ If lint or build fails → fix immediately before pushing.
 - **Increment rule**: Each commit that touches any source file must bump the version.
   - Same date → increment trailing number (`CH20260501-4` → `CH20260501-5`)
   - New date → reset to `-1`
-- **Current version**: `CH20260501-6`
+- **Current version**: `CH20260506-2`
 - Do this automatically — user will never need to ask.
 
 ---
