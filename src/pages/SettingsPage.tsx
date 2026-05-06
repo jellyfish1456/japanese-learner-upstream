@@ -4,7 +4,7 @@ import SyncSection from "../components/SyncSection";
 
 declare const __BUILD_TIME__: string;
 
-const APP_VERSION = "CH20260503-10";
+const APP_VERSION = "CH20260506-1";
 const HAS_GOOGLE_ID   = Boolean(import.meta.env.VITE_GOOGLE_CLIENT_ID);
 const HAS_CAPTION_PROXY = Boolean(import.meta.env.VITE_CAPTION_PROXY_URL);
 
