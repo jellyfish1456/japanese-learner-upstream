@@ -82,6 +82,19 @@ export default function SpotDetailPage() {
         </div>
       </div>
 
+      {/* Photo */}
+      {spot.photo && (
+        <div className="rounded-xl overflow-hidden mb-4 aspect-video bg-gray-100 dark:bg-gray-800">
+          <img
+            src={spot.photo}
+            alt={spotName ?? spot.name}
+            className="w-full h-full object-cover"
+            loading="lazy"
+            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+          />
+        </div>
+      )}
+
       {/* Description */}
       <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 mb-4">
         <div className="flex items-center gap-2 mb-3">
