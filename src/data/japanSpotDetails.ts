@@ -11,35 +11,35 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   hokkaido: [
     {
       name: "富良野薰衣草田",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/%E3%83%95%E3%82%A1%E3%83%BC%E3%83%A0%E5%AF%8C%E7%94%B0%EF%BC%88Farm_Tomita%EF%BC%89_-_panoramio_%282%29.jpg/800px-%E3%83%95%E3%82%A1%E3%83%BC%E3%83%A0%E5%AF%8C%E7%94%B0%EF%BC%88Farm_Tomita%EF%BC%89_-_panoramio_%282%29.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/%E3%83%95%E3%82%A1%E3%83%BC%E3%83%A0%E5%AF%8C%E7%94%B0%EF%BC%88Farm_Tomita%EF%BC%89_-_panoramio_%282%29.jpg/960px-%E3%83%95%E3%82%A1%E3%83%BC%E3%83%A0%E5%AF%8C%E7%94%B0%EF%BC%88Farm_Tomita%EF%BC%89_-_panoramio_%282%29.jpg",
       desc: "富良野是日本最著名的薰衣草產地，每年7月整片山坡染上紫色，搭配遠處的大雪山，構成令人屏息的風景。以「富田農場」最具代表性，園內種植多色花卉，花期從初夏延伸至秋天。",
       tips: "最佳花期為7月中旬，若搭乘JR富良野線可在「ラベンダー畑」臨時站下車，步行即達，建議平日上午前往避開人潮。",
       tags: ["自然", "花田"],
     },
     {
       name: "小樽運河",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Otaru_Canal_Night.jpg/800px-Otaru_Canal_Night.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Otaru_Canal_Night.jpg/960px-Otaru_Canal_Night.jpg",
       desc: "小樽運河建於大正時代，昔日是北海道對外貿易的重要水路，兩岸石造倉庫群現已改為餐廳、玻璃工藝店與咖啡館。夜晚瓦斯燈亮起，倒映在運河水面，是北海道最浪漫的夜景之一。",
       tips: "從小樽車站步行約10分鐘即可抵達，傍晚17:00後燈光亮起，黃昏至夜間是拍照最佳時段，附近的堺町通商店街也值得逛逛。",
       tags: ["文化", "夜景", "歷史"],
     },
     {
       name: "知床半島",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/140829_Track_Near_Furepe_Falls_Shiretoko_Hokkaido_Japan00s3.jpg/800px-140829_Track_Near_Furepe_Falls_Shiretoko_Hokkaido_Japan00s3.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/140829_Track_Near_Furepe_Falls_Shiretoko_Hokkaido_Japan00s3.jpg/960px-140829_Track_Near_Furepe_Falls_Shiretoko_Hokkaido_Japan00s3.jpg",
       desc: "知床是日本最後的秘境之一，2005年列入世界自然遺産，棕熊、蝦夷鹿、虎頭海鵰等珍稀動物在此自由棲息。冬天流冰漂至岸邊，形成壯觀的白色景觀；夏天則可搭船欣賞懸崖瀑布。",
       tips: "可從斜里或宇登呂搭乘觀光船遊覽半島，5月賞紅葉楢木、2月可體驗流冰健行（需導遊帶領），是日本少數能近距離觀察野生熊的地點。",
       tags: ["自然", "世界遺産"],
     },
     {
       name: "旭山動物園",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Asahiyama_zoo_entrance.jpg/800px-Asahiyama_zoo_entrance.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Asahiyama_zoo_entrance.jpg/960px-Asahiyama_zoo_entrance.jpg",
       desc: "旭山動物園以「行動展示」聞名，讓動物在最接近自然的環境中活動，遊客可透過透明隧道近距離觀察北極熊游泳、企鵝散步。曾是日本瀕臨廢園的小動物園，如今已成全日本最受歡迎的動物園之一。",
       tips: "冬季（12月至3月）的「企鵝散步」活動每天固定在特定時間舉行，非常受歡迎；夏季日照長，可玩到晚上8點，兩個季節各有特色。",
       tags: ["自然", "遊樂"],
     },
     {
       name: "函館夜景",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Night_scape_seen_from_Mount_Hakodate_Ropeway.jpg/800px-Night_scape_seen_from_Mount_Hakodate_Ropeway.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Night_scape_seen_from_Mount_Hakodate_Ropeway.jpg/960px-Night_scape_seen_from_Mount_Hakodate_Ropeway.jpg",
       desc: "函館夜景被列為「世界三大夜景」之一，從函館山山頂俯瞰，沙洲地形造成的城市輪廓宛如一顆閃耀的寶石。函館朝市的海鮮丼、元町洋風建築群與五稜郭公園也讓此地充滿魅力。",
       tips: "建議搭乘纜車上函館山，夕陽後約20分鐘（入夜後）是光線最美的時段；秋冬能見度較高，是觀賞夜景的最佳季節。",
       tags: ["夜景", "文化", "歷史"],
@@ -50,28 +50,28 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   aomori: [
     {
       name: "弘前城（賞櫻名所）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Hirosaki-castle_Aomori_with_Sakura_blossoms.jpg/800px-Hirosaki-castle_Aomori_with_Sakura_blossoms.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Hirosaki-castle_Aomori_with_Sakura_blossoms.jpg/960px-Hirosaki-castle_Aomori_with_Sakura_blossoms.jpg",
       desc: "弘前城建於1611年，是東北地區保存最完好的江戶時代天守之一，城內廣植約2600棵吉野櫻，每年4月下旬至5月初舉辦「弘前さくらまつり」，吸引200萬以上旅客。花瓣落下漂浮在護城河上的「花筏」景象更是一絕。",
       tips: "花期約在4月下旬至5月初，夜間有打燈活動，護城河搭船賞花需提前購票；距弘前車站步行約25分鐘或搭公車。",
       tags: ["歷史", "自然", "城堡"],
     },
     {
       name: "奧入瀨溪流",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Oirase_Stream%2C_Towada-Hachimantai_National_Park%2C_Japan.jpg/800px-Oirase_Stream%2C_Towada-Hachimantai_National_Park%2C_Japan.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Oirase_Stream%2C_Towada-Hachimantai_National_Park%2C_Japan.jpg/960px-Oirase_Stream%2C_Towada-Hachimantai_National_Park%2C_Japan.jpg",
       desc: "奧入瀨溪流全長約14公里，清澈的溪水沿著原始森林蜿蜒而下，沿途有數十個大小瀑布與苔蘚岩石，四季景色各異。秋天紅葉倒映水面，是日本最美的自然步道之一，被指定為特別名勝及天然紀念物。",
       tips: "全程步行需4至5小時，可搭乘JR巴士在途中上下車，秋季（10月中旬至下旬）紅葉最盛，建議早晨出發享受清晨薄霧的神秘氣氛。",
       tags: ["自然"],
     },
     {
       name: "白神山地",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Sirakami_santi.JPG/800px-Sirakami_santi.JPG",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Sirakami_santi.JPG/960px-Sirakami_santi.JPG",
       desc: "白神山地跨越青森與秋田兩縣，擁有世界最大規模的原生山毛櫸（ブナ）森林，1993年登錄為世界自然遺産。森林中有特別的生態系統，包含多種珍稀動植物，潺潺溪流與原始森林讓人心曠神怡。",
       tips: "部分核心區需事前申請才可入山，建議從青森縣西目屋村或秋田縣藤里町作為入山起點，6月至10月是最適合健行的季節。",
       tags: ["自然", "世界遺産"],
     },
     {
       name: "三內丸山遺跡",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/140913_Sannai-Maruyama_site_Aomori_Japan01bs6bs6.jpg/800px-140913_Sannai-Maruyama_site_Aomori_Japan01bs6bs6.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/140913_Sannai-Maruyama_site_Aomori_Japan01bs6bs6.jpg/960px-140913_Sannai-Maruyama_site_Aomori_Japan01bs6bs6.jpg",
       desc: "三內丸山遺跡是日本規模最大的繩文時代遺址，距今約5500至4000年前，2021年列入世界文化遺産。遺址內已重建六柱式大型建物、豎穴式住居等，並設有博物館展示出土文物，讓遊客深入了解日本最古老的文明。",
       tips: "距青森市區車程約20分鐘，門票免費，常設展覽豐富，配合導覽行程約需1至2小時，附近有青森縣立美術館也值得順道參觀。",
       tags: ["歷史", "文化", "世界遺産"],
@@ -82,14 +82,14 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   akita: [
     {
       name: "田澤湖",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Lake_Tazawa_and_Kansa-g%C5%AB_20210213.jpg/800px-Lake_Tazawa_and_Kansa-g%C5%AB_20210213.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Lake_Tazawa_and_Kansa-g%C5%AB_20210213.jpg/960px-Lake_Tazawa_and_Kansa-g%C5%AB_20210213.jpg",
       desc: "田澤湖是日本最深的湖泊，最深處達423.4公尺，湖水呈現神秘的深藍色，即使在嚴冬也不會完全結冰。湖畔供奉著傳說中為了保持美貌而化為龍神的辰子姬像，是秋田縣的代表性地標。",
       tips: "從JR田澤湖站搭乘公車約15分鐘可抵達湖畔，可租借自行車環湖（全長約20公里），推薦搭乘遊覽船欣賞湖中景色。",
       tags: ["自然"],
     },
     {
       name: "角館武家屋敷",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Bukeyashiki_Street_in_Kakunodate_20060506.jpg/800px-Bukeyashiki_Street_in_Kakunodate_20060506.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Bukeyashiki_Street_in_Kakunodate_20060506.jpg/960px-Bukeyashiki_Street_in_Kakunodate_20060506.jpg",
       desc: "角館被稱為「東北的小京都」，城下町保存著完整的武家屋敷群，青柳家、石黑家等老宅至今仍對外開放。春天枝垂櫻盛開，連棟老宅與粉紅花朵形成夢幻景致，入選日本歷史上最重要的保存地區之一。",
       tips: "從秋田新幹線角館站步行約15分鐘，4月下旬枝垂櫻盛開期間，每年吸引大批賞花人潮，建議平日早晨前往；武家屋敷地區免費入場，部分宅邸需購票。",
       tags: ["歷史", "文化"],
@@ -103,7 +103,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "男鹿半島",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Namahage_Sedo_Festival_namahage.jpg/800px-Namahage_Sedo_Festival_namahage.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Namahage_Sedo_Festival_namahage.jpg/960px-Namahage_Sedo_Festival_namahage.jpg",
       desc: "男鹿半島伸入日本海，以「なまはげ」傳統文化著稱——每年大年夜，戴著鬼面的男鹿人走訪家家戶戶驅邪祈福，現已成為重要的民俗文化遺産。半島周邊亦有豐富的海鮮與壯麗的日本海景觀。",
       tips: "男鹿溫泉鄉是絕佳的住宿選擇，可在「なまはげ館」全年體驗傳統文化展示；從秋田站搭乘男鹿線約1小時抵達男鹿站，再轉搭公車。",
       tags: ["文化", "自然"],
@@ -114,28 +114,28 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   iwate: [
     {
       name: "平泉・中尊寺（世界遺産）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/230728_Chusonji_Hiraizumi_Iwate_pref_Japan01s3.jpg/800px-230728_Chusonji_Hiraizumi_Iwate_pref_Japan01s3.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/230728_Chusonji_Hiraizumi_Iwate_pref_Japan01s3.jpg/960px-230728_Chusonji_Hiraizumi_Iwate_pref_Japan01s3.jpg",
       desc: "平泉在12世紀曾是奧州藤原氏的黃金都市，2011年登錄世界文化遺産。中尊寺金色堂是日本最精美的藤原文化結晶，以黃金打造的阿彌陀堂供奉著藤原三代的木乃伊，令人歎為觀止。",
       tips: "從JR平泉站步行約20分鐘或搭乘循環巴士，金色堂需購票入內；可搭配毛越寺一同遊覽，全日遊覽時間約4至5小時。",
       tags: ["歷史", "文化", "世界遺産", "宗教"],
     },
     {
       name: "毛越寺",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/230728_Motsuji_Hiraizumi_Iwate_pref_Japan37s3.jpg/800px-230728_Motsuji_Hiraizumi_Iwate_pref_Japan37s3.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/230728_Motsuji_Hiraizumi_Iwate_pref_Japan37s3.jpg/960px-230728_Motsuji_Hiraizumi_Iwate_pref_Japan37s3.jpg",
       desc: "毛越寺與中尊寺同屬世界遺産，以壯闊的淨土庭園著稱，庭園中心的大泉が池四周種植了鳶尾花（アヤメ）、萩花等，四季皆美。每年5月下旬舉行「薪能」（柴火能劇），充滿平安時代的雅致氛圍。",
       tips: "距JR平泉站步行約5分鐘，建議搭配中尊寺一日遊覽，庭園散步需約1小時；6月上旬鳶尾花盛開時景色最美。",
       tags: ["歷史", "文化", "世界遺産"],
     },
     {
       name: "浄土ヶ浜",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Jodogahama_Beach_%2851971544590%29.jpg/800px-Jodogahama_Beach_%2851971544590%29.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Jodogahama_Beach_%2851971544590%29.jpg/960px-Jodogahama_Beach_%2851971544590%29.jpg",
       desc: "浄土ヶ浜位於三陸復興國立公園內，白色流紋岩與碧藍海水形成如同「極樂淨土」的夢幻景色，得名由此。從4月開始，可搭乘遊覽船進入海蝕洞窟，還有機會看到海鷗等海鳥在岩石上棲息。",
       tips: "從盛岡搭乘巴士約2小時抵達宮古市，再轉公車至浄土ヶ浜，搭乘遊覽船深入洞窟（需另購票）是必體驗行程；5至10月開放期間最適合造訪。",
       tags: ["自然", "海洋"],
     },
     {
       name: "遠野（民俗の里）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Nabekura_park07s3872.jpg/800px-Nabekura_park07s3872.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Nabekura_park07s3872.jpg/960px-Nabekura_park07s3872.jpg",
       desc: "遠野被稱為日本民俗的故鄉，柳田國男的《遠野物語》記錄了此地的河童、座敷童子等妖怪傳說。「カッパ淵」是傳說中河童棲息的河川，遠野鄉村景色保留著日本農村的原始風貌，令人彷彿穿越時空。",
       tips: "從新花卷站或花卷站搭乘JR釜石線至遠野站，可租借自行車巡遊各景點；建議報名導覽行程深入了解當地傳說文化。",
       tags: ["文化", "歷史"],
@@ -146,28 +146,28 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   yamagata: [
     {
       name: "蔵王樹氷（冬季限定）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/220430_ZaoOnsen_Yamagata_Yamagata_pref_Japan02s3.jpg/800px-220430_ZaoOnsen_Yamagata_Yamagata_pref_Japan02s3.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/220430_ZaoOnsen_Yamagata_Yamagata_pref_Japan02s3.jpg/960px-220430_ZaoOnsen_Yamagata_Yamagata_pref_Japan02s3.jpg",
       desc: "藏王樹冰是日本冬季最壯觀的自然奇景之一，西伯利亞寒風將水氣凍結在冷杉樹上，形成巨大的「雪怪」（スノーモンスター）造型，整片山坡宛如外星球景觀。晚間點燈活動更增添神秘感。",
       tips: "最佳觀賞期為1月下旬至2月中旬，需搭乘藏王纜車上山；山頂氣溫可達零下20度以下，全套防寒裝備不可少，建議選擇天氣晴朗的上午前往。",
       tags: ["自然", "滑雪"],
     },
     {
       name: "山寺（立石寺）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Risshaku-ji_Kaisan-do_201706b.jpg/800px-Risshaku-ji_Kaisan-do_201706b.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Risshaku-ji_Kaisan-do_201706b.jpg/960px-Risshaku-ji_Kaisan-do_201706b.jpg",
       desc: "山寺正式名稱為「寶珠山立石寺」，建於860年，1015級石階蜿蜒至山頂的奧之院，途中散布著歷代僧侶的靈堂與洞窟寺院。松尾芭蕉名句「閑さや岩にしみ入る蝉の声」正是在此創作，充滿禪意。",
       tips: "爬完1015級台階約需1至1.5小時，建議穿著舒適的登山鞋；秋天紅葉與寺院的組合特別美，從JR山寺站步行5分鐘即可開始登山。",
       tags: ["宗教", "歷史", "自然"],
     },
     {
       name: "銀山温泉",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/%E9%8A%80%E5%B1%B1%E6%B8%A9%E6%B3%89_Ginzan_Onsen_%287809473788%29.jpg/800px-%E9%8A%80%E5%B1%B1%E6%B8%A9%E6%B3%89_Ginzan_Onsen_%287809473788%29.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/%E9%8A%80%E5%B1%B1%E6%B8%A9%E6%B3%89_Ginzan_Onsen_%287809473788%29.jpg/960px-%E9%8A%80%E5%B1%B1%E6%B8%A9%E6%B3%89_Ginzan_Onsen_%287809473788%29.jpg",
       desc: "銀山溫泉以大正時代的木造旅館群沿河而立而聞名，夜晚瓦斯燈倒映在銀山川水面，散發濃厚的大正浪漫氣氛，曾被認為是宮崎駿動畫《神隱少女》的靈感來源之一。",
       tips: "從JR大石田站搭乘公車約40分鐘，夜間（17:00後）點燈最為夢幻；溫泉街只可步行，禁止開車進入，建議提前預訂住宿旅館體驗一泊二食。",
       tags: ["溫泉", "文化"],
     },
     {
       name: "出羽三山",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Five_tier_pagoda_at_Mt._Haguro_2006-10-29.jpg/800px-Five_tier_pagoda_at_Mt._Haguro_2006-10-29.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Five_tier_pagoda_at_Mt._Haguro_2006-10-29.jpg/960px-Five_tier_pagoda_at_Mt._Haguro_2006-10-29.jpg",
       desc: "出羽三山由月山、羽黑山、湯殿山組成，自古是日本山岳信仰「修驗道」的聖地，信徒會進行被稱為「三山參拜」的修行巡禮。羽黑山五重塔是山形縣最古老的建築之一，杉木參道充滿莊嚴氣氛。",
       tips: "羽黑山五重塔全年可參觀，月山（1984公尺）夏季才開放登頂；從鶴岡站搭乘公車可抵達羽黑山，建議至少安排半天時間感受靈山氣氛。",
       tags: ["宗教", "文化", "自然"],
@@ -178,21 +178,21 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   miyagi: [
     {
       name: "松島（日本三景）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/211030_Kameshima_Matsushima_Miyagi_pref_Japan01n.jpg/800px-211030_Kameshima_Matsushima_Miyagi_pref_Japan01n.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/211030_Kameshima_Matsushima_Miyagi_pref_Japan01n.jpg/960px-211030_Kameshima_Matsushima_Miyagi_pref_Japan01n.jpg",
       desc: "松島與京都天橋立、廣島宮島並列「日本三景」，約260座大小島嶼散布於松島灣，島上松樹蒼翠，景色如詩如畫。可搭乘遊覽船穿梭各島之間，岸邊的瑞嚴寺是桃山時代的國寶建築。",
       tips: "從JR仙台站搭乘仙石線至松島海岸站約40分鐘，推薦搭乘50分鐘遊覽船欣賞海上景色；牡蠣（カキ）是當地名物，秋冬季節最為肥美。",
       tags: ["自然", "文化"],
     },
     {
       name: "仙台城（青葉城）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Waki-yagura_of_Sendai_Castle_20220910b.jpg/800px-Waki-yagura_of_Sendai_Castle_20220910b.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Waki-yagura_of_Sendai_Castle_20220910b.jpg/960px-Waki-yagura_of_Sendai_Castle_20220910b.jpg",
       desc: "仙台城由「獨眼龍」伊達政宗建於1601年，雖然天守已不存在，但本丸跡地俯瞰仙台市街的視野極為開闊。城址廣場上矗立著伊達政宗騎馬像，是仙台的象徵地標，也是賞雪與賞楓名所。",
       tips: "從仙台站搭乘觀光巴士「ループル仙台」可直達，乘車約20分鐘；騎馬像前是拍照熱門地點，夜間打燈後別有一番風情。",
       tags: ["歷史", "城堡"],
     },
     {
       name: "仙台七夕まつり",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/SendaiCity_Skylines_from_Mukaiyama2018.jpg/800px-SendaiCity_Skylines_from_Mukaiyama2018.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/SendaiCity_Skylines_from_Mukaiyama2018.jpg/960px-SendaiCity_Skylines_from_Mukaiyama2018.jpg",
       desc: "仙台七夕祭（8月6至8日）是日本最大規模的七夕祭典，長達約3公里的商店街被數千個以和紙手工製作的七夕飾品所裝飾，五彩繽紛的吹き流し從拱廊頂端垂掛而下，絢麗壯觀。",
       tips: "祭典期間交通非常擁擠，建議提前預訂住宿；七夕前夜（8月5日）有花火大會，全程免費入場，商店街飾品在活動前數週就開始陳設，可提早觀賞。",
       tags: ["文化"],
@@ -210,7 +210,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   fukushima: [
     {
       name: "鶴ヶ城（會津若松城）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Aizuwakamatsu_Castle_ac_%281%29.jpg/800px-Aizuwakamatsu_Castle_ac_%281%29.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Aizuwakamatsu_Castle_ac_%281%29.jpg/960px-Aizuwakamatsu_Castle_ac_%281%29.jpg",
       desc: "鶴ヶ城是東北地區唯一保存天守的城池，以幕末時期「戊辰戰爭」中白虎隊的悲壯故事聞名。天守頂層可俯瞰會津若松市景，城內博物館展示江戶時代的武器與甲冑。春天約1000棵櫻花盛開，極為壯觀。",
       tips: "從JR會津若松站搭乘観光週遊バス約15分鐘，4月下旬至5月初的賞櫻期入場需排隊，建議早晨前往；附近的七日町通有許多懷舊商店。",
       tags: ["歷史", "城堡"],
@@ -224,14 +224,14 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "大内宿（茅葺き集落）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Ouchijuku_2006-11-12.jpg/800px-Ouchijuku_2006-11-12.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Ouchijuku_2006-11-12.jpg/960px-Ouchijuku_2006-11-12.jpg",
       desc: "大內宿是江戶時代的宿場町（驛站聚落），茅草屋頂老宅整齊排列於道路兩側，至今仍有居民生活其中。最特別的是當地名物「高遠そば」——用一根大蔥代替筷子吃蕎麥麵，是必體驗的趣味飲食文化。",
       tips: "距JR湯野上溫泉站步行約40分鐘（或搭乘計程車），週末遊客眾多；冬季（2月）積雪的景色最為美麗，雪燈籠祭更是特別活動。",
       tags: ["歷史", "文化"],
     },
     {
       name: "磐梯山",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Mt._Bandaisan_0811.JPG/800px-Mt._Bandaisan_0811.JPG",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Mt._Bandaisan_0811.JPG/960px-Mt._Bandaisan_0811.JPG",
       desc: "磐梯山（1816公尺）是福島縣的象徵，自古被稱為「會津富士」，1888年大噴發改變了山體面貌並造就了裏磐梯的湖群地形。多條登山步道可攻頂，頂部可遠眺五色沼全景與周邊山脈，秋天山麓紅葉燦爛。",
       tips: "登山起點在八方台（標高1192公尺），可搭乘磐梯吾妻Sky Line公路到達，全程登山約2至3小時；7至10月為登山旺季，注意火山氣體安全警示。",
       tags: ["自然", "登山"],
@@ -242,14 +242,14 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   niigata: [
     {
       name: "佐渡金山（世界遺産候補）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Sadokinzan-doyunowareto_01.JPG/800px-Sadokinzan-doyunowareto_01.JPG",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Sadokinzan-doyunowareto_01.JPG/960px-Sadokinzan-doyunowareto_01.JPG",
       desc: "佐渡金山是江戶時代幕府直轄的金礦，曾是世界最大的金礦之一，歷時400年累計挖出黃金78噸、白銀2330噸。礦山內部可親身體驗礦工的作業生活，蠟像與音效重現了當時採礦的艱辛場景。",
       tips: "從新潟港搭乘高速船至佐渡約1小時，金山入場需購票，建議一同參觀「西三川ゴールドパーク」体験砂金採集；佐渡亦是朱鷺（トキ）的棲息地，可至保護中心參觀。",
       tags: ["歷史", "文化"],
     },
     {
       name: "苗場・湯沢スキー場",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Naeba_ski_resort%2C_January_2026_%2839264%29.jpg/800px-Naeba_ski_resort%2C_January_2026_%2839264%29.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Naeba_ski_resort%2C_January_2026_%2839264%29.jpg/960px-Naeba_ski_resort%2C_January_2026_%2839264%29.jpg",
       desc: "苗場與湯澤是日本關東・信越地區最知名的滑雪勝地，積雪量豐富，設備完善，從東京搭乘新幹線僅需約75分鐘即可抵達。夏季纜車開放後可欣賞高原自然景觀，石打丸山等滑雪場的夜滑也相當受歡迎。",
       tips: "12月至3月為滑雪旺季，從越後湯澤站有免費接駁巴士往返各滑雪場；若無滑雪經驗，當地提供多種入門課程，設施也適合家庭親子同遊。",
       tags: ["滑雪", "自然"],
@@ -274,28 +274,28 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   ibaraki: [
     {
       name: "偕楽園（梅の名所）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Kairaku-en%2C_Ibaraki_24.jpg/800px-Kairaku-en%2C_Ibaraki_24.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Kairaku-en%2C_Ibaraki_24.jpg/960px-Kairaku-en%2C_Ibaraki_24.jpg",
       desc: "偕楽園與金澤兼六園、岡山後楽園並稱「日本三名園」，由水戶藩第九代藩主德川斉昭於1842年建造。園內種植約3000棵梅樹，每年2至3月舉行「水戶梅まつり」，是日本最大規模的梅花祭典之一。",
       tips: "從JR水戶站搭乘巴士約15分鐘，梅花祭期間（2月中旬至3月下旬）免費入場；好文亭茶室是園內重要建築，可在此欣賞梅林全景並享用抹茶。",
       tags: ["自然", "文化", "歷史"],
     },
     {
       name: "国営ひたち海浜公園（粉蝶花）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/2025_Hitachi_Seaside_Park_2.jpg/800px-2025_Hitachi_Seaside_Park_2.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/2025_Hitachi_Seaside_Park_2.jpg/960px-2025_Hitachi_Seaside_Park_2.jpg",
       desc: "國營ひたち海濱公園是日本最大的國營公園之一，以春季「ネモフィラ（粉蝶花）」藍色花海最為知名，每年4至5月有450萬株藍紫色小花覆蓋整片山丘，遠看如藍天落地，壯觀無比。秋季掃帚草（コキア）轉紅也同樣迷人。",
       tips: "從勝田站搭乘巴士或騎自行車約15分鐘，春季ネモフィラ（4月下旬至5月初）和秋季コキア（10月中旬）是最熱門的參觀時期，週末可能大排長龍。",
       tags: ["自然", "花田"],
     },
     {
       name: "筑波山",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mount_Tsukuba_seen_from_the_WSW_%282006%29.jpg/800px-Mount_Tsukuba_seen_from_the_WSW_%282006%29.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mount_Tsukuba_seen_from_the_WSW_%282006%29.jpg/960px-Mount_Tsukuba_seen_from_the_WSW_%282006%29.jpg",
       desc: "筑波山（877公尺）雙峰並立，自古被稱為「西富士、東筑波」，是關東地區最受歡迎的登山地點之一。山頂可俯瞰關東平野，天氣晴朗時甚至能眺望富士山；山間繡球花（あじさい）和楓葉景觀也頗受好評。",
       tips: "可搭乘纜車或步行登山，從筑波山神社出發至頂約1小時；4至5月山麓約1萬株杜鵑花盛開，山頂纜車景色優美，是關東日歸健行的絕佳選擇。",
       tags: ["自然", "登山"],
     },
     {
       name: "袋田の滝",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Fukuroda_Falls_-_%E8%A2%8B%E7%94%B0%E3%81%AE%E6%BB%9D%28%E3%81%B5%E3%81%8F%E3%82%8D%E3%81%A0%E3%81%AE%E3%81%9F%E3%81%8D%29.jpg/800px-Fukuroda_Falls_-_%E8%A2%8B%E7%94%B0%E3%81%AE%E6%BB%9D%28%E3%81%B5%E3%81%8F%E3%82%8D%E3%81%A0%E3%81%AE%E3%81%9F%E3%81%8D%29.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Fukuroda_Falls_-_%E8%A2%8B%E7%94%B0%E3%81%AE%E6%BB%9D%28%E3%81%B5%E3%81%8F%E3%82%8D%E3%81%A0%E3%81%AE%E3%81%9F%E3%81%8D%29.jpg/960px-Fukuroda_Falls_-_%E8%A2%8B%E7%94%B0%E3%81%AE%E6%BB%9D%28%E3%81%B5%E3%81%8F%E3%82%8D%E3%81%A0%E3%81%AE%E3%81%9F%E3%81%8D%29.jpg",
       desc: "袋田瀑布高達120公尺，寬73公尺，分四段垂流而下，被稱為「日本三名瀑」之一，西行法師曾讚嘆「人生必須看四次才夠」。秋天紅葉環繞，冬天瀑布完全結冰形成巨大冰瀑，壯觀程度令人嘆為觀止。",
       tips: "從JR袋田站搭乘公車約10分鐘，穿越隧道入場後可從兩個觀瀑台欣賞；冬季（1至2月）結冰景觀為限定特色，秋季紅葉（11月上旬）最受歡迎。",
       tags: ["自然"],
@@ -306,28 +306,28 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   tochigi: [
     {
       name: "日光東照宮（世界遺産）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/200801_Nikko_Tosho-gu_Nikko_Japan03s3.jpg/800px-200801_Nikko_Tosho-gu_Nikko_Japan03s3.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/200801_Nikko_Tosho-gu_Nikko_Japan03s3.jpg/960px-200801_Nikko_Tosho-gu_Nikko_Japan03s3.jpg",
       desc: "日光東照宮建於1617年，是德川家康的靈廟，1999年列入世界文化遺産。極盡奢華的雕刻裝飾——包括「見ざる・聞かざる・言わざる」三猿與「眠り猫」——展現了江戶時代最頂尖的工藝技術，在蒼翠杉木林中格外震撼。",
       tips: "從JR日光站或東武日光站步行或搭巴士約30分鐘，建議購買二社一寺共通拜觀券；春秋兩季楓紅或新綠配合金碧輝煌的社殿極為壯觀，建議早晨入場避開人潮。",
       tags: ["歷史", "文化", "世界遺産", "宗教"],
     },
     {
       name: "中禅寺湖・華厳の滝",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Mount_nantai_and_lake_chuzenji.jpg/800px-Mount_nantai_and_lake_chuzenji.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Mount_nantai_and_lake_chuzenji.jpg/960px-Mount_nantai_and_lake_chuzenji.jpg",
       desc: "中禪寺湖是日本海拔最高的湖泊（1269公尺），形成於男體山的火山噴發，湖水透明度極高。湖邊的華嚴瀑布高達97公尺，是日本三大瀑布之一，十月下旬湖畔楓葉與瀑布的組合被譽為日本最美的秋景之一。",
       tips: "從日光搭乘公車約40分鐘至中禪寺湖畔，華嚴瀑布需搭乘電梯（需購票）至觀瀑台；秋季（10月中至下旬）紅葉期間非常擁擠，建議提早出發。",
       tags: ["自然"],
     },
     {
       name: "那須高原",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Nasu_chausudake.jpg/800px-Nasu_chausudake.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Nasu_chausudake.jpg/960px-Nasu_chausudake.jpg",
       desc: "那須高原是栃木縣北部的高原度假勝地，皇室行宮「那須御用邸」也位於此地，彰顯其高雅氣息。高原上牧場、溫泉、美術館林立，那須嶽（茶臼岳）登山道在秋天呈現壯麗紅葉景觀，全年皆適合造訪。",
       tips: "從JR那須塩原站搭乘公車約50分鐘，茶臼岳可搭纜車（那須ロープウェイ）至九合目再步行；那須高原的乳製品（起司、牛乳）和草莓採摘也是熱門體驗。",
       tags: ["自然", "溫泉"],
     },
     {
       name: "足利フラワーパーク",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Japanese_wisteria%2C_Ashikaga_Flower_Park_1.jpg/800px-Japanese_wisteria%2C_Ashikaga_Flower_Park_1.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Japanese_wisteria%2C_Ashikaga_Flower_Park_1.jpg/960px-Japanese_wisteria%2C_Ashikaga_Flower_Park_1.jpg",
       desc: "足利花卉公園以樹齡超過150年的大藤（ふじ）聞名，每年4至5月藤花盛開時，長達160公尺的藤花棚垂掛著紫色花串，被美國CNN評選為「世界夢幻旅遊景點」。夜間點燈後的景色如夢似幻，同樣令人陶醉。",
       tips: "從JR・東武足利市站搭乘計程車約10分鐘，大藤花期（4月下旬至5月上旬）期間採動態票價，越近盛開越貴；夜間點燈活動（19:00至22:00）需另外安排。",
       tags: ["自然", "花田"],
@@ -338,14 +338,14 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   gunma: [
     {
       name: "草津温泉（湯畑）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Kusatsu%2C_Gunma.jpg/800px-Kusatsu%2C_Gunma.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Kusatsu%2C_Gunma.jpg/960px-Kusatsu%2C_Gunma.jpg",
       desc: "草津是日本三大名泉之首（與有馬、下呂並列），每分鐘湧出5000公升以上的強酸性泉水，自然殺菌力極強。「湯畑」是草津溫泉的象徵地景——溫泉水在七口木制桶槽中緩緩冷卻，白色蒸氣終年不散，別具風情。",
       tips: "從JR長野原草津口站搭乘巴士約25分鐘，湯畑廣場全年免費，旁邊有免費的足湯；「時間湯」傳統浴池（需付費）需配合開放時間。",
       tags: ["溫泉"],
     },
     {
       name: "伊香保温泉（石段街）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Ikaho_Onsen_Ishidan_02.JPG/800px-Ikaho_Onsen_Ishidan_02.JPG",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Ikaho_Onsen_Ishidan_02.JPG/960px-Ikaho_Onsen_Ishidan_02.JPG",
       desc: "伊香保溫泉以365段石階（石段街）為中心，兩側溫泉旅館、土產店與射擊遊藝場鱗次櫛比，充滿昭和懷舊風情，曾是德川家康與諸多文人雅士的療養勝地。黃金湯（含鐵）與白銀湯（無色）兩種泉質截然不同。",
       tips: "從JR渋川站搭乘巴士約30分鐘，石階街是免費散步區；晨間人少，適合享受靜謐溫泉街的氛圍，週邊伊香保森林公園的紅葉也很精彩。",
       tags: ["溫泉", "文化"],
@@ -369,14 +369,14 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   saitama: [
     {
       name: "川越（小江戸）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Alley_in_Kawagoe.jpg/800px-Alley_in_Kawagoe.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Alley_in_Kawagoe.jpg/960px-Alley_in_Kawagoe.jpg",
       desc: "川越被稱為「小江戶」，保存著江戶時代的蔵造り（石灰石砌成的倉庫式建築）商家街道，以「時の鐘」為地標，彷彿走進時光隧道。菓子屋横丁販賣各式傳統糖果與零食，充滿懷舊風情。",
       tips: "從池袋或新宿搭電車約30至40分鐘，一番街（蔵造りの街並み）免費散步；週末遊客眾多，建議平日前往；芋（川越名物）製成的各種甜食必嚐。",
       tags: ["歷史", "文化"],
     },
     {
       name: "秩父（長瀞渓谷）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Central_Chichibu_view_from_Hitsujiyama_Park.JPG/800px-Central_Chichibu_view_from_Hitsujiyama_Park.JPG",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Central_Chichibu_view_from_Hitsujiyama_Park.JPG/960px-Central_Chichibu_view_from_Hitsujiyama_Park.JPG",
       desc: "秩父的長瀞溪谷是關東最美的溪谷景觀之一，蜿蜒的荒川流過岩畳（熔岩台地），可搭乘竹筏（ライン下り）在急流中漂流，沿岸楓紅秋景尤為精彩。秩父夜祭是日本三大曳山祭之一，以煙火聞名。",
       tips: "從池袋搭乘西武池袋線至西武秩父站約90分鐘，長瀞竹筏需預約；秩父夜祭（12月3日）期間交通擁擠，建議搭乘電車前往。",
       tags: ["自然"],
@@ -399,28 +399,28 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   chiba: [
     {
       name: "東京ディズニーリゾート",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Tokyo_Disneyland_Cinderella_Castle_2023-07-02.jpg/800px-Tokyo_Disneyland_Cinderella_Castle_2023-07-02.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Tokyo_Disneyland_Cinderella_Castle_2023-07-02.jpg/960px-Tokyo_Disneyland_Cinderella_Castle_2023-07-02.jpg",
       desc: "東京迪士尼度假區由東京迪士尼樂園與東京迪士尼海洋組成，是日本最受歡迎的主題樂園，年度入園人數長期位居世界前列。迪士尼海洋以其獨特的海洋冒險主題在全球迪士尼中獨樹一幟，被譽為世界最美麗的主題樂園。",
       tips: "建議提前至官網購買電子票並確認人數設施預約（スタンバイパス），旺季（黃金週、暑假）建議8:00前入園；兩個園區可各玩一整天，選擇平日較為輕鬆。",
       tags: ["遊樂"],
     },
     {
       name: "成田山新勝寺",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Naritasan_Shinshoji_Temple.jpg/800px-Naritasan_Shinshoji_Temple.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Naritasan_Shinshoji_Temple.jpg/960px-Naritasan_Shinshoji_Temple.jpg",
       desc: "成田山新勝寺創立於940年，以「不動明王」信仰聞名，每年初詣參拜者人數全國前三名，超過300萬人。寺院建築群壯觀，從表參道到本堂一路商店林立，鰻魚（うなぎ）料理是成田最著名的名物。",
       tips: "從成田站或京成成田站步行約10分鐘，新勝寺免費參拜；參道的鰻魚飯店眾多，午餐強烈推薦；可與成田機場觀機結合為半日行程。",
       tags: ["宗教", "文化"],
     },
     {
       name: "鋸山（地獄のぞき）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Nokogiriyama_overhang.jpg/800px-Nokogiriyama_overhang.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Nokogiriyama_overhang.jpg/960px-Nokogiriyama_overhang.jpg",
       desc: "鋸山因山頂岩石形似鋸齒而得名，以「地獄のぞき」展望台聞名——懸崖突出的岩石讓遊客站在邊緣俯瞰100公尺深的斷崖，令人腿軟。山中還有日本最大的磨崖仏（石壁雕刻大佛）與「百尺觀音」等奇景。",
       tips: "從JR浜金谷站步行或搭乘纜車上山，自行步行需2至3小時；地獄のぞき吸引遊客打卡排隊，建議平日前往，山頂天氣多變記得帶外套。",
       tags: ["自然"],
     },
     {
       name: "銚子犬吠埼灯台",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/250821_Inubosaki_Lighthouse_09.jpg/800px-250821_Inubosaki_Lighthouse_09.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/250821_Inubosaki_Lighthouse_09.jpg/960px-250821_Inubosaki_Lighthouse_09.jpg",
       desc: "犬吠埼燈台位於千葉縣最東端，是日本第一個迎接新年日出的知名地點，每年元旦吸引大批旅客聚集觀看第一道曙光。白色圓筒形燈台建於1874年，登上近百級台階後可眺望太平洋無際海洋。",
       tips: "從銚子電鐵犬吠站步行約10分鐘，燈台可花100円購票登頂；元旦日出（约6:40）觀賞人潮眾多，建議凌晨4點前抵達，冬季風大記得保暖。",
       tags: ["自然", "文化"],
@@ -431,35 +431,35 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   tokyo: [
     {
       name: "浅草寺・仲見世",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Sensoji_2023.jpg/800px-Sensoji_2023.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Sensoji_2023.jpg/960px-Sensoji_2023.jpg",
       desc: "淺草寺創建於628年，是東京最古老的寺院，「雷門」巨大紅燈籠是東京的代表性地標。仲見世通商店街全長250公尺，販賣人形燒、草鞋、扇子等江戶風情伴手禮，每年初詣參拜人數超過300萬，是東京感受江戶庶民文化的最佳去處。",
       tips: "搭乘地鐵銀座線至淺草站即達，清晨7點前幾乎沒有人潮，雷門・本堂全年開放免費參觀；附近的隅田川花火大會（7月底）是東京最盛大的煙火祭典。",
       tags: ["文化", "歷史", "宗教"],
     },
     {
       name: "渋谷スクランブル交差点",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Shibuya_Crossing%2C_Aerial.jpg/800px-Shibuya_Crossing%2C_Aerial.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Shibuya_Crossing%2C_Aerial.jpg/960px-Shibuya_Crossing%2C_Aerial.jpg",
       desc: "澀谷scramble交叉路口是全球最繁忙的路口之一，每次綠燈可能有超過3000人同時穿越，成為代表現代東京的地標景象。周邊聚集時尚服飾、藝術設施與美食，是感受東京流行文化的最佳地點。",
       tips: "從JR澀谷站八公口出來即可看到；站在スクランブルスクエア展望台（票費需購）或周邊咖啡廳二樓可以居高俯瞰壯觀的人流；萬聖節（10月31日）聚集大量變裝人群。",
       tags: ["文化"],
     },
     {
       name: "新宿・歌舞伎町",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Skyscrapers_of_Shinjuku_2009_January.jpg/800px-Skyscrapers_of_Shinjuku_2009_January.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Skyscrapers_of_Shinjuku_2009_January.jpg/960px-Skyscrapers_of_Shinjuku_2009_January.jpg",
       desc: "新宿是東京規模最大的繁華鬧區，西口有東京都廳（免費展望台）、東口有伊勢丹等百貨公司，歌舞伎町則是亞洲最大的娛樂區，集中了無數餐廳、居酒屋、娛樂設施。Golden Gai是由數十間迷你酒吧組成的獨特小巷，充滿昭和情懷。",
       tips: "東京都廳展望台免費開放（週一閉館），從都廳可俯瞰360度市景；新宿御苑是都心最大的公園，春季賞櫻名所（需購票入場）。",
       tags: ["文化", "夜景"],
     },
     {
       name: "お台場",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Odaiba_close_up_-_2025_Jan_14_01-27PM.jpeg/800px-Odaiba_close_up_-_2025_Jan_14_01-27PM.jpeg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Odaiba_close_up_-_2025_Jan_14_01-27PM.jpeg/960px-Odaiba_close_up_-_2025_Jan_14_01-27PM.jpeg",
       desc: "台場是東京灣的人工島，展示著充滿未來感的都市風貌，自由女神像複製品、富士電視台球形建築與彩虹橋夜景是其代表意象。teamLab數位藝術美術館、獨角獸鋼彈立像、DiverCity Tokyo等設施吸引大批年輕旅客。",
       tips: "從新橋站搭乘百合鷗號單軌電車約15分鐘，或從豊洲・有明乘坐水上巴士；夜晚彩虹橋點燈後景色最美，teamLab需提前網路購票。",
       tags: ["文化", "藝術", "夜景"],
     },
     {
       name: "上野公園・動物園",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Ueno_park.jpg/800px-Ueno_park.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Ueno_park.jpg/960px-Ueno_park.jpg",
       desc: "上野公園是東京最著名的賞櫻勝地，約1000棵染井吉野櫻每年3月下旬至4月初盛開，公園內還聚集了東京國立博物館、國立西洋美術館（世界遺産）、東京都美術館等多座一流博物館。上野動物園是日本最古老的動物園，以大熊貓最受歡迎。",
       tips: "從JR上野站步行即達，公園免費入場，博物館和動物園需個別購票；賞櫻期間週末人潮眾多，平日清晨是最佳散步時段；大熊貓觀賞需要網路預約。",
       tags: ["自然", "文化", "藝術"],
@@ -470,28 +470,28 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   kanagawa: [
     {
       name: "鎌倉大仏・鶴岡八幡宮",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/230128_Kamakura_Daibutsu_Japan04s3.jpg/800px-230128_Kamakura_Daibutsu_Japan04s3.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/230128_Kamakura_Daibutsu_Japan04s3.jpg/960px-230128_Kamakura_Daibutsu_Japan04s3.jpg",
       desc: "鎌倉大佛（高德院）高達11.3公尺，是日本第二高的青銅大佛，建於1252年，莊嚴的面容在戶外靜靜守望了700多年。鶴岡八幡宮是鎌倉武家文化的象徵，宏偉的朱紅鳥居至段葛神道延伸至社殿，是鎌倉最重要的神社。",
       tips: "從JR鎌倉站搭乘江之電至長谷站步行10分鐘可達大佛，或乘巴士；鶴岡八幡宮從鎌倉站步行約15分鐘；建議安排全天，連結稻村ヶ崎、長谷寺等景點一同遊覽。",
       tags: ["歷史", "文化", "宗教"],
     },
     {
       name: "箱根温泉・富士山展望",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/View_of_Mount_Fuji_from_Lake_Ashi.jpg/800px-View_of_Mount_Fuji_from_Lake_Ashi.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/View_of_Mount_Fuji_from_Lake_Ashi.jpg/960px-View_of_Mount_Fuji_from_Lake_Ashi.jpg",
       desc: "箱根是東京近郊最受歡迎的溫泉旅遊地，從蘆之湖畔可仰望富士山的完美倒影（晴天限定），箱根登山鐵道、纜車、海盜船等多種交通方式串連全區景點。大涌谷的黑色溫泉蛋（吃一個據說可延壽7年）也是必體驗。",
       tips: "從新宿搭乘小田急浪漫特急直達箱根湯本約85分鐘，建議購買「箱根フリーパス」2日券；清晨蘆之湖鏡面富士的最佳拍攝地點在箱根恩賜公園。",
       tags: ["溫泉", "自然"],
     },
     {
       name: "横浜中華街・みなとみらい",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Yokohama_Chinatown_signage_2015.jpg/800px-Yokohama_Chinatown_signage_2015.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Yokohama_Chinatown_signage_2015.jpg/960px-Yokohama_Chinatown_signage_2015.jpg",
       desc: "橫濱中華街是日本最大的中華街，全長約600公尺，聚集了600多家中華料理店和商店，「善隣門」是其象徵性牌樓。みなとみらい21地區則是現代化的海濱都市，橫濱地標塔（日本第二高樓）與紅磚倉庫的對比彰顯橫濱的多元魅力。",
       tips: "從橫濱站搭乘みなとみらい線至元町・中華街站即達，中華街全年無休；紅磚倉庫（赤レンガ倉庫）舉辦各種季節性市集，夜景從みなとみらい21地區的碼頭欣賞最美。",
       tags: ["文化", "美食"],
     },
     {
       name: "江の島",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/EnoshimaAeralPhoto1988JP14.jpg/800px-EnoshimaAeralPhoto1988JP14.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/EnoshimaAeralPhoto1988JP14.jpg/960px-EnoshimaAeralPhoto1988JP14.jpg",
       desc: "江之島是神奈川縣的海上小島，通過弁天橋與陸地相連，島上有江島神社、洞窟奇景、燈塔展望台等豐富景點。從江之島可以清楚眺望富士山與相模灣，日落時分海面染成金橘色，景色絕美。",
       tips: "從江之電「江ノ島」站或小田急「片瀬江ノ島」站步行約10分鐘，島內景點需各別購票或購買「江の島1dayパスポート」；新鮮的江之島名物「しらす（白飯魚）」丼是必嚐料理。",
       tags: ["自然", "文化", "宗教"],
@@ -502,7 +502,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   toyama: [
     {
       name: "立山黒部アルペンルート",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Murodoh.jpg/800px-Murodoh.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Murodoh.jpg/960px-Murodoh.jpg",
       desc: "立山黒部阿爾卑斯山脈路線是日本最壯觀的山岳觀光路線，穿越海拔3000公尺的立山連峰，途中需換乘纜車、高架電車、無軌電車等6種交通工具。4至5月的雪壁（雪の大谷）高達20公尺，遊客在雪牆夾道中行走，震撼人心。",
       tips: "全程單程約6小時，建議從立山側（富山）或扇澤側（長野）選一端出發；4至5月雪壁期間最受歡迎，須提前預訂交通票券，秋季（9至10月）紅葉也非常壯麗。",
       tags: ["自然", "登山"],
@@ -516,7 +516,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "富山城",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Toyama_Municipal_Folk_Museum_%28mock_keep_tower_of_the_Toyama_Castle%29_20180503.jpg/800px-Toyama_Municipal_Folk_Museum_%28mock_keep_tower_of_the_Toyama_Castle%29_20180503.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Toyama_Municipal_Folk_Museum_%28mock_keep_tower_of_the_Toyama_Castle%29_20180503.jpg/960px-Toyama_Municipal_Folk_Museum_%28mock_keep_tower_of_the_Toyama_Castle%29_20180503.jpg",
       desc: "富山城建於16世紀，曾為前田氏的支藩居城，現存天守是1954年重建的鋼筋水泥構造，內有鄉土博物館展示富山藩的歷史文物。護城河周邊的富山城址公園在春天有百棵以上的櫻花盛開，是市民的賞花勝地。",
       tips: "從富山站步行約15分鐘，博物館需購票；附近的富岩運河環水公園是日本最美麗的星巴克（水邊星巴克）所在地，搭配散步非常愜意。",
       tags: ["歷史", "城堡"],
@@ -534,14 +534,14 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   ishikawa: [
     {
       name: "兼六園（日本三名園）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Stone_lantern_Kenrokuen.jpg/800px-Stone_lantern_Kenrokuen.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Stone_lantern_Kenrokuen.jpg/960px-Stone_lantern_Kenrokuen.jpg",
       desc: "兼六園與水戶偕楽園、岡山後楽園並稱「日本三名園」，建於18世紀，以「兼六」（宏大、幽邃、人力、蒼古、水泉、眺望六勝並備）之名著稱。霞ヶ池中的噴水是日本最古老的利用水壓的噴泉，雪吊（冬季防雪裝置）也是金澤冬天的代表性景觀。",
       tips: "從JR金澤站搭乘巴士約15分鐘，3至11月需購票（12至2月免費），建議早晨8時開園時入場；毗鄰的金澤城公園可同日遊覽，免費入場。",
       tags: ["文化", "自然"],
     },
     {
       name: "金沢21世紀美術館",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/21st_Century_Museum_of_Contemporary_Art%2C_Kanazawa011.jpg/800px-21st_Century_Museum_of_Contemporary_Art%2C_Kanazawa011.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/21st_Century_Museum_of_Contemporary_Art%2C_Kanazawa011.jpg/960px-21st_Century_Museum_of_Contemporary_Art%2C_Kanazawa011.jpg",
       desc: "金澤21世紀美術館以圓形玻璃建築著稱，對外開放的免費區域有知名裝置藝術「Swimming Pool」——從地面看下去彷彿有人在水中遊泳。館內常設展覽水準極高，是引領日本當代藝術的重要場所。",
       tips: "從JR金澤站步行約15分鐘，或搭巴士至廣坂站；免費廣場全年開放，付費展廳需購票；建議在平日早晨前往「Swimming Pool」避開排隊。",
       tags: ["藝術", "文化"],
@@ -580,7 +580,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "福井県立恐竜博物館",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Tyrannosaurus_at_the_Fukui_Prefectural_Dinosaur_Museum.jpg/800px-Tyrannosaurus_at_the_Fukui_Prefectural_Dinosaur_Museum.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Tyrannosaurus_at_the_Fukui_Prefectural_Dinosaur_Museum.jpg/960px-Tyrannosaurus_at_the_Fukui_Prefectural_Dinosaur_Museum.jpg",
       desc: "福井縣立恐龍博物館是世界三大恐龍博物館之一，館內展示44具恐龍骨骼化石與逼真的恐龍模型，其中多件為在福井縣勝山地區發掘的新品種。全新翻修後的館舍以銀色蛋形建築為外觀，極具衝擊感，是親子旅遊的最佳選擇。",
       tips: "從JR福井站搭乘えちぜん鉄道至勝山站再轉公車約5分鐘，需購票；旺季（暑假）建議網路預購，旁邊的野外恐龍發掘体験也非常受兒童歡迎。",
       tags: ["文化", "遊樂"],
@@ -598,14 +598,14 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   yamanashi: [
     {
       name: "富士山（世界遺産）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/View_of_Mount_Fuji_from_%C5%8Cwakudani_20211202.jpg/800px-View_of_Mount_Fuji_from_%C5%8Cwakudani_20211202.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/View_of_Mount_Fuji_from_%C5%8Cwakudani_20211202.jpg/960px-View_of_Mount_Fuji_from_%C5%8Cwakudani_20211202.jpg",
       desc: "富士山（3776公尺）是日本的象徵，也是日本最高峰，2013年以「信仰的對象與藝術的源泉」列入世界文化遺産。每年7至8月開放登山，山頂可俯瞰雲海與日出（御来光），是許多人一生必完成的挑戰，山梨縣側的吉田登山道是最熱門路線。",
       tips: "登山期限7月1日至9月10日，初學者建議參加導遊行程或選吉田ルート；富士山5合目觀光全年可達（自駕或巴士），河口湖畔的逆さ富士（倒影）是拍攝富士山的絕佳角度。",
       tags: ["自然", "世界遺産", "登山"],
     },
     {
       name: "河口湖・山中湖",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/KawaguchiKo.jpg/800px-KawaguchiKo.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/KawaguchiKo.jpg/960px-KawaguchiKo.jpg",
       desc: "河口湖與山中湖是富士五湖中最大的兩座湖泊，從湖畔眺望富士山是日本最經典的景觀之一。春天湖畔的芝桜（芝草花）與富士山的組合尤其美麗；冬天湖面有時結冰，夜晚鑽石富士（富士山頂正對日落）也是難得奇景。",
       tips: "從新宿搭乘富士急行巴士約2小時至河口湖；搭乘河口湖周遊巴士可巡遊湖畔景點，春季（4至5月）芝桜節是最熱門時期，建議提前預訂住宿。",
       tags: ["自然"],
@@ -637,7 +637,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "善光寺",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/160501_Zenkoji_Nagano_Japan06s3.jpg/800px-160501_Zenkoji_Nagano_Japan06s3.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/160501_Zenkoji_Nagano_Japan06s3.jpg/960px-160501_Zenkoji_Nagano_Japan06s3.jpg",
       desc: "善光寺創建於7世紀，是日本最古老的佛教寺院之一，供奉「一光三尊阿彌陀如来」，以「生涯必須參拜一次」著稱，每6年舉辦一次的「御開帳」大祭吸引數百萬參拜者。參道兩旁鋪滿石板，商店出售信州蕎麥等長野名物。",
       tips: "從長野站搭乘巴士約10分鐘，或步行約25分鐘；可報名「お戒壇めぐり」（黑暗迴廊）體驗，黑暗中摸索找到鑰匙可祈求心願成就。",
       tags: ["宗教", "文化"],
@@ -658,7 +658,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "地獄谷野猿公苑",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Jigokudani_Hotspring_Gorakuen.JPG/800px-Jigokudani_Hotspring_Gorakuen.JPG",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Jigokudani_Hotspring_Gorakuen.JPG/960px-Jigokudani_Hotspring_Gorakuen.JPG",
       desc: "地獄谷野猿公苑是全球唯一可以觀賞日本獼猴（ニホンザル）在天然溫泉中泡澡的地方，猴子們在冬天雪中享受溫泉的畫面被世界各地媒體廣泛報導，在國際上極為知名，有「Snow Monkey Park」之稱。",
       tips: "從長電湯田中站搭乘巴士約15分鐘再步行30分鐘，全年開放，但冬季（12至2月）雪中溫泉猴是最精彩的場景；早晨猴群最為活躍，建議9時前抵達。",
       tags: ["自然"],
@@ -676,14 +676,14 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "下呂温泉",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/260125_Gero_Onsen_Gero_Gifu_pref_Japan02s3.jpg/800px-260125_Gero_Onsen_Gero_Gifu_pref_Japan02s3.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/260125_Gero_Onsen_Gero_Gifu_pref_Japan02s3.jpg/960px-260125_Gero_Onsen_Gero_Gifu_pref_Japan02s3.jpg",
       desc: "下呂溫泉與有馬・草津並列「日本三名泉」，泉質為弱鹼性單純泉，對皮膚極好，被稱為「美肌の湯」。溫泉街沿著飛騨川兩岸展開，河邊有免費的混浴露天足湯「噴泉池」，是下呂特有的開放式溫泉體驗。",
       tips: "從名古屋搭乘JR臥龍號特急約1.5小時，溫泉街步行可遊覽；噴泉池全年免費開放，建議攜帶毛巾，入浴需換上浴衣（可向旅館借）。",
       tags: ["溫泉"],
     },
     {
       name: "飛騨高山（古い町並み）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Takayama%27s_Early_Winter_Welcome_%28NE%29.jpg/800px-Takayama%27s_Early_Winter_Welcome_%28NE%29.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Takayama%27s_Early_Winter_Welcome_%28NE%29.jpg/960px-Takayama%27s_Early_Winter_Welcome_%28NE%29.jpg",
       desc: "飛驒高山被稱為「小京都」，三町筋的江戶時代町家建築保存完好，釀酒藏元、漆器店、郷土料理店沿街而立。高山祭（春4月・秋10月）以精緻的屋台（花車）巡行聞名，被列為日本三大美祭之一。",
       tips: "從名古屋搭乘特急臥龍號約2.5小時，古町散步免費；朝市（宮川朝市・陣屋前朝市）每天早晨開放，可購買當地蔬菜與土產，推薦嚐試飛驒牛握壽司。",
       tags: ["歷史", "文化"],
@@ -701,28 +701,28 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   shizuoka: [
     {
       name: "富士山（世界遺産）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/View_of_Mount_Fuji_from_%C5%8Cwakudani_20211202.jpg/800px-View_of_Mount_Fuji_from_%C5%8Cwakudani_20211202.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/View_of_Mount_Fuji_from_%C5%8Cwakudani_20211202.jpg/960px-View_of_Mount_Fuji_from_%C5%8Cwakudani_20211202.jpg",
       desc: "靜岡縣側的富士山（靜岡・山梨兩縣共有）以富士宮登山道最受歡迎，標高2400公尺的5合目可眺望駿河灣與伊豆半島。富士山麓的朝霧高原牧場景色開闊，田貫湖是拍攝「鑽石富士」（日出光暈套住山頂）的知名地點。",
       tips: "富士宮口5合目可從新富士站搭巴士約55分鐘，正式登山期7至9月；冬天山腳的富士五湖可欣賞積雪富士山倒影，元旦清晨在田貫湖可觀賞富士山頂日出。",
       tags: ["自然", "世界遺産", "登山"],
     },
     {
       name: "熱海温泉",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Atami_20170211-1.jpg/800px-Atami_20170211-1.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Atami_20170211-1.jpg/960px-Atami_20170211-1.jpg",
       desc: "熱海是日本最古老的溫泉度假地之一，江戶時代德川將軍也愛好湯治，至今仍是關東人氣最旺的溫泉城市。熱海梅園的梅花（1至2月）全國最早開放，糸川沿岸的早咲桜（1至2月）也是著名的冬季賞花景點，每年夏冬兩季的煙火大會也非常壯觀。",
       tips: "從東京搭乘新幹線こだま約35分鐘，或東海道本線約90分鐘；熱海サンビーチ海水浴場夏季開放，附近的MOA美術館展示世界頂級美術品並以日本庭園著稱。",
       tags: ["溫泉", "自然"],
     },
     {
       name: "伊豆・下田（碧蒼海岸）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Shimoda_Port_Shimodau_Shizuoka_pref_Japan02s.jpg/800px-Shimoda_Port_Shimodau_Shizuoka_pref_Japan02s.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Shimoda_Port_Shimodau_Shizuoka_pref_Japan02s.jpg/960px-Shimoda_Port_Shimodau_Shizuoka_pref_Japan02s.jpg",
       desc: "伊豆半島南端的下田是日本首個對美國開放的港口（1854年），佩里艦隊登陸的了仙寺遺址至今保存完好。白濱海岸、龍宮窟等碧藍海灣景色媲美沖繩，是東京近郊少見的熱帶風情海灘，黑船祭（5月）是重要的文化節慶。",
       tips: "從東京搭乘踊り子特急至下田約2.5小時，夏季（7至8月）是海水浴旺季；伊豆急下田站出發可搭乘人力車或巴士巡遊各海灣，推薦黑船Cruise遊覽港口。",
       tags: ["自然", "歷史", "海洋"],
     },
     {
       name: "浜松城",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Hamamatsu_Castle_2023.jpg/800px-Hamamatsu_Castle_2023.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Hamamatsu_Castle_2023.jpg/960px-Hamamatsu_Castle_2023.jpg",
       desc: "濱松城是德川家康年輕時居城17年的城郭，因多次戰役而被稱為「出世城」（升官城），歷代城主幾乎都後來晉升為幕府重臣，現存天守雖為1958年重建，但石垣與二之丸遺跡真實完整。城址公園內約70棵染井吉野春天盛開。",
       tips: "從JR濱松站步行約20分鐘或搭巴士約10分鐘，天守館需購票；附近的浜松市楽器博物館（世界最大樂器博物館）也值得順道參觀。",
       tags: ["歷史", "城堡"],
@@ -733,28 +733,28 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   aichi: [
     {
       name: "名古屋城",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Nagoya_Castle_7.jpg/800px-Nagoya_Castle_7.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Nagoya_Castle_7.jpg/960px-Nagoya_Castle_7.jpg",
       desc: "名古屋城由德川家康於1612年建造，金の鯱（黃金鯱）是名古屋最著名的地標，兩隻黃金虎頭魚大鯱裝飾在天守屋頂，成為整座城市的象徵。本丸御殿內的障壁畫（杉戶繪）是江戶時代狩野派的頂尖傑作，目前已完整復原對外開放。",
       tips: "從名古屋站搭乘地鐵市役所站步行約5分鐘，天守及本丸御殿各需購票；春天護城河周邊的染井吉野盛開，4月上旬是賞花最佳時期。",
       tags: ["歷史", "城堡"],
     },
     {
       name: "熱田神宮",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Atsuta_Shrine.jpg/800px-Atsuta_Shrine.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Atsuta_Shrine.jpg/960px-Atsuta_Shrine.jpg",
       desc: "熱田神宮創立已超過1900年，供奉日本三種神器之一的「草薙神剣」，是日本神道的最高聖地之一，全年參拜者超過600萬人。神宮內的高齡樹木（包括1000年以上的楠木群）營造出神聖莊嚴的氛圍，附近的「宮きしめん」是名古屋名物。",
       tips: "從JR・名鉄熱田站步行約5分鐘，免費參拜；元旦三日間的初詣是愛知縣最熱鬧的活動，超過230萬人參拜，宮內各處有各種御守可購買。",
       tags: ["宗教", "文化"],
     },
     {
       name: "犬山城（国宝）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Castle_in_Inuyama.JPG/800px-Castle_in_Inuyama.JPG",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Castle_in_Inuyama.JPG/960px-Castle_in_Inuyama.JPG",
       desc: "犬山城是日本現存12座原始天守中最古老的一座（1537年建），2004年之前是日本唯一由個人所有的國寶城郭。天守頂層可俯瞰木曽川與尾張平野，城下町保存著江戶時代的商家建築，城山腰的三光稻荷神社以戀愛守護聞名。",
       tips: "從名鐵犬山站步行約15分鐘，天守需購票；城下町的散步免費，推薦品嚐當地名物「田楽（豆腐田樂）」；春天城周邊的染井吉野盛開，是絕美賞花名所。",
       tags: ["歷史", "城堡"],
     },
     {
       name: "セントレア（中部国際空港）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Chubu_International_Airport_Aerial_photograph.2010.jpg/800px-Chubu_International_Airport_Aerial_photograph.2010.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Chubu_International_Airport_Aerial_photograph.2010.jpg/960px-Chubu_International_Airport_Aerial_photograph.2010.jpg",
       desc: "中部國際機場（セントレア）建於人工島上，是日本三大國際機場之一，以高品質的設施與服務聞名，在機場評比中多次獲得全球最佳地區性機場獎項。空港島內的「フライト・オブ・ドリームズ」展示波音787初始機體，是航空迷的聖地。",
       tips: "從名古屋站搭乘名鉄特急至中部国際空港站約28分鐘；即使不搭機也可前往空港商業設施用餐購物，展望台可近距離觀賞飛機起降，是親子出遊的熱門地點。",
       tags: ["文化", "遊樂"],
@@ -797,7 +797,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   shiga: [
     {
       name: "彦根城（国宝）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Hikone_Castle_November_2016_-02.jpg/800px-Hikone_Castle_November_2016_-02.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Hikone_Castle_November_2016_-02.jpg/960px-Hikone_Castle_November_2016_-02.jpg",
       desc: "彥根城是日本現存12座天守閣中的國寶之一，建於1622年，以複雜的曲輪（防禦工事）配置著稱。吉祥物「ひこにゃん」（穿盔甲的貓）在全日本廣受歡迎。春天護城河沿岸约1200棵染井吉野盛開，城下町保存著多處江戶時代的建築。",
       tips: "從JR彥根站步行約15分鐘，天守需購票；護城河遊船（需另購票）可從水面仰望天守，ひこにゃん每天固定時間出場（見面表演），可查官網確認時間。",
       tags: ["歷史", "城堡"],
@@ -811,14 +811,14 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "比叡山延暦寺",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Enryakuji_Konponchudo02s5s3200.jpg/800px-Enryakuji_Konponchudo02s5s3200.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Enryakuji_Konponchudo02s5s3200.jpg/960px-Enryakuji_Konponchudo02s5s3200.jpg",
       desc: "比叡山延暦寺創建於788年，是天台宗總本山，日本佛教史上幾乎所有宗派的祖師（法然、親鸞、道元、日蓮等）都曾在此修行，被稱為「日本佛教的母山」，1994年列入世界文化遺産。三塔十六谷的伽藍群分散在比叡山山腰。",
       tips: "從京都搭乘叡山電鐵至比叡山頂，或從坂本搭乘纜車，需購買全山共通入場券；建議安排全天，分別遊覽東塔・西塔・横川三區，山上氣溫較低需帶外套。",
       tags: ["宗教", "文化", "歷史", "世界遺産"],
     },
     {
       name: "竹生島",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Chikubushima_SAKURAMA_Kintaro_II.jpg/800px-Chikubushima_SAKURAMA_Kintaro_II.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Chikubushima_SAKURAMA_Kintaro_II.jpg/960px-Chikubushima_SAKURAMA_Kintaro_II.jpg",
       desc: "竹生島是琵琶湖中的神秘小島，面積僅0.14平方公里，卻供奉著日本三大辯財天之一的「寶厳寺」。島上的唐門（國寶）建於伏見城遺構，懸造式的都久夫須麻神社伸出在崖邊，有將陶製土盤（かわらけ）投入鳥居的祈願習俗。",
       tips: "從長浜港或今津港搭乘遊覽船約30至40分鐘，島上停留時間約85分鐘（包含參拜），全年開放（惡天候除外），需購票含船費；島上唯一的食堂供應鮒壽司（琵琶湖名產）。",
       tags: ["宗教", "文化"],
@@ -829,7 +829,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   kyoto: [
     {
       name: "金閣寺・銀閣寺",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Golden_Pavilion_Kinkaku-ji_water_mirror_2024.jpg/800px-Golden_Pavilion_Kinkaku-ji_water_mirror_2024.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Golden_Pavilion_Kinkaku-ji_water_mirror_2024.jpg/960px-Golden_Pavilion_Kinkaku-ji_water_mirror_2024.jpg",
       desc: "金閣寺（鹿苑寺）以黃金包覆的三層樓閣倒映在鏡湖池水面的景色聞名全球，是京都最具代表性的地標，每年吸引超過500萬遊客。銀閣寺（慈照寺）雖然沒有銀箔覆蓋，卻以精緻的枯山水庭園與幽靜的禪意著稱，兩寺性格迥異卻各具魅力。",
       tips: "金閣寺從JR・阪急嵐山等站搭巴士約40至50分鐘，銀閣寺從京都市バス搭至銀閣寺道站步行約10分鐘；早晨（開門後1小時）人較少，建議搭配哲學之道一同遊覽。",
       tags: ["文化", "歷史", "宗教"],
@@ -843,21 +843,21 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "伏見稲荷大社（千本鳥居）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Torii_path_with_lantern_at_Fushimi_Inari_Taisha_Shrine%2C_Kyoto%2C_Japan.jpg/800px-Torii_path_with_lantern_at_Fushimi_Inari_Taisha_Shrine%2C_Kyoto%2C_Japan.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Torii_path_with_lantern_at_Fushimi_Inari_Taisha_Shrine%2C_Kyoto%2C_Japan.jpg/960px-Torii_path_with_lantern_at_Fushimi_Inari_Taisha_Shrine%2C_Kyoto%2C_Japan.jpg",
       desc: "伏見稲荷大社是日本全國3萬座稻荷神社的總本社，以超過1萬座朱紅色鳥居綿延山道的「千本鳥居」聞名全球，是日本最受外國旅客歡迎的觀光地。鳥居由各地企業奉納，密集排列的隧道景象壯觀而神秘，深夜也可自由入場。",
       tips: "從JR稻荷站下車即達，24小時免費參拜；清晨5至7時人最少，也是最神秘的拍照時段；全程走完稻荷山需約2至3小時，可只走至四ツ辻（1小時）欣賞最美路段。",
       tags: ["宗教", "文化"],
     },
     {
       name: "清水寺",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Kiyomizu.jpg/800px-Kiyomizu.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Kiyomizu.jpg/960px-Kiyomizu.jpg",
       desc: "清水寺建於778年，「清水の舞台から飛び降りる」（從清水舞台跳下去，意指破釜沉舟）是日本家喻戶曉的成語，其懸造式本堂舞台高出地面13公尺，俯瞰京都市街。三重塔前的夜楓點燈（春秋各舉辦）是京都最美的夜景之一。",
       tips: "從京都站搭乘市巴士約20分鐘至清水道站，步行約10分鐘；春秋兩季的夜間特別拜觀（18:00後）可看到被燈光映照的金秋楓葉或春季枝垂櫻，需另購票。",
       tags: ["宗教", "文化", "歷史"],
     },
     {
       name: "祇園・花見小路",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/150124_Gion_Kyoto_Japan01s3.jpg/800px-150124_Gion_Kyoto_Japan01s3.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/150124_Gion_Kyoto_Japan01s3.jpg/960px-150124_Gion_Kyoto_Japan01s3.jpg",
       desc: "祇園是日本最著名的花街（藝妓街），花見小路是其核心的石板小路，兩側的料亭與置屋保留著江戶時代的木造建築風情。傍晚偶有舞妓・芸妓從町家步出，是感受京都傳統藝能文化最直接的方式，春秋兩季的都をどり・温習會是高水準的傳統表演。",
       tips: "從京阪祗園四条站步行約5分鐘，花見小路免費散策；強烈呼籲不可追拍或妨礙舞妓工作，部分路段已設置禁止拍照告示；附近的八坂神社（祇園社）免費參拜。",
       tags: ["文化", "歷史"],
@@ -868,21 +868,21 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   osaka: [
     {
       name: "道頓堀・心斎橋",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Dotonbori%2C_Osaka%2C_at_night%2C_November_2016.jpg/800px-Dotonbori%2C_Osaka%2C_at_night%2C_November_2016.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Dotonbori%2C_Osaka%2C_at_night%2C_November_2016.jpg/960px-Dotonbori%2C_Osaka%2C_at_night%2C_November_2016.jpg",
       desc: "道頓堀是大阪美食文化的象徵，誇張的立體招牌（かに道楽螃蟹、グリコ跑步人像等）在霓虹燈映照下格外壯觀。章魚燒（たこ焼き）、炸串（串カツ）、お好み焼き是不可不嚐的大阪庶民美食，心齋橋筋商店街全長580公尺，是大阪最繁華的購物街。",
       tips: "從地鐵難波站或心齋橋站步行即達，道頓堀全天24小時熱鬧，格力高看板前是最熱門的打卡點；黃昏後霓虹燈全開是最精彩的時段，建議空腹前往大吃一頓。",
       tags: ["文化", "美食"],
     },
     {
       name: "大阪城",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Osaka_Castle_02bs3200.jpg/800px-Osaka_Castle_02bs3200.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Osaka_Castle_02bs3200.jpg/960px-Osaka_Castle_02bs3200.jpg",
       desc: "大阪城由豊臣秀吉於1583年建造，是日本戰國時代最宏大的城郭，現存天守是1931年重建。天守頂層展望台可俯瞰大阪市景，城址公園（西之丸庭園）在春天廣植染井吉野，是大阪最著名的賞花聖地，每年花見人潮達數十萬人。",
       tips: "從JR大阪城公園站或地鐵天満橋站步行約10分鐘，公園免費入場，天守博物館需購票；春天（3月下旬至4月初）的夜楓點燈（天守燈光）格外美麗。",
       tags: ["歷史", "城堡"],
     },
     {
       name: "ユニバーサル・スタジオ・ジャパン",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/USJ_5years.JPG/800px-USJ_5years.JPG",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/USJ_5years.JPG/960px-USJ_5years.JPG",
       desc: "大阪環球影城（USJ）是日本最具代表性的主題樂園，哈利波特魔法世界、超級任天堂世界等獨家設施吸引全球旅客。每年萬聖節（9至11月）的恐怖活動與聖誕節特別活動都是年度盛事，夜間遊行與煙火秀同樣精彩。",
       tips: "從JR桜島站步行3分鐘，強烈建議提前官網購票並預約熱門設施；超級任天堂世界需要額外的「エリア入場確認書」預約，平日人較少但週末需2倍以上等待時間。",
       tags: ["遊樂"],
@@ -907,21 +907,21 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   hyogo: [
     {
       name: "神戸・北野異人館",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Kobe_kitano_thomas_house07_2816.jpg/800px-Kobe_kitano_thomas_house07_2816.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Kobe_kitano_thomas_house07_2816.jpg/960px-Kobe_kitano_thomas_house07_2816.jpg",
       desc: "神戶是日本最國際化的港口城市，北野的「異人館」是19世紀末外國居留地留下的西洋館群，現已開放為博物館。風見鶏の館（德國人邸宅）和萊茵館等建築展示了明治・大正時代的歐洲生活風情，聚集法式甜點店與精品品牌的「南京町（中華街）」也是神戶另一大亮點。",
       tips: "從JR・阪急・阪神三宮站步行至北野約20分鐘，異人館各館需單獨購票或購買套票；摩耶山（掬星台）展望台的神戶夜景被列為日本三大夜景，可搭乘纜車上山。",
       tags: ["文化", "歷史"],
     },
     {
       name: "有馬温泉",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/170811_Rokko-Arima_Ropeway_Kobe_Japan00n.jpg/800px-170811_Rokko-Arima_Ropeway_Kobe_Japan00n.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/170811_Rokko-Arima_Ropeway_Kobe_Japan00n.jpg/960px-170811_Rokko-Arima_Ropeway_Kobe_Japan00n.jpg",
       desc: "有馬溫泉是日本三古湯之一（與道後・白浜並列），以含豐富鐵質的「金泉」（茶褐色）和含碳酸的「銀泉」（無色）兩種稀有泉質著稱。豊臣秀吉也多次在此休養，溫泉街保留著江戶時代的石疊小路，炭酸煎餅是當地名物。",
       tips: "從神戶三宮搭乘地鐵・北神急行至有馬溫泉站約30分鐘，溫泉街步行可遊覽；金之湯・銀之湯均提供日歸入浴（需購票），週末人多，建議平日前往。",
       tags: ["溫泉"],
     },
     {
       name: "姫路城（世界遺産）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Himeji_castle_in_may_2015.jpg/800px-Himeji_castle_in_may_2015.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Himeji_castle_in_may_2015.jpg/960px-Himeji_castle_in_may_2015.jpg",
       desc: "姫路城是日本最美麗的城郭，1993年登錄世界文化遺産，以純白色的壁面與複雜的防禦設計著稱，被暱稱為「白鷺城」。天守閣（國寶）保存至今超過400年，從未遭受戰火與地震破壞，是日本最完整的城郭建築，春天約1000棵染井吉野盛開更是一絕。",
       tips: "從JR姫路站步行約20分鐘，天守群需購票；從清晨8:45開放入場，建議搭配「好古園」（附近的池泉式迴遊庭園）同日遊覽，春天（3月下旬至4月初）賞花期入場需排隊。",
       tags: ["歷史", "城堡", "世界遺産"],
