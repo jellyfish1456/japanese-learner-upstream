@@ -942,14 +942,14 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   nara: [
     {
       name: "東大寺・奈良大仏",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Todaiji18s3200.jpg/960px-Todaiji18s3200.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Golden_Hall_of_Todaiji_Temple_in_Nara%2C_Japan%2C_20240819_1621_4846.jpg/960px-Golden_Hall_of_Todaiji_Temple_in_Nara%2C_Japan%2C_20240819_1621_4846.jpg",
       desc: "東大寺建於8世紀，大仏殿是世界上最大的木造建築，殿內供奉高達15公尺的盧舍那大佛（奈良大仏），是日本佛教藝術的最高傑作。大佛殿旁的柱子有一個與大佛鼻孔等大的洞，鑽過去象徵可獲得智慧，是最受歡迎的體驗。",
       tips: "從近鐵奈良站步行約20分鐘，東大寺需購票；公園內的奈良鹿（約1200頭，天然紀念物）會向遊客討鹿仙貝（せんべい），是奈良最受歡迎的體驗。",
       tags: ["歷史", "文化", "宗教"],
     },
     {
       name: "春日大社",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Kasuga_Grand_Shrine%2C_Nara%2C_Japan_-_20051229.jpg/960px-Kasuga_Grand_Shrine%2C_Nara%2C_Japan_-_20051229.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Kasuga-taisha_Shrine%2C_Nara_Prefecture%3B_March_2018_%2801%29.jpg/960px-Kasuga-taisha_Shrine%2C_Nara_Prefecture%3B_March_2018_%2801%29.jpg",
       desc: "春日大社創建於768年，是奈良最重要的神社，境內有3000盞以上的石燈籠與銅燈籠，每年2月與8月舉行「万燈籠」儀式，數千盞燈同時點亮，景象神秘而壯觀。1998年列入世界文化遺産。",
       tips: "從JR奈良站搭巴士約10分鐘，神社免費參拜（本社内部需購票）；万燈籠祭（2月3日・8月14至15日）是特殊體驗，建議提前確認活動日期。",
       tags: ["宗教", "文化", "世界遺産"],
@@ -1045,7 +1045,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "松江城（国宝）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Matsue_castle04bs4592.jpg/960px-Matsue_castle04bs4592.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Matsue_castle01bs4592.jpg/960px-Matsue_castle01bs4592.jpg",
       desc: "松江城是日本現存12座原始天守中唯一的國寶，建於1611年，以不裝飾黑塗板壁的「黑城」外觀著稱。護城河搭乘堀川遊覧船（約50分鐘），在城下町水路中悠遊，是松江最具魅力的體驗。",
       tips: "從JR松江站步行約20分鐘，天守需購票；堀川遊覧船需另購票，冬天可放下防水簾保暖；松江是茶道文化興盛的地方，周邊有多間傳統茶室。",
       tags: ["歷史", "城堡"],
@@ -1059,7 +1059,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "足立美術館",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Adachi_Museum_of_Art01st3200.jpg/960px-Adachi_Museum_of_Art01st3200.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Adachi_Museum_of_Art_Garden.jpg/960px-Adachi_Museum_of_Art_Garden.jpg",
       desc: "足立美術館以日本現代日本畫大家橫山大觀的收藏著稱，同時擁有被《日本庭園》雜誌評選為「日本最美庭園」長達20年以上的枯山水庭園。透過落地玻璃窗欣賞庭園的構圖本身就是一件藝術作品。",
       tips: "從JR安来站有免費接駁巴士，需購票入館；不允許進入庭園，只能透過玻璃窗欣賞；秋季楓紅映在白砂上最為絕美。",
       tags: ["藝術", "文化"],
