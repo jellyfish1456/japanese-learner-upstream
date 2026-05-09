@@ -352,7 +352,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "四万温泉",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Shima_Onsen_Sekizenkan_Honkan_20211019.jpg/960px-Shima_Onsen_Sekizenkan_Honkan_20211019.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Sekizenkan%2C_Shima_Onsen%2C_Nakanojo%2C_Gunma_-_May_20%2C_2008.jpg/960px-Sekizenkan%2C_Shima_Onsen%2C_Nakanojo%2C_Gunma_-_May_20%2C_2008.jpg",
       desc: "四萬溫泉藏於深山峽谷之中，以古老的温泉旅館「積善館本館」（江戶時代建築）最具代表性，其朱紅色外觀與木橋映照在夜燈下，被廣泛認為是宮崎駿《神隱少女》湯屋的靈感來源。泉質優良，有「四萬の病を癒す」之稱。",
       tips: "從JR中之條站搭乘巴士約50分鐘，積善館本館的入浴開放給日歸遊客，建議預訂；溫泉街雖小，但沿著四萬川散步十分愜意。",
       tags: ["溫泉"],
@@ -384,14 +384,14 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "鉄道博物館",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/The_Railway_Museum_Saitama_2018.jpg/960px-The_Railway_Museum_Saitama_2018.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/180704saitama1.jpg/960px-180704saitama1.jpg",
       desc: "鐵道博物館是日本最大型的鐵道主題博物館，展示從明治時代至今的各型列車實物，包括新幹線0系、蒸氣機車等珍貴車輛。設有模擬駕駛室、迷你新幹線兒童乘車體驗等互動設施，大人小孩同樂。",
       tips: "從大宮站搭乘ニューシャトル一站即達（鉄道博物館站），購票後可全日遊覽；平日較安靜，模擬駕駛體驗需要另外抽號排隊，建議早到。",
       tags: ["文化", "遊樂"],
     },
     {
       name: "さきたま古墳公園",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Sakitama_Kofun_Park_aerial_view.jpg/960px-Sakitama_Kofun_Park_aerial_view.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Inariyama_Kofun_and_Shogun-yama_Kofun_%28Gyoda%29.JPG/960px-Inariyama_Kofun_and_Shogun-yama_Kofun_%28Gyoda%29.JPG",
       desc: "埼玉古墳公園內聚集了9座5至6世紀的前方後圓墳，其中稲荷山古墳出土的金錯銘鐵劍上刻有115字銘文，是研究古代日本歷史的重要文物，現藏於園內的「埼玉県立さきたま史跡の博物館」。",
       tips: "從JR吹上站步行約20分鐘，古墳公園免費入場，博物館需購票；公園廣闊，適合野餐散步，4月下旬旁邊的花園整齊鋪滿藤花。",
       tags: ["歷史"],
@@ -1027,7 +1027,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "大山（伯耆富士）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Mt_Daisen_Full_View_2.jpg/960px-Mt_Daisen_Full_View_2.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Daisen_01.jpg/960px-Daisen_01.jpg",
       desc: "大山（1729公尺）是中国地方最高峰，因圓錐形的優美山形被稱為「伯耆富士」，也是日本百名山之一。北壁是日本規模最大的崩落斜面，秋天一片火紅楓葉，大山寺周邊的千年以上古杉也是珍貴自然景觀。",
       tips: "從米子站搭乘大山行巴士約50分鐘，攻頂需約3至4小時；建議7月至10月登山，冬季可在大山スキー場滑雪。",
       tags: ["自然", "登山"],
@@ -1038,7 +1038,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   shimane: [
     {
       name: "出雲大社（縁結びの神）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Izumo-taisha_haiden-2.JPG/960px-Izumo-taisha_haiden-2.JPG",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Haiden_of_Izumo-taisha-1.JPG/960px-Haiden_of_Izumo-taisha-1.JPG",
       desc: "出雲大社是日本最古老的神社之一，供奉大国主命，被尊為日本最強的「縁結び（結緣）」神社。每年農曆10月（神無月），全日本的神明都會聚集於此商議人間的姻緣，是日本神話中最重要的場所。",
       tips: "從JR出雲市站搭乘一畑電車至出雲大社前站步行約10分鐘，免費參拜；拜殿的大繩（しめ縄）重量5噸，附近的稲佐の浜是神明登陸的傳說地點。",
       tags: ["宗教", "文化"],
@@ -1198,7 +1198,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
   kagawa: [
     {
       name: "栗林公園（国指定特別名勝）",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Ritsurin_Garden.jpg/960px-Ritsurin_Garden.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Ritsurin_garden_kangetsu_bridge.jpg/960px-Ritsurin_garden_kangetsu_bridge.jpg",
       desc: "栗林公園是日本國家指定特別名勝中規模最大的日本庭園，由江戶時代高松藩主歷代建造完成，南庭六個池塘與13座假山精心配置，被米其林旅遊指南評為三星景點。每個角度都是一幅精心構圖的日本畫。",
       tips: "從JR栗林公園北口站步行約5分鐘，需購票入場；建議在開園時（7至8時）前往享受寧靜；可搭乘傳統木舟（和船）遊覧南庭（需另購票）。",
       tags: ["文化", "自然"],
@@ -1219,7 +1219,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "小豆島・オリーブ",
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Angel_Road_Shodo_Island_02.jpg/960px-Angel_Road_Shodo_Island_02.jpg",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Angel_Road_Shodoshima_Japan.jpg/960px-Angel_Road_Shodoshima_Japan.jpg",
       desc: "小豆島是瀨戶內海最大的島嶼之一，以橄欖樹（日本最早引種地）和醬油釀造聞名，被稱為「地中海的島嶼」。寒霞渓峽谷秋天紅葉壯觀，電影《二十四の瞳》的拍攝地馬木小学校分校至今保存完好。",
       tips: "從高松港搭乘渡輪約60分鐘，島內自駕最方便；オリーブ公園（橄欖公園）免費入場，可租借掃帚拍攝魔女宅急便風格的照片；秋天寒霞渓纜車俯瞰紅葉景色最美。",
       tags: ["自然", "文化"],
