@@ -1307,7 +1307,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "柳川（川下り）",
-      photo: "",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Yanagawa-kawakudari.jpg/960px-Yanagawa-kawakudari.jpg",
       desc: "柳川是福岡縣南部的水鄉城下町，城內縱橫交錯的護城河（掘割）至今保留完整，搭乘「川下り」（小舟遊河）穿行在垂柳拂水的河道中，是最能感受日本水鄉風情的體驗之一。詩人北原白秋出生於此，文學氣息濃厚。",
       tips: "從西鉄福岡站搭特急約50分鐘至柳川站；川下り約70分鐘、大人1650圓，冬季有暖爐船（こたつ船）；下船處的「鰻のせいろ蒸し（蒸籠鰻魚飯）」是柳川名物中的名物，排隊也值得。",
       tags: ["文化", "歷史", "美食"],
@@ -1331,7 +1331,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "唐津城・虹の松原",
-      photo: "",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Karatsu_Castle.jpg/960px-Karatsu_Castle.jpg",
       desc: "唐津城矗立在唐津灣畔的小山丘上，天守閣居高臨下可眺望玄界灘與虹之松原全景。虹之松原是日本三大松原之一，長約5公里的海岸線上密植百萬棵黑松，綠色松林與白色沙灘形成壯觀的弧線，有如天上彩虹。",
       tips: "從JR唐津站步行約20分鐘至唐津城；虹之松原可租借自行車穿越，途中有多家松原茶屋可品嚐唐津バーガー（唐津漢堡）；每年11月的「唐津くんち」是日本三大曳山祭之一，華麗的花車遊行不容錯過。",
       tags: ["歷史", "城堡", "自然"],
@@ -1362,7 +1362,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "軍艦島（世界遺産）",
-      photo: "",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Hashima_Island_2023.jpg/960px-Hashima_Island_2023.jpg",
       desc: "軍艦島（端島）是長崎港外一座面積僅0.063平方公里的小島，曾因海底煤礦而擠滿5000多名居民，人口密度為世界之最。1974年廢礦後成為無人島，廢墟般的鋼筋混凝土建築群極具末世感，2015年登錄世界文化遺產。",
       tips: "需參加官方認可的上陸觀光船（約4000圓，含上陸費），航程約40分鐘；天候不佳時無法上陸僅能繞島；建議提前一週以上預約；上島後僅能在指定通道參觀，禁止進入建築物內部。",
       tags: ["世界遺産", "歷史"],
@@ -1407,7 +1407,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "天草",
-      photo: "",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Amakusa_Islands.jpg/960px-Amakusa_Islands.jpg",
       desc: "天草群島由大小120多個島嶼組成，是日本隱匿基督教（隱れキリシタン）歷史的重要舞台。崎津集落的哥德式教堂與傳統漁村風景交織，入選世界文化遺產。天草海域可觀賞野生海豚，全年遭遇率超過98%。",
       tips: "從熊本市開車經天草五橋約2小時；崎津教堂免費參觀但需保持安靜；海豚觀賞船從五和町出發，約1小時1人4500圓；天草大王地雞與車海老（車蝦）是當地美食名物。",
       tags: ["歷史", "文化", "海洋", "世界遺産"],
@@ -1438,7 +1438,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "臼杵石仏",
-      photo: "",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Usuki_Stone_Buddas55.jpg/960px-Usuki_Stone_Buddas55.jpg",
       desc: "臼杵石佛群是日本規模最大的摩崖佛像群，共有60餘尊佛像雕刻在凝灰岩崖壁上，其中59尊被指定為國寶。雕刻年代推定為平安時代末期至鎌倉時代，精緻的面部表情與優雅的姿態歷經千年仍令人讚嘆。",
       tips: "從JR臼杵站搭乘巴士約20分鐘；門票大人550圓；石佛群分為四區，全部參觀約需1至1.5小時；臼杵市保存著城下町風情，「二王座歷史之道」的石畳小路值得散步。",
       tags: ["歷史", "文化", "宗教"],
@@ -1469,7 +1469,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "鵜戸神宮",
-      photo: "",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Udo-jingu_Main-shrine.jpg/960px-Udo-jingu_Main-shrine.jpg",
       desc: "鵜戶神宮是建在日南海岸斷崖洞窟中的神社，朱紅色的本殿嵌入天然洞窟之中，面朝太平洋的壯闊景色令人震撼。相傳此地是日本神話中山幸彥之子誕生之地，以求姻緣、安產聞名。",
       tips: "從JR宮崎站搭乘巴士約1.5小時；參拜需沿陡峭石階下行至洞窟；投擲「運玉」（5個100圓）進入繩圈內可許願成功；建議穿著好走的鞋子；附近的鬼の洗濯板岩礁地形也值得一看。",
       tags: ["文化", "宗教", "自然"],
@@ -1500,7 +1500,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "仙巌園",
-      photo: "",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Sengan-en2.jpg/960px-Sengan-en2.jpg",
       desc: "仙巌園（磯庭園）是薩摩藩主島津氏的別邸庭園，以櫻島活火山為借景、錦江灣為前景，構成日本最壯觀的「借景庭園」之一。園內保存了反射爐遺跡等近代化工業設施，見證了薩摩藩的近代化歷程，入選世界文化遺產。",
       tips: "從鹿兒島中央站搭乘巴士約30分鐘；門票大人1000圓（含尚古集成館）；園內的「両棒餅（ぢゃんぼ餅）」是鹿兒島傳統點心，必嚐；晴天時從庭園眺望櫻島的景色絕佳。",
       tags: ["歷史", "文化", "世界遺産"],
@@ -1531,7 +1531,7 @@ export const spotDetails: Record<string, SpotDetail[]> = {
     },
     {
       name: "古宇利島・竹富島",
-      photo: "",
+      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Kouri_Bridge_%2815130568259%29.jpg/960px-Kouri_Bridge_%2815130568259%29.jpg",
       desc: "古宇利島位於沖繩本島北部，以「古宇利大橋」連結本島，橋上兩側的翡翠色海水美得令人窒息，島上的心形岩（ハートロック）是情侶必訪景點。竹富島則位於石垣島附近，保存了完整的沖繩傳統紅瓦聚落，水牛車巡遊是最具代表性的體驗。",
       tips: "古宇利島從那霸開車約1.5小時，通過古宇利大橋免費；竹富島從石垣島搭乘高速船約10分鐘；水牛車體驗約30分鐘1500圓；竹富島的星砂之濱（カイジ浜）可撿到星形沙粒，是獨特的自然紀念品。",
       tags: ["海洋", "自然", "文化"],
