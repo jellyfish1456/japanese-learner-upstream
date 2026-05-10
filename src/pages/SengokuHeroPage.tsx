@@ -1,0 +1,151 @@
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { prefectureMap, REGION_HEX } from "../data/japanTravel";
+import { sengokuHeroes, type SengokuHero } from "../data/sengokuHeroes";
+
+function HeroCard({ hero, color }: { hero: SengokuHero; color: string }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      {/* Header */}
+      <div
+        className="p-4 text-white"
+        style={{ background: `linear-gradient(135deg, ${color}, ${color}dd)` }}
+      >
+        <div className="flex items-start justify-between">
+          <div>
+            <h3 className="text-xl font-bold">{hero.name}</h3>
+            <p className="text-sm opacity-90 mt-0.5">{hero.nameReading}</p>
+          </div>
+          <div className="text-right text-sm opacity-80">
+            <p>{hero.era}</p>
+            <p className="font-semibold">{hero.clan}</p>
+          </div>
+        </div>
+        <p className="text-xs mt-2 opacity-90 bg-white/20 rounded-lg px-2 py-1 inline-block">
+          {hero.role}
+        </p>
+      </div>
+
+      {/* Story */}
+      <div className="p-4 space-y-3">
+        <div>
+          <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+            物語
+          </p>
+          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+            {hero.story}
+          </p>
+        </div>
+
+        {/* Fun fact - collapsible */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="w-full flex items-center gap-2 text-left py-2 px-3 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 transition-colors hover:bg-amber-100 dark:hover:bg-amber-900/30"
+        >
+          <span className="text-lg">💡</span>
+          <span className="flex-1 text-xs font-semibold text-amber-700 dark:text-amber-300">
+            豆知識
+          </span>
+          <svg
+            className={`w-4 h-4 text-amber-500 transition-transform ${open ? "rotate-180" : ""}`}
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2}
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+          </svg>
+        </button>
+        {open && (
+          <div className="px-3 py-2 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-100 dark:border-amber-800">
+            <p className="text-sm text-amber-700 dark:text-amber-300 leading-relaxed">
+              {hero.funFact}
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function SengokuHeroPage() {
+  const { prefectureId } = useParams<{ prefectureId: string }>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [prefectureId]);
+
+  const p = prefectureMap[prefectureId ?? ""];
+  const heroes = sengokuHeroes[prefectureId ?? ""] ?? [];
+  const color = REGION_HEX[p?.region ?? ""]?.base ?? "#64748b";
+
+  if (!p) {
+    return (
+      <div className="text-center py-16 text-gray-400 dark:text-gray-500">
+        <div className="text-4xl mb-3">⚔️</div>
+        <p>找不到該縣份的資料</p>
+        <button
+          onClick={() => navigate("/japan-travel")}
+          className="mt-4 px-4 py-2 rounded-xl bg-blue-500 text-white text-sm font-semibold"
+        >
+          回到地圖
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {/* Back */}
+      <button
+        onClick={() => navigate(`/japan-travel/${prefectureId}`)}
+        className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 mb-4 transition-colors"
+      >
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+        </svg>
+        {p.name}に戻る
+      </button>
+
+      {/* Title */}
+      <div className="mb-5">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-2xl">⚔️</span>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50">
+            {p.name}の戦国武将
+          </h2>
+        </div>
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          戦国時代（1467〜1615）にこの地で活躍した武将たち
+        </p>
+      </div>
+
+      {/* Hero cards */}
+      {heroes.length > 0 ? (
+        <div className="space-y-4 mb-6">
+          {heroes.map((hero) => (
+            <HeroCard key={hero.name} hero={hero} color={color} />
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-12 text-gray-400 dark:text-gray-500">
+          <div className="text-4xl mb-3">🏯</div>
+          <p className="text-sm">この地域の戦国武将データは準備中です</p>
+        </div>
+      )}
+
+      {/* Back button */}
+      <div className="pb-4">
+        <button
+          onClick={() => navigate(`/japan-travel/${prefectureId}`)}
+          className="w-full py-3 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+        >
+          {p.name}に戻る
+        </button>
+      </div>
+    </div>
+  );
+}

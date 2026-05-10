@@ -6,6 +6,7 @@ import { prefecturePaths } from "../data/prefectureSvgPaths";
 import { subRegionData } from "../data/japanSubRegions";
 import { castlesByPrefecture } from "../data/japanCastles";
 import { tsmcLocations, TYPE_COLOR, TYPE_LABEL } from "../data/tsmcLocations";
+import { sengokuHeroes } from "../data/sengokuHeroes";
 
 // ── Castle image with fallback ──────────────────────────────────────────────
 function CastleImage({ src, alt }: { src: string; alt: string }) {
@@ -469,6 +470,23 @@ export default function PrefectureDetailPage() {
 
       {/* Castles */}
       <CastlesSection id={p.id} />
+
+      {/* Sengoku Heroes */}
+      {(sengokuHeroes[p.id]?.length ?? 0) > 0 && (
+        <button
+          onClick={() => navigate(`/japan-travel/${p.id}/sengoku`)}
+          className="w-full bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 mb-4 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors tap-active text-left"
+        >
+          <span className="text-2xl">⚔️</span>
+          <div className="flex-1">
+            <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">戦国武将</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">この地の戦国時代の英雄たち</p>
+          </div>
+          <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </button>
+      )}
 
       {/* Food */}
       <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 mb-4">
