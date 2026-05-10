@@ -13,14 +13,14 @@ function HeroCard({ hero, color }: { hero: SengokuHero; color: string }) {
       {/* Hero portrait image */}
       {hero.image && !imgError && (
         <div
-          className="w-full flex justify-center py-4"
-          style={{ background: `linear-gradient(135deg, ${color}22, ${color}11)` }}
+          className="w-full flex justify-center py-6"
+          style={{ background: `linear-gradient(180deg, ${color}18, ${color}08)` }}
         >
           <img
             src={hero.image}
             alt={hero.name}
             onError={() => setImgError(true)}
-            className="w-32 h-40 object-contain rounded-lg shadow-md bg-white/80"
+            className="w-52 h-64 object-contain rounded-xl shadow-lg bg-white/90 dark:bg-gray-700/90 p-1"
           />
         </div>
       )}
