@@ -258,19 +258,34 @@ export default function HomePage() {
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1">日本旅遊推薦</h2>
           <p className="text-sm text-gray-500 dark:text-gray-400">點擊都道府縣，探索日本各地旅遊資訊</p>
         </div>
-        <button
-          onClick={() => navigate("/japan-travel")}
-          className="w-full bg-gradient-to-r from-sky-500 to-indigo-500 hover:from-sky-600 hover:to-indigo-600 text-white rounded-2xl p-5 flex items-center gap-4 transition-colors tap-active shadow-sm"
-        >
-          <div className="text-4xl">🗾</div>
-          <div className="text-left">
-            <div className="text-lg font-bold">日本地圖</div>
-            <div className="text-xs opacity-80 mt-0.5">47 都道府縣・景點・美食・最佳季節</div>
-          </div>
-          <svg className="w-5 h-5 ml-auto opacity-60" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-          </svg>
-        </button>
+        <div className="space-y-3">
+          <button
+            onClick={() => navigate("/japan-travel")}
+            className="w-full bg-gradient-to-r from-sky-500 to-indigo-500 hover:from-sky-600 hover:to-indigo-600 text-white rounded-2xl p-5 flex items-center gap-4 transition-colors tap-active shadow-sm"
+          >
+            <div className="text-4xl">🗾</div>
+            <div className="text-left">
+              <div className="text-lg font-bold">日本地圖</div>
+              <div className="text-xs opacity-80 mt-0.5">47 都道府縣・景點・美食・最佳季節</div>
+            </div>
+            <svg className="w-5 h-5 ml-auto opacity-60" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+          </button>
+          <button
+            onClick={() => navigate("/sengoku-timeline")}
+            className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white rounded-2xl p-5 flex items-center gap-4 transition-colors tap-active shadow-sm"
+          >
+            <div className="text-4xl">⏰</div>
+            <div className="text-left">
+              <div className="text-lg font-bold">戦国時代の時間線</div>
+              <div className="text-xs opacity-80 mt-0.5">1467～1615 年の重要事件・戦役</div>
+            </div>
+            <svg className="w-5 h-5 ml-auto opacity-60" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   );
