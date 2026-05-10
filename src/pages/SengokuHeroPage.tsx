@@ -6,9 +6,24 @@ import { sengokuHeroes, type SengokuHero } from "../data/sengokuHeroes";
 function HeroCard({ hero, color }: { hero: SengokuHero; color: string }) {
   const [showFact, setShowFact] = useState(false);
   const [lang, setLang] = useState<"ja" | "cn">("ja");
+  const [imgError, setImgError] = useState(false);
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      {/* Hero portrait image */}
+      {hero.image && !imgError && (
+        <div
+          className="w-full flex justify-center py-4"
+          style={{ background: `linear-gradient(135deg, ${color}22, ${color}11)` }}
+        >
+          <img
+            src={hero.image}
+            alt={hero.name}
+            onError={() => setImgError(true)}
+            className="w-32 h-40 object-contain rounded-lg shadow-md bg-white/80"
+          />
+        </div>
+      )}
       {/* Header */}
       <div
         className="p-4 text-white"
