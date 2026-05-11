@@ -1,0 +1,1416 @@
+[
+  {
+    "id": "n3-001",
+    "grammar": "上げる（あげる）",
+    "romaji": "ageru",
+    "meaning": "to finish doing ~",
+    "examples": []
+  },
+  {
+    "id": "n3-002",
+    "grammar": "あまり",
+    "romaji": "amari",
+    "meaning": "so much… that",
+    "examples": []
+  },
+  {
+    "id": "n3-003",
+    "grammar": "あまりにも",
+    "romaji": "amari ni mo",
+    "meaning": "too much; excessively ~",
+    "examples": []
+  },
+  {
+    "id": "n3-004",
+    "grammar": "合う（あう）",
+    "romaji": "au",
+    "meaning": "do something together",
+    "examples": []
+  },
+  {
+    "id": "n3-005",
+    "grammar": "ばいい",
+    "romaji": "ba ii",
+    "meaning": "should; can; it'd be good if ~",
+    "examples": []
+  },
+  {
+    "id": "n3-006",
+    "grammar": "ばよかった",
+    "romaji": "ba yokatta",
+    "meaning": "should have; would have been better if ~",
+    "examples": []
+  },
+  {
+    "id": "n3-007",
+    "grammar": "ば～ほど",
+    "romaji": "ba~hodo",
+    "meaning": "the more… the more ~",
+    "examples": []
+  },
+  {
+    "id": "n3-008",
+    "grammar": "ば～のに",
+    "romaji": "ba~noni",
+    "meaning": "would have; should have; if only ~",
+    "examples": []
+  },
+  {
+    "id": "n3-009",
+    "grammar": "ばかりで",
+    "romaji": "bakari de",
+    "meaning": "only; just ~ (negative description)",
+    "examples": []
+  },
+  {
+    "id": "n3-010",
+    "grammar": "ばかりでなく",
+    "romaji": "bakari denaku",
+    "meaning": "not only... but also; as well as ~",
+    "examples": [
+      {
+        "ja": "このマンションは狭いばかりでなく、暗いです。",
+        "en": "This apartment is not only small, it's also dark."
+      },
+      {
+        "ja": "彼は歌ばかりでなくダンスも上手です。",
+        "en": "He is good at not only singing but also dancing."
+      },
+      {
+        "ja": "うちの子は6歳なのに日本語ばかりでなく英語まで喋れるよ。",
+        "en": "Our child is only 6, but can speak Japanese and English."
+      },
+      {
+        "ja": "このレストランは、味が悪いばかりでなく、店員の態度もひどい。",
+        "en": "Not only is the food bad, but the service is horrible."
+      },
+      {
+        "ja": "台風が来ている。雨ばかりでなく、風も強くなってきた。",
+        "en": "The typhoon is coming. Rain and wind are getting stronger."
+      }
+    ]
+  },
+  {
+    "id": "n3-011",
+    "grammar": "べきだ",
+    "romaji": "beki da",
+    "meaning": "should do; must do ~",
+    "examples": [
+      {
+        "ja": "私はそれについてもっと知るべきだ。",
+        "en": "I should know more about that."
+      },
+      {
+        "ja": "約束は守るべきだ。",
+        "en": "You should keep your promises."
+      },
+      {
+        "ja": "早く帰宅すべきだ。",
+        "en": "You should go home early."
+      },
+      {
+        "ja": "真実を言うべきだ。",
+        "en": "You should tell the truth."
+      },
+      {
+        "ja": "最初に私に電話するべきだった。",
+        "en": "You should have called me first."
+      }
+    ]
+  },
+  {
+    "id": "n3-012",
+    "grammar": "べきではない",
+    "romaji": "beki dewa nai",
+    "meaning": "should not do; must not do ~",
+    "examples": []
+  },
+  {
+    "id": "n3-013",
+    "grammar": "別に～ない",
+    "romaji": "betsu ni~nai",
+    "meaning": "not really, not particularly",
+    "examples": []
+  },
+  {
+    "id": "n3-014",
+    "grammar": "ぶりに",
+    "romaji": "buri ni",
+    "meaning": "for the first time in (period of time)",
+    "examples": []
+  },
+  {
+    "id": "n3-015",
+    "grammar": "中（ちゅう）",
+    "romaji": "chuu / juu",
+    "meaning": "currently; during; throughout ~",
+    "examples": []
+  },
+  {
+    "id": "n3-016",
+    "grammar": "だけ",
+    "romaji": "dake",
+    "meaning": "as much as ~",
+    "examples": []
+  },
+  {
+    "id": "n3-017",
+    "grammar": "だけでなく",
+    "romaji": "dake de naku",
+    "meaning": "not only… but also ~",
+    "examples": []
+  },
+  {
+    "id": "n3-018",
+    "grammar": "だけど",
+    "romaji": "dakedo",
+    "meaning": "but; however; although ~",
+    "examples": []
+  },
+  {
+    "id": "n3-019",
+    "grammar": "だらけ",
+    "romaji": "darake",
+    "meaning": "full of; covered with (something undesirable)",
+    "examples": []
+  },
+  {
+    "id": "n3-020",
+    "grammar": "どんなに～ても",
+    "romaji": "donna ni~temo",
+    "meaning": "no matter how (much)",
+    "examples": []
+  },
+  {
+    "id": "n3-021",
+    "grammar": "どうしても",
+    "romaji": "doushitemo",
+    "meaning": "no matter what; at any cost ~",
+    "examples": []
+  },
+  {
+    "id": "n3-022",
+    "grammar": "ふりをする",
+    "romaji": "furi o suru",
+    "meaning": "to pretend; to act as if ~",
+    "examples": []
+  },
+  {
+    "id": "n3-023",
+    "grammar": "ふと",
+    "romaji": "futo",
+    "meaning": "suddenly; accidentally; unexpectedly ~",
+    "examples": []
+  },
+  {
+    "id": "n3-024",
+    "grammar": "がち",
+    "romaji": "gachi",
+    "meaning": "tend to; tendency to; frequently ~",
+    "examples": []
+  },
+  {
+    "id": "n3-025",
+    "grammar": "がたい",
+    "romaji": "gatai",
+    "meaning": "very difficult to; hard to ~",
+    "examples": []
+  },
+  {
+    "id": "n3-026",
+    "grammar": "気味（ぎみ）",
+    "romaji": "gimi",
+    "meaning": "-like; -looking; tending to ~",
+    "examples": []
+  },
+  {
+    "id": "n3-027",
+    "grammar": "ごとに",
+    "romaji": "goto ni",
+    "meaning": "each; every; at intervals of ~",
+    "examples": []
+  },
+  {
+    "id": "n3-028",
+    "grammar": "ほど",
+    "romaji": "hodo",
+    "meaning": "degree; extent; upper limit",
+    "examples": []
+  },
+  {
+    "id": "n3-029",
+    "grammar": "ほど～ない",
+    "romaji": "hodo~nai",
+    "meaning": "is not as… as ~",
+    "examples": []
+  },
+  {
+    "id": "n3-030",
+    "grammar": "一度に（いちどに）",
+    "romaji": "ichido ni",
+    "meaning": "all at once",
+    "examples": []
+  },
+  {
+    "id": "n3-031",
+    "grammar": "いくら～ても",
+    "romaji": "ikura~temo",
+    "meaning": "no matter how ~",
+    "examples": []
+  },
+  {
+    "id": "n3-032",
+    "grammar": "一方だ（いっぽうだ）",
+    "romaji": "ippou da",
+    "meaning": "more and more; continue to ~",
+    "examples": []
+  },
+  {
+    "id": "n3-033",
+    "grammar": "一体（いったい）",
+    "romaji": "ittai",
+    "meaning": "what on earth; emphasis",
+    "examples": []
+  },
+  {
+    "id": "n3-034",
+    "grammar": "じゃない",
+    "romaji": "janai",
+    "meaning": "maybe; confirmation; express surprise",
+    "examples": []
+  },
+  {
+    "id": "n3-035",
+    "grammar": "か何か（かなにか）",
+    "romaji": "ka nani ka",
+    "meaning": "or something ~",
+    "examples": []
+  },
+  {
+    "id": "n3-036",
+    "grammar": "かける",
+    "romaji": "kakeru",
+    "meaning": "half-; not yet finished; in the middle of~",
+    "examples": []
+  },
+  {
+    "id": "n3-037",
+    "grammar": "から〜にかけて",
+    "romaji": "kara~ni kakete",
+    "meaning": "through; from [A] to [B]",
+    "examples": []
+  },
+  {
+    "id": "n3-038",
+    "grammar": "代わりに（かわりに）",
+    "romaji": "kawari ni",
+    "meaning": "instead of; in exchange for ~",
+    "examples": []
+  },
+  {
+    "id": "n3-039",
+    "grammar": "結果（けっか）",
+    "romaji": "kekka",
+    "meaning": "as a result of; after ~",
+    "examples": []
+  },
+  {
+    "id": "n3-040",
+    "grammar": "結局（けっきょく）",
+    "romaji": "kekkyoku",
+    "meaning": "after all; eventually ~",
+    "examples": []
+  },
+  {
+    "id": "n3-041",
+    "grammar": "決して～ない",
+    "romaji": "kesshite~nai",
+    "meaning": "never; by no means ~",
+    "examples": []
+  },
+  {
+    "id": "n3-042",
+    "grammar": "切れない",
+    "romaji": "kirenai",
+    "meaning": "unable to do; too much to finish",
+    "examples": []
+  },
+  {
+    "id": "n3-043",
+    "grammar": "きり",
+    "romaji": "kiri",
+    "meaning": "only; just; since; after ~",
+    "examples": []
+  },
+  {
+    "id": "n3-044",
+    "grammar": "切る",
+    "romaji": "kiru",
+    "meaning": "to do something completely to the end",
+    "examples": []
+  },
+  {
+    "id": "n3-045",
+    "grammar": "っけ",
+    "romaji": "kke",
+    "meaning": "a casual suffix to confirm something",
+    "examples": []
+  },
+  {
+    "id": "n3-046",
+    "grammar": "込む",
+    "romaji": "komu",
+    "meaning": "to do for a long time; to move inside",
+    "examples": []
+  },
+  {
+    "id": "n3-047",
+    "grammar": "こそ",
+    "romaji": "koso",
+    "meaning": "for sure; precisely; definitely ~",
+    "examples": []
+  },
+  {
+    "id": "n3-048",
+    "grammar": "こと",
+    "romaji": "koto",
+    "meaning": "(must) do",
+    "examples": []
+  },
+  {
+    "id": "n3-049",
+    "grammar": "ことから",
+    "romaji": "koto kara",
+    "meaning": "from the fact that ~",
+    "examples": []
+  },
+  {
+    "id": "n3-050",
+    "grammar": "ことになっている",
+    "romaji": "koto ni natteiru",
+    "meaning": "expresses a standard, rule or expectation",
+    "examples": []
+  },
+  {
+    "id": "n3-051",
+    "grammar": "ことはない",
+    "romaji": "koto wa nai",
+    "meaning": "there is no need to; never happens",
+    "examples": []
+  },
+  {
+    "id": "n3-052",
+    "grammar": "ことは～が",
+    "romaji": "koto wa~ga",
+    "meaning": "although; but ~",
+    "examples": []
+  },
+  {
+    "id": "n3-053",
+    "grammar": "くらい / ぐらい",
+    "romaji": "kurai / gurai",
+    "meaning": "approximately; about; around ~",
+    "examples": []
+  },
+  {
+    "id": "n3-054",
+    "grammar": "くせに",
+    "romaji": "kuse ni",
+    "meaning": "and yet; though; in spite of ~",
+    "examples": []
+  },
+  {
+    "id": "n3-055",
+    "grammar": "まるで",
+    "romaji": "maru de",
+    "meaning": "as if; as though; just like ~",
+    "examples": []
+  },
+  {
+    "id": "n3-056",
+    "grammar": "まさか",
+    "romaji": "masaka",
+    "meaning": "there's no way; impossible; you must be joking",
+    "examples": []
+  },
+  {
+    "id": "n3-057",
+    "grammar": "めったに～ない",
+    "romaji": "metta ni~nai",
+    "meaning": "hardly; rarely; seldom",
+    "examples": []
+  },
+  {
+    "id": "n3-058",
+    "grammar": "も～ば～も",
+    "romaji": "mo~ba~mo",
+    "meaning": "and; also; as well; either/or",
+    "examples": []
+  },
+  {
+    "id": "n3-059",
+    "grammar": "もしかしたら",
+    "romaji": "moshika shitara",
+    "meaning": "perhaps; maybe; by any chance ~",
+    "examples": []
+  },
+  {
+    "id": "n3-060",
+    "grammar": "もしも〜たら",
+    "romaji": "moshimo~tara",
+    "meaning": "if; in the case; supposing ~",
+    "examples": []
+  },
+  {
+    "id": "n3-061",
+    "grammar": "向け",
+    "romaji": "muke",
+    "meaning": "intended for; aimed at ~",
+    "examples": []
+  },
+  {
+    "id": "n3-062",
+    "grammar": "向き",
+    "romaji": "muki",
+    "meaning": "suitable for ~",
+    "examples": []
+  },
+  {
+    "id": "n3-063",
+    "grammar": "むしろ",
+    "romaji": "mushiro",
+    "meaning": "rather; instead; better ~",
+    "examples": []
+  },
+  {
+    "id": "n3-064",
+    "grammar": "ながらも",
+    "romaji": "nagara mo",
+    "meaning": "but; although; despite ~",
+    "examples": []
+  },
+  {
+    "id": "n3-065",
+    "grammar": "ないことはない",
+    "romaji": "nai koto wa nai",
+    "meaning": "can do; is not impossible",
+    "examples": []
+  },
+  {
+    "id": "n3-066",
+    "grammar": "ないと",
+    "romaji": "naito",
+    "meaning": "must do; unless/if you don't ~",
+    "examples": []
+  },
+  {
+    "id": "n3-067",
+    "grammar": "なかなか",
+    "romaji": "nakanaka",
+    "meaning": "very; quite; pretty; rather ~",
+    "examples": []
+  },
+  {
+    "id": "n3-068",
+    "grammar": "なんか / なんて / など",
+    "romaji": "nanka / nante / nado",
+    "meaning": "give examples; show modesty ~",
+    "examples": []
+  },
+  {
+    "id": "n3-069",
+    "grammar": "直す",
+    "romaji": "naosu",
+    "meaning": "to do something again; to do over",
+    "examples": []
+  },
+  {
+    "id": "n3-070",
+    "grammar": "なるべく",
+    "romaji": "naru beku",
+    "meaning": "as much as possible",
+    "examples": []
+  },
+  {
+    "id": "n3-071",
+    "grammar": "なぜなら",
+    "romaji": "nazenara",
+    "meaning": "because; the reason is ~",
+    "examples": []
+  },
+  {
+    "id": "n3-072",
+    "grammar": "んだって",
+    "romaji": "ndatte",
+    "meaning": "I hear that; heard that ~",
+    "examples": []
+  },
+  {
+    "id": "n3-073",
+    "grammar": "に違いない",
+    "romaji": "ni chigai nai",
+    "meaning": "I'm sure; no doubt that ~",
+    "examples": []
+  },
+  {
+    "id": "n3-074",
+    "grammar": "に反して",
+    "romaji": "ni hanshite",
+    "meaning": "against; contrary to ~",
+    "examples": []
+  },
+  {
+    "id": "n3-075",
+    "grammar": "にかけて",
+    "romaji": "ni kakete",
+    "meaning": "over (a period); regarding ~",
+    "examples": []
+  },
+  {
+    "id": "n3-076",
+    "grammar": "に関する / に関して",
+    "romaji": "ni kan suru / ni kan shite",
+    "meaning": "about; regarding ~",
+    "examples": []
+  },
+  {
+    "id": "n3-077",
+    "grammar": "にかわって / にかわり",
+    "romaji": "ni kawatte / ni kawari",
+    "meaning": "instead of; on behalf of ~",
+    "examples": []
+  },
+  {
+    "id": "n3-078",
+    "grammar": "に比べて",
+    "romaji": "ni kurabete",
+    "meaning": "compared to; in comparison to ~",
+    "examples": []
+  },
+  {
+    "id": "n3-079",
+    "grammar": "に慣れる",
+    "romaji": "ni nareru",
+    "meaning": "to be used to something",
+    "examples": []
+  },
+  {
+    "id": "n3-080",
+    "grammar": "において / における",
+    "romaji": "ni oite / ni okeru",
+    "meaning": "in; at; regarding ~",
+    "examples": []
+  },
+  {
+    "id": "n3-081",
+    "grammar": "にしたがって",
+    "romaji": "ni shitagatte",
+    "meaning": "as; in accordance with ~",
+    "examples": []
+  },
+  {
+    "id": "n3-082",
+    "grammar": "にしても",
+    "romaji": "ni shite mo",
+    "meaning": "even if; even though ~",
+    "examples": []
+  },
+  {
+    "id": "n3-083",
+    "grammar": "にしては",
+    "romaji": "ni shite wa",
+    "meaning": "for; considering it's ~",
+    "examples": []
+  },
+  {
+    "id": "n3-084",
+    "grammar": "に対して",
+    "romaji": "ni taishite",
+    "meaning": "towards; against; regarding ~",
+    "examples": []
+  },
+  {
+    "id": "n3-085",
+    "grammar": "にとって",
+    "romaji": "ni totte",
+    "meaning": "to; for; concerning ~",
+    "examples": [
+      {
+        "ja": "私にとって、漢字の勉強はとても楽しい。",
+        "en": "For me, studying kanji is fun!"
+      },
+      {
+        "ja": "あなたにとって、一番大切な物は何ですか？",
+        "en": "What is the most important thing for you?"
+      },
+      {
+        "ja": "家族は私にとって、一番大切な物です。",
+        "en": "For me, the most important thing is family."
+      },
+      {
+        "ja": "水は人間の体にとって必要なものだ。",
+        "en": "Water is essential for the human body."
+      },
+      {
+        "ja": "スポーツ選手にとって、健康管理はとても重要です。",
+        "en": "For athletes, health management is very important."
+      }
+    ]
+  },
+  {
+    "id": "n3-086",
+    "grammar": "について",
+    "romaji": "ni tsuite",
+    "meaning": "concerning; regarding; about ~",
+    "examples": [
+      {
+        "ja": "この問題についてどう思いますか。",
+        "en": "What do you think about this problem?"
+      },
+      {
+        "ja": "あなたの国についていろいろと教えてください。",
+        "en": "Please tell me about your country."
+      },
+      {
+        "ja": "その事件について、知っていることを全部話してください。",
+        "en": "Tell me everything you know about that incident."
+      },
+      {
+        "ja": "明日、私は自分の国の料理について発表します。",
+        "en": "Tomorrow, I'll present about food in my country."
+      },
+      {
+        "ja": "ベトナムの観光地について調べています。",
+        "en": "I'm researching tourist attractions in Vietnam."
+      }
+    ]
+  },
+  {
+    "id": "n3-087",
+    "grammar": "につれて",
+    "romaji": "ni tsurete",
+    "meaning": "as; in proportion to ~",
+    "examples": []
+  },
+  {
+    "id": "n3-088",
+    "grammar": "には",
+    "romaji": "ni wa",
+    "meaning": "for the purpose of; in order to ~",
+    "examples": []
+  },
+  {
+    "id": "n3-089",
+    "grammar": "によると /によれば",
+    "romaji": "ni yoru to/ni yoreba",
+    "meaning": "according to ~",
+    "examples": []
+  },
+  {
+    "id": "n3-090",
+    "grammar": "によって / による",
+    "romaji": "ni yotte / ni yoru",
+    "meaning": "by means of; due to ~",
+    "examples": [
+      {
+        "ja": "それは場合による。",
+        "en": "That depends on the situation."
+      },
+      {
+        "ja": "人によって考え方が違う。",
+        "en": "Everyone thinks differently."
+      },
+      {
+        "ja": "大雪によって、電車は２時間以上も遅れました。",
+        "en": "Due to heavy snow, the train was delayed 2+ hours."
+      },
+      {
+        "ja": "これは有名な作家によって書かれた小説です。",
+        "en": "This novel was written by a famous author."
+      },
+      {
+        "ja": "習慣は国によって異なる。",
+        "en": "Customs differ by country."
+      }
+    ]
+  },
+  {
+    "id": "n3-091",
+    "grammar": "のでしょうか",
+    "romaji": "no deshou ka",
+    "meaning": "ask a question politely",
+    "examples": []
+  },
+  {
+    "id": "n3-092",
+    "grammar": "を中心に",
+    "romaji": "o chuushin ni",
+    "meaning": "focused on; centered on",
+    "examples": []
+  },
+  {
+    "id": "n3-093",
+    "grammar": "をはじめ",
+    "romaji": "o hajime",
+    "meaning": "for example; starting with ~",
+    "examples": []
+  },
+  {
+    "id": "n3-094",
+    "grammar": "を込めて",
+    "romaji": "o komete",
+    "meaning": "filled with; full of",
+    "examples": []
+  },
+  {
+    "id": "n3-095",
+    "grammar": "を通じて / を通して",
+    "romaji": "o tsuujite / o tooshite",
+    "meaning": "through; via; throughout ~",
+    "examples": []
+  },
+  {
+    "id": "n3-096",
+    "grammar": "おかげで",
+    "romaji": "okage de",
+    "meaning": "thanks to; owing to; because of ~",
+    "examples": []
+  },
+  {
+    "id": "n3-097",
+    "grammar": "っぱなし",
+    "romaji": "ppanashi",
+    "meaning": "leaving (something) on; still in use",
+    "examples": []
+  },
+  {
+    "id": "n3-098",
+    "grammar": "っぽい",
+    "romaji": "ppoi",
+    "meaning": "seems like; somewhat; -ish ~",
+    "examples": []
+  },
+  {
+    "id": "n3-099",
+    "grammar": "さえ",
+    "romaji": "sae",
+    "meaning": "even; so much as; not even",
+    "examples": []
+  },
+  {
+    "id": "n3-100",
+    "grammar": "さえ～ば",
+    "romaji": "sae~ba",
+    "meaning": "if only; as long as ~",
+    "examples": []
+  },
+  {
+    "id": "n3-101",
+    "grammar": "際に（さいに）",
+    "romaji": "sai ni",
+    "meaning": "when; at the time of ~",
+    "examples": []
+  },
+  {
+    "id": "n3-102",
+    "grammar": "最中に（さいちゅうに）",
+    "romaji": "saichuu ni",
+    "meaning": "while; during; in the middle of ~",
+    "examples": []
+  },
+  {
+    "id": "n3-103",
+    "grammar": "さらに",
+    "romaji": "sara ni",
+    "meaning": "furthermore; again; more and more ~",
+    "examples": []
+  },
+  {
+    "id": "n3-104",
+    "grammar": "さて",
+    "romaji": "sate",
+    "meaning": "conjunction: well; now; then ~",
+    "examples": []
+  },
+  {
+    "id": "n3-105",
+    "grammar": "せいで",
+    "romaji": "sei de",
+    "meaning": "because of; due to; as a result of ~",
+    "examples": []
+  },
+  {
+    "id": "n3-106",
+    "grammar": "せいぜい",
+    "romaji": "seizei",
+    "meaning": "at the most; at best",
+    "examples": []
+  },
+  {
+    "id": "n3-107",
+    "grammar": "しばらく",
+    "romaji": "shibaraku",
+    "meaning": "for a moment; for a while ~",
+    "examples": []
+  },
+  {
+    "id": "n3-108",
+    "grammar": "しかない",
+    "romaji": "shikanai",
+    "meaning": "have no choice but ~",
+    "examples": []
+  },
+  {
+    "id": "n3-109",
+    "grammar": "そのために",
+    "romaji": "sono tame ni",
+    "meaning": "hence; for that reason ~",
+    "examples": []
+  },
+  {
+    "id": "n3-110",
+    "grammar": "それとも",
+    "romaji": "soretomo",
+    "meaning": "or; or else ~",
+    "examples": []
+  },
+  {
+    "id": "n3-111",
+    "grammar": "そうもない /そうにない",
+    "romaji": "sou mo nai /sou ni nai",
+    "meaning": "very unlikely to ~",
+    "examples": []
+  },
+  {
+    "id": "n3-112",
+    "grammar": "すでに",
+    "romaji": "sude ni",
+    "meaning": "already been done; is already the case",
+    "examples": []
+  },
+  {
+    "id": "n3-113",
+    "grammar": "すなわち",
+    "romaji": "sunawachi",
+    "meaning": "in other words; namely ~",
+    "examples": []
+  },
+  {
+    "id": "n3-114",
+    "grammar": "たものだ",
+    "romaji": "ta mono da",
+    "meaning": "used to do; would often do",
+    "examples": []
+  },
+  {
+    "id": "n3-115",
+    "grammar": "たとたん",
+    "romaji": "ta totan",
+    "meaning": "as soon as; just as ~",
+    "examples": []
+  },
+  {
+    "id": "n3-116",
+    "grammar": "たびに",
+    "romaji": "tabi ni",
+    "meaning": "whenever; every time ~",
+    "examples": []
+  },
+  {
+    "id": "n3-117",
+    "grammar": "ために",
+    "romaji": "tame ni",
+    "meaning": "for; in order to; because of ~",
+    "examples": []
+  },
+  {
+    "id": "n3-118",
+    "grammar": "確かに（たしかに）",
+    "romaji": "tashika ni",
+    "meaning": "surely, certainly ~",
+    "examples": []
+  },
+  {
+    "id": "n3-119",
+    "grammar": "たて",
+    "romaji": "tate",
+    "meaning": "just done; freshly done; newly done",
+    "examples": []
+  },
+  {
+    "id": "n3-120",
+    "grammar": "たとえ～ても",
+    "romaji": "tatoe~temo",
+    "meaning": "even if… is the case",
+    "examples": []
+  },
+  {
+    "id": "n3-121",
+    "grammar": "例えば（たとえば）",
+    "romaji": "tatoeba",
+    "meaning": "for example; for instance ~",
+    "examples": []
+  },
+  {
+    "id": "n3-122",
+    "grammar": "たって",
+    "romaji": "tatte",
+    "meaning": "even if; even though; no matter how ~",
+    "examples": []
+  },
+  {
+    "id": "n3-123",
+    "grammar": "てばかりいる",
+    "romaji": "te bakari iru",
+    "meaning": "only; nothing but ~",
+    "examples": []
+  },
+  {
+    "id": "n3-124",
+    "grammar": "てごらん",
+    "romaji": "te goran",
+    "meaning": "(please) try to; (please) look",
+    "examples": []
+  },
+  {
+    "id": "n3-125",
+    "grammar": "てはじめて",
+    "romaji": "te hajimete",
+    "meaning": "not until; only after [x] did I",
+    "examples": []
+  },
+  {
+    "id": "n3-126",
+    "grammar": "てからでないと",
+    "romaji": "te kara de nai to",
+    "meaning": "must first do; cannot do without first doing ~",
+    "examples": []
+  },
+  {
+    "id": "n3-127",
+    "grammar": "てしょうがない",
+    "romaji": "te shou ga nai",
+    "meaning": "can't help but; very; extremely ~",
+    "examples": []
+  },
+  {
+    "id": "n3-128",
+    "grammar": "て済む（てすむ）",
+    "romaji": "te sumu",
+    "meaning": "sufficient by; resolve by ~",
+    "examples": []
+  },
+  {
+    "id": "n3-129",
+    "grammar": "てはいけないから",
+    "romaji": "te wa ikenai kara",
+    "meaning": "in order to not~; to prevent ~",
+    "examples": []
+  },
+  {
+    "id": "n3-130",
+    "grammar": "ている場合じゃない",
+    "romaji": "teiru baai janai",
+    "meaning": "this is no time to be doing ~",
+    "examples": []
+  },
+  {
+    "id": "n3-131",
+    "grammar": "的（てき）",
+    "romaji": "teki",
+    "meaning": "change noun into na-adjective",
+    "examples": []
+  },
+  {
+    "id": "n3-132",
+    "grammar": "ても始まらない",
+    "romaji": "temo hajimaranai",
+    "meaning": "even if you... it's no use ~",
+    "examples": []
+  },
+  {
+    "id": "n3-133",
+    "grammar": "ても構わない",
+    "romaji": "temo kamawanai",
+    "meaning": "it doesn't matter if ~",
+    "examples": []
+  },
+  {
+    "id": "n3-134",
+    "grammar": "てもしょうがない",
+    "romaji": "temo shou ga nai",
+    "meaning": "there's no point to~; it cannot be helped",
+    "examples": []
+  },
+  {
+    "id": "n3-135",
+    "grammar": "と言えば（といえば）",
+    "romaji": "to ieba",
+    "meaning": "speaking of; when you talk of ~",
+    "examples": []
+  },
+  {
+    "id": "n3-136",
+    "grammar": "といい / たらいい",
+    "romaji": "to ii / tara ii",
+    "meaning": "it would be nice if; should ~",
+    "examples": []
+  },
+  {
+    "id": "n3-137",
+    "grammar": "といっても",
+    "romaji": "to ittemo",
+    "meaning": "although I say; although one might say ~",
+    "examples": []
+  },
+  {
+    "id": "n3-138",
+    "grammar": "ということだ",
+    "romaji": "to iu koto da",
+    "meaning": "I heard; it means that ~",
+    "examples": []
+  },
+  {
+    "id": "n3-139",
+    "grammar": "というのは",
+    "romaji": "to iu nowa",
+    "meaning": "this means; because; that is to say ~",
+    "examples": []
+  },
+  {
+    "id": "n3-140",
+    "grammar": "と言うと（というと）",
+    "romaji": "to iu to",
+    "meaning": "speaking of; when you say ~",
+    "examples": []
+  },
+  {
+    "id": "n3-141",
+    "grammar": "というより",
+    "romaji": "to iu yori",
+    "meaning": "rather than ~",
+    "examples": []
+  },
+  {
+    "id": "n3-142",
+    "grammar": "とみえる / とみえて",
+    "romaji": "to mieru / to miete",
+    "meaning": "it seems that ~",
+    "examples": []
+  },
+  {
+    "id": "n3-143",
+    "grammar": "とすれば・としたら",
+    "romaji": "to sureba / to shitara",
+    "meaning": "assuming~; if A then B",
+    "examples": []
+  },
+  {
+    "id": "n3-144",
+    "grammar": "と共に（とともに）",
+    "romaji": "to tomo ni",
+    "meaning": "together with; at the same time as ~",
+    "examples": []
+  },
+  {
+    "id": "n3-145",
+    "grammar": "途中で/途中に",
+    "romaji": "tochuu de / tochuu ni",
+    "meaning": "on the way; in the middle of ~",
+    "examples": []
+  },
+  {
+    "id": "n3-146",
+    "grammar": "ところで",
+    "romaji": "tokoro de",
+    "meaning": "by the way ~",
+    "examples": []
+  },
+  {
+    "id": "n3-147",
+    "grammar": "ところが",
+    "romaji": "tokoro ga",
+    "meaning": "even so; however; even though ~",
+    "examples": []
+  },
+  {
+    "id": "n3-148",
+    "grammar": "とおりに",
+    "romaji": "toori ni",
+    "meaning": "in the same way as; as ~",
+    "examples": []
+  },
+  {
+    "id": "n3-149",
+    "grammar": "通す（とおす）",
+    "romaji": "toosu",
+    "meaning": "to do until the end; through ~",
+    "examples": []
+  },
+  {
+    "id": "n3-150",
+    "grammar": "として",
+    "romaji": "toshite",
+    "meaning": "as; in the role of ~",
+    "examples": [
+      {
+        "ja": "彼は教師として働いている。",
+        "en": "He works as a teacher."
+      },
+      {
+        "ja": "彼女は、歌手として最近活躍しています。",
+        "en": "She is active as a singer lately."
+      },
+      {
+        "ja": "私は留学生として日本に来ました。",
+        "en": "I came to Japan as a study abroad student."
+      },
+      {
+        "ja": "同じ日本人として彼を応援して行きたいです。",
+        "en": "I want to support him as a fellow Japanese."
+      },
+      {
+        "ja": "私の生まれた町はお茶の町として知られている。",
+        "en": "My hometown is known as a village of tea."
+      }
+    ]
+  },
+  {
+    "id": "n3-151",
+    "grammar": "とても～ない",
+    "romaji": "totemo~nai",
+    "meaning": "cannot possibly be; hardly ~",
+    "examples": []
+  },
+  {
+    "id": "n3-152",
+    "grammar": "とは限らない",
+    "romaji": "towa kagiranai",
+    "meaning": "not necessarily so; is not always true",
+    "examples": []
+  },
+  {
+    "id": "n3-153",
+    "grammar": "つい",
+    "romaji": "tsui",
+    "meaning": "accidentally; unintentionally; by mistake",
+    "examples": []
+  },
+  {
+    "id": "n3-154",
+    "grammar": "ついに",
+    "romaji": "tsui ni",
+    "meaning": "finally; at last; in the end ~",
+    "examples": []
+  },
+  {
+    "id": "n3-155",
+    "grammar": "ついでに",
+    "romaji": "tsuide ni",
+    "meaning": "while, incidentally, at the same time ~",
+    "examples": []
+  },
+  {
+    "id": "n3-156",
+    "grammar": "つまり",
+    "romaji": "tsumari",
+    "meaning": "in other words; in summary; in short ~",
+    "examples": []
+  },
+  {
+    "id": "n3-157",
+    "grammar": "つもりだった",
+    "romaji": "tsumori datta",
+    "meaning": "I thought I~; was planning to~",
+    "examples": []
+  },
+  {
+    "id": "n3-158",
+    "grammar": "つもりで",
+    "romaji": "tsumori de",
+    "meaning": "with the intention of doing ~",
+    "examples": []
+  },
+  {
+    "id": "n3-159",
+    "grammar": "うちに",
+    "romaji": "uchi ni",
+    "meaning": "while; before ~",
+    "examples": [
+      {
+        "ja": "明るいうちに、帰りましょう。",
+        "en": "Let's head home while it's still light."
+      },
+      {
+        "ja": "忘すれないうちに、メモをしておこう。",
+        "en": "Let's write a memo before you forget."
+      },
+      {
+        "ja": "これはまだ温かいうちに早く食べてください。",
+        "en": "Please eat this while it is still warm."
+      },
+      {
+        "ja": "桜がきれいなうちにお花見に行きましょう。",
+        "en": "Let's go see the sakura while they're beautiful."
+      },
+      {
+        "ja": "若いうちに一生懸命勉強しなさい。",
+        "en": "Study hard while you are young."
+      }
+    ]
+  },
+  {
+    "id": "n3-160",
+    "grammar": "上で（うえで）",
+    "romaji": "ue de",
+    "meaning": "upon; after; when; for; in order to",
+    "examples": []
+  },
+  {
+    "id": "n3-161",
+    "grammar": "上に（うえに）",
+    "romaji": "ue ni",
+    "meaning": "as well; besides; in addition to ~",
+    "examples": []
+  },
+  {
+    "id": "n3-162",
+    "grammar": "は別として",
+    "romaji": "wa betsu toshite",
+    "meaning": "aside from; apart from; except for ~",
+    "examples": []
+  },
+  {
+    "id": "n3-163",
+    "grammar": "はもちろん",
+    "romaji": "wa mochiron",
+    "meaning": "not to mention; not only... but also ~",
+    "examples": []
+  },
+  {
+    "id": "n3-164",
+    "grammar": "は～で有名",
+    "romaji": "wa~de yuumei",
+    "meaning": "famous for ~",
+    "examples": []
+  },
+  {
+    "id": "n3-165",
+    "grammar": "わけだ",
+    "romaji": "wake da",
+    "meaning": "for that reason; no wonder; the fact is ~",
+    "examples": []
+  },
+  {
+    "id": "n3-166",
+    "grammar": "わけではない",
+    "romaji": "wake dewa nai",
+    "meaning": "it doesn't mean that; not the case ~",
+    "examples": []
+  },
+  {
+    "id": "n3-167",
+    "grammar": "わけがない",
+    "romaji": "wake ga nai",
+    "meaning": "there is no way that; impossible ~",
+    "examples": []
+  },
+  {
+    "id": "n3-168",
+    "grammar": "わけにはいかない",
+    "romaji": "wake niwa ikanai",
+    "meaning": "must not; cannot afford to ~",
+    "examples": []
+  },
+  {
+    "id": "n3-169",
+    "grammar": "割に（わりに）",
+    "romaji": "wari ni",
+    "meaning": "considering ~; for ~; despite ~",
+    "examples": []
+  },
+  {
+    "id": "n3-170",
+    "grammar": "わざと",
+    "romaji": "wazato",
+    "meaning": "on purpose; intentionally ~",
+    "examples": []
+  },
+  {
+    "id": "n3-171",
+    "grammar": "わざわざ",
+    "romaji": "wazawaza",
+    "meaning": "to go to the trouble of ~",
+    "examples": []
+  },
+  {
+    "id": "n3-172",
+    "grammar": "よりも",
+    "romaji": "yorimo",
+    "meaning": "in comparison to; rather than ~",
+    "examples": []
+  },
+  {
+    "id": "n3-173",
+    "grammar": "ようがない",
+    "romaji": "you ga nai",
+    "meaning": "there is no way to; impossible to ~",
+    "examples": []
+  },
+  {
+    "id": "n3-174",
+    "grammar": "ような気がする",
+    "romaji": "you na ki ga suru",
+    "meaning": "have a feeling that; seems like ~",
+    "examples": []
+  },
+  {
+    "id": "n3-175",
+    "grammar": "ように",
+    "romaji": "you ni",
+    "meaning": "in order to, so that ~",
+    "examples": []
+  },
+  {
+    "id": "n3-176",
+    "grammar": "ように見える",
+    "romaji": "you ni mieru",
+    "meaning": "to look; to seem; to appear ~",
+    "examples": []
+  },
+  {
+    "id": "n3-177",
+    "grammar": "ようとしない",
+    "romaji": "you to shinai",
+    "meaning": "not try to; not make an effort to ~",
+    "examples": []
+  },
+  {
+    "id": "n3-178",
+    "grammar": "ようとする",
+    "romaji": "you to suru",
+    "meaning": "try to; attempt to; be about to ~",
+    "examples": []
+  },
+  {
+    "id": "n3-179",
+    "grammar": "ずに",
+    "romaji": "zuni",
+    "meaning": "without doing ~",
+    "examples": []
+  },
+  {
+    "id": "n3-180",
+    "grammar": "ずにはいられない",
+    "romaji": "zuni wa irarenai",
+    "meaning": "can't help but feel; must do ~",
+    "examples": []
+  },
+  {
+    "id": "n3-181",
+    "grammar": "ずつ",
+    "romaji": "zutsu",
+    "meaning": "apiece; each; at a time",
+    "examples": []
+  }
+]

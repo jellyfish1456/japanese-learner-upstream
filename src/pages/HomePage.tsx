@@ -221,6 +221,35 @@ export default function HomePage() {
             </div>
           </div>
 
+          {/* 文法辭典 */}
+          <div className="mt-8">
+            <div className="mb-4">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1">文法辭典</h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400">JLPT 各級文法整理，含例句與解釋</p>
+            </div>
+            <div className="grid grid-cols-3 gap-3">
+              {(["N5", "N4", "N3"] as const).map((lvl) => {
+                const dictColors: Record<string, { bg: string; icon: string; count: string }> = {
+                  N5: { bg: "bg-green-500 hover:bg-green-600", icon: "📖", count: "78" },
+                  N4: { bg: "bg-blue-500 hover:bg-blue-600", icon: "📗", count: "128" },
+                  N3: { bg: "bg-purple-500 hover:bg-purple-600", icon: "📘", count: "181" },
+                };
+                const s = dictColors[lvl];
+                return (
+                  <button
+                    key={lvl}
+                    onClick={() => navigate(`/grammar-lessons/${lvl.toLowerCase()}`)}
+                    className={`${s.bg} text-white rounded-2xl p-4 text-center transition-colors tap-active shadow-sm`}
+                  >
+                    <div className="text-3xl mb-2">{s.icon}</div>
+                    <div className="text-lg font-bold">{lvl}</div>
+                    <div className="text-xs opacity-80 mt-0.5">{s.count} 個文法</div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
           {/* 聽力練習 */}
           <div className="mt-8">
             <div className="mb-4">

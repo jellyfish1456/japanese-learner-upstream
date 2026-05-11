@@ -1,0 +1,1129 @@
+[
+  {
+    "id": "n4-001",
+    "grammar": "間（あいだ）",
+    "romaji": "aida",
+    "meaning": "while; during; between ~",
+    "examples": [
+      {
+        "ja": "電車に乗っている間、ずっと本を読んでいました。",
+        "en": "I read a book the entire time I was on the train."
+      },
+      {
+        "ja": "名古屋は東京と大阪の間にあります。",
+        "en": "Nagoya is in between Tokyo and Osaka."
+      },
+      {
+        "ja": "9時から5時までの間、仕事です。",
+        "en": "I work from 9 to 5."
+      },
+      {
+        "ja": "日本にいる間は、毎日日本語を話すつもりです。",
+        "en": "I plan to speak Japanese everyday while in Japan."
+      },
+      {
+        "ja": "学校にいる間は、スマホを使ってはいけません。",
+        "en": "We can't use smartphones while in school."
+      }
+    ]
+  },
+  {
+    "id": "n4-002",
+    "grammar": "間に（あいだに）",
+    "romaji": "aida ni",
+    "meaning": "while; during~ something happened",
+    "examples": []
+  },
+  {
+    "id": "n4-003",
+    "grammar": "あまり～ない",
+    "romaji": "amari~nai",
+    "meaning": "not very, not much ~",
+    "examples": []
+  },
+  {
+    "id": "n4-004",
+    "grammar": "後で（あとで）",
+    "romaji": "ato de",
+    "meaning": "after~; later",
+    "examples": []
+  },
+  {
+    "id": "n4-005",
+    "grammar": "ば",
+    "romaji": "ba",
+    "meaning": "conditional form; If [A] then [B]",
+    "examples": [
+      {
+        "ja": "このボタンを押せば、ドアが開きます。",
+        "en": "If you push this button, the door will open."
+      },
+      {
+        "ja": "あなたが行けば、わたしも行くよ。",
+        "en": "If you go, then I'm going too."
+      },
+      {
+        "ja": "毎日練習をすれば、上手になるよ。",
+        "en": "If you practice everyday, you'll improve!"
+      },
+      {
+        "ja": "数週間もすれば、みんな忘れるよ。",
+        "en": "Everyone will forget this in a few weeks."
+      },
+      {
+        "ja": "海に行けば誰だって水着を着るわ。",
+        "en": "Everyone wears a bathing suit at the beach."
+      }
+    ]
+  },
+  {
+    "id": "n4-006",
+    "grammar": "場合は（ばあいは）",
+    "romaji": "baai wa",
+    "meaning": "in the event of; in the case that ~",
+    "examples": []
+  },
+  {
+    "id": "n4-007",
+    "grammar": "ばかり",
+    "romaji": "bakari",
+    "meaning": "only; nothing but ~",
+    "examples": []
+  },
+  {
+    "id": "n4-008",
+    "grammar": "だけで",
+    "romaji": "dake de",
+    "meaning": "just by; just by doing",
+    "examples": []
+  },
+  {
+    "id": "n4-009",
+    "grammar": "出す（だす）",
+    "romaji": "dasu",
+    "meaning": "to begin to; to start to",
+    "examples": []
+  },
+  {
+    "id": "n4-010",
+    "grammar": "でございます",
+    "romaji": "de gozaimasu",
+    "meaning": "to be (honorific)",
+    "examples": []
+  },
+  {
+    "id": "n4-011",
+    "grammar": "でも",
+    "romaji": "demo",
+    "meaning": "... or something; how about~",
+    "examples": []
+  },
+  {
+    "id": "n4-012",
+    "grammar": "ではないか",
+    "romaji": "dewa nai ka",
+    "meaning": "right?; isn't it?",
+    "examples": []
+  },
+  {
+    "id": "n4-013",
+    "grammar": "が必要（がひつよう）",
+    "romaji": "ga hitsuyou",
+    "meaning": "need; necessary",
+    "examples": []
+  },
+  {
+    "id": "n4-014",
+    "grammar": "がする",
+    "romaji": "ga suru",
+    "meaning": "to smell; hear; taste",
+    "examples": []
+  },
+  {
+    "id": "n4-015",
+    "grammar": "がり",
+    "romaji": "gari",
+    "meaning": "someone tends to; has a tendency to ~",
+    "examples": []
+  },
+  {
+    "id": "n4-016",
+    "grammar": "がる / がっている",
+    "romaji": "garu / gatteiru",
+    "meaning": "to show signs of; to appear; to feel ~",
+    "examples": []
+  },
+  {
+    "id": "n4-017",
+    "grammar": "ございます",
+    "romaji": "gozaimasu",
+    "meaning": "to be, to exist (polite form)",
+    "examples": []
+  },
+  {
+    "id": "n4-018",
+    "grammar": "始める（はじめる）",
+    "romaji": "hajimeru",
+    "meaning": "to start; to begin to ~",
+    "examples": []
+  },
+  {
+    "id": "n4-019",
+    "grammar": "はずだ",
+    "romaji": "hazu da",
+    "meaning": "it must be; it should be (expectation)",
+    "examples": [
+      {
+        "ja": "あなたなら分かるはずだ。",
+        "en": "You should know this."
+      },
+      {
+        "ja": "彼は今学校にいるはずだ。",
+        "en": "He should be in school right now."
+      },
+      {
+        "ja": "お父さんがそろそろ家に帰るはずだ。",
+        "en": "Father should be returning home anytime now."
+      },
+      {
+        "ja": "今日は祝日だから、銀行は休みのはずだ。",
+        "en": "It's a holiday, so surely the banks are closed."
+      },
+      {
+        "ja": "それは明らかなはずだ。",
+        "en": "That should be obvious."
+      }
+    ]
+  },
+  {
+    "id": "n4-020",
+    "grammar": "はずがない",
+    "romaji": "hazu ga nai",
+    "meaning": "cannot be (impossible)",
+    "examples": []
+  },
+  {
+    "id": "n4-021",
+    "grammar": "必要がある（ひつようがある）",
+    "romaji": "hitsuyou ga aru",
+    "meaning": "need to; it is necessary to",
+    "examples": []
+  },
+  {
+    "id": "n4-022",
+    "grammar": "意向形（いこうけい）",
+    "romaji": "ikou kei",
+    "meaning": "volitional form; let's do ~",
+    "examples": []
+  },
+  {
+    "id": "n4-023",
+    "grammar": "いらっしゃる",
+    "romaji": "irassharu",
+    "meaning": "to be; to come; to go (polite)",
+    "examples": []
+  },
+  {
+    "id": "n4-024",
+    "grammar": "いたします",
+    "romaji": "itashimasu",
+    "meaning": "to do (polite form of する)",
+    "examples": []
+  },
+  {
+    "id": "n4-025",
+    "grammar": "じゃないか",
+    "romaji": "janai ka",
+    "meaning": "right? isn't it? let's~",
+    "examples": []
+  },
+  {
+    "id": "n4-026",
+    "grammar": "かどうか",
+    "romaji": "ka dou ka",
+    "meaning": "whether or not ~",
+    "examples": []
+  },
+  {
+    "id": "n4-027",
+    "grammar": "かしら",
+    "romaji": "ka shira",
+    "meaning": "I wonder (feminine)",
+    "examples": []
+  },
+  {
+    "id": "n4-028",
+    "grammar": "かい",
+    "romaji": "kai",
+    "meaning": "turns a sentence into a yes/no question",
+    "examples": []
+  },
+  {
+    "id": "n4-029",
+    "grammar": "かもしれない",
+    "romaji": "kamo shirenai",
+    "meaning": "might; perhaps; indicates possibility",
+    "examples": [
+      {
+        "ja": "難しいかも。",
+        "en": "This might be a bit difficult."
+      },
+      {
+        "ja": "そうかもしれない。",
+        "en": "That may be the case."
+      },
+      {
+        "ja": "病気かもしれない。",
+        "en": "I might be sick..."
+      },
+      {
+        "ja": "午後から雨が降るかもしれない。",
+        "en": "It might start raining in the afternoon."
+      },
+      {
+        "ja": "来週、台風が来るかもしれない。",
+        "en": "A typhoon is possibly coming this week."
+      }
+    ]
+  },
+  {
+    "id": "n4-030",
+    "grammar": "かな",
+    "romaji": "kana",
+    "meaning": "I wonder; should I?",
+    "examples": []
+  },
+  {
+    "id": "n4-031",
+    "grammar": "から作る（からつくる）",
+    "romaji": "kara tsukuru",
+    "meaning": "made from; made with",
+    "examples": []
+  },
+  {
+    "id": "n4-032",
+    "grammar": "きっと",
+    "romaji": "kitto",
+    "meaning": "surely; undoubtedly; most likely",
+    "examples": []
+  },
+  {
+    "id": "n4-033",
+    "grammar": "頃（ころ / ごろ）",
+    "romaji": "koro / goro",
+    "meaning": "around; about; when",
+    "examples": []
+  },
+  {
+    "id": "n4-034",
+    "grammar": "こと",
+    "romaji": "koto",
+    "meaning": "Verb nominalizer",
+    "examples": []
+  },
+  {
+    "id": "n4-035",
+    "grammar": "ことがある",
+    "romaji": "koto ga aru",
+    "meaning": "there are times when",
+    "examples": []
+  },
+  {
+    "id": "n4-036",
+    "grammar": "ことができる",
+    "romaji": "koto ga dekiru",
+    "meaning": "can; able to",
+    "examples": [
+      {
+        "ja": "私は日本語を話すことができる。",
+        "en": "I can speak Japanese."
+      },
+      {
+        "ja": "彼女は歌うことができる。",
+        "en": "She can sing."
+      },
+      {
+        "ja": "何も言うことができない。",
+        "en": "I can't say anything."
+      },
+      {
+        "ja": "ここからは山を見ることができます。",
+        "en": "You can see the mountains from here."
+      },
+      {
+        "ja": "納豆を食べることが出来ますか？",
+        "en": "Can you eat natto?"
+      }
+    ]
+  },
+  {
+    "id": "n4-037",
+    "grammar": "ことになる",
+    "romaji": "koto ni naru",
+    "meaning": "it has been decided that..",
+    "examples": []
+  },
+  {
+    "id": "n4-038",
+    "grammar": "ことにする",
+    "romaji": "koto ni suru",
+    "meaning": "to decide on",
+    "examples": []
+  },
+  {
+    "id": "n4-039",
+    "grammar": "くする",
+    "romaji": "ku suru",
+    "meaning": "to make something ~",
+    "examples": []
+  },
+  {
+    "id": "n4-040",
+    "grammar": "急に（きゅうに）",
+    "romaji": "kyuu ni",
+    "meaning": "quickly; suddenly; abruptly ~",
+    "examples": []
+  },
+  {
+    "id": "n4-041",
+    "grammar": "までに",
+    "romaji": "made ni",
+    "meaning": "by; by the time; indicates time limit",
+    "examples": []
+  },
+  {
+    "id": "n4-042",
+    "grammar": "まま",
+    "romaji": "mama",
+    "meaning": "as it is; current state; without changing",
+    "examples": []
+  },
+  {
+    "id": "n4-043",
+    "grammar": "または",
+    "romaji": "matawa",
+    "meaning": "both; or; otherwise",
+    "examples": []
+  },
+  {
+    "id": "n4-044",
+    "grammar": "みたいだ",
+    "romaji": "mitai da",
+    "meaning": "like; similar to; resembling ~",
+    "examples": []
+  },
+  {
+    "id": "n4-045",
+    "grammar": "みたいな",
+    "romaji": "mitai na",
+    "meaning": "like, similar to ~",
+    "examples": []
+  },
+  {
+    "id": "n4-046",
+    "grammar": "みたいに",
+    "romaji": "mitai ni",
+    "meaning": "like; similar to ~",
+    "examples": []
+  },
+  {
+    "id": "n4-047",
+    "grammar": "も",
+    "romaji": "mo",
+    "meaning": "as many as; as much as; up to; nearly ~",
+    "examples": []
+  },
+  {
+    "id": "n4-048",
+    "grammar": "な",
+    "romaji": "na",
+    "meaning": "don't ~ (order somebody to not do something)",
+    "examples": []
+  },
+  {
+    "id": "n4-049",
+    "grammar": "など",
+    "romaji": "nado",
+    "meaning": "such as; things like ~",
+    "examples": []
+  },
+  {
+    "id": "n4-050",
+    "grammar": "ながら",
+    "romaji": "nagara",
+    "meaning": "while; during; as; simultaneously",
+    "examples": [
+      {
+        "ja": "話を聞きながらメモします。",
+        "en": "I took notes while listening."
+      },
+      {
+        "ja": "テレビを見ながら晩ごはんを食べます。",
+        "en": "I eat dinner while watching TV."
+      },
+      {
+        "ja": "音楽を聞きながら料理します。",
+        "en": "I listen to music while I cook."
+      },
+      {
+        "ja": "ギターを弾きながら歌えますか。",
+        "en": "Can you sing and play guitar at the same time?"
+      },
+      {
+        "ja": "アルバイトをしながら大学で勉強しています。",
+        "en": "I work part time while attending University."
+      }
+    ]
+  },
+  {
+    "id": "n4-051",
+    "grammar": "なかなか～ない",
+    "romaji": "nakanaka~nai",
+    "meaning": "not easy to; struggling to ~",
+    "examples": []
+  },
+  {
+    "id": "n4-052",
+    "grammar": "なければいけない",
+    "romaji": "nakereba ikenai",
+    "meaning": "must do something",
+    "examples": []
+  },
+  {
+    "id": "n4-053",
+    "grammar": "なければならない",
+    "romaji": "nakereba naranai",
+    "meaning": "must do something",
+    "examples": []
+  },
+  {
+    "id": "n4-054",
+    "grammar": "なら",
+    "romaji": "nara",
+    "meaning": "if; in the case that ~",
+    "examples": []
+  },
+  {
+    "id": "n4-055",
+    "grammar": "なさい",
+    "romaji": "nasai",
+    "meaning": "do this (soft/firm command)",
+    "examples": []
+  },
+  {
+    "id": "n4-056",
+    "grammar": "なさる",
+    "romaji": "nasaru",
+    "meaning": "to do (honorific)",
+    "examples": []
+  },
+  {
+    "id": "n4-057",
+    "grammar": "に気がつく",
+    "romaji": "ni ki ga tsuku",
+    "meaning": "to notice; to realize",
+    "examples": []
+  },
+  {
+    "id": "n4-058",
+    "grammar": "に見える",
+    "romaji": "ni mieru",
+    "meaning": "to look; to seem; to appear",
+    "examples": []
+  },
+  {
+    "id": "n4-059",
+    "grammar": "にする",
+    "romaji": "ni suru",
+    "meaning": "to make something ~",
+    "examples": []
+  },
+  {
+    "id": "n4-060",
+    "grammar": "にくい",
+    "romaji": "nikui",
+    "meaning": "difficult to do ~",
+    "examples": []
+  },
+  {
+    "id": "n4-061",
+    "grammar": "の中で",
+    "romaji": "no naka de",
+    "meaning": "in; among ~",
+    "examples": []
+  },
+  {
+    "id": "n4-062",
+    "grammar": "のに",
+    "romaji": "noni",
+    "meaning": "although, in spite of, even though ~",
+    "examples": []
+  },
+  {
+    "id": "n4-063",
+    "grammar": "のに",
+    "romaji": "noni",
+    "meaning": "to (do something); in order to ~",
+    "examples": []
+  },
+  {
+    "id": "n4-064",
+    "grammar": "のは〜だ",
+    "romaji": "nowa~da",
+    "meaning": "[A] is [B]; the reason for [A] is [B]",
+    "examples": []
+  },
+  {
+    "id": "n4-065",
+    "grammar": "お～ください",
+    "romaji": "o~kudasai",
+    "meaning": "please do ~ (honorific)",
+    "examples": []
+  },
+  {
+    "id": "n4-066",
+    "grammar": "お～になる",
+    "romaji": "o~ni naru",
+    "meaning": "to do (honorific)",
+    "examples": []
+  },
+  {
+    "id": "n4-067",
+    "grammar": "おきに",
+    "romaji": "oki ni",
+    "meaning": "repeated at intervals, every ~",
+    "examples": []
+  },
+  {
+    "id": "n4-068",
+    "grammar": "終わる",
+    "romaji": "owaru",
+    "meaning": "to finish; to end~",
+    "examples": []
+  },
+  {
+    "id": "n4-069",
+    "grammar": "られる",
+    "romaji": "rareru",
+    "meaning": "potential form; ability or inability to do",
+    "examples": []
+  },
+  {
+    "id": "n4-070",
+    "grammar": "らしい",
+    "romaji": "rashii",
+    "meaning": "it seems like; I heard; apparently ~",
+    "examples": []
+  },
+  {
+    "id": "n4-071",
+    "grammar": "さ",
+    "romaji": "sa",
+    "meaning": "-ness; nominalizer for adjective",
+    "examples": []
+  },
+  {
+    "id": "n4-072",
+    "grammar": "さっき",
+    "romaji": "sakki",
+    "meaning": "some time ago; just now",
+    "examples": []
+  },
+  {
+    "id": "n4-073",
+    "grammar": "させられる",
+    "romaji": "saserareru",
+    "meaning": "causative-passive; to be made to do",
+    "examples": []
+  },
+  {
+    "id": "n4-074",
+    "grammar": "させる",
+    "romaji": "saseru",
+    "meaning": "causative form; to make/let somebody do",
+    "examples": []
+  },
+  {
+    "id": "n4-075",
+    "grammar": "させてください",
+    "romaji": "sasete kudasai",
+    "meaning": "please let me do",
+    "examples": []
+  },
+  {
+    "id": "n4-076",
+    "grammar": "さすが",
+    "romaji": "sasuga",
+    "meaning": "as one would expect; even ~",
+    "examples": []
+  },
+  {
+    "id": "n4-077",
+    "grammar": "し",
+    "romaji": "shi",
+    "meaning": "and; and what's more ~ (emphasis)",
+    "examples": []
+  },
+  {
+    "id": "n4-078",
+    "grammar": "そんなに",
+    "romaji": "sonna ni",
+    "meaning": "so much; so; like that",
+    "examples": []
+  },
+  {
+    "id": "n4-079",
+    "grammar": "それでも",
+    "romaji": "sore demo",
+    "meaning": "but still; and yet; even so ~",
+    "examples": []
+  },
+  {
+    "id": "n4-080",
+    "grammar": "それに",
+    "romaji": "sore ni",
+    "meaning": "besides; in addition; also; moreover ~",
+    "examples": []
+  },
+  {
+    "id": "n4-081",
+    "grammar": "そうだ",
+    "romaji": "sou da",
+    "meaning": "I heard that; it is said that ~",
+    "examples": [
+      {
+        "ja": "いまにも、雨が降りそうだ。",
+        "en": "It seems like it's gonna rain any moment."
+      },
+      {
+        "ja": "その人は倒れそうです。",
+        "en": "That person looks like they're about to fall."
+      },
+      {
+        "ja": "どうしたの？眠そうだね。",
+        "en": "What's wrong. You look sleepy."
+      },
+      {
+        "ja": "わぁ、おいしそうな料理がたくさんありますね。",
+        "en": "Wow, there's a lot of good looking food here!"
+      },
+      {
+        "ja": "彼女は嬉しそうな表情で教室に入ってきた。",
+        "en": "She entered the classroom with a happy expression."
+      }
+    ]
+  },
+  {
+    "id": "n4-082",
+    "grammar": "そうだ",
+    "romaji": "sou da",
+    "meaning": "looks like; appears like; seeming ~",
+    "examples": [
+      {
+        "ja": "いまにも、雨が降りそうだ。",
+        "en": "It seems like it's gonna rain any moment."
+      },
+      {
+        "ja": "その人は倒れそうです。",
+        "en": "That person looks like they're about to fall."
+      },
+      {
+        "ja": "どうしたの？眠そうだね。",
+        "en": "What's wrong. You look sleepy."
+      },
+      {
+        "ja": "わぁ、おいしそうな料理がたくさんありますね。",
+        "en": "Wow, there's a lot of good looking food here!"
+      },
+      {
+        "ja": "彼女は嬉しそうな表情で教室に入ってきた。",
+        "en": "She entered the classroom with a happy expression."
+      }
+    ]
+  },
+  {
+    "id": "n4-083",
+    "grammar": "そうに / そうな",
+    "romaji": "sou ni / sou na",
+    "meaning": "seems like; looks like ~",
+    "examples": []
+  },
+  {
+    "id": "n4-084",
+    "grammar": "たばかり",
+    "romaji": "ta bakari",
+    "meaning": "just finished; something just occurred",
+    "examples": []
+  },
+  {
+    "id": "n4-085",
+    "grammar": "たところ",
+    "romaji": "ta tokoro",
+    "meaning": "just finished doing, was just doing",
+    "examples": []
+  },
+  {
+    "id": "n4-086",
+    "grammar": "たがる",
+    "romaji": "tagaru",
+    "meaning": "wants to do ~ (third person)",
+    "examples": []
+  },
+  {
+    "id": "n4-087",
+    "grammar": "たら",
+    "romaji": "tara",
+    "meaning": "if; after; when ~",
+    "examples": []
+  },
+  {
+    "id": "n4-088",
+    "grammar": "たらどう",
+    "romaji": "tara dou",
+    "meaning": "why don't you; how about ~",
+    "examples": []
+  },
+  {
+    "id": "n4-089",
+    "grammar": "たらいいですか",
+    "romaji": "tara ii desu ka",
+    "meaning": "what should I do?",
+    "examples": []
+  },
+  {
+    "id": "n4-090",
+    "grammar": "てあげる",
+    "romaji": "te ageru",
+    "meaning": "to do for; to do a favor",
+    "examples": []
+  },
+  {
+    "id": "n4-091",
+    "grammar": "てほしい",
+    "romaji": "te hoshii",
+    "meaning": "I want you to; need you to ~",
+    "examples": []
+  },
+  {
+    "id": "n4-092",
+    "grammar": "ていく",
+    "romaji": "te iku",
+    "meaning": "to start; to continue; to go on",
+    "examples": []
+  },
+  {
+    "id": "n4-093",
+    "grammar": "ていた",
+    "romaji": "te ita",
+    "meaning": "was doing something (past continuous)",
+    "examples": []
+  },
+  {
+    "id": "n4-094",
+    "grammar": "ていただけませんか",
+    "romaji": "te itadakemasen ka",
+    "meaning": "could you please ~",
+    "examples": []
+  },
+  {
+    "id": "n4-095",
+    "grammar": "てくれる",
+    "romaji": "te kureru",
+    "meaning": "to do a favor; do something for someone",
+    "examples": []
+  },
+  {
+    "id": "n4-096",
+    "grammar": "てくる",
+    "romaji": "te kuru",
+    "meaning": "to become; to continue; to start ~",
+    "examples": []
+  },
+  {
+    "id": "n4-097",
+    "grammar": "てみる",
+    "romaji": "te miru",
+    "meaning": "try doing",
+    "examples": []
+  },
+  {
+    "id": "n4-098",
+    "grammar": "てもらう",
+    "romaji": "te morau",
+    "meaning": "to get somebody to do something",
+    "examples": []
+  },
+  {
+    "id": "n4-099",
+    "grammar": "ておく",
+    "romaji": "te oku",
+    "meaning": "to do something in advance",
+    "examples": []
+  },
+  {
+    "id": "n4-100",
+    "grammar": "てしまう / ちゃう",
+    "romaji": "te shimau / chau",
+    "meaning": "to do by accident; to finish completely",
+    "examples": [
+      {
+        "ja": "仕事は全部終わってしまいました。",
+        "en": "I've finished with all of my work."
+      },
+      {
+        "ja": "疲れが出たので、寝ちゃった。",
+        "en": "I was tired and fell asleep."
+      },
+      {
+        "ja": "パスポートをなくしてしまいました。",
+        "en": "I've lost my passport."
+      },
+      {
+        "ja": "漢字の宿題はもうやってしまいました。",
+        "en": "I've already finished my kanji homework."
+      },
+      {
+        "ja": "ごめん！ジュースを全部飲んじゃった！",
+        "en": "Sorry, I drank all the juice!"
+      }
+    ]
+  },
+  {
+    "id": "n4-101",
+    "grammar": "てすみません",
+    "romaji": "te sumimasen",
+    "meaning": "I'm sorry for",
+    "examples": []
+  },
+  {
+    "id": "n4-102",
+    "grammar": "てやる",
+    "romaji": "te yaru",
+    "meaning": "to do for; to do a favor (casual)",
+    "examples": []
+  },
+  {
+    "id": "n4-103",
+    "grammar": "てよかった",
+    "romaji": "te yokatta",
+    "meaning": "I'm glad that ~",
+    "examples": []
+  },
+  {
+    "id": "n4-104",
+    "grammar": "ているところ",
+    "romaji": "teiru tokoro",
+    "meaning": "in the process of doing",
+    "examples": []
+  },
+  {
+    "id": "n4-105",
+    "grammar": "ても",
+    "romaji": "temo",
+    "meaning": "even; even if; even though ~",
+    "examples": [
+      {
+        "ja": "たくさん食べても、お腹が空きます。",
+        "en": "Even if I eat a lot, I still feel hungry."
+      },
+      {
+        "ja": "日曜日でも、働きます。",
+        "en": "I work even on Sundays."
+      },
+      {
+        "ja": "子どもでもできることよ。",
+        "en": "Even children can do this."
+      },
+      {
+        "ja": "必要なので、高くても買います。",
+        "en": "I need this, so I'll buy it even if it's expensive."
+      },
+      {
+        "ja": "雨が降っても、今日洗濯をします。",
+        "en": "Even if it rains, I'm doing the laundry today."
+      }
+    ]
+  },
+  {
+    "id": "n4-106",
+    "grammar": "と",
+    "romaji": "to",
+    "meaning": "whenever [A] happens, [B] also happens",
+    "examples": []
+  },
+  {
+    "id": "n4-107",
+    "grammar": "と言ってもいい",
+    "romaji": "to ittemo ii",
+    "meaning": "you could say; one might say",
+    "examples": []
+  },
+  {
+    "id": "n4-108",
+    "grammar": "という",
+    "romaji": "to iu",
+    "meaning": "called; named; that ~",
+    "examples": []
+  },
+  {
+    "id": "n4-109",
+    "grammar": "ということ",
+    "romaji": "to iu koto",
+    "meaning": "convert phrase into noun",
+    "examples": []
+  },
+  {
+    "id": "n4-110",
+    "grammar": "と言われている",
+    "romaji": "to iwarete iru",
+    "meaning": "it is said that ~",
+    "examples": []
+  },
+  {
+    "id": "n4-111",
+    "grammar": "と聞いた",
+    "romaji": "to kiita",
+    "meaning": "I heard...",
+    "examples": []
+  },
+  {
+    "id": "n4-112",
+    "grammar": "と思う",
+    "romaji": "to omou",
+    "meaning": "to think…; I think…",
+    "examples": []
+  },
+  {
+    "id": "n4-113",
+    "grammar": "とか～とか",
+    "romaji": "toka~toka",
+    "meaning": "among other things; such as; like ~",
+    "examples": []
+  },
+  {
+    "id": "n4-114",
+    "grammar": "ところ",
+    "romaji": "tokoro",
+    "meaning": "just about to; on the verge of doing",
+    "examples": []
+  },
+  {
+    "id": "n4-115",
+    "grammar": "続ける",
+    "romaji": "tsuzukeru",
+    "meaning": "continue to; keen on ~",
+    "examples": []
+  },
+  {
+    "id": "n4-116",
+    "grammar": "って",
+    "romaji": "tte",
+    "meaning": "named; called ~",
+    "examples": []
+  },
+  {
+    "id": "n4-117",
+    "grammar": "やすい",
+    "romaji": "yasui",
+    "meaning": "easy to; likely to; prone to ~",
+    "examples": []
+  },
+  {
+    "id": "n4-118",
+    "grammar": "やっと",
+    "romaji": "yatto",
+    "meaning": "at last; finally; barely; narrowly ~",
+    "examples": []
+  },
+  {
+    "id": "n4-119",
+    "grammar": "より",
+    "romaji": "yori",
+    "meaning": "than; rather than; more than ~",
+    "examples": []
+  },
+  {
+    "id": "n4-120",
+    "grammar": "予定だ（よていだ）",
+    "romaji": "yotei da",
+    "meaning": "plan to, intend to",
+    "examples": []
+  },
+  {
+    "id": "n4-121",
+    "grammar": "ようだ",
+    "romaji": "you da",
+    "meaning": "appears; seems; looks as if ~",
+    "examples": []
+  },
+  {
+    "id": "n4-122",
+    "grammar": "ように / ような",
+    "romaji": "you ni / you na",
+    "meaning": "like; as; similar to ~",
+    "examples": []
+  },
+  {
+    "id": "n4-123",
+    "grammar": "ようになる",
+    "romaji": "you ni naru",
+    "meaning": "to reach the point that; to come to be",
+    "examples": [
+      {
+        "ja": "大きくなったら分かるようになるよ。",
+        "en": "When you get older, you'll understand."
+      },
+      {
+        "ja": "毎日練習すれば、泳げるようになります。",
+        "en": "If you practice everyday, you'll be able to swim."
+      },
+      {
+        "ja": "やっと自転車に乗れるようになりました。",
+        "en": "I finally learned how to ride a bicycle!"
+      },
+      {
+        "ja": "たくさん勉強したので、日本語を話せるようになりました。",
+        "en": "I became able to speak Japanese."
+      },
+      {
+        "ja": "薬を飲んで、よく寝られるようになりました。",
+        "en": "I was able to sleep well after taking medicine."
+      }
+    ]
+  },
+  {
+    "id": "n4-124",
+    "grammar": "ようにする",
+    "romaji": "you ni suru",
+    "meaning": "to try to; to make sure that ~",
+    "examples": []
+  },
+  {
+    "id": "n4-125",
+    "grammar": "ようと思う",
+    "romaji": "you to omou",
+    "meaning": "thinking of doing; planning to ~",
+    "examples": []
+  },
+  {
+    "id": "n4-126",
+    "grammar": "ぜひ",
+    "romaji": "zehi",
+    "meaning": "by all means; certainly; definitely ~",
+    "examples": []
+  },
+  {
+    "id": "n4-127",
+    "grammar": "全然～ない（ぜんぜん～ない）",
+    "romaji": "zenzen~nai",
+    "meaning": "(not) at all",
+    "examples": []
+  },
+  {
+    "id": "n4-128",
+    "grammar": "づらい",
+    "romaji": "zurai",
+    "meaning": "difficult to do ~",
+    "examples": []
+  }
+]

@@ -1,0 +1,863 @@
+[
+  {
+    "id": "n5-001",
+    "grammar": "ちゃいけない・じゃいけない",
+    "romaji": "cha ikenai / ja ikenai",
+    "meaning": "must not do (spoken Japanese)",
+    "examples": [
+      {
+        "ja": "寝る前にスマホを見ちゃダメよ。",
+        "en": "You shouldn't look at your smartphone before going to bed."
+      },
+      {
+        "ja": "ここはきけんなので、入っちゃダメだよ。",
+        "en": "This area is dangerous, so you're not allowed to enter."
+      },
+      {
+        "ja": "やっちゃいけないことをやっちゃった。",
+        "en": "I did something I shouldn't have."
+      },
+      {
+        "ja": "自信をなくしちゃいけません！",
+        "en": "You mustn't lose confidence!"
+      },
+      {
+        "ja": "野菜を食べるまでデザートを食べちゃいけないよ。",
+        "en": "No eating dessert until you finish eating your vegetables."
+      }
+    ]
+  },
+  {
+    "id": "n5-002",
+    "grammar": "だ / です",
+    "romaji": "da / desu",
+    "meaning": "to be (am, is, are, were, used to)",
+    "examples": [
+      {
+        "ja": "私はクリスです。",
+        "en": "I am Chris."
+      },
+      {
+        "ja": "私の名前はクリスです。",
+        "en": "My name is Chris."
+      },
+      {
+        "ja": "彼らは3年生です。",
+        "en": "They are 3rd year students."
+      },
+      {
+        "ja": "昨日はとてもきれいな日だった。",
+        "en": "Yesterday was a very beautiful day."
+      },
+      {
+        "ja": "今日は暑いですね。",
+        "en": "It's pretty hot today, isn't it?"
+      }
+    ]
+  },
+  {
+    "id": "n5-003",
+    "grammar": "だけ",
+    "romaji": "dake",
+    "meaning": "only; just; as much as ~",
+    "examples": [
+      {
+        "ja": "一人だけ。",
+        "en": "Only one person."
+      },
+      {
+        "ja": "ほしいものはこれだけ。",
+        "en": "This is the only thing I want."
+      },
+      {
+        "ja": "ちょっと見ているだけです。",
+        "en": "I'm just looking around."
+      },
+      {
+        "ja": "出来るだけ新しい漢字を勉強したい。",
+        "en": "I want to study as much new kanji as possible."
+      },
+      {
+        "ja": "彼女が信頼できるのは彼だけだ。",
+        "en": "He is the only one that she can trust."
+      }
+    ]
+  },
+  {
+    "id": "n5-004",
+    "grammar": "だろう",
+    "romaji": "darou",
+    "meaning": "I think; it seems; probably; right?",
+    "examples": [
+      {
+        "ja": "彼はもうすぐ来るだろう。",
+        "en": "He should be coming any moment now."
+      },
+      {
+        "ja": "そうだろうと思ったよ。",
+        "en": "I thought (figured) as much."
+      },
+      {
+        "ja": "明日はたぶん雨が降るだろう。",
+        "en": "It will likely rain tomorrow."
+      },
+      {
+        "ja": "間違いないだろう。",
+        "en": "Surely there's no mistake."
+      },
+      {
+        "ja": "あそこにいる人は誰だろう。",
+        "en": "I wonder who that person is over there."
+      }
+    ]
+  },
+  {
+    "id": "n5-005",
+    "grammar": "で",
+    "romaji": "de",
+    "meaning": "in; at; on; by; with; via ~",
+    "examples": [
+      {
+        "ja": "学校で日本語を勉強する。",
+        "en": "I study Japanese at school."
+      },
+      {
+        "ja": "車で行く。",
+        "en": "I will go by/via car."
+      },
+      {
+        "ja": "1時間で終わります。",
+        "en": "I'll finish in one hour."
+      },
+      {
+        "ja": "病気で今日休みます。",
+        "en": "Because I'm sick, I'm taking today off."
+      },
+      {
+        "ja": "駅で会いましょうね。",
+        "en": "Let's meet at the station."
+      }
+    ]
+  },
+  {
+    "id": "n5-006",
+    "grammar": "でも",
+    "romaji": "demo",
+    "meaning": "but; however; though ~",
+    "examples": [
+      {
+        "ja": "私は魚が好きです。でも肉も好きです。",
+        "en": "I like fish. But I also like meat."
+      },
+      {
+        "ja": "パン屋に行きました。でも、何も買いませんでした。",
+        "en": "I went to the bakery, but didn't buy anything."
+      },
+      {
+        "ja": "動物が好きです。でも、犬が一ばん好きです。",
+        "en": "I like animals. But I love dogs the most."
+      },
+      {
+        "ja": "図書館に行きました。でも、集中できませんでした。",
+        "en": "I went to the library. But I wasn't able to concentrate."
+      },
+      {
+        "ja": "スーパーに行きました。でも、財布を忘れました！",
+        "en": "I went to the grocery store. But I forgot my wallet!"
+      }
+    ]
+  },
+  {
+    "id": "n5-007",
+    "grammar": "でしょう",
+    "romaji": "deshou",
+    "meaning": "I think; it seems; probably; right?",
+    "examples": [
+      {
+        "ja": "明日は雨が降るでしょう。",
+        "en": "It will probably rain tomorrow."
+      },
+      {
+        "ja": "先生はまもなく来るでしょう。",
+        "en": "The teacher will probably come soon."
+      },
+      {
+        "ja": "それは何でしょう。",
+        "en": "I wonder what that is."
+      },
+      {
+        "ja": "いいでしょう。",
+        "en": "That sounds good."
+      },
+      {
+        "ja": "彼はもうすぐ来るでしょう。",
+        "en": "He should be here any second."
+      }
+    ]
+  },
+  {
+    "id": "n5-008",
+    "grammar": "どんな",
+    "romaji": "donna",
+    "meaning": "what kind of; what sort of",
+    "examples": []
+  },
+  {
+    "id": "n5-009",
+    "grammar": "どうして",
+    "romaji": "doushite",
+    "meaning": "why; for what reason; how",
+    "examples": []
+  },
+  {
+    "id": "n5-010",
+    "grammar": "どうやって",
+    "romaji": "douyatte",
+    "meaning": "how; in what way; by what means",
+    "examples": []
+  },
+  {
+    "id": "n5-011",
+    "grammar": "が",
+    "romaji": "ga",
+    "meaning": "subject marker; however; but ~",
+    "examples": [
+      {
+        "ja": "犬が好きです。",
+        "en": "I like dogs."
+      },
+      {
+        "ja": "明日は雨が降る。",
+        "en": "It is going to rain tomorrow."
+      },
+      {
+        "ja": "仕方がない。",
+        "en": "It cannot be helped."
+      },
+      {
+        "ja": "私は犬が好きですがお母さんは好きじゃない。",
+        "en": "I like dogs but my mom does not."
+      },
+      {
+        "ja": "このカメラを買いたいですがお金がない。",
+        "en": "I want to buy this camera, but I have no money."
+      }
+    ]
+  },
+  {
+    "id": "n5-012",
+    "grammar": "があります",
+    "romaji": "ga arimasu",
+    "meaning": "there is; is (non-living things)",
+    "examples": []
+  },
+  {
+    "id": "n5-013",
+    "grammar": "がほしい",
+    "romaji": "ga hoshii",
+    "meaning": "to want something",
+    "examples": [
+      {
+        "ja": "もっとお金が欲しいです。",
+        "en": "I want more money."
+      },
+      {
+        "ja": "彼女がほしい。",
+        "en": "I want a girlfriend."
+      },
+      {
+        "ja": "お金がたくさんほしい。",
+        "en": "I want a lot of money."
+      },
+      {
+        "ja": "新しいGoProカメラが欲しいです！",
+        "en": "I want the new GoPro camera!"
+      },
+      {
+        "ja": "いつか自分の家が欲しいです。",
+        "en": "I want to have my own house one day."
+      }
+    ]
+  },
+  {
+    "id": "n5-014",
+    "grammar": "がいます",
+    "romaji": "ga imasu",
+    "meaning": "there is; to be; is (living things)",
+    "examples": []
+  },
+  {
+    "id": "n5-015",
+    "grammar": "ほうがいい",
+    "romaji": "hou ga ii",
+    "meaning": "had better; should ~",
+    "examples": [
+      {
+        "ja": "疲れたら、早く寝たほうがいい。",
+        "en": "If you're tired, it's better to go to bed early."
+      },
+      {
+        "ja": "暑い日には、水をたくさん飲んだ方がいい。",
+        "en": "It's best to drink a lot of water on hot days."
+      },
+      {
+        "ja": "寝る前に、スマホを使わない方がいい。",
+        "en": "Before bed, it's best to not use your smartphone."
+      },
+      {
+        "ja": "毎日日本語を練習した方がいいですよ。",
+        "en": "You should practice Japanese every day."
+      },
+      {
+        "ja": "分からないとき、先生に聞いた方がいいですよ。",
+        "en": "When you don't understand, ask your teacher."
+      }
+    ]
+  },
+  {
+    "id": "n5-016",
+    "grammar": "一番（いちばん）",
+    "romaji": "ichiban",
+    "meaning": "the most; the best",
+    "examples": []
+  },
+  {
+    "id": "n5-017",
+    "grammar": "一緒に（いっしょに）",
+    "romaji": "issho ni",
+    "meaning": "together",
+    "examples": []
+  },
+  {
+    "id": "n5-018",
+    "grammar": "いつも",
+    "romaji": "itsumo",
+    "meaning": "always; usually; habitually",
+    "examples": []
+  },
+  {
+    "id": "n5-019",
+    "grammar": "じゃない・ではない",
+    "romaji": "janai / dewa nai",
+    "meaning": "to not be (am not; is not; are not)",
+    "examples": []
+  },
+  {
+    "id": "n5-020",
+    "grammar": "か",
+    "romaji": "ka",
+    "meaning": "question particle",
+    "examples": []
+  },
+  {
+    "id": "n5-021",
+    "grammar": "か～か",
+    "romaji": "ka~ka",
+    "meaning": "or",
+    "examples": []
+  },
+  {
+    "id": "n5-022",
+    "grammar": "から",
+    "romaji": "kara",
+    "meaning": "because; since; from",
+    "examples": [
+      {
+        "ja": "明日テストがあるから、今夜勉強つもりだ。",
+        "en": "Since I have a test tomorrow, I plan to study tonight."
+      },
+      {
+        "ja": "暑いから、窓を開けてください。",
+        "en": "It's hot, so could you please open the window?"
+      },
+      {
+        "ja": "このシャツは彼女からもらった。",
+        "en": "I got this shirt from my girlfriend."
+      },
+      {
+        "ja": "天気がいいから、外に行きたい。",
+        "en": "Since the weather is nice, I want to go outside."
+      },
+      {
+        "ja": "17時からアルバイトがある。",
+        "en": "I've got my part time job from 5pm."
+      }
+    ]
+  },
+  {
+    "id": "n5-023",
+    "grammar": "方（かた）",
+    "romaji": "kata",
+    "meaning": "the way of doing something; how to do ~",
+    "examples": []
+  },
+  {
+    "id": "n5-024",
+    "grammar": "けど",
+    "romaji": "kedo",
+    "meaning": "but; however; although ~",
+    "examples": []
+  },
+  {
+    "id": "n5-025",
+    "grammar": "けれども",
+    "romaji": "keredo mo",
+    "meaning": "but; however; although ~",
+    "examples": []
+  },
+  {
+    "id": "n5-026",
+    "grammar": "まだ",
+    "romaji": "mada",
+    "meaning": "still; not yet",
+    "examples": [
+      {
+        "ja": "まだ寝ているの？",
+        "en": "You're still sleeping?"
+      },
+      {
+        "ja": "まだ高校生です。",
+        "en": "I'm still a high school student."
+      },
+      {
+        "ja": "先生はまだ来ていない。",
+        "en": "Our teacher still hasn't come."
+      },
+      {
+        "ja": "もう10時ですが弟がまだ寝ている。",
+        "en": "It's already 10 am, but my brother is still sleeping."
+      },
+      {
+        "ja": "私は宿題がまだ終わっていません。",
+        "en": "I still haven't finished with my homework."
+      }
+    ]
+  },
+  {
+    "id": "n5-027",
+    "grammar": "まだ～ていません",
+    "romaji": "mada ~te imasen",
+    "meaning": "have not yet ~",
+    "examples": []
+  },
+  {
+    "id": "n5-028",
+    "grammar": "まで",
+    "romaji": "made",
+    "meaning": "until; as far as; to (an extent); even ~",
+    "examples": []
+  },
+  {
+    "id": "n5-029",
+    "grammar": "前に（まえに）",
+    "romaji": "mae ni",
+    "meaning": "before; in front of ~",
+    "examples": []
+  },
+  {
+    "id": "n5-030",
+    "grammar": "ませんか",
+    "romaji": "masen ka",
+    "meaning": "would you; do you want to; shall we ~",
+    "examples": []
+  },
+  {
+    "id": "n5-031",
+    "grammar": "ましょう",
+    "romaji": "mashou",
+    "meaning": "let's ~; shall we ~",
+    "examples": []
+  },
+  {
+    "id": "n5-032",
+    "grammar": "ましょうか",
+    "romaji": "mashouka",
+    "meaning": "shall I ~; used to offer help",
+    "examples": []
+  },
+  {
+    "id": "n5-033",
+    "grammar": "も",
+    "romaji": "mo",
+    "meaning": "too; also; as well",
+    "examples": []
+  },
+  {
+    "id": "n5-034",
+    "grammar": "もう",
+    "romaji": "mou",
+    "meaning": "already; anymore; again; other",
+    "examples": []
+  },
+  {
+    "id": "n5-035",
+    "grammar": "なあ",
+    "romaji": "naa",
+    "meaning": "sentence ending particle; confirmation",
+    "examples": []
+  },
+  {
+    "id": "n5-036",
+    "grammar": "ないで",
+    "romaji": "naide",
+    "meaning": "without doing ~; to do [B] without doing [A]",
+    "examples": []
+  },
+  {
+    "id": "n5-037",
+    "grammar": "ないでください",
+    "romaji": "naide kudasai",
+    "meaning": "please don't do ~",
+    "examples": []
+  },
+  {
+    "id": "n5-038",
+    "grammar": "ないといけない",
+    "romaji": "naito ikenai",
+    "meaning": "must do; have an obligation to do ~",
+    "examples": []
+  },
+  {
+    "id": "n5-039",
+    "grammar": "なくてもいい",
+    "romaji": "naku temo ii",
+    "meaning": "don't have to",
+    "examples": []
+  },
+  {
+    "id": "n5-040",
+    "grammar": "なくちゃ",
+    "romaji": "nakucha",
+    "meaning": "must do; need to; gotta do ~",
+    "examples": []
+  },
+  {
+    "id": "n5-041",
+    "grammar": "なくてはいけない",
+    "romaji": "nakute wa ikenai",
+    "meaning": "must do; need to do",
+    "examples": []
+  },
+  {
+    "id": "n5-042",
+    "grammar": "なくてはならない",
+    "romaji": "nakute wa naranai",
+    "meaning": "must do; need to do ~",
+    "examples": []
+  },
+  {
+    "id": "n5-043",
+    "grammar": "なる",
+    "romaji": "naru",
+    "meaning": "to become",
+    "examples": []
+  },
+  {
+    "id": "n5-044",
+    "grammar": "んです",
+    "romaji": "ndesu",
+    "meaning": "to explain something; show emphasis",
+    "examples": []
+  },
+  {
+    "id": "n5-045",
+    "grammar": "ね",
+    "romaji": "ne",
+    "meaning": "isn't it? right? eh?",
+    "examples": []
+  },
+  {
+    "id": "n5-046",
+    "grammar": "に",
+    "romaji": "ni",
+    "meaning": "destination particle; in; at; on; to",
+    "examples": []
+  },
+  {
+    "id": "n5-047",
+    "grammar": "に行く（にいく）",
+    "romaji": "ni iku",
+    "meaning": "go to do ~",
+    "examples": []
+  },
+  {
+    "id": "n5-048",
+    "grammar": "にする",
+    "romaji": "ni suru",
+    "meaning": "to decide on",
+    "examples": []
+  },
+  {
+    "id": "n5-049",
+    "grammar": "の",
+    "romaji": "no",
+    "meaning": "possessive particle",
+    "examples": []
+  },
+  {
+    "id": "n5-050",
+    "grammar": "のです",
+    "romaji": "no desu",
+    "meaning": "to explain something; show emphasis",
+    "examples": []
+  },
+  {
+    "id": "n5-051",
+    "grammar": "のが下手（のがへた）",
+    "romaji": "no ga heta",
+    "meaning": "to be bad at doing something",
+    "examples": []
+  },
+  {
+    "id": "n5-052",
+    "grammar": "のが上手（のがじょうず）",
+    "romaji": "no ga jouzu",
+    "meaning": "to be good at",
+    "examples": []
+  },
+  {
+    "id": "n5-053",
+    "grammar": "のが好き（のがすき）",
+    "romaji": "no ga suki",
+    "meaning": "to like doing something",
+    "examples": []
+  },
+  {
+    "id": "n5-054",
+    "grammar": "の中で[A]が一番",
+    "romaji": "no naka de ichiban",
+    "meaning": "out of this group, [A] is best",
+    "examples": []
+  },
+  {
+    "id": "n5-055",
+    "grammar": "ので",
+    "romaji": "node",
+    "meaning": "because of; given that; since ~",
+    "examples": []
+  },
+  {
+    "id": "n5-056",
+    "grammar": "しかし",
+    "romaji": "shikashi",
+    "meaning": "but; however ~",
+    "examples": []
+  },
+  {
+    "id": "n5-057",
+    "grammar": "それから",
+    "romaji": "sore kara",
+    "meaning": "and; and then; after that",
+    "examples": []
+  },
+  {
+    "id": "n5-058",
+    "grammar": "そして",
+    "romaji": "soshite",
+    "meaning": "and; and then; thus",
+    "examples": []
+  },
+  {
+    "id": "n5-059",
+    "grammar": "すぎる",
+    "romaji": "sugiru",
+    "meaning": "too much",
+    "examples": []
+  },
+  {
+    "id": "n5-060",
+    "grammar": "たことがある",
+    "romaji": "ta koto ga aru",
+    "meaning": "to have done something before",
+    "examples": []
+  },
+  {
+    "id": "n5-061",
+    "grammar": "たい",
+    "romaji": "tai",
+    "meaning": "want to do something",
+    "examples": [
+      {
+        "ja": "日本語をもっと勉強したいです。",
+        "en": "I want to study more Japanese."
+      },
+      {
+        "ja": "早く結婚したい。",
+        "en": "I want to hurry up and get married."
+      },
+      {
+        "ja": "自転車がこわれたから、新しいのを買いたい。",
+        "en": "My bicycle broke, so I want to buy a new one."
+      },
+      {
+        "ja": "子どものころから、ずっと日本に行きたかった。",
+        "en": "Ever since I was little, I wanted to go to Japan."
+      },
+      {
+        "ja": "将来は日本の会社で働きたいです。",
+        "en": "I'd like to work for a Japanese company."
+      }
+    ]
+  },
+  {
+    "id": "n5-062",
+    "grammar": "たり～たり",
+    "romaji": "tari~tari",
+    "meaning": "do such things as A and B",
+    "examples": []
+  },
+  {
+    "id": "n5-063",
+    "grammar": "てある",
+    "romaji": "te aru",
+    "meaning": "is/has been done (resulting state)",
+    "examples": []
+  },
+  {
+    "id": "n5-064",
+    "grammar": "ている",
+    "romaji": "te iru",
+    "meaning": "ongoing action or current state",
+    "examples": [
+      {
+        "ja": "昼ご飯を食べている。",
+        "en": "Currently eating lunch now."
+      },
+      {
+        "ja": "5年間日本語を勉強しています。",
+        "en": "I have been studying Japanese for 5 years."
+      },
+      {
+        "ja": "毎日、寝る前にマンガを読んでいる。",
+        "en": "I read manga every day before I sleep."
+      },
+      {
+        "ja": "彼はお父さんと似ている。",
+        "en": "He looks like his father."
+      },
+      {
+        "ja": "ドアが開いている。",
+        "en": "The door has been left open."
+      }
+    ]
+  },
+  {
+    "id": "n5-065",
+    "grammar": "てから",
+    "romaji": "te kara",
+    "meaning": "after doing ~",
+    "examples": []
+  },
+  {
+    "id": "n5-066",
+    "grammar": "てください",
+    "romaji": "te kudasai",
+    "meaning": "please do",
+    "examples": []
+  },
+  {
+    "id": "n5-067",
+    "grammar": "てはいけない",
+    "romaji": "te wa ikenai",
+    "meaning": "must not; may not; cannot",
+    "examples": []
+  },
+  {
+    "id": "n5-068",
+    "grammar": "てもいいです",
+    "romaji": "temo ii desu",
+    "meaning": "is OK to ~; may I ~?",
+    "examples": []
+  },
+  {
+    "id": "n5-069",
+    "grammar": "と",
+    "romaji": "to",
+    "meaning": "and; with; as; connecting particle",
+    "examples": []
+  },
+  {
+    "id": "n5-070",
+    "grammar": "とき",
+    "romaji": "toki",
+    "meaning": "when; at this time",
+    "examples": []
+  },
+  {
+    "id": "n5-071",
+    "grammar": "とても",
+    "romaji": "totemo",
+    "meaning": "very; awfully; exceedingly",
+    "examples": []
+  },
+  {
+    "id": "n5-072",
+    "grammar": "つもり",
+    "romaji": "tsumori",
+    "meaning": "plan to ~; intend to ~",
+    "examples": [
+      {
+        "ja": "今日はラーメンを食べるつもりだ。",
+        "en": "Today, I plan to eat ramen."
+      },
+      {
+        "ja": "あなたたちも行くつもりですか？",
+        "en": "Are you guys also planning to go?"
+      },
+      {
+        "ja": "大学に入って日本語を勉強するつもりです。",
+        "en": "I plan on studying Japanese in university."
+      },
+      {
+        "ja": "いつ日本に留学するつもりなの？",
+        "en": "When do you plan on studying abroad in Japan?"
+      },
+      {
+        "ja": "もしJLPTに受かったら日本の会社で働くつもりだ。",
+        "en": "I plan to work at a Japanese company if I pass JLPT."
+      }
+    ]
+  },
+  {
+    "id": "n5-073",
+    "grammar": "は",
+    "romaji": "wa",
+    "meaning": "topic marker",
+    "examples": []
+  },
+  {
+    "id": "n5-074",
+    "grammar": "は〜より・・・です",
+    "romaji": "wa ~yori... desu",
+    "meaning": "[A] is more ~ than [B]",
+    "examples": []
+  },
+  {
+    "id": "n5-075",
+    "grammar": "はどうですか",
+    "romaji": "wa dou desu ka",
+    "meaning": "how about; how is",
+    "examples": []
+  },
+  {
+    "id": "n5-076",
+    "grammar": "や",
+    "romaji": "ya",
+    "meaning": "and; or; connecting particle",
+    "examples": []
+  },
+  {
+    "id": "n5-077",
+    "grammar": "よ",
+    "romaji": "yo",
+    "meaning": "you know; emphasis (ending particle)",
+    "examples": []
+  },
+  {
+    "id": "n5-078",
+    "grammar": "より～ほうが",
+    "romaji": "yori ~hou ga",
+    "meaning": "[2] is more than [1]",
+    "examples": []
+  }
+]
