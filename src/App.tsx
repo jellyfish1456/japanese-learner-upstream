@@ -24,6 +24,7 @@ import SpotDetailPage from "./pages/SpotDetailPage";
 import SengokuHeroPage from "./pages/SengokuHeroPage";
 import SengokuTimelinePage from "./pages/SengokuTimelinePage";
 import GrammarLessonPage from "./pages/GrammarLessonPage";
+import NewsReaderPage from "./pages/NewsReaderPage";
 
 export default function App() {
   return (
@@ -49,6 +50,7 @@ export default function App() {
           <Route path="/shadowing/:level/:articleId" element={<ShadowingPage />} />
           <Route path="/grammar/:level" element={<GrammarQuizPage />} />
           <Route path="/grammar-lessons/:level" element={<GrammarLessonPage />} />
+          <Route path="/news-reader/:level/:articleId" element={<NewsReaderPage />} />
           <Route path="/japan-travel" element={<JapanMapPage />} />
           <Route path="/japan-travel/:prefectureId" element={<PrefectureDetailPage />} />
           <Route path="/japan-travel/:prefectureId/spot/:spotIndex" element={<SpotDetailPage />} />

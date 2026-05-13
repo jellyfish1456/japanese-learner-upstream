@@ -15,6 +15,10 @@ export interface ShadowingArticle {
    *  NHK World Japan channel: @NHKWorldJapan
    *  To update: paste the YouTube URL and extract the v= parameter. */
   youtubeId?: string;
+  /** Publication date (YYYY-MM-DD) shown in news reader mode */
+  date?: string;
+  /** Emoji used as article thumbnail in news reader */
+  emoji?: string;
   segments: ShadowingSegment[];
 }
 
@@ -25,6 +29,8 @@ export const shadowingArticles: ShadowingArticle[] = [
     level: "N5",
     title: "まいにちのせいかつ",
     titleZH: "每天的生活",
+    date: "2026-05-01",
+    emoji: "🌅",
     // NHK World Japan "Survival Japanese" — update with actual NHK video URL
     // 例: youtubeId: "VIDEO_ID_HERE"
     segments: [
@@ -42,6 +48,8 @@ export const shadowingArticles: ShadowingArticle[] = [
     level: "N5",
     title: "わたしのかぞく",
     titleZH: "我的家人",
+    date: "2026-05-03",
+    emoji: "👨‍👩‍👧‍👦",
     segments: [
       { text: "私の家族は五人です。", zh: "我的家人共五人。" },
       { text: "父と母と兄と妹がいます。", zh: "有爸爸、媽媽、哥哥和妹妹。" },
@@ -56,6 +64,8 @@ export const shadowingArticles: ShadowingArticle[] = [
     level: "N5",
     title: "すきなたべもの",
     titleZH: "喜歡的食物",
+    date: "2026-05-06",
+    emoji: "🍣",
     segments: [
       { text: "私はすしが大好きです。", zh: "我非常喜歡壽司。" },
       { text: "毎週日曜日にすし屋に行きます。", zh: "每個星期天去壽司店。" },
@@ -71,6 +81,8 @@ export const shadowingArticles: ShadowingArticle[] = [
     level: "N4",
     title: "旅行のけいかく",
     titleZH: "旅行計畫",
+    date: "2026-05-04",
+    emoji: "🗺️",
     segments: [
       { text: "来月、友達と京都に旅行する予定です。", zh: "下個月計畫和朋友去京都旅行。" },
       { text: "京都には有名な神社やお寺がたくさんあります。", zh: "京都有許多著名的神社和寺廟。" },
@@ -85,6 +97,8 @@ export const shadowingArticles: ShadowingArticle[] = [
     level: "N4",
     title: "しごととやすみ",
     titleZH: "工作與休假",
+    date: "2026-05-07",
+    emoji: "💼",
     segments: [
       { text: "私は週五日、会社に勤めています。", zh: "我一週工作五天。" },
       { text: "仕事は朝九時から夜六時までです。", zh: "工作從早上九點到晚上六點。" },
@@ -99,6 +113,8 @@ export const shadowingArticles: ShadowingArticle[] = [
     level: "N4",
     title: "けんこうのために",
     titleZH: "為了健康",
+    date: "2026-05-10",
+    emoji: "🏃",
     segments: [
       { text: "体の健康を保つために毎日運動しています。", zh: "為了保持身體健康，每天運動。" },
       { text: "朝は三十分ジョギングするようになりました。", zh: "早上開始慢跑三十分鐘了。" },
@@ -115,6 +131,8 @@ export const shadowingArticles: ShadowingArticle[] = [
     level: "N3",
     title: "都市と田舎のちがい",
     titleZH: "城市與鄉村的差異",
+    date: "2026-05-05",
+    emoji: "🏙️",
     segments: [
       { text: "日本では都市部と地方では生活スタイルがかなり異なります。", zh: "在日本，都市地區和地方的生活方式相當不同。" },
       { text: "東京などの大都市では交通が発達していて便利な反面、とても混雑しています。", zh: "東京等大城市交通發達很方便，但另一方面也非常擁擠。" },
@@ -128,6 +146,8 @@ export const shadowingArticles: ShadowingArticle[] = [
     level: "N3",
     title: "かんきょう問題について",
     titleZH: "關於環境問題",
+    date: "2026-05-08",
+    emoji: "🌍",
     segments: [
       { text: "地球温暖化は現在、世界中で深刻な問題となっています。", zh: "地球暖化目前已成為全球嚴重的問題。" },
       { text: "気温の上昇により、異常気象や海面上昇が起きています。", zh: "由於氣溫上升，正在發生異常氣候和海平面上升。" },
@@ -142,6 +162,8 @@ export const shadowingArticles: ShadowingArticle[] = [
     level: "N3",
     title: "SNSと人間関係",
     titleZH: "社群媒體與人際關係",
+    date: "2026-05-12",
+    emoji: "📱",
     segments: [
       { text: "スマートフォンの普及により、ソーシャルメディアが生活に深く根づいています。", zh: "智慧型手機普及，社群媒體已深入我們的生活。" },
       { text: "友人や家族と離れていても、すぐに連絡が取れるのは大きなメリットです。", zh: "即使與朋友家人相距遙遠，也能立即聯絡，這是一大優點。" },
