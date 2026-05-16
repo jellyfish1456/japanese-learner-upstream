@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getArticlesByLevel, isNewArticle } from "../data/shadowing";
 import type { ShadowingArticle } from "../data/shadowing";
@@ -5,6 +6,8 @@ import type { ShadowingArticle } from "../data/shadowing";
 export default function ShadowingListPage() {
   const { level } = useParams<{ level: string }>();
   const navigate = useNavigate();
+
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" }); }, [level]);
   const lvl = (level?.toUpperCase() ?? "N5") as "N5" | "N4" | "N3";
   const articles = getArticlesByLevel(lvl);
 
