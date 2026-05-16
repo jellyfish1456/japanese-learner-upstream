@@ -72,10 +72,13 @@ Each article MUST follow this exact JSON structure:
   "titleZH": "(Traditional Chinese title)",
   "date": "${today}",
   "emoji": "(single relevant emoji)",
+  "sourceUrl": "(NHK News Easy article URL if the topic is based on a real recent news story, otherwise omit this field)",
   "segments": [
     { "text": "(Japanese sentence)", "zh": "(Traditional Chinese translation)" }
   ]
 }
+
+If you know a real NHK News Easy article URL for the topic (format: https://news.web.nhk/news/easy/k{id}/k{id}.html), include it as "sourceUrl". Otherwise omit the field entirely.
 
 Rules:
 - Use Traditional Chinese (繁體中文) for all translations

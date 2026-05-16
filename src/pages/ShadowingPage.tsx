@@ -446,14 +446,14 @@ export default function ShadowingPage() {
             {lvl}
           </span>
           <span className="text-xs text-gray-400 dark:text-gray-500">跟讀練習</span>
-          {!isYouTubeMode && (
+          {!isYouTubeMode && article && (
             <a
-              href="https://news.web.nhk/news/easy/"
+              href={article.sourceUrl ?? "https://news.web.nhk/news/easy/"}
               target="_blank"
               rel="noopener noreferrer"
               className="ml-auto text-xs text-blue-500 hover:underline"
             >
-              NHK News Easy ↗
+              {article.sourceUrl ? "📎 原文 ↗" : "NHK News Easy ↗"}
             </a>
           )}
         </div>

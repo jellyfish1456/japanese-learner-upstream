@@ -19,6 +19,8 @@ export interface ShadowingArticle {
   date?: string;
   /** Emoji used as article thumbnail in news reader */
   emoji?: string;
+  /** Original source URL (e.g. NHK News Easy article link) */
+  sourceUrl?: string;
   segments: ShadowingSegment[];
 }
 
