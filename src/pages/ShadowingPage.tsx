@@ -455,7 +455,8 @@ export default function ShadowingPage() {
         </p>
       </div>
 
-      {/* YouTube video section */}
+      {/* YouTube video section — only show for YouTube mode or when a video is active */}
+      {(isYouTubeMode || ytId) && (
       <div className="mb-5">
         {ytId ? (
           <div>
@@ -627,6 +628,7 @@ export default function ShadowingPage() {
           </div>
         )}
       </div>
+      )}
 
       {/* Transcript / captions / STT paragraph */}
       {(displaySegments.length > 0 || sttText.length > 0) && (

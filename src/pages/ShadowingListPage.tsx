@@ -22,7 +22,18 @@ export default function ShadowingListPage() {
         </span>
         <div>
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50">跟讀練習</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400">跟著文章逐句朗讀，加強口說能力</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            跟著文章逐句朗讀，加強口說能力
+            {" · "}
+            <a
+              href="https://www3.nhk.or.jp/news/easy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:underline"
+            >
+              NHK News Easy ↗
+            </a>
+          </p>
         </div>
       </div>
 

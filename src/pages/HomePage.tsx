@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDatasetMetas, useDatasets } from "../hooks/useDatasets";
 import { useDialogueDatasets } from "../hooks/useDialogues";
+import { getArticlesByLevel } from "../data/shadowing";
 import DatasetCard from "../components/DatasetCard";
 import FilterBar from "../components/FilterBar";
 import { loadReviewList } from "../lib/storage";
@@ -177,6 +178,7 @@ export default function HomePage() {
                   N3: { bg: "bg-purple-500 hover:bg-purple-600", icon: "🔊" },
                 };
                 const s = shadowColors[lvl];
+                const count = getArticlesByLevel(lvl).length;
                 return (
                   <button
                     key={lvl}
@@ -185,7 +187,7 @@ export default function HomePage() {
                   >
                     <div className="text-3xl mb-2">{s.icon}</div>
                     <div className="text-lg font-bold">{lvl}</div>
-                    <div className="text-xs opacity-80 mt-0.5">3 篇文章</div>
+                    <div className="text-xs opacity-80 mt-0.5">{count} 篇文章</div>
                   </button>
                 );
               })}
