@@ -22,7 +22,14 @@ export interface ShadowingArticle {
   segments: ShadowingSegment[];
 }
 
-export const shadowingArticles: ShadowingArticle[] = [
+// Auto-generated news articles (updated by GitHub Actions every 2 days)
+const _newsModules = import.meta.glob<ShadowingArticle[]>(
+  "./shadowing-news.json",
+  { eager: true, import: "default" }
+);
+const _newsArticles: ShadowingArticle[] = Object.values(_newsModules)[0] ?? [];
+
+const _staticArticles: ShadowingArticle[] = [
   // ─── N5 ───────────────────────────────────────────────────────────────────
   {
     id: "n5-1",
@@ -584,6 +591,23 @@ export const shadowingArticles: ShadowingArticle[] = [
   },
 ];
 
+// Combined array (static + auto-generated news), newest first within each batch
+export const shadowingArticles: ShadowingArticle[] = [
+  ..._newsArticles,
+  ..._staticArticles,
+];
+
+/** Returns articles for a given level, sorted newest-first. */
 export function getArticlesByLevel(level: "N5" | "N4" | "N3"): ShadowingArticle[] {
-  return shadowingArticles.filter((a) => a.level === level);
+  return shadowingArticles
+    .filter((a) => a.level === level)
+    .sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));
+}
+
+/** Returns true if the article was published within the last `days` days. */
+export function isNewArticle(article: ShadowingArticle, days = 4): boolean {
+  if (!article.date) return false;
+  const pub = new Date(article.date).getTime();
+  const now = Date.now();
+  return now - pub <= days * 24 * 60 * 60 * 1000;
 }

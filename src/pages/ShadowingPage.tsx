@@ -192,6 +192,9 @@ export default function ShadowingPage() {
     setSttActive(false);
   }, []);
 
+  // Scroll to top when a new article is opened
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" }); }, [articleId]);
+
   // Cleanup STT on unmount
   useEffect(() => () => { sttRef.current?.stop(); }, []);
 

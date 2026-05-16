@@ -49,6 +49,9 @@ export default function NewsReaderPage() {
     }
   }, [activeIdx]);
 
+  // Scroll to top when article changes
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" }); }, [articleId]);
+
   // Stop TTS on unmount
   useEffect(() => {
     return () => {
