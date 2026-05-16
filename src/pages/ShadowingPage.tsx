@@ -446,6 +446,16 @@ export default function ShadowingPage() {
             {lvl}
           </span>
           <span className="text-xs text-gray-400 dark:text-gray-500">跟讀練習</span>
+          {!isYouTubeMode && (
+            <a
+              href="https://www3.nhk.or.jp/news/easy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-auto text-xs text-blue-500 hover:underline"
+            >
+              NHK News Easy ↗
+            </a>
+          )}
         </div>
         <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50">
           {isYouTubeMode ? "YouTube 自由跟讀" : article.titleZH}

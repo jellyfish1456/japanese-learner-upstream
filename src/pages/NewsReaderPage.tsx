@@ -187,11 +187,22 @@ export default function NewsReaderPage() {
         </div>
 
         <div className="p-4">
-          <div className="flex items-center gap-2 mb-2">
+          <div className="flex items-center gap-2 mb-2 flex-wrap">
             <span className={`${badgeColor} text-white text-xs font-bold px-2 py-0.5 rounded-md`}>{lvl}</span>
             {article.date && (
               <span className="text-xs text-gray-400 dark:text-gray-500">{article.date}</span>
             )}
+            <a
+              href="https://www3.nhk.or.jp/news/easy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-auto text-xs text-blue-500 hover:underline flex items-center gap-0.5"
+            >
+              NHK News Easy
+              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5-6h6m0 0v6m0-6L9.75 14.25" />
+              </svg>
+            </a>
           </div>
           <h1 className="text-lg font-bold text-gray-900 dark:text-gray-50 leading-tight mb-1">
             {showFurigana ? <RubyTextAuto text={article.title} /> : article.title}
