@@ -193,7 +193,7 @@ export default function NewsReaderPage() {
               <span className="text-xs text-gray-400 dark:text-gray-500">{article.date}</span>
             )}
             <a
-              href="https://www3.nhk.or.jp/news/easy/"
+              href="https://news.web.nhk/news/easy/"
               target="_blank"
               rel="noopener noreferrer"
               className="ml-auto text-xs text-blue-500 hover:underline flex items-center gap-0.5"

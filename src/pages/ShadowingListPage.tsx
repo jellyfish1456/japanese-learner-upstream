@@ -26,7 +26,7 @@ export default function ShadowingListPage() {
             跟著文章逐句朗讀，加強口說能力
             {" · "}
             <a
-              href="https://www3.nhk.or.jp/news/easy/"
+              href="https://news.web.nhk/news/easy/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-500 hover:underline"
