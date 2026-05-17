@@ -205,6 +205,47 @@ if (newArticles.length === 0) {
   process.exit(0);
 }
 
+// ── Backfill breakdowns for old articles missing them ────────────────────────
+const needsBackfill = existing.filter((a) => a.segments?.length && (!a.breakdown || a.breakdown.length === 0));
+if (needsBackfill.length > 0) {
+  console.log(`\nBackfilling breakdown for ${needsBackfill.length} existing articles...`);
+  for (const art of needsBackfill) {
+    const segList = art.segments.map((s, i) => `Sentence ${i + 1}: ${s.text}`).join("\n");
+    const bkPrompt = `
+You are a Japanese language teacher. Break down each sentence into grammatical phrases for learners.
+
+Article title: ${art.title}
+Level: ${art.level}
+
+${segList}
+
+For EACH sentence, return an array of phrase objects:
+{ "jp": "(phrase)", "kana": "(hiragana reading)", "zh": "(Traditional Chinese translation)", "note": "(grammar note in Traditional Chinese, under 20 chars)" }
+
+Split each sentence into 3-7 natural grammatical chunks (particles stay with their word).
+
+Return ONLY a valid JSON array of arrays (one inner array per sentence). No markdown, no explanation.
+`.trim();
+
+    try {
+      const bkResp = await client.messages.create({
+        model: "claude-haiku-4-5",
+        max_tokens: 8192,
+        messages: [{ role: "user", content: bkPrompt }],
+      });
+      const bkText = bkResp.content[0].type === "text" ? bkResp.content[0].text : "";
+      const bkCleaned = bkText.replace(/^```(?:json)?\s*/m, "").replace(/\s*```$/m, "").trim();
+      const breakdown = JSON.parse(bkCleaned);
+      if (Array.isArray(breakdown) && breakdown.length > 0) {
+        art.breakdown = breakdown;
+        console.log(`  ✓ ${art.id}: ${breakdown.length} sentences`);
+      }
+    } catch (e) {
+      console.warn(`  ✗ ${art.id}: ${e.message}`);
+    }
+  }
+}
+
 // ── Prepend new articles ─────────────────────────────────────────────────────
 const updated = [...newArticles, ...existing];
 writeFileSync(NEWS_FILE, JSON.stringify(updated, null, 2) + "\n", "utf-8");
