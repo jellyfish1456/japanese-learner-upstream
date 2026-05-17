@@ -147,8 +147,13 @@ Breakdown rules:
 - Split each sentence into natural grammatical chunks (particles stay attached to their word)
 - "kana" must be the full hiragana reading of the phrase
 - "zh" is the Traditional Chinese translation of just that phrase
-- "note" is a short grammar/usage explanation in Traditional Chinese (e.g. 「は」表示主題, 動詞ます形過去式, etc.)
-- Keep notes concise (under 20 characters if possible)
+- "note" is a DETAILED grammar/usage explanation in Traditional Chinese. Include:
+  - For verbs: state the dictionary form (原形), verb group (一段/五段/不規則), and what conjugation is used (e.g. 動詞「向かう」（五段）的ます形過去式「向かいました」)
+  - For particles: explain the specific usage (e.g. 「を」表示離開的起點，常搭配「出発する」)
+  - For adjectives: state whether い形容詞 or な形容詞, and what form is used
+  - For grammar patterns: briefly explain the pattern (e.g. 「〜ことができます」表示能力，意思是「能夠〜」)
+  - For nouns/proper nouns: provide context (e.g. 專有名詞，日本首相的名字)
+- Notes should be 15-40 characters, detailed enough to teach grammar
 
 Other rules:
 - The FIRST 1-2 sentences should use the actual excerpt text from NHK
@@ -206,7 +211,14 @@ if (newArticles.length === 0) {
 }
 
 // ── Backfill breakdowns for old articles missing them ────────────────────────
-const needsBackfill = existing.filter((a) => a.segments?.length && (!a.breakdown || a.breakdown.length === 0));
+// Backfill if missing breakdown OR if notes are too short (< 10 chars avg = weak notes)
+const needsBackfill = existing.filter((a) => {
+  if (!a.segments?.length) return false;
+  if (!a.breakdown || a.breakdown.length === 0) return true;
+  const allNotes = a.breakdown.flat().map((p) => p.note || "");
+  const avgLen = allNotes.reduce((s, n) => s + n.length, 0) / (allNotes.length || 1);
+  return avgLen < 10;
+});
 if (needsBackfill.length > 0) {
   console.log(`\nBackfilling breakdown for ${needsBackfill.length} existing articles...`);
   for (const art of needsBackfill) {
@@ -220,9 +232,17 @@ Level: ${art.level}
 ${segList}
 
 For EACH sentence, return an array of phrase objects:
-{ "jp": "(phrase)", "kana": "(hiragana reading)", "zh": "(Traditional Chinese translation)", "note": "(grammar note in Traditional Chinese, under 20 chars)" }
+{ "jp": "(phrase)", "kana": "(hiragana reading)", "zh": "(Traditional Chinese translation)", "note": "(detailed grammar note in Traditional Chinese)" }
 
 Split each sentence into 3-7 natural grammatical chunks (particles stay with their word).
+
+Note rules — be DETAILED and educational:
+- For verbs: state the dictionary form (原形), verb group (一段/五段/不規則), and conjugation used (e.g. 動詞「向かう」（五段）的ます形過去式)
+- For particles: explain the specific usage (e.g. 「を」表示離開的起點，常搭配「出発する」)
+- For adjectives: state い形/な形 and what form is used
+- For grammar patterns: explain the pattern (e.g. 「〜ことができます」表示能力)
+- For nouns/proper nouns: provide context if helpful
+- Notes should be 15-40 characters
 
 Return ONLY a valid JSON array of arrays (one inner array per sentence). No markdown, no explanation.
 `.trim();
