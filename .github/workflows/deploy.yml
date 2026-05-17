@@ -7,6 +7,10 @@ on:
   # Allow manual trigger
   workflow_dispatch:
 
+  # Triggered by refresh-articles workflow after new articles are pushed
+  repository_dispatch:
+    types: [refresh-deploy]
+
 permissions:
   contents: read
   pages: write
