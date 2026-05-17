@@ -145,6 +145,22 @@ data/
 - `VITE_GOOGLE_CLIENT_ID` → GitHub secret
 - Missing → SettingsPage shows setup guide
 
+### NHK News Article Auto-Refresh
+- **Workflow**: `.github/workflows/refresh-articles.yml`
+- **Schedule**: Every 2 days at 06:00 UTC (14:00 台灣時間), cron: `0 6 */2 * *`
+- **Script**: `scripts/refresh-articles.mjs`
+- **Data file**: `src/data/shadowing-news.json` (auto-generated, do NOT hand-edit)
+- **Flow**:
+  1. Fetches real NHK News Easy article URLs from sitemap (`https://news.web.nhk/news/easy/sitemap/sitemap.xml`)
+  2. Extracts title + description from each article's HTML meta tags
+  3. Sends real NHK titles/excerpts to Claude Haiku API to expand into learning articles with Traditional Chinese translations
+  4. Each article includes `sourceUrl` linking to the original NHK page
+  5. Commits updated `shadowing-news.json` + version bump in `SettingsPage.tsx`
+  6. Explicitly triggers `deploy.yml` (required because `GITHUB_TOKEN` commits don't auto-trigger other workflows)
+- **Secrets required**: `ANTHROPIC_API_KEY`
+- **Manual trigger**: GitHub Actions → Refresh News Articles → Run workflow (with optional `force` flag)
+- **Data merge**: `src/data/shadowing.ts` combines `shadowing-news.json` (dynamic) + static articles via `import.meta.glob`
+
 ---
 
 ## File Organization
