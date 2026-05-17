@@ -132,10 +132,25 @@ For EACH article, create a JSON object with this structure:
   "sourceUrl": "(the original NHK URL — copy exactly from above)",
   "segments": [
     { "text": "(Japanese sentence)", "zh": "(Traditional Chinese translation)" }
+  ],
+  "breakdown": [
+    [
+      { "jp": "(phrase)", "kana": "(hiragana reading)", "zh": "(Traditional Chinese)", "note": "(grammar note in Traditional Chinese)" }
+    ]
   ]
 }
 
-Rules:
+The "breakdown" field is an array of arrays — one inner array per sentence (matching segments order).
+Each inner array splits that sentence into meaningful grammatical phrases (3-7 phrases per sentence).
+
+Breakdown rules:
+- Split each sentence into natural grammatical chunks (particles stay attached to their word)
+- "kana" must be the full hiragana reading of the phrase
+- "zh" is the Traditional Chinese translation of just that phrase
+- "note" is a short grammar/usage explanation in Traditional Chinese (e.g. 「は」表示主題, 動詞ます形過去式, etc.)
+- Keep notes concise (under 20 characters if possible)
+
+Other rules:
 - The FIRST 1-2 sentences should use the actual excerpt text from NHK
 - Expand to 6-7 total sentences, maintaining NHK Easy's simple style
 - Use Traditional Chinese (繁體中文) for all translations
@@ -150,7 +165,7 @@ let articles;
 try {
   const response = await client.messages.create({
     model: "claude-haiku-4-5",
-    max_tokens: 8192,
+    max_tokens: 16384,
     messages: [{ role: "user", content: prompt }],
   });
 

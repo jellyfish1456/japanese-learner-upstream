@@ -5,6 +5,13 @@ export interface ShadowingSegment {
   end?: number;   // video end time (seconds)
 }
 
+export interface BreakdownPhrase {
+  jp: string;    // Japanese phrase
+  kana: string;  // Hiragana reading
+  zh: string;    // Traditional Chinese translation
+  note: string;  // Grammar / usage explanation
+}
+
 export interface ShadowingArticle {
   id: string;
   level: "N5" | "N4" | "N3";
@@ -22,6 +29,8 @@ export interface ShadowingArticle {
   /** Original source URL (e.g. NHK News Easy article link) */
   sourceUrl?: string;
   segments: ShadowingSegment[];
+  /** Per-sentence phrase breakdown for the 講解 panel */
+  breakdown?: BreakdownPhrase[][];
 }
 
 // Auto-generated news articles (updated by GitHub Actions every 2 days)

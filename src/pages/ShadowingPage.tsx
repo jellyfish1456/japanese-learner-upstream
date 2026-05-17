@@ -1,7 +1,7 @@
 import { useState, useEffect, useLayoutEffect, useRef, useCallback, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { shadowingArticles } from "../data/shadowing";
-import type { ShadowingSegment } from "../data/shadowing";
+import type { ShadowingSegment, BreakdownPhrase } from "../data/shadowing";
 import RubyText from "../components/RubyText";
 import RubyTextAuto from "../components/RubyTextAuto";
 import YouTubePlayer from "../components/YouTubePlayer";
@@ -152,6 +152,7 @@ export default function ShadowingPage() {
 
   // Display
   const [showZH, setShowZH] = useState(false);
+  const [showBreakdown, setShowBreakdown] = useState(false);
   const [repeatMode, setRepeatMode] = useState(false);
   const [autoNext, setAutoNext] = useState(true);
 
@@ -673,6 +674,64 @@ export default function ShadowingPage() {
             <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700 space-y-1">
               {article.segments.map((seg, idx) => (
                 <p key={idx} className="text-xs text-gray-500 dark:text-gray-400">{seg.zh}</p>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Breakdown panel */}
+      {!isYouTubeMode && article?.breakdown && article.breakdown.length > 0 && (
+        <div className="mb-5">
+          <button
+            onClick={() => setShowBreakdown(!showBreakdown)}
+            className="w-full flex items-center justify-between px-4 py-3 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 transition-colors hover:bg-gray-50 dark:hover:bg-gray-750"
+          >
+            <span className="flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
+              <span>📖</span> 跟讀文章講解
+            </span>
+            <svg
+              className={`w-4 h-4 text-gray-400 transition-transform ${showBreakdown ? "rotate-180" : ""}`}
+              fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </button>
+
+          {showBreakdown && (
+            <div className="mt-2 space-y-4">
+              {article.breakdown.map((phrases: BreakdownPhrase[], sIdx: number) => (
+                <div key={sIdx} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                  {/* Sentence header */}
+                  <div className="px-4 py-2.5 bg-gray-50 dark:bg-gray-750 border-b border-gray-200 dark:border-gray-700">
+                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">
+                      {article.segments[sIdx]?.text}
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                      {article.segments[sIdx]?.zh}
+                    </p>
+                  </div>
+                  {/* Breakdown table */}
+                  <div className="divide-y divide-gray-100 dark:divide-gray-700">
+                    <div className="grid grid-cols-[1fr_1fr_1fr_1.2fr] px-4 py-2 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                      <span>日文原文</span>
+                      <span>假名</span>
+                      <span>中文對應</span>
+                      <span>說明</span>
+                    </div>
+                    {phrases.map((p: BreakdownPhrase, pIdx: number) => (
+                      <div
+                        key={pIdx}
+                        className="grid grid-cols-[1fr_1fr_1fr_1.2fr] px-4 py-3 text-sm gap-x-2 items-start"
+                      >
+                        <span className="font-semibold text-gray-900 dark:text-gray-100">{p.jp}</span>
+                        <span className="text-gray-600 dark:text-gray-400">{p.kana}</span>
+                        <span className="text-gray-700 dark:text-gray-300">{p.zh}</span>
+                        <span className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">{p.note}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           )}
