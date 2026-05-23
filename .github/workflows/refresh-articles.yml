@@ -2,8 +2,8 @@ name: Refresh News Articles
 
 on:
   schedule:
-    # Every 2 days at 06:00 UTC (14:00 台灣時間)
-    - cron: "0 6 */2 * *"
+    # Every Monday at 06:00 UTC (14:00 台灣時間)
+    - cron: "0 6 * * 1"
   workflow_dispatch:
     inputs:
       force:
