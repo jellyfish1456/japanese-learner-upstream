@@ -147,7 +147,7 @@ data/
 
 ### NHK News Article Auto-Refresh
 - **Workflow**: `.github/workflows/refresh-articles.yml`
-- **Schedule**: Every 2 days at 06:00 UTC (14:00 台灣時間), cron: `0 6 */2 * *`
+- **Schedule**: Every Monday at 06:00 UTC (14:00 台灣時間), cron: `0 6 * * 1`
 - **Script**: `scripts/refresh-articles.mjs`
 - **Data file**: `src/data/shadowing-news.json` (auto-generated, do NOT hand-edit)
 - **Flow**:
@@ -176,6 +176,51 @@ src/
 
 ---
 
+## ⚠️ Past Mistakes — DO NOT REPEAT
+
+### 1. GITHUB_TOKEN commits don't trigger other workflows
+- **Problem**: `refresh-articles.yml` pushes a commit, but `deploy.yml` (triggered by `on: push`) never fires.
+- **Root cause**: GitHub security — commits made with `GITHUB_TOKEN` do NOT trigger other workflows.
+- **Solution**: Use `repository_dispatch` event. After push, call `curl` to send a dispatch to trigger deploy.
+- **Also**: `gh workflow run` fails with `GITHUB_TOKEN` permissions — use `curl` + GitHub API instead.
+
+### 2. Always add `scrollTo(top: 0)` on page components
+- **Problem**: Navigating to a new page keeps the previous scroll position.
+- **Fix**: Every page-level component that users navigate to must have:
+  ```ts
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" }); }, [routeParam]);
+  ```
+- **Affected files**: `ShadowingPage.tsx`, `ShadowingListPage.tsx`, `NewsReaderPage.tsx` — all fixed.
+- **Rule**: When creating ANY new page component, always include scroll-to-top.
+
+### 3. NHK article dates come from the article URL, not the run date
+- **Problem**: User expected 5/25 articles to show date "2026-05-25", but they showed "2026-05-22".
+- **Root cause**: The script extracts dates from the NHK article URL (`ne20260522...`), which is the NHK publish date, not the date the workflow ran.
+- **This is correct behavior** — do NOT "fix" this. NHK may not publish on weekends, so the latest article date can lag behind the current date.
+
+### 4. New features must generate data for ALL existing articles, not just new ones
+- **Problem**: Added `breakdown` field but only new articles got it. Old articles had no breakdown, so the button didn't appear.
+- **Fix**: Always add a backfill step when introducing new data fields. The `refresh-articles.mjs` script now backfills missing breakdowns on every run.
+
+### 5. Don't generate AI content when user asks for real content
+- **Problem**: User asked "拿 NHK 的文章當作材料" — I generated random AI articles instead of fetching real NHK content.
+- **Rule**: When user says to use content from a specific source, ALWAYS fetch from that source. Use AI only to expand/translate, never to fabricate the source material.
+
+### 6. NHK News Easy URL changed — use correct domain
+- **Old (wrong)**: `https://www3.nhk.or.jp/news/easy/` (301 redirects)
+- **Current (correct)**: `https://news.web.nhk/news/easy/`
+- **Rule**: Always verify URLs are current. If a redirect is detected, update all references.
+
+### 7. git push rejected after Actions auto-push
+- **Problem**: Remote has new commits from GitHub Actions, local push is rejected.
+- **Fix**: Always `git pull --rebase` before pushing when a workflow may have pushed since last pull.
+
+### 8. Deploy must be triggered after article refresh
+- **Problem**: Articles were generated and pushed but the website didn't update.
+- **Fix**: `refresh-articles.yml` now explicitly dispatches `deploy.yml` via `repository_dispatch` after pushing. Always verify the deployed site has the latest content, not just that the commit exists.
+
+---
+
 ## Communication Style
 - Reply in **English**, brief, minimal tokens
 - Only show modified code sections, not full files
@@ -183,4 +228,4 @@ src/
 
 ---
 
-**Last Updated**: 2026-05-01 | **Current Version**: CH20260501-6
+**Last Updated**: 2026-05-25
