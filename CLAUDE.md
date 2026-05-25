@@ -147,7 +147,9 @@ data/
 
 ### NHK News Article Auto-Refresh
 - **Workflow**: `.github/workflows/refresh-articles.yml`
-- **Schedule**: Every Monday at 06:00 UTC (14:00 台灣時間), cron: `0 6 * * 1`
+- **Schedule**: Weekly, Mon-Fri at 06:00 UTC (14:00 台灣時間), cron: `0 6 * * 1-5`
+  - Monday is the primary run; Tue-Fri are fallback retries if NHK had no new articles (holidays)
+  - Once articles are added for the week (`addedOn` field), subsequent runs skip automatically
 - **Script**: `scripts/refresh-articles.mjs`
 - **Data file**: `src/data/shadowing-news.json` (auto-generated, do NOT hand-edit)
 - **Flow**:
