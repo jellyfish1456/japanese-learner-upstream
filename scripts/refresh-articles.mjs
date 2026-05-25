@@ -27,9 +27,20 @@ const existingIds = new Set(existing.map((a) => a.id));
 const today = new Date().toISOString().split("T")[0];
 const dateTag = today.replace(/-/g, "");
 
-// Skip if articles with today's date already exist
-if (existing.some((a) => a.date === today)) {
-  console.log(`✓ Articles already generated for ${today}, skipping.`);
+// Skip if we already added articles this week (Mon-Sun).
+// Cron runs Mon-Fri, but we only want to add articles ONCE per week.
+// We track this by an "addedOn" field stamped on each article when generated.
+function getMonday(dateStr) {
+  const d = new Date(dateStr);
+  const day = d.getDay(); // 0=Sun, 1=Mon
+  const diff = day === 0 ? 6 : day - 1;
+  d.setDate(d.getDate() - diff);
+  return d.toISOString().split("T")[0];
+}
+const thisMonday = getMonday(today);
+const addedThisWeek = existing.some((a) => a.addedOn && a.addedOn >= thisMonday);
+if (addedThisWeek) {
+  console.log(`✓ Already added articles this week (week of ${thisMonday}), skipping.`);
   process.exit(0);
 }
 
@@ -52,7 +63,8 @@ const candidateUrls = newUrls.slice(0, 4);
 
 if (candidateUrls.length === 0) {
   console.log("No new NHK articles found in sitemap.");
-  process.exit(0);
+  // Exit code 2 = no new articles, workflow can retry next day
+  process.exit(2);
 }
 
 console.log(`Found ${candidateUrls.length} new NHK articles`);
@@ -202,6 +214,8 @@ const newArticles = articles.filter((a) => {
     console.warn(`Skipping duplicate id: ${a.id}`);
     return false;
   }
+  // Stamp when this article was added (for weekly dedup)
+  a.addedOn = today;
   return true;
 });
 

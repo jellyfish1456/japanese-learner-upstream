@@ -3,7 +3,8 @@ name: Refresh News Articles
 on:
   schedule:
     # Every Monday at 06:00 UTC (14:00 台灣時間)
-    - cron: "0 6 * * 1"
+    # Also Tue-Fri as fallback retry if Monday had no new NHK articles (holidays)
+    - cron: "0 6 * * 1-5"
   workflow_dispatch:
     inputs:
       force:
