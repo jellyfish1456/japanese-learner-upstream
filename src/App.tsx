@@ -25,6 +25,7 @@ import SengokuHeroPage from "./pages/SengokuHeroPage";
 import SengokuTimelinePage from "./pages/SengokuTimelinePage";
 import GrammarLessonPage from "./pages/GrammarLessonPage";
 import NewsReaderPage from "./pages/NewsReaderPage";
+import DailyPracticePage from "./pages/DailyPracticePage";
 
 export default function App() {
   return (
@@ -48,6 +49,7 @@ export default function App() {
           <Route path="/shadowing/youtube" element={<ShadowingPage />} />
           <Route path="/shadowing/:level" element={<ShadowingListPage />} />
           <Route path="/shadowing/:level/:articleId" element={<ShadowingPage />} />
+          <Route path="/daily-practice" element={<DailyPracticePage />} />
           <Route path="/grammar/:level" element={<GrammarQuizPage />} />
           <Route path="/grammar-lessons/:level" element={<GrammarLessonPage />} />
           <Route path="/news-reader/:level/:articleId" element={<NewsReaderPage />} />
