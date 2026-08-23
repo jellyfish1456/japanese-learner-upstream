@@ -91,6 +91,27 @@ export default function HomePage() {
         </button>
       </div>
 
+      {/* 短語搜尋 */}
+      <div className="mt-8">
+        <div className="mb-4">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1">短語搜尋</h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400">搜尋日文短語，找出跟讀文章和對話中的用法</p>
+        </div>
+        <button
+          onClick={() => navigate("/phrase-search")}
+          className="w-full bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white rounded-2xl p-5 flex items-center gap-4 transition-colors tap-active shadow-sm"
+        >
+          <div className="text-4xl">🔍</div>
+          <div className="text-left">
+            <div className="text-lg font-bold">搜尋日文短語</div>
+            <div className="text-xs opacity-80 mt-0.5">從跟讀文章、對話中找到真實用法</div>
+          </div>
+          <svg className="w-5 h-5 ml-auto opacity-60" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </button>
+      </div>
+
       {/* 再複習詞彙 */}
       {vocabReviews.length > 0 && (
         <div className="mt-8">
