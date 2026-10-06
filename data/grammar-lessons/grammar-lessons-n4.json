@@ -32,21 +32,60 @@
     "grammar": "間に（あいだに）",
     "romaji": "aida ni",
     "meaning": "while; during~ something happened",
-    "examples": []
+    "examples": [
+      {
+        "ja": "母が寝ている間に、ケーキを作りました。",
+        "en": "I made a cake while my mother was sleeping."
+      },
+      {
+        "ja": "旅行の間に、たくさん写真を撮りました。",
+        "en": "I took many photos during the trip."
+      },
+      {
+        "ja": "授業の間に、地震がありました。",
+        "en": "There was an earthquake during class."
+      }
+    ]
   },
   {
     "id": "n4-003",
     "grammar": "あまり～ない",
     "romaji": "amari~nai",
     "meaning": "not very, not much ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "この映画はあまり面白くない。",
+        "en": "This movie isn't very interesting."
+      },
+      {
+        "ja": "最近あまり運動していません。",
+        "en": "I haven't been exercising much lately."
+      },
+      {
+        "ja": "あまり心配しないでください。",
+        "en": "Please don't worry too much."
+      }
+    ]
   },
   {
     "id": "n4-004",
     "grammar": "後で（あとで）",
     "romaji": "ato de",
     "meaning": "after~; later",
-    "examples": []
+    "examples": [
+      {
+        "ja": "仕事が終わった後で、飲みに行きましょう。",
+        "en": "Let's go drinking after work."
+      },
+      {
+        "ja": "食事の後で散歩をします。",
+        "en": "I take a walk after meals."
+      },
+      {
+        "ja": "後で電話してもいいですか。",
+        "en": "May I call you later?"
+      }
+    ]
   },
   {
     "id": "n4-005",
@@ -81,91 +120,260 @@
     "grammar": "場合は（ばあいは）",
     "romaji": "baai wa",
     "meaning": "in the event of; in the case that ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "雨の場合は、試合は中止です。",
+        "en": "In the event of rain, the game is cancelled."
+      },
+      {
+        "ja": "地震の場合は、机の下に隠れてください。",
+        "en": "In case of an earthquake, hide under a desk."
+      },
+      {
+        "ja": "遅れる場合は、連絡してください。",
+        "en": "In case you're late, please contact us."
+      }
+    ]
   },
   {
     "id": "n4-007",
     "grammar": "ばかり",
     "romaji": "bakari",
     "meaning": "only; nothing but ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "彼はゲームばかりしている。",
+        "en": "He does nothing but play games."
+      },
+      {
+        "ja": "文句ばかり言わないで。",
+        "en": "Stop doing nothing but complaining."
+      },
+      {
+        "ja": "甘いものばかり食べている。",
+        "en": "I eat nothing but sweets."
+      }
+    ]
   },
   {
     "id": "n4-008",
     "grammar": "だけで",
     "romaji": "dake de",
     "meaning": "just by; just by doing",
-    "examples": []
+    "examples": [
+      {
+        "ja": "見るだけで楽しい。",
+        "en": "It's fun just by looking."
+      },
+      {
+        "ja": "話を聞くだけで疲れた。",
+        "en": "I got tired just from listening to the story."
+      },
+      {
+        "ja": "名前を書くだけでいいですか。",
+        "en": "Is it enough just to write my name?"
+      }
+    ]
   },
   {
     "id": "n4-009",
     "grammar": "出す（だす）",
     "romaji": "dasu",
     "meaning": "to begin to; to start to",
-    "examples": []
+    "examples": [
+      {
+        "ja": "急に雨が降り出した。",
+        "en": "It suddenly started to rain."
+      },
+      {
+        "ja": "子供が泣き出した。",
+        "en": "The child started to cry."
+      },
+      {
+        "ja": "彼は突然走り出した。",
+        "en": "He suddenly started running."
+      }
+    ]
   },
   {
     "id": "n4-010",
     "grammar": "でございます",
     "romaji": "de gozaimasu",
     "meaning": "to be (honorific)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "こちらは田中でございます。",
+        "en": "This is Tanaka (speaking). (honorific)"
+      },
+      {
+        "ja": "お手洗いはあちらでございます。",
+        "en": "The restroom is over there. (honorific)"
+      },
+      {
+        "ja": "ありがとうございます。",
+        "en": "Thank you very much. (honorific)"
+      }
+    ]
   },
   {
     "id": "n4-011",
     "grammar": "でも",
     "romaji": "demo",
     "meaning": "... or something; how about~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "お茶でも飲みませんか。",
+        "en": "How about having some tea or something?"
+      },
+      {
+        "ja": "映画でも見に行こうか。",
+        "en": "Shall we go see a movie or something?"
+      },
+      {
+        "ja": "散歩でもしましょうか。",
+        "en": "Shall we take a walk or something?"
+      }
+    ]
   },
   {
     "id": "n4-012",
     "grammar": "ではないか",
     "romaji": "dewa nai ka",
     "meaning": "right?; isn't it?",
-    "examples": []
+    "examples": [
+      {
+        "ja": "これ、おいしいではないか。",
+        "en": "This is delicious, isn't it?"
+      },
+      {
+        "ja": "もう終わったのではないか。",
+        "en": "Isn't it already finished?"
+      },
+      {
+        "ja": "彼も知っているのではないですか。",
+        "en": "Doesn't he know about it too?"
+      }
+    ]
   },
   {
     "id": "n4-013",
     "grammar": "が必要（がひつよう）",
     "romaji": "ga hitsuyou",
     "meaning": "need; necessary",
-    "examples": []
+    "examples": [
+      {
+        "ja": "この仕事にはパソコンが必要です。",
+        "en": "A computer is needed for this job."
+      },
+      {
+        "ja": "日本語の勉強には辞書が必要だ。",
+        "en": "A dictionary is needed for studying Japanese."
+      },
+      {
+        "ja": "旅行にはパスポートが必要です。",
+        "en": "A passport is needed for travel."
+      }
+    ]
   },
   {
     "id": "n4-014",
     "grammar": "がする",
     "romaji": "ga suru",
     "meaning": "to smell; hear; taste",
-    "examples": []
+    "examples": [
+      {
+        "ja": "いい匂いがする。",
+        "en": "It smells good."
+      },
+      {
+        "ja": "外から変な音がする。",
+        "en": "I hear a strange sound from outside."
+      },
+      {
+        "ja": "このスープは少し変な味がする。",
+        "en": "This soup tastes a little strange."
+      }
+    ]
   },
   {
     "id": "n4-015",
     "grammar": "がり",
     "romaji": "gari",
     "meaning": "someone tends to; has a tendency to ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "彼女は寒がりだ。",
+        "en": "She tends to feel cold easily."
+      },
+      {
+        "ja": "うちの猫は怖がりです。",
+        "en": "Our cat is easily frightened."
+      },
+      {
+        "ja": "弟は暑がりで、いつもクーラーをつける。",
+        "en": "My brother tends to feel hot and always turns on the AC."
+      }
+    ]
   },
   {
     "id": "n4-016",
     "grammar": "がる / がっている",
     "romaji": "garu / gatteiru",
     "meaning": "to show signs of; to appear; to feel ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "彼女は寂しがっている。",
+        "en": "She seems to be feeling lonely."
+      },
+      {
+        "ja": "子供が新しいおもちゃを欲しがっている。",
+        "en": "The child seems to want a new toy."
+      },
+      {
+        "ja": "犬が外に行きたがっている。",
+        "en": "The dog seems to want to go outside."
+      }
+    ]
   },
   {
     "id": "n4-017",
     "grammar": "ございます",
     "romaji": "gozaimasu",
     "meaning": "to be, to exist (polite form)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "お部屋にご案内いたします。",
+        "en": "I will show you to your room. (polite)"
+      },
+      {
+        "ja": "只今お席のご用意がございます。",
+        "en": "We have a seat available now. (polite)"
+      },
+      {
+        "ja": "何かご質問はございますか。",
+        "en": "Do you have any questions? (polite)"
+      }
+    ]
   },
   {
     "id": "n4-018",
     "grammar": "始める（はじめる）",
     "romaji": "hajimeru",
     "meaning": "to start; to begin to ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "雨が降り始めた。",
+        "en": "It started to rain."
+      },
+      {
+        "ja": "日本語を勉強し始めました。",
+        "en": "I started studying Japanese."
+      },
+      {
+        "ja": "桜が咲き始めています。",
+        "en": "The cherry blossoms are starting to bloom."
+      }
+    ]
   },
   {
     "id": "n4-019",
@@ -200,63 +408,180 @@
     "grammar": "はずがない",
     "romaji": "hazu ga nai",
     "meaning": "cannot be (impossible)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "彼がそんなことをするはずがない。",
+        "en": "There's no way he would do such a thing."
+      },
+      {
+        "ja": "この時間に開いているはずがない。",
+        "en": "It can't possibly be open at this time."
+      },
+      {
+        "ja": "彼女が知らないはずがない。",
+        "en": "It's impossible that she doesn't know."
+      }
+    ]
   },
   {
     "id": "n4-021",
     "grammar": "必要がある（ひつようがある）",
     "romaji": "hitsuyou ga aru",
     "meaning": "need to; it is necessary to",
-    "examples": []
+    "examples": [
+      {
+        "ja": "もっと練習する必要がある。",
+        "en": "There is a need to practice more."
+      },
+      {
+        "ja": "医者に行く必要があります。",
+        "en": "You need to go to the doctor."
+      },
+      {
+        "ja": "説明する必要がありますか。",
+        "en": "Is it necessary to explain?"
+      }
+    ]
   },
   {
     "id": "n4-022",
     "grammar": "意向形（いこうけい）",
     "romaji": "ikou kei",
     "meaning": "volitional form; let's do ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "映画を見よう。",
+        "en": "Let's watch a movie."
+      },
+      {
+        "ja": "明日早く起きよう。",
+        "en": "Let's wake up early tomorrow."
+      },
+      {
+        "ja": "一緒に頑張ろう。",
+        "en": "Let's do our best together."
+      }
+    ]
   },
   {
     "id": "n4-023",
     "grammar": "いらっしゃる",
     "romaji": "irassharu",
     "meaning": "to be; to come; to go (polite)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "先生はいらっしゃいますか。",
+        "en": "Is the teacher here? (polite)"
+      },
+      {
+        "ja": "社長はもうお帰りになりましたか。いいえ、まだいらっしゃいます。",
+        "en": "Has the president left? No, he is still here. (polite)"
+      },
+      {
+        "ja": "どちらからいらっしゃいましたか。",
+        "en": "Where did you come from? (polite)"
+      }
+    ]
   },
   {
     "id": "n4-024",
     "grammar": "いたします",
     "romaji": "itashimasu",
     "meaning": "to do (polite form of する)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "私がご説明いたします。",
+        "en": "I will explain. (humble)"
+      },
+      {
+        "ja": "すぐにお届けいたします。",
+        "en": "I will deliver it right away. (humble)"
+      },
+      {
+        "ja": "後ほどお電話いたします。",
+        "en": "I will call you later. (humble)"
+      }
+    ]
   },
   {
     "id": "n4-025",
     "grammar": "じゃないか",
     "romaji": "janai ka",
     "meaning": "right? isn't it? let's~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "これ、美味しいじゃないか！",
+        "en": "This is delicious, isn't it!"
+      },
+      {
+        "ja": "一緒に行こうじゃないか。",
+        "en": "Let's go together!"
+      },
+      {
+        "ja": "やればできるじゃないか。",
+        "en": "See, you can do it if you try!"
+      }
+    ]
   },
   {
     "id": "n4-026",
     "grammar": "かどうか",
     "romaji": "ka dou ka",
     "meaning": "whether or not ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "彼が来るかどうか分かりません。",
+        "en": "I don't know whether he will come or not."
+      },
+      {
+        "ja": "正しいかどうか確認してください。",
+        "en": "Please check whether it's correct or not."
+      },
+      {
+        "ja": "間に合うかどうか心配です。",
+        "en": "I'm worried whether I'll make it on time."
+      }
+    ]
   },
   {
     "id": "n4-027",
     "grammar": "かしら",
     "romaji": "ka shira",
     "meaning": "I wonder (feminine)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "明日は雨かしら。",
+        "en": "I wonder if it will rain tomorrow."
+      },
+      {
+        "ja": "彼は元気かしら。",
+        "en": "I wonder if he's doing well."
+      },
+      {
+        "ja": "間に合うかしら。",
+        "en": "I wonder if I'll make it in time."
+      }
+    ]
   },
   {
     "id": "n4-028",
     "grammar": "かい",
     "romaji": "kai",
     "meaning": "turns a sentence into a yes/no question",
-    "examples": []
+    "examples": [
+      {
+        "ja": "明日も来るかい？",
+        "en": "Are you coming tomorrow too?"
+      },
+      {
+        "ja": "大丈夫かい？",
+        "en": "Are you OK?"
+      },
+      {
+        "ja": "この本を読んだかい？",
+        "en": "Have you read this book?"
+      }
+    ]
   },
   {
     "id": "n4-029",
@@ -291,42 +616,120 @@
     "grammar": "かな",
     "romaji": "kana",
     "meaning": "I wonder; should I?",
-    "examples": []
+    "examples": [
+      {
+        "ja": "明日は晴れるかな。",
+        "en": "I wonder if it'll be sunny tomorrow."
+      },
+      {
+        "ja": "このケーキ、食べていいかな。",
+        "en": "I wonder if I can eat this cake."
+      },
+      {
+        "ja": "彼女は来るかな。",
+        "en": "I wonder if she'll come."
+      }
+    ]
   },
   {
     "id": "n4-031",
     "grammar": "から作る（からつくる）",
     "romaji": "kara tsukuru",
     "meaning": "made from; made with",
-    "examples": []
+    "examples": [
+      {
+        "ja": "ワインはぶどうから作られます。",
+        "en": "Wine is made from grapes."
+      },
+      {
+        "ja": "豆腐は大豆から作られています。",
+        "en": "Tofu is made from soybeans."
+      },
+      {
+        "ja": "この机は木から作りました。",
+        "en": "This desk was made from wood."
+      }
+    ]
   },
   {
     "id": "n4-032",
     "grammar": "きっと",
     "romaji": "kitto",
     "meaning": "surely; undoubtedly; most likely",
-    "examples": []
+    "examples": [
+      {
+        "ja": "彼はきっと成功するだろう。",
+        "en": "He will surely succeed."
+      },
+      {
+        "ja": "明日はきっと晴れますよ。",
+        "en": "It will surely be sunny tomorrow."
+      },
+      {
+        "ja": "きっと大丈夫です。",
+        "en": "I'm sure it'll be fine."
+      }
+    ]
   },
   {
     "id": "n4-033",
     "grammar": "頃（ころ / ごろ）",
     "romaji": "koro / goro",
     "meaning": "around; about; when",
-    "examples": []
+    "examples": [
+      {
+        "ja": "三時ごろに会いましょう。",
+        "en": "Let's meet around 3 o'clock."
+      },
+      {
+        "ja": "学生のころ、毎日サッカーをしていた。",
+        "en": "When I was a student, I played soccer every day."
+      },
+      {
+        "ja": "子供のころの夢は何でしたか。",
+        "en": "What was your dream when you were a child?"
+      }
+    ]
   },
   {
     "id": "n4-034",
     "grammar": "こと",
     "romaji": "koto",
     "meaning": "Verb nominalizer",
-    "examples": []
+    "examples": [
+      {
+        "ja": "早く寝ることは大切です。",
+        "en": "Going to bed early is important."
+      },
+      {
+        "ja": "毎日運動することが健康にいい。",
+        "en": "Exercising every day is good for your health."
+      },
+      {
+        "ja": "約束を守ることは大事だ。",
+        "en": "Keeping promises is important."
+      }
+    ]
   },
   {
     "id": "n4-035",
     "grammar": "ことがある",
     "romaji": "koto ga aru",
     "meaning": "there are times when",
-    "examples": []
+    "examples": [
+      {
+        "ja": "日本では地震があることがあります。",
+        "en": "There are times when earthquakes happen in Japan."
+      },
+      {
+        "ja": "朝ご飯を食べないことがある。",
+        "en": "There are times when I skip breakfast."
+      },
+      {
+        "ja": "電車が遅れることがあります。",
+        "en": "Trains are sometimes delayed."
+      }
+    ]
   },
   {
     "id": "n4-036",
@@ -361,91 +764,260 @@
     "grammar": "ことになる",
     "romaji": "koto ni naru",
     "meaning": "it has been decided that..",
-    "examples": []
+    "examples": [
+      {
+        "ja": "来月から値段が上がることになりました。",
+        "en": "It has been decided that prices will go up from next month."
+      },
+      {
+        "ja": "東京に転勤することになった。",
+        "en": "It has been decided that I'll transfer to Tokyo."
+      },
+      {
+        "ja": "来年日本に留学することになりました。",
+        "en": "It has been decided that I'll study in Japan next year."
+      }
+    ]
   },
   {
     "id": "n4-038",
     "grammar": "ことにする",
     "romaji": "koto ni suru",
     "meaning": "to decide on",
-    "examples": []
+    "examples": [
+      {
+        "ja": "毎日日本語を勉強することにしました。",
+        "en": "I decided to study Japanese every day."
+      },
+      {
+        "ja": "来年から走ることにした。",
+        "en": "I decided to start running from next year."
+      },
+      {
+        "ja": "甘いものを食べないことにしています。",
+        "en": "I've made it a rule not to eat sweets."
+      }
+    ]
   },
   {
     "id": "n4-039",
     "grammar": "くする",
     "romaji": "ku suru",
     "meaning": "to make something ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "部屋を明るくしてください。",
+        "en": "Please make the room bright."
+      },
+      {
+        "ja": "音を小さくしてもらえますか。",
+        "en": "Could you make the sound quieter?"
+      },
+      {
+        "ja": "もっと安くできますか。",
+        "en": "Can you make it cheaper?"
+      }
+    ]
   },
   {
     "id": "n4-040",
     "grammar": "急に（きゅうに）",
     "romaji": "kyuu ni",
     "meaning": "quickly; suddenly; abruptly ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "急にお腹が痛くなった。",
+        "en": "My stomach suddenly started hurting."
+      },
+      {
+        "ja": "急に雨が降ってきた。",
+        "en": "It suddenly started raining."
+      },
+      {
+        "ja": "急に電気が消えた。",
+        "en": "The lights suddenly went out."
+      }
+    ]
   },
   {
     "id": "n4-041",
     "grammar": "までに",
     "romaji": "made ni",
     "meaning": "by; by the time; indicates time limit",
-    "examples": []
+    "examples": [
+      {
+        "ja": "金曜日までにレポートを出してください。",
+        "en": "Please submit the report by Friday."
+      },
+      {
+        "ja": "五時までに帰らなければなりません。",
+        "en": "I must go home by 5 o'clock."
+      },
+      {
+        "ja": "来週までに決めてください。",
+        "en": "Please decide by next week."
+      }
+    ]
   },
   {
     "id": "n4-042",
     "grammar": "まま",
     "romaji": "mama",
     "meaning": "as it is; current state; without changing",
-    "examples": []
+    "examples": [
+      {
+        "ja": "靴を履いたまま入らないでください。",
+        "en": "Please don't enter with your shoes on."
+      },
+      {
+        "ja": "テレビをつけたまま寝てしまった。",
+        "en": "I fell asleep with the TV on."
+      },
+      {
+        "ja": "窓を開けたままにしておいて。",
+        "en": "Leave the window open as it is."
+      }
+    ]
   },
   {
     "id": "n4-043",
     "grammar": "または",
     "romaji": "matawa",
     "meaning": "both; or; otherwise",
-    "examples": []
+    "examples": [
+      {
+        "ja": "電車またはバスで行けます。",
+        "en": "You can go by train or bus."
+      },
+      {
+        "ja": "メールまたは電話でご連絡ください。",
+        "en": "Please contact us by email or phone."
+      },
+      {
+        "ja": "現金またはカードでお支払いできます。",
+        "en": "You can pay by cash or card."
+      }
+    ]
   },
   {
     "id": "n4-044",
     "grammar": "みたいだ",
     "romaji": "mitai da",
     "meaning": "like; similar to; resembling ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "彼は怒っているみたいだ。",
+        "en": "He seems to be angry."
+      },
+      {
+        "ja": "外は寒いみたいです。",
+        "en": "It seems cold outside."
+      },
+      {
+        "ja": "風邪をひいたみたいだ。",
+        "en": "It seems like I caught a cold."
+      }
+    ]
   },
   {
     "id": "n4-045",
     "grammar": "みたいな",
     "romaji": "mitai na",
     "meaning": "like, similar to ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "子供みたいな大人。",
+        "en": "An adult who is like a child."
+      },
+      {
+        "ja": "夢みたいな話ですね。",
+        "en": "It's a dream-like story, isn't it?"
+      },
+      {
+        "ja": "嘘みたいな本当の話。",
+        "en": "A true story that seems like a lie."
+      }
+    ]
   },
   {
     "id": "n4-046",
     "grammar": "みたいに",
     "romaji": "mitai ni",
     "meaning": "like; similar to ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "彼女みたいに日本語が上手になりたい。",
+        "en": "I want to become good at Japanese like her."
+      },
+      {
+        "ja": "プロみたいに料理が上手ですね。",
+        "en": "You cook well, like a pro."
+      },
+      {
+        "ja": "子供みたいに泣いた。",
+        "en": "I cried like a child."
+      }
+    ]
   },
   {
     "id": "n4-047",
     "grammar": "も",
     "romaji": "mo",
     "meaning": "as many as; as much as; up to; nearly ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "百人もの人が集まった。",
+        "en": "As many as a hundred people gathered."
+      },
+      {
+        "ja": "三時間も待たされた。",
+        "en": "I was kept waiting for as long as three hours."
+      },
+      {
+        "ja": "ビールを五本も飲んだ。",
+        "en": "He drank as many as five beers."
+      }
+    ]
   },
   {
     "id": "n4-048",
     "grammar": "な",
     "romaji": "na",
     "meaning": "don't ~ (order somebody to not do something)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "触るな！",
+        "en": "Don't touch!"
+      },
+      {
+        "ja": "動くな。",
+        "en": "Don't move."
+      },
+      {
+        "ja": "心配するな。",
+        "en": "Don't worry."
+      }
+    ]
   },
   {
     "id": "n4-049",
     "grammar": "など",
     "romaji": "nado",
     "meaning": "such as; things like ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "寿司や天ぷらなどの日本料理が好きです。",
+        "en": "I like Japanese food such as sushi and tempura."
+      },
+      {
+        "ja": "東京や京都などに行きました。",
+        "en": "I went to places like Tokyo and Kyoto."
+      },
+      {
+        "ja": "私などにはとてもできません。",
+        "en": "Someone like me could never do it."
+      }
+    ]
   },
   {
     "id": "n4-050",
@@ -480,210 +1052,600 @@
     "grammar": "なかなか～ない",
     "romaji": "nakanaka~nai",
     "meaning": "not easy to; struggling to ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "この問題はなかなか解けない。",
+        "en": "I'm struggling to solve this problem."
+      },
+      {
+        "ja": "バスがなかなか来ない。",
+        "en": "The bus just won't come."
+      },
+      {
+        "ja": "日本語の漢字はなかなか覚えられない。",
+        "en": "I just can't seem to memorize Japanese kanji."
+      }
+    ]
   },
   {
     "id": "n4-052",
     "grammar": "なければいけない",
     "romaji": "nakereba ikenai",
     "meaning": "must do something",
-    "examples": []
+    "examples": [
+      {
+        "ja": "明日までに終わらなければいけない。",
+        "en": "I must finish by tomorrow."
+      },
+      {
+        "ja": "毎日薬を飲まなければいけません。",
+        "en": "I must take medicine every day."
+      },
+      {
+        "ja": "もっと勉強しなければいけない。",
+        "en": "I must study more."
+      }
+    ]
   },
   {
     "id": "n4-053",
     "grammar": "なければならない",
     "romaji": "nakereba naranai",
     "meaning": "must do something",
-    "examples": []
+    "examples": [
+      {
+        "ja": "法律を守らなければならない。",
+        "en": "One must obey the law."
+      },
+      {
+        "ja": "自分のことは自分でしなければならない。",
+        "en": "You must do things for yourself."
+      },
+      {
+        "ja": "明日早く起きなければならない。",
+        "en": "I must wake up early tomorrow."
+      }
+    ]
   },
   {
     "id": "n4-054",
     "grammar": "なら",
     "romaji": "nara",
     "meaning": "if; in the case that ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "日本に行くなら、春がいいですよ。",
+        "en": "If you're going to Japan, spring is good."
+      },
+      {
+        "ja": "安いなら買います。",
+        "en": "If it's cheap, I'll buy it."
+      },
+      {
+        "ja": "暇なら手伝ってくれませんか。",
+        "en": "If you're free, could you help me?"
+      }
+    ]
   },
   {
     "id": "n4-055",
     "grammar": "なさい",
     "romaji": "nasai",
     "meaning": "do this (soft/firm command)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "早く寝なさい。",
+        "en": "Go to bed now."
+      },
+      {
+        "ja": "静かにしなさい。",
+        "en": "Be quiet."
+      },
+      {
+        "ja": "宿題をしなさい。",
+        "en": "Do your homework."
+      }
+    ]
   },
   {
     "id": "n4-056",
     "grammar": "なさる",
     "romaji": "nasaru",
     "meaning": "to do (honorific)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "先生は何とおっしゃいましたか。",
+        "en": "What did the teacher say? (honorific)"
+      },
+      {
+        "ja": "社長はどうなさいますか。",
+        "en": "What will the president do? (honorific)"
+      },
+      {
+        "ja": "何をなさっていますか。",
+        "en": "What are you doing? (honorific)"
+      }
+    ]
   },
   {
     "id": "n4-057",
     "grammar": "に気がつく",
     "romaji": "ni ki ga tsuku",
     "meaning": "to notice; to realize",
-    "examples": []
+    "examples": [
+      {
+        "ja": "間違いに気がついた。",
+        "en": "I noticed the mistake."
+      },
+      {
+        "ja": "財布がないことに気がつきました。",
+        "en": "I noticed that my wallet was missing."
+      },
+      {
+        "ja": "彼女の髪型が変わったことに気がつかなかった。",
+        "en": "I didn't notice that her hairstyle changed."
+      }
+    ]
   },
   {
     "id": "n4-058",
     "grammar": "に見える",
     "romaji": "ni mieru",
     "meaning": "to look; to seem; to appear",
-    "examples": []
+    "examples": [
+      {
+        "ja": "彼は疲れているように見える。",
+        "en": "He looks tired."
+      },
+      {
+        "ja": "彼女は幸せに見えます。",
+        "en": "She looks happy."
+      },
+      {
+        "ja": "この料理はおいしそうに見える。",
+        "en": "This dish looks delicious."
+      }
+    ]
   },
   {
     "id": "n4-059",
     "grammar": "にする",
     "romaji": "ni suru",
     "meaning": "to make something ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "部屋をきれいにしてください。",
+        "en": "Please make the room clean."
+      },
+      {
+        "ja": "日本語を得意にしたい。",
+        "en": "I want to make Japanese my strong point."
+      },
+      {
+        "ja": "赤ちゃんを静かにしてください。",
+        "en": "Please keep the baby quiet."
+      }
+    ]
   },
   {
     "id": "n4-060",
     "grammar": "にくい",
     "romaji": "nikui",
     "meaning": "difficult to do ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "この漢字は覚えにくい。",
+        "en": "This kanji is hard to remember."
+      },
+      {
+        "ja": "この靴は歩きにくい。",
+        "en": "These shoes are hard to walk in."
+      },
+      {
+        "ja": "彼の字は読みにくい。",
+        "en": "His handwriting is hard to read."
+      }
+    ]
   },
   {
     "id": "n4-061",
     "grammar": "の中で",
     "romaji": "no naka de",
     "meaning": "in; among ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "クラスの中で一番背が高いです。",
+        "en": "I am the tallest in the class."
+      },
+      {
+        "ja": "世界の中で一番大きい国はどこですか。",
+        "en": "What is the biggest country in the world?"
+      },
+      {
+        "ja": "家族の中で誰が一番料理が上手ですか。",
+        "en": "Who is the best cook in the family?"
+      }
+    ]
   },
   {
     "id": "n4-062",
     "grammar": "のに",
     "romaji": "noni",
     "meaning": "although, in spite of, even though ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "勉強したのに、テストに落ちた。",
+        "en": "Even though I studied, I failed the test."
+      },
+      {
+        "ja": "約束したのに、来なかった。",
+        "en": "Although he promised, he didn't come."
+      },
+      {
+        "ja": "高いのに、品質が悪い。",
+        "en": "It's expensive, yet the quality is bad."
+      }
+    ]
   },
   {
     "id": "n4-063",
     "grammar": "のに",
     "romaji": "noni",
     "meaning": "to (do something); in order to ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "この辞書は漢字を調べるのに便利です。",
+        "en": "This dictionary is convenient for looking up kanji."
+      },
+      {
+        "ja": "この部屋は勉強するのに最適です。",
+        "en": "This room is ideal for studying."
+      },
+      {
+        "ja": "旅行するのにいくら必要ですか。",
+        "en": "How much money do you need for traveling?"
+      }
+    ]
   },
   {
     "id": "n4-064",
     "grammar": "のは〜だ",
     "romaji": "nowa~da",
     "meaning": "[A] is [B]; the reason for [A] is [B]",
-    "examples": []
+    "examples": [
+      {
+        "ja": "遅刻したのは電車が遅れたからだ。",
+        "en": "The reason I was late is that the train was delayed."
+      },
+      {
+        "ja": "成功したのは努力のおかげだ。",
+        "en": "The reason for success is thanks to effort."
+      },
+      {
+        "ja": "嬉しいのは合格したことだ。",
+        "en": "What makes me happy is that I passed."
+      }
+    ]
   },
   {
     "id": "n4-065",
     "grammar": "お～ください",
     "romaji": "o~kudasai",
     "meaning": "please do ~ (honorific)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "こちらにお座りください。",
+        "en": "Please sit here. (honorific)"
+      },
+      {
+        "ja": "どうぞお飲みください。",
+        "en": "Please drink. (honorific)"
+      },
+      {
+        "ja": "少々お待ちください。",
+        "en": "Please wait a moment. (honorific)"
+      }
+    ]
   },
   {
     "id": "n4-066",
     "grammar": "お～になる",
     "romaji": "o~ni naru",
     "meaning": "to do (honorific)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "先生がお書きになった本です。",
+        "en": "This is a book the teacher wrote. (honorific)"
+      },
+      {
+        "ja": "社長はもうお帰りになりました。",
+        "en": "The president has already left. (honorific)"
+      },
+      {
+        "ja": "何時にお起きになりますか。",
+        "en": "What time do you wake up? (honorific)"
+      }
+    ]
   },
   {
     "id": "n4-067",
     "grammar": "おきに",
     "romaji": "oki ni",
     "meaning": "repeated at intervals, every ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "この薬は四時間おきに飲んでください。",
+        "en": "Please take this medicine every four hours."
+      },
+      {
+        "ja": "三メートルおきに木が植えてある。",
+        "en": "Trees are planted every three meters."
+      },
+      {
+        "ja": "一日おきにジョギングしています。",
+        "en": "I jog every other day."
+      }
+    ]
   },
   {
     "id": "n4-068",
     "grammar": "終わる",
     "romaji": "owaru",
     "meaning": "to finish; to end~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "本を読み終わりました。",
+        "en": "I finished reading the book."
+      },
+      {
+        "ja": "宿題はもう書き終わった。",
+        "en": "I've already finished writing the homework."
+      },
+      {
+        "ja": "食べ終わったら皿を洗ってね。",
+        "en": "Wash the dishes when you finish eating."
+      }
+    ]
   },
   {
     "id": "n4-069",
     "grammar": "られる",
     "romaji": "rareru",
     "meaning": "potential form; ability or inability to do",
-    "examples": []
+    "examples": [
+      {
+        "ja": "日本語が話せますか。",
+        "en": "Can you speak Japanese?"
+      },
+      {
+        "ja": "この漢字が読めません。",
+        "en": "I can't read this kanji."
+      },
+      {
+        "ja": "一人で帰れますか。",
+        "en": "Can you go home by yourself?"
+      }
+    ]
   },
   {
     "id": "n4-070",
     "grammar": "らしい",
     "romaji": "rashii",
     "meaning": "it seems like; I heard; apparently ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "明日は雨らしい。",
+        "en": "It seems like it will rain tomorrow."
+      },
+      {
+        "ja": "彼は会社を辞めたらしいよ。",
+        "en": "Apparently he quit his job."
+      },
+      {
+        "ja": "あの店はおいしいらしい。",
+        "en": "That restaurant is supposedly good."
+      }
+    ]
   },
   {
     "id": "n4-071",
     "grammar": "さ",
     "romaji": "sa",
     "meaning": "-ness; nominalizer for adjective",
-    "examples": []
+    "examples": [
+      {
+        "ja": "この山は高さが3776メートルです。",
+        "en": "This mountain has a height of 3776 meters."
+      },
+      {
+        "ja": "温かさが感じられる手紙だった。",
+        "en": "It was a letter that conveyed warmth."
+      },
+      {
+        "ja": "大切さに気がついた。",
+        "en": "I realized the importance."
+      }
+    ]
   },
   {
     "id": "n4-072",
     "grammar": "さっき",
     "romaji": "sakki",
     "meaning": "some time ago; just now",
-    "examples": []
+    "examples": [
+      {
+        "ja": "さっき電話がありましたよ。",
+        "en": "There was a phone call just now."
+      },
+      {
+        "ja": "さっきまでここにいたのに。",
+        "en": "He was here just a moment ago."
+      },
+      {
+        "ja": "さっき食べたばかりです。",
+        "en": "I just ate a moment ago."
+      }
+    ]
   },
   {
     "id": "n4-073",
     "grammar": "させられる",
     "romaji": "saserareru",
     "meaning": "causative-passive; to be made to do",
-    "examples": []
+    "examples": [
+      {
+        "ja": "母に野菜を食べさせられた。",
+        "en": "I was made to eat vegetables by my mother."
+      },
+      {
+        "ja": "上司に残業させられました。",
+        "en": "I was made to work overtime by my boss."
+      },
+      {
+        "ja": "三時間も待たせられた。",
+        "en": "I was made to wait for three whole hours."
+      }
+    ]
   },
   {
     "id": "n4-074",
     "grammar": "させる",
     "romaji": "saseru",
     "meaning": "causative form; to make/let somebody do",
-    "examples": []
+    "examples": [
+      {
+        "ja": "母は子供に薬を飲ませた。",
+        "en": "The mother made the child take medicine."
+      },
+      {
+        "ja": "先生は学生に作文を書かせた。",
+        "en": "The teacher made the students write an essay."
+      },
+      {
+        "ja": "好きなようにさせてあげて。",
+        "en": "Let them do as they like."
+      }
+    ]
   },
   {
     "id": "n4-075",
     "grammar": "させてください",
     "romaji": "sasete kudasai",
     "meaning": "please let me do",
-    "examples": []
+    "examples": [
+      {
+        "ja": "私に説明させてください。",
+        "en": "Please let me explain."
+      },
+      {
+        "ja": "少し考えさせてください。",
+        "en": "Please let me think about it."
+      },
+      {
+        "ja": "お手伝いさせてください。",
+        "en": "Please let me help."
+      }
+    ]
   },
   {
     "id": "n4-076",
     "grammar": "さすが",
     "romaji": "sasuga",
     "meaning": "as one would expect; even ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "さすが先生、よく知っていますね。",
+        "en": "As expected of a teacher, you know a lot."
+      },
+      {
+        "ja": "さすがにそれは無理だ。",
+        "en": "Even for me, that's impossible."
+      },
+      {
+        "ja": "さすが日本製、品質がいい。",
+        "en": "As you'd expect from something made in Japan, the quality is good."
+      }
+    ]
   },
   {
     "id": "n4-077",
     "grammar": "し",
     "romaji": "shi",
     "meaning": "and; and what's more ~ (emphasis)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "この店は安いし、おいしいし、最高です。",
+        "en": "This restaurant is cheap, tasty, and the best."
+      },
+      {
+        "ja": "雨も降っているし、風も強いし、出かけたくない。",
+        "en": "It's raining and the wind is strong, so I don't want to go out."
+      },
+      {
+        "ja": "彼は頭もいいし、スポーツもできる。",
+        "en": "He's smart and also good at sports."
+      }
+    ]
   },
   {
     "id": "n4-078",
     "grammar": "そんなに",
     "romaji": "sonna ni",
     "meaning": "so much; so; like that",
-    "examples": []
+    "examples": [
+      {
+        "ja": "そんなに心配しなくていいよ。",
+        "en": "You don't need to worry that much."
+      },
+      {
+        "ja": "そんなに食べたら太りますよ。",
+        "en": "If you eat that much, you'll gain weight."
+      },
+      {
+        "ja": "そんなに難しくなかった。",
+        "en": "It wasn't that difficult."
+      }
+    ]
   },
   {
     "id": "n4-079",
     "grammar": "それでも",
     "romaji": "sore demo",
     "meaning": "but still; and yet; even so ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "雨が降っている。それでも出かけるの？",
+        "en": "It's raining. Even so, you're going out?"
+      },
+      {
+        "ja": "失敗した。それでも諦めなかった。",
+        "en": "I failed. But still, I didn't give up."
+      },
+      {
+        "ja": "高い。それでも買いたい。",
+        "en": "It's expensive. Even so, I want to buy it."
+      }
+    ]
   },
   {
     "id": "n4-080",
     "grammar": "それに",
     "romaji": "sore ni",
     "meaning": "besides; in addition; also; moreover ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "安いです。それに品質もいいです。",
+        "en": "It's cheap. Moreover, the quality is good."
+      },
+      {
+        "ja": "彼は優しい。それに頭もいい。",
+        "en": "He's kind. Besides, he's also smart."
+      },
+      {
+        "ja": "駅から近い。それに家賃も安い。",
+        "en": "It's close to the station. In addition, the rent is cheap."
+      }
+    ]
   },
   {
     "id": "n4-081",
@@ -746,119 +1708,340 @@
     "grammar": "そうに / そうな",
     "romaji": "sou ni / sou na",
     "meaning": "seems like; looks like ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "彼は嬉しそうな顔をしている。",
+        "en": "He has a happy-looking face."
+      },
+      {
+        "ja": "おいしそうに食べていますね。",
+        "en": "You're eating it as if it's delicious."
+      },
+      {
+        "ja": "寂しそうな目をしている。",
+        "en": "She has sad-looking eyes."
+      }
+    ]
   },
   {
     "id": "n4-084",
     "grammar": "たばかり",
     "romaji": "ta bakari",
     "meaning": "just finished; something just occurred",
-    "examples": []
+    "examples": [
+      {
+        "ja": "今来たばかりです。",
+        "en": "I just arrived."
+      },
+      {
+        "ja": "さっき食べたばかりなのに、もうお腹が空いた。",
+        "en": "I just ate, but I'm already hungry."
+      },
+      {
+        "ja": "日本に来たばかりで、まだ何も分からない。",
+        "en": "I just came to Japan and don't know anything yet."
+      }
+    ]
   },
   {
     "id": "n4-085",
     "grammar": "たところ",
     "romaji": "ta tokoro",
     "meaning": "just finished doing, was just doing",
-    "examples": []
+    "examples": [
+      {
+        "ja": "家に帰ったところです。",
+        "en": "I just got home."
+      },
+      {
+        "ja": "電話をかけたところだったのに、出なかった。",
+        "en": "I had just called, but they didn't answer."
+      },
+      {
+        "ja": "今ちょうど食べ終わったところです。",
+        "en": "I just finished eating."
+      }
+    ]
   },
   {
     "id": "n4-086",
     "grammar": "たがる",
     "romaji": "tagaru",
     "meaning": "wants to do ~ (third person)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "弟は外で遊びたがっている。",
+        "en": "My little brother wants to play outside."
+      },
+      {
+        "ja": "彼女は日本に行きたがっている。",
+        "en": "She wants to go to Japan."
+      },
+      {
+        "ja": "子供はお菓子を食べたがる。",
+        "en": "Children tend to want to eat sweets."
+      }
+    ]
   },
   {
     "id": "n4-087",
     "grammar": "たら",
     "romaji": "tara",
     "meaning": "if; after; when ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "家に帰ったら、電話してください。",
+        "en": "Please call me when you get home."
+      },
+      {
+        "ja": "もし時間があったら、遊びに来てね。",
+        "en": "If you have time, come hang out."
+      },
+      {
+        "ja": "薬を飲んだら、すぐ元気になった。",
+        "en": "After taking medicine, I felt better right away."
+      }
+    ]
   },
   {
     "id": "n4-088",
     "grammar": "たらどう",
     "romaji": "tara dou",
     "meaning": "why don't you; how about ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "医者に行ったらどうですか。",
+        "en": "Why don't you go to the doctor?"
+      },
+      {
+        "ja": "もう少し休んだらどう？",
+        "en": "How about resting a bit more?"
+      },
+      {
+        "ja": "彼に直接聞いたらどうですか。",
+        "en": "Why don't you ask him directly?"
+      }
+    ]
   },
   {
     "id": "n4-089",
     "grammar": "たらいいですか",
     "romaji": "tara ii desu ka",
     "meaning": "what should I do?",
-    "examples": []
+    "examples": [
+      {
+        "ja": "何を買ったらいいですか。",
+        "en": "What should I buy?"
+      },
+      {
+        "ja": "どこに行ったらいいですか。",
+        "en": "Where should I go?"
+      },
+      {
+        "ja": "何時に来たらいいですか。",
+        "en": "What time should I come?"
+      }
+    ]
   },
   {
     "id": "n4-090",
     "grammar": "てあげる",
     "romaji": "te ageru",
     "meaning": "to do for; to do a favor",
-    "examples": []
+    "examples": [
+      {
+        "ja": "友達にプレゼントを買ってあげた。",
+        "en": "I bought a present for my friend."
+      },
+      {
+        "ja": "道を教えてあげましょうか。",
+        "en": "Shall I show you the way?"
+      },
+      {
+        "ja": "妹に日本語を教えてあげている。",
+        "en": "I'm teaching my younger sister Japanese."
+      }
+    ]
   },
   {
     "id": "n4-091",
     "grammar": "てほしい",
     "romaji": "te hoshii",
     "meaning": "I want you to; need you to ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "静かにしてほしい。",
+        "en": "I want you to be quiet."
+      },
+      {
+        "ja": "もう少し待ってほしいんですが。",
+        "en": "I'd like you to wait a bit more."
+      },
+      {
+        "ja": "本当のことを言ってほしい。",
+        "en": "I want you to tell the truth."
+      }
+    ]
   },
   {
     "id": "n4-092",
     "grammar": "ていく",
     "romaji": "te iku",
     "meaning": "to start; to continue; to go on",
-    "examples": []
+    "examples": [
+      {
+        "ja": "これからもっと暑くなっていく。",
+        "en": "It will continue to get hotter from now on."
+      },
+      {
+        "ja": "日本語が少しずつ分かっていく。",
+        "en": "I'm gradually coming to understand Japanese."
+      },
+      {
+        "ja": "子供たちは大きくなっていく。",
+        "en": "The children will continue to grow."
+      }
+    ]
   },
   {
     "id": "n4-093",
     "grammar": "ていた",
     "romaji": "te ita",
     "meaning": "was doing something (past continuous)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "昨日の夜、本を読んでいた。",
+        "en": "I was reading a book last night."
+      },
+      {
+        "ja": "彼女が来たとき、私は料理をしていた。",
+        "en": "When she came, I was cooking."
+      },
+      {
+        "ja": "子供のころ、毎日サッカーをしていた。",
+        "en": "When I was a child, I was playing soccer every day."
+      }
+    ]
   },
   {
     "id": "n4-094",
     "grammar": "ていただけませんか",
     "romaji": "te itadakemasen ka",
     "meaning": "could you please ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "すみませんが、もう一度説明していただけませんか。",
+        "en": "Excuse me, could you explain once more?"
+      },
+      {
+        "ja": "写真を撮っていただけませんか。",
+        "en": "Could you take a photo for me?"
+      },
+      {
+        "ja": "ここに名前を書いていただけませんか。",
+        "en": "Could you write your name here?"
+      }
+    ]
   },
   {
     "id": "n4-095",
     "grammar": "てくれる",
     "romaji": "te kureru",
     "meaning": "to do a favor; do something for someone",
-    "examples": []
+    "examples": [
+      {
+        "ja": "友達が空港まで送ってくれた。",
+        "en": "My friend took me to the airport."
+      },
+      {
+        "ja": "母が弁当を作ってくれた。",
+        "en": "My mother made a bento for me."
+      },
+      {
+        "ja": "先生が丁寧に教えてくれました。",
+        "en": "The teacher taught me carefully."
+      }
+    ]
   },
   {
     "id": "n4-096",
     "grammar": "てくる",
     "romaji": "te kuru",
     "meaning": "to become; to continue; to start ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "だんだん寒くなってきた。",
+        "en": "It's been getting colder gradually."
+      },
+      {
+        "ja": "雨が降ってきた。",
+        "en": "It started raining."
+      },
+      {
+        "ja": "日本語が分かるようになってきました。",
+        "en": "I've come to understand Japanese."
+      }
+    ]
   },
   {
     "id": "n4-097",
     "grammar": "てみる",
     "romaji": "te miru",
     "meaning": "try doing",
-    "examples": []
+    "examples": [
+      {
+        "ja": "この料理を食べてみてください。",
+        "en": "Please try eating this dish."
+      },
+      {
+        "ja": "一度着てみたいです。",
+        "en": "I'd like to try wearing it once."
+      },
+      {
+        "ja": "やってみないと分からない。",
+        "en": "You won't know unless you try."
+      }
+    ]
   },
   {
     "id": "n4-098",
     "grammar": "てもらう",
     "romaji": "te morau",
     "meaning": "to get somebody to do something",
-    "examples": []
+    "examples": [
+      {
+        "ja": "友達に日本語を教えてもらった。",
+        "en": "I had my friend teach me Japanese."
+      },
+      {
+        "ja": "先生に推薦状を書いてもらいました。",
+        "en": "I had my teacher write a recommendation letter."
+      },
+      {
+        "ja": "駅までの道を教えてもらえますか。",
+        "en": "Could you tell me the way to the station?"
+      }
+    ]
   },
   {
     "id": "n4-099",
     "grammar": "ておく",
     "romaji": "te oku",
     "meaning": "to do something in advance",
-    "examples": []
+    "examples": [
+      {
+        "ja": "明日のためにお弁当を作っておいた。",
+        "en": "I made a bento in advance for tomorrow."
+      },
+      {
+        "ja": "旅行の前にホテルを予約しておきました。",
+        "en": "I booked the hotel in advance before the trip."
+      },
+      {
+        "ja": "窓を開けておいてください。",
+        "en": "Please leave the window open."
+      }
+    ]
   },
   {
     "id": "n4-100",
@@ -893,28 +2076,80 @@
     "grammar": "てすみません",
     "romaji": "te sumimasen",
     "meaning": "I'm sorry for",
-    "examples": []
+    "examples": [
+      {
+        "ja": "遅くなってすみません。",
+        "en": "I'm sorry for being late."
+      },
+      {
+        "ja": "お待たせしてすみません。",
+        "en": "I'm sorry for making you wait."
+      },
+      {
+        "ja": "ご迷惑をかけてすみませんでした。",
+        "en": "I'm sorry for causing you trouble."
+      }
+    ]
   },
   {
     "id": "n4-102",
     "grammar": "てやる",
     "romaji": "te yaru",
     "meaning": "to do for; to do a favor (casual)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "弟に漢字を教えてやった。",
+        "en": "I taught my brother kanji (casual)."
+      },
+      {
+        "ja": "犬に餌をやった。",
+        "en": "I gave the dog food."
+      },
+      {
+        "ja": "子供に本を読んでやった。",
+        "en": "I read a book for the kids (casual)."
+      }
+    ]
   },
   {
     "id": "n4-103",
     "grammar": "てよかった",
     "romaji": "te yokatta",
     "meaning": "I'm glad that ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "日本に来てよかった。",
+        "en": "I'm glad I came to Japan."
+      },
+      {
+        "ja": "あの時諦めなくてよかった。",
+        "en": "I'm glad I didn't give up then."
+      },
+      {
+        "ja": "傘を持ってきてよかった。",
+        "en": "I'm glad I brought an umbrella."
+      }
+    ]
   },
   {
     "id": "n4-104",
     "grammar": "ているところ",
     "romaji": "teiru tokoro",
     "meaning": "in the process of doing",
-    "examples": []
+    "examples": [
+      {
+        "ja": "今ちょうど食べているところです。",
+        "en": "I'm in the middle of eating right now."
+      },
+      {
+        "ja": "レポートを書いているところです。",
+        "en": "I'm in the process of writing a report."
+      },
+      {
+        "ja": "準備をしているところだった。",
+        "en": "I was in the middle of getting ready."
+      }
+    ]
   },
   {
     "id": "n4-105",
@@ -949,119 +2184,340 @@
     "grammar": "と",
     "romaji": "to",
     "meaning": "whenever [A] happens, [B] also happens",
-    "examples": []
+    "examples": [
+      {
+        "ja": "春になると桜が咲く。",
+        "en": "Whenever spring comes, cherry blossoms bloom."
+      },
+      {
+        "ja": "このボタンを押すと、ドアが開きます。",
+        "en": "When you press this button, the door opens."
+      },
+      {
+        "ja": "右に曲がると、駅が見えます。",
+        "en": "When you turn right, you'll see the station."
+      }
+    ]
   },
   {
     "id": "n4-107",
     "grammar": "と言ってもいい",
     "romaji": "to ittemo ii",
     "meaning": "you could say; one might say",
-    "examples": []
+    "examples": [
+      {
+        "ja": "日本語は難しいと言ってもいい。",
+        "en": "You could say Japanese is difficult."
+      },
+      {
+        "ja": "彼は天才と言ってもいいだろう。",
+        "en": "One might say he's a genius."
+      },
+      {
+        "ja": "この映画は傑作と言ってもいい。",
+        "en": "You could say this movie is a masterpiece."
+      }
+    ]
   },
   {
     "id": "n4-108",
     "grammar": "という",
     "romaji": "to iu",
     "meaning": "called; named; that ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "東京タワーという建物を知っていますか。",
+        "en": "Do you know the building called Tokyo Tower?"
+      },
+      {
+        "ja": "「鬼滅の刃」というアニメが人気です。",
+        "en": "The anime called 'Demon Slayer' is popular."
+      },
+      {
+        "ja": "田中という人から電話がありました。",
+        "en": "There was a call from a person named Tanaka."
+      }
+    ]
   },
   {
     "id": "n4-109",
     "grammar": "ということ",
     "romaji": "to iu koto",
     "meaning": "convert phrase into noun",
-    "examples": []
+    "examples": [
+      {
+        "ja": "日本語が上手だということは知っています。",
+        "en": "I know (the fact) that your Japanese is good."
+      },
+      {
+        "ja": "彼が来ないということを聞きました。",
+        "en": "I heard that he won't come."
+      },
+      {
+        "ja": "健康が大切だということを忘れないで。",
+        "en": "Don't forget that health is important."
+      }
+    ]
   },
   {
     "id": "n4-110",
     "grammar": "と言われている",
     "romaji": "to iwarete iru",
     "meaning": "it is said that ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "日本茶は体にいいと言われている。",
+        "en": "It is said that Japanese tea is good for your body."
+      },
+      {
+        "ja": "この山は一番高いと言われています。",
+        "en": "It is said that this mountain is the tallest."
+      },
+      {
+        "ja": "魚を食べると頭がよくなると言われている。",
+        "en": "It is said that eating fish makes you smarter."
+      }
+    ]
   },
   {
     "id": "n4-111",
     "grammar": "と聞いた",
     "romaji": "to kiita",
     "meaning": "I heard...",
-    "examples": []
+    "examples": [
+      {
+        "ja": "明日は雨だと聞いた。",
+        "en": "I heard it'll rain tomorrow."
+      },
+      {
+        "ja": "彼は転職すると聞いた。",
+        "en": "I heard he's changing jobs."
+      },
+      {
+        "ja": "あの店は来月閉まると聞きました。",
+        "en": "I heard that store is closing next month."
+      }
+    ]
   },
   {
     "id": "n4-112",
     "grammar": "と思う",
     "romaji": "to omou",
     "meaning": "to think…; I think…",
-    "examples": []
+    "examples": [
+      {
+        "ja": "明日は晴れると思います。",
+        "en": "I think it will be sunny tomorrow."
+      },
+      {
+        "ja": "彼は来ないと思う。",
+        "en": "I think he won't come."
+      },
+      {
+        "ja": "日本語は面白いと思います。",
+        "en": "I think Japanese is interesting."
+      }
+    ]
   },
   {
     "id": "n4-113",
     "grammar": "とか～とか",
     "romaji": "toka~toka",
     "meaning": "among other things; such as; like ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "週末は映画を見るとか買い物をするとかしている。",
+        "en": "On weekends I do things like watching movies and shopping."
+      },
+      {
+        "ja": "寿司とかラーメンとかが好きです。",
+        "en": "I like things like sushi and ramen."
+      },
+      {
+        "ja": "テニスとかサッカーとかのスポーツが好きです。",
+        "en": "I like sports such as tennis and soccer."
+      }
+    ]
   },
   {
     "id": "n4-114",
     "grammar": "ところ",
     "romaji": "tokoro",
     "meaning": "just about to; on the verge of doing",
-    "examples": []
+    "examples": [
+      {
+        "ja": "今から出かけるところです。",
+        "en": "I'm just about to go out."
+      },
+      {
+        "ja": "電話しようとしたところに、彼が来た。",
+        "en": "Just as I was about to call, he came."
+      },
+      {
+        "ja": "ちょうど寝るところだった。",
+        "en": "I was just about to go to sleep."
+      }
+    ]
   },
   {
     "id": "n4-115",
     "grammar": "続ける",
     "romaji": "tsuzukeru",
     "meaning": "continue to; keen on ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "毎日日本語を勉強し続けています。",
+        "en": "I continue to study Japanese every day."
+      },
+      {
+        "ja": "雨が降り続けている。",
+        "en": "It keeps on raining."
+      },
+      {
+        "ja": "走り続けて疲れた。",
+        "en": "I'm tired from continuing to run."
+      }
+    ]
   },
   {
     "id": "n4-116",
     "grammar": "って",
     "romaji": "tte",
     "meaning": "named; called ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "田中って人、知ってる？",
+        "en": "Do you know the person called Tanaka?"
+      },
+      {
+        "ja": "明日は休みだって。",
+        "en": "I heard tomorrow is a day off."
+      },
+      {
+        "ja": "彼、来ないって。",
+        "en": "He said he's not coming."
+      }
+    ]
   },
   {
     "id": "n4-117",
     "grammar": "やすい",
     "romaji": "yasui",
     "meaning": "easy to; likely to; prone to ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "この本は読みやすい。",
+        "en": "This book is easy to read."
+      },
+      {
+        "ja": "この道は歩きやすいです。",
+        "en": "This road is easy to walk on."
+      },
+      {
+        "ja": "彼は話しやすい人です。",
+        "en": "He's an easy person to talk to."
+      }
+    ]
   },
   {
     "id": "n4-118",
     "grammar": "やっと",
     "romaji": "yatto",
     "meaning": "at last; finally; barely; narrowly ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "やっと宿題が終わった！",
+        "en": "I finally finished my homework!"
+      },
+      {
+        "ja": "やっと春が来ましたね。",
+        "en": "Spring has finally arrived."
+      },
+      {
+        "ja": "やっと彼に会えた。",
+        "en": "I was finally able to meet him."
+      }
+    ]
   },
   {
     "id": "n4-119",
     "grammar": "より",
     "romaji": "yori",
     "meaning": "than; rather than; more than ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "バスより電車のほうが速い。",
+        "en": "The train is faster than the bus."
+      },
+      {
+        "ja": "今日は昨日より暖かい。",
+        "en": "Today is warmer than yesterday."
+      },
+      {
+        "ja": "肉より魚のほうが好きです。",
+        "en": "I prefer fish over meat."
+      }
+    ]
   },
   {
     "id": "n4-120",
     "grammar": "予定だ（よていだ）",
     "romaji": "yotei da",
     "meaning": "plan to, intend to",
-    "examples": []
+    "examples": [
+      {
+        "ja": "来月日本に行く予定です。",
+        "en": "I plan to go to Japan next month."
+      },
+      {
+        "ja": "明日会議がある予定だ。",
+        "en": "There's supposed to be a meeting tomorrow."
+      },
+      {
+        "ja": "来年結婚する予定です。",
+        "en": "I plan to get married next year."
+      }
+    ]
   },
   {
     "id": "n4-121",
     "grammar": "ようだ",
     "romaji": "you da",
     "meaning": "appears; seems; looks as if ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "彼は疲れているようだ。",
+        "en": "He appears to be tired."
+      },
+      {
+        "ja": "雨が降るようです。",
+        "en": "It seems like it will rain."
+      },
+      {
+        "ja": "彼女は日本人のようだ。",
+        "en": "She seems to be Japanese."
+      }
+    ]
   },
   {
     "id": "n4-122",
     "grammar": "ように / ような",
     "romaji": "you ni / you na",
     "meaning": "like; as; similar to ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "花のようにきれいだ。",
+        "en": "She's beautiful like a flower."
+      },
+      {
+        "ja": "夢のような話です。",
+        "en": "It's a dream-like story."
+      },
+      {
+        "ja": "子供のように遊んだ。",
+        "en": "I played like a child."
+      }
+    ]
   },
   {
     "id": "n4-123",
@@ -1096,34 +2552,99 @@
     "grammar": "ようにする",
     "romaji": "you ni suru",
     "meaning": "to try to; to make sure that ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "遅刻しないようにしてください。",
+        "en": "Please try not to be late."
+      },
+      {
+        "ja": "毎日運動するようにしています。",
+        "en": "I try to exercise every day."
+      },
+      {
+        "ja": "野菜を食べるようにしなさい。",
+        "en": "Make sure to eat vegetables."
+      }
+    ]
   },
   {
     "id": "n4-125",
     "grammar": "ようと思う",
     "romaji": "you to omou",
     "meaning": "thinking of doing; planning to ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "来年留学しようと思っています。",
+        "en": "I'm thinking of studying abroad next year."
+      },
+      {
+        "ja": "ダイエットしようと思う。",
+        "en": "I'm thinking of going on a diet."
+      },
+      {
+        "ja": "新しい仕事を探そうと思っている。",
+        "en": "I'm thinking of looking for a new job."
+      }
+    ]
   },
   {
     "id": "n4-126",
     "grammar": "ぜひ",
     "romaji": "zehi",
     "meaning": "by all means; certainly; definitely ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "ぜひ遊びに来てください。",
+        "en": "Please do come visit."
+      },
+      {
+        "ja": "ぜひ食べてみてください。",
+        "en": "You really should try eating it."
+      },
+      {
+        "ja": "ぜひ日本に来てくださいね。",
+        "en": "You must come to Japan."
+      }
+    ]
   },
   {
     "id": "n4-127",
     "grammar": "全然～ない（ぜんぜん～ない）",
     "romaji": "zenzen~nai",
     "meaning": "(not) at all",
-    "examples": []
+    "examples": [
+      {
+        "ja": "全然分かりません。",
+        "en": "I don't understand at all."
+      },
+      {
+        "ja": "全然眠くない。",
+        "en": "I'm not sleepy at all."
+      },
+      {
+        "ja": "全然問題ないですよ。",
+        "en": "It's no problem at all."
+      }
+    ]
   },
   {
     "id": "n4-128",
     "grammar": "づらい",
     "romaji": "zurai",
     "meaning": "difficult to do ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "この字は書きづらい。",
+        "en": "This character is hard to write."
+      },
+      {
+        "ja": "彼には話しづらいことがある。",
+        "en": "There's something difficult to tell him."
+      },
+      {
+        "ja": "このペンは持ちづらい。",
+        "en": "This pen is hard to hold."
+      }
+    ]
   }
 ]

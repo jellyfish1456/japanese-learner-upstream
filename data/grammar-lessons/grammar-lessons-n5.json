@@ -200,21 +200,60 @@
     "grammar": "どんな",
     "romaji": "donna",
     "meaning": "what kind of; what sort of",
-    "examples": []
+    "examples": [
+      {
+        "ja": "どんな音楽が好きですか。",
+        "en": "What kind of music do you like?"
+      },
+      {
+        "ja": "どんな仕事をしていますか。",
+        "en": "What kind of work do you do?"
+      },
+      {
+        "ja": "どんな映画を見ましたか。",
+        "en": "What kind of movie did you watch?"
+      }
+    ]
   },
   {
     "id": "n5-009",
     "grammar": "どうして",
     "romaji": "doushite",
     "meaning": "why; for what reason; how",
-    "examples": []
+    "examples": [
+      {
+        "ja": "どうして遅れたんですか。",
+        "en": "Why were you late?"
+      },
+      {
+        "ja": "どうして日本語を勉強していますか。",
+        "en": "Why are you studying Japanese?"
+      },
+      {
+        "ja": "どうして泣いているの？",
+        "en": "Why are you crying?"
+      }
+    ]
   },
   {
     "id": "n5-010",
     "grammar": "どうやって",
     "romaji": "douyatte",
     "meaning": "how; in what way; by what means",
-    "examples": []
+    "examples": [
+      {
+        "ja": "駅までどうやって行きますか。",
+        "en": "How do you get to the station?"
+      },
+      {
+        "ja": "この料理はどうやって作りますか。",
+        "en": "How do you make this dish?"
+      },
+      {
+        "ja": "どうやって漢字を覚えましたか。",
+        "en": "How did you memorize kanji?"
+      }
+    ]
   },
   {
     "id": "n5-011",
@@ -249,7 +288,20 @@
     "grammar": "があります",
     "romaji": "ga arimasu",
     "meaning": "there is; is (non-living things)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "部屋にテレビがあります。",
+        "en": "There is a TV in the room."
+      },
+      {
+        "ja": "机の上に本があります。",
+        "en": "There is a book on the desk."
+      },
+      {
+        "ja": "冷蔵庫に牛乳がありますか。",
+        "en": "Is there milk in the refrigerator?"
+      }
+    ]
   },
   {
     "id": "n5-013",
@@ -284,7 +336,20 @@
     "grammar": "がいます",
     "romaji": "ga imasu",
     "meaning": "there is; to be; is (living things)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "公園に猫がいます。",
+        "en": "There is a cat in the park."
+      },
+      {
+        "ja": "教室に学生がいますか。",
+        "en": "Are there students in the classroom?"
+      },
+      {
+        "ja": "家に誰もいません。",
+        "en": "Nobody is home."
+      }
+    ]
   },
   {
     "id": "n5-015",
@@ -319,42 +384,120 @@
     "grammar": "一番（いちばん）",
     "romaji": "ichiban",
     "meaning": "the most; the best",
-    "examples": []
+    "examples": [
+      {
+        "ja": "クラスで田中さんが一番背が高い。",
+        "en": "Tanaka is the tallest in the class."
+      },
+      {
+        "ja": "日本料理の中で寿司が一番好きです。",
+        "en": "Sushi is my favorite among Japanese food."
+      },
+      {
+        "ja": "一番近い駅はどこですか。",
+        "en": "Where is the nearest station?"
+      }
+    ]
   },
   {
     "id": "n5-017",
     "grammar": "一緒に（いっしょに）",
     "romaji": "issho ni",
     "meaning": "together",
-    "examples": []
+    "examples": [
+      {
+        "ja": "一緒に昼ご飯を食べませんか。",
+        "en": "Shall we eat lunch together?"
+      },
+      {
+        "ja": "友達と一緒に映画を見ました。",
+        "en": "I watched a movie together with my friend."
+      },
+      {
+        "ja": "一緒に帰りましょう。",
+        "en": "Let's go home together."
+      }
+    ]
   },
   {
     "id": "n5-018",
     "grammar": "いつも",
     "romaji": "itsumo",
     "meaning": "always; usually; habitually",
-    "examples": []
+    "examples": [
+      {
+        "ja": "いつも朝七時に起きます。",
+        "en": "I always wake up at 7 in the morning."
+      },
+      {
+        "ja": "彼女はいつも笑っている。",
+        "en": "She is always smiling."
+      },
+      {
+        "ja": "いつもお世話になっています。",
+        "en": "Thank you for always taking care of me."
+      }
+    ]
   },
   {
     "id": "n5-019",
     "grammar": "じゃない・ではない",
     "romaji": "janai / dewa nai",
     "meaning": "to not be (am not; is not; are not)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "これは私のじゃない。",
+        "en": "This is not mine."
+      },
+      {
+        "ja": "今日は暑くはないですね。",
+        "en": "It's not hot today, is it?"
+      },
+      {
+        "ja": "あの人は学生ではありません。",
+        "en": "That person is not a student."
+      }
+    ]
   },
   {
     "id": "n5-020",
     "grammar": "か",
     "romaji": "ka",
     "meaning": "question particle",
-    "examples": []
+    "examples": [
+      {
+        "ja": "これは何ですか。",
+        "en": "What is this?"
+      },
+      {
+        "ja": "明日は雨ですか。",
+        "en": "Will it rain tomorrow?"
+      },
+      {
+        "ja": "日本語は難しいですか。",
+        "en": "Is Japanese difficult?"
+      }
+    ]
   },
   {
     "id": "n5-021",
     "grammar": "か～か",
     "romaji": "ka~ka",
     "meaning": "or",
-    "examples": []
+    "examples": [
+      {
+        "ja": "コーヒーか紅茶、どちらがいいですか。",
+        "en": "Which would you like, coffee or tea?"
+      },
+      {
+        "ja": "電車かバスで行きます。",
+        "en": "I'll go by train or bus."
+      },
+      {
+        "ja": "土曜日か日曜日に会いましょう。",
+        "en": "Let's meet on Saturday or Sunday."
+      }
+    ]
   },
   {
     "id": "n5-022",
@@ -389,21 +532,60 @@
     "grammar": "方（かた）",
     "romaji": "kata",
     "meaning": "the way of doing something; how to do ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "この漢字の読み方を教えてください。",
+        "en": "Please teach me how to read this kanji."
+      },
+      {
+        "ja": "箸の使い方が分かりません。",
+        "en": "I don't know how to use chopsticks."
+      },
+      {
+        "ja": "駅への行き方を知っていますか。",
+        "en": "Do you know the way to the station?"
+      }
+    ]
   },
   {
     "id": "n5-024",
     "grammar": "けど",
     "romaji": "kedo",
     "meaning": "but; however; although ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "行きたいけど、時間がない。",
+        "en": "I want to go, but I don't have time."
+      },
+      {
+        "ja": "日本語は難しいけど、楽しいです。",
+        "en": "Japanese is difficult, but fun."
+      },
+      {
+        "ja": "高いけど、買いました。",
+        "en": "It was expensive, but I bought it."
+      }
+    ]
   },
   {
     "id": "n5-025",
     "grammar": "けれども",
     "romaji": "keredo mo",
     "meaning": "but; however; although ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "食べたいけれども、お金がない。",
+        "en": "I want to eat, but I have no money."
+      },
+      {
+        "ja": "疲れているけれども、頑張ります。",
+        "en": "I'm tired, but I'll do my best."
+      },
+      {
+        "ja": "雨が降っているけれども、出かけます。",
+        "en": "It's raining, but I'll go out."
+      }
+    ]
   },
   {
     "id": "n5-026",
@@ -438,238 +620,680 @@
     "grammar": "まだ～ていません",
     "romaji": "mada ~te imasen",
     "meaning": "have not yet ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "まだ宿題をしていません。",
+        "en": "I haven't done my homework yet."
+      },
+      {
+        "ja": "まだ朝ご飯を食べていません。",
+        "en": "I haven't eaten breakfast yet."
+      },
+      {
+        "ja": "まだ返事をもらっていません。",
+        "en": "I haven't received a reply yet."
+      }
+    ]
   },
   {
     "id": "n5-028",
     "grammar": "まで",
     "romaji": "made",
     "meaning": "until; as far as; to (an extent); even ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "駅まで歩きました。",
+        "en": "I walked to the station."
+      },
+      {
+        "ja": "三時まで待ってください。",
+        "en": "Please wait until 3 o'clock."
+      },
+      {
+        "ja": "子供まで知っている。",
+        "en": "Even children know about it."
+      }
+    ]
   },
   {
     "id": "n5-029",
     "grammar": "前に（まえに）",
     "romaji": "mae ni",
     "meaning": "before; in front of ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "寝る前に歯を磨きます。",
+        "en": "I brush my teeth before going to bed."
+      },
+      {
+        "ja": "食事の前に手を洗ってください。",
+        "en": "Please wash your hands before the meal."
+      },
+      {
+        "ja": "駅の前にコンビニがあります。",
+        "en": "There is a convenience store in front of the station."
+      }
+    ]
   },
   {
     "id": "n5-030",
     "grammar": "ませんか",
     "romaji": "masen ka",
     "meaning": "would you; do you want to; shall we ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "一緒に映画を見ませんか。",
+        "en": "Would you like to watch a movie together?"
+      },
+      {
+        "ja": "週末、どこかに行きませんか。",
+        "en": "Shall we go somewhere this weekend?"
+      },
+      {
+        "ja": "お茶を飲みませんか。",
+        "en": "Would you like to have some tea?"
+      }
+    ]
   },
   {
     "id": "n5-031",
     "grammar": "ましょう",
     "romaji": "mashou",
     "meaning": "let's ~; shall we ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "一緒に行きましょう。",
+        "en": "Let's go together."
+      },
+      {
+        "ja": "昼ご飯を食べましょう。",
+        "en": "Let's eat lunch."
+      },
+      {
+        "ja": "日本語で話しましょう。",
+        "en": "Let's speak in Japanese."
+      }
+    ]
   },
   {
     "id": "n5-032",
     "grammar": "ましょうか",
     "romaji": "mashouka",
     "meaning": "shall I ~; used to offer help",
-    "examples": []
+    "examples": [
+      {
+        "ja": "窓を開けましょうか。",
+        "en": "Shall I open the window?"
+      },
+      {
+        "ja": "荷物を持ちましょうか。",
+        "en": "Shall I carry your luggage?"
+      },
+      {
+        "ja": "駅まで送りましょうか。",
+        "en": "Shall I take you to the station?"
+      }
+    ]
   },
   {
     "id": "n5-033",
     "grammar": "も",
     "romaji": "mo",
     "meaning": "too; also; as well",
-    "examples": []
+    "examples": [
+      {
+        "ja": "私も日本語を勉強しています。",
+        "en": "I also study Japanese."
+      },
+      {
+        "ja": "猫も犬も好きです。",
+        "en": "I like both cats and dogs."
+      },
+      {
+        "ja": "彼も来ますか。",
+        "en": "Is he coming too?"
+      }
+    ]
   },
   {
     "id": "n5-034",
     "grammar": "もう",
     "romaji": "mou",
     "meaning": "already; anymore; again; other",
-    "examples": []
+    "examples": [
+      {
+        "ja": "もう食べましたか。",
+        "en": "Have you already eaten?"
+      },
+      {
+        "ja": "もう帰りたい。",
+        "en": "I want to go home already."
+      },
+      {
+        "ja": "もう一度言ってください。",
+        "en": "Please say it one more time."
+      }
+    ]
   },
   {
     "id": "n5-035",
     "grammar": "なあ",
     "romaji": "naa",
     "meaning": "sentence ending particle; confirmation",
-    "examples": []
+    "examples": [
+      {
+        "ja": "今日は暑いなあ。",
+        "en": "Man, it's hot today."
+      },
+      {
+        "ja": "日本に行きたいなあ。",
+        "en": "I really want to go to Japan."
+      },
+      {
+        "ja": "おいしいなあ。",
+        "en": "This is so delicious."
+      }
+    ]
   },
   {
     "id": "n5-036",
     "grammar": "ないで",
     "romaji": "naide",
     "meaning": "without doing ~; to do [B] without doing [A]",
-    "examples": []
+    "examples": [
+      {
+        "ja": "朝ご飯を食べないで学校に行った。",
+        "en": "I went to school without eating breakfast."
+      },
+      {
+        "ja": "傘を持たないで出かけた。",
+        "en": "I went out without bringing an umbrella."
+      },
+      {
+        "ja": "何も言わないで帰った。",
+        "en": "He left without saying anything."
+      }
+    ]
   },
   {
     "id": "n5-037",
     "grammar": "ないでください",
     "romaji": "naide kudasai",
     "meaning": "please don't do ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "ここで写真を撮らないでください。",
+        "en": "Please don't take photos here."
+      },
+      {
+        "ja": "心配しないでください。",
+        "en": "Please don't worry."
+      },
+      {
+        "ja": "遅くならないでくださいね。",
+        "en": "Please don't be late."
+      }
+    ]
   },
   {
     "id": "n5-038",
     "grammar": "ないといけない",
     "romaji": "naito ikenai",
     "meaning": "must do; have an obligation to do ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "明日までに宿題を出さないといけない。",
+        "en": "I have to submit my homework by tomorrow."
+      },
+      {
+        "ja": "毎日薬を飲まないといけません。",
+        "en": "I have to take medicine every day."
+      },
+      {
+        "ja": "もう行かないといけない。",
+        "en": "I have to go now."
+      }
+    ]
   },
   {
     "id": "n5-039",
     "grammar": "なくてもいい",
     "romaji": "naku temo ii",
     "meaning": "don't have to",
-    "examples": []
+    "examples": [
+      {
+        "ja": "明日は来なくてもいいですよ。",
+        "en": "You don't have to come tomorrow."
+      },
+      {
+        "ja": "全部食べなくてもいいです。",
+        "en": "You don't have to eat everything."
+      },
+      {
+        "ja": "急がなくてもいいですよ。",
+        "en": "You don't have to hurry."
+      }
+    ]
   },
   {
     "id": "n5-040",
     "grammar": "なくちゃ",
     "romaji": "nakucha",
     "meaning": "must do; need to; gotta do ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "もう寝なくちゃ。",
+        "en": "I gotta go to sleep."
+      },
+      {
+        "ja": "早く準備しなくちゃ。",
+        "en": "I gotta get ready soon."
+      },
+      {
+        "ja": "宿題しなくちゃ。",
+        "en": "I gotta do my homework."
+      }
+    ]
   },
   {
     "id": "n5-041",
     "grammar": "なくてはいけない",
     "romaji": "nakute wa ikenai",
     "meaning": "must do; need to do",
-    "examples": []
+    "examples": [
+      {
+        "ja": "毎日勉強しなくてはいけません。",
+        "en": "You must study every day."
+      },
+      {
+        "ja": "約束を守らなくてはいけない。",
+        "en": "You must keep your promise."
+      },
+      {
+        "ja": "薬を飲まなくてはいけません。",
+        "en": "You must take your medicine."
+      }
+    ]
   },
   {
     "id": "n5-042",
     "grammar": "なくてはならない",
     "romaji": "nakute wa naranai",
     "meaning": "must do; need to do ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "規則を守らなくてはならない。",
+        "en": "You must follow the rules."
+      },
+      {
+        "ja": "報告書を出さなくてはならない。",
+        "en": "I must submit the report."
+      },
+      {
+        "ja": "時間通りに来なくてはならない。",
+        "en": "You must come on time."
+      }
+    ]
   },
   {
     "id": "n5-043",
     "grammar": "なる",
     "romaji": "naru",
     "meaning": "to become",
-    "examples": []
+    "examples": [
+      {
+        "ja": "春になると暖かくなります。",
+        "en": "It gets warm when spring comes."
+      },
+      {
+        "ja": "日本語が上手になりました。",
+        "en": "Your Japanese has gotten good."
+      },
+      {
+        "ja": "大人になったら何になりたいですか。",
+        "en": "What do you want to become when you grow up?"
+      }
+    ]
   },
   {
     "id": "n5-044",
     "grammar": "んです",
     "romaji": "ndesu",
     "meaning": "to explain something; show emphasis",
-    "examples": []
+    "examples": [
+      {
+        "ja": "どうしたんですか。",
+        "en": "What happened?"
+      },
+      {
+        "ja": "実は、明日引っ越すんです。",
+        "en": "Actually, I'm moving tomorrow."
+      },
+      {
+        "ja": "お腹が痛いんです。",
+        "en": "My stomach hurts (explaining)."
+      }
+    ]
   },
   {
     "id": "n5-045",
     "grammar": "ね",
     "romaji": "ne",
     "meaning": "isn't it? right? eh?",
-    "examples": []
+    "examples": [
+      {
+        "ja": "いい天気ですね。",
+        "en": "Nice weather, isn't it?"
+      },
+      {
+        "ja": "この映画、面白いですね。",
+        "en": "This movie is interesting, isn't it?"
+      },
+      {
+        "ja": "日本語は難しいですね。",
+        "en": "Japanese is difficult, right?"
+      }
+    ]
   },
   {
     "id": "n5-046",
     "grammar": "に",
     "romaji": "ni",
     "meaning": "destination particle; in; at; on; to",
-    "examples": []
+    "examples": [
+      {
+        "ja": "学校に行きます。",
+        "en": "I go to school."
+      },
+      {
+        "ja": "七時に起きます。",
+        "en": "I wake up at 7 o'clock."
+      },
+      {
+        "ja": "月曜日に会議があります。",
+        "en": "There is a meeting on Monday."
+      }
+    ]
   },
   {
     "id": "n5-047",
     "grammar": "に行く（にいく）",
     "romaji": "ni iku",
     "meaning": "go to do ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "買い物に行きます。",
+        "en": "I'm going shopping."
+      },
+      {
+        "ja": "友達に会いに行きました。",
+        "en": "I went to see my friend."
+      },
+      {
+        "ja": "映画を見に行きませんか。",
+        "en": "Shall we go see a movie?"
+      }
+    ]
   },
   {
     "id": "n5-048",
     "grammar": "にする",
     "romaji": "ni suru",
     "meaning": "to decide on",
-    "examples": []
+    "examples": [
+      {
+        "ja": "コーヒーにします。",
+        "en": "I'll have coffee (I'll decide on coffee)."
+      },
+      {
+        "ja": "旅行先は京都にしましょう。",
+        "en": "Let's decide on Kyoto for our trip."
+      },
+      {
+        "ja": "何にしますか。",
+        "en": "What will you have?"
+      }
+    ]
   },
   {
     "id": "n5-049",
     "grammar": "の",
     "romaji": "no",
     "meaning": "possessive particle",
-    "examples": []
+    "examples": [
+      {
+        "ja": "これは私の本です。",
+        "en": "This is my book."
+      },
+      {
+        "ja": "日本語の先生はとても優しいです。",
+        "en": "The Japanese teacher is very kind."
+      },
+      {
+        "ja": "友達の家に行きました。",
+        "en": "I went to my friend's house."
+      }
+    ]
   },
   {
     "id": "n5-050",
     "grammar": "のです",
     "romaji": "no desu",
     "meaning": "to explain something; show emphasis",
-    "examples": []
+    "examples": [
+      {
+        "ja": "明日テストがあるのです。",
+        "en": "The thing is, there's a test tomorrow."
+      },
+      {
+        "ja": "電車が遅れたのです。",
+        "en": "It's because the train was delayed."
+      },
+      {
+        "ja": "どうして来なかったのですか。",
+        "en": "Why didn't you come? (asking for explanation)"
+      }
+    ]
   },
   {
     "id": "n5-051",
     "grammar": "のが下手（のがへた）",
     "romaji": "no ga heta",
     "meaning": "to be bad at doing something",
-    "examples": []
+    "examples": [
+      {
+        "ja": "私は料理を作るのが下手です。",
+        "en": "I'm bad at cooking."
+      },
+      {
+        "ja": "彼は絵を描くのが下手だ。",
+        "en": "He's bad at drawing."
+      },
+      {
+        "ja": "泳ぐのが下手です。",
+        "en": "I'm bad at swimming."
+      }
+    ]
   },
   {
     "id": "n5-052",
     "grammar": "のが上手（のがじょうず）",
     "romaji": "no ga jouzu",
     "meaning": "to be good at",
-    "examples": []
+    "examples": [
+      {
+        "ja": "彼女は歌うのが上手です。",
+        "en": "She's good at singing."
+      },
+      {
+        "ja": "日本語を話すのが上手ですね。",
+        "en": "You're good at speaking Japanese."
+      },
+      {
+        "ja": "料理を作るのが上手になりたい。",
+        "en": "I want to become good at cooking."
+      }
+    ]
   },
   {
     "id": "n5-053",
     "grammar": "のが好き（のがすき）",
     "romaji": "no ga suki",
     "meaning": "to like doing something",
-    "examples": []
+    "examples": [
+      {
+        "ja": "音楽を聴くのが好きです。",
+        "en": "I like listening to music."
+      },
+      {
+        "ja": "本を読むのが好きですか。",
+        "en": "Do you like reading books?"
+      },
+      {
+        "ja": "散歩するのが好きです。",
+        "en": "I like taking walks."
+      }
+    ]
   },
   {
     "id": "n5-054",
     "grammar": "の中で[A]が一番",
     "romaji": "no naka de ichiban",
     "meaning": "out of this group, [A] is best",
-    "examples": []
+    "examples": [
+      {
+        "ja": "果物の中でりんごが一番好きです。",
+        "en": "Among fruits, I like apples the best."
+      },
+      {
+        "ja": "スポーツの中でサッカーが一番楽しい。",
+        "en": "Among sports, soccer is the most fun."
+      },
+      {
+        "ja": "季節の中で春が一番好きです。",
+        "en": "Among the seasons, I like spring the most."
+      }
+    ]
   },
   {
     "id": "n5-055",
     "grammar": "ので",
     "romaji": "node",
     "meaning": "because of; given that; since ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "雨が降っているので、傘を持って行きます。",
+        "en": "Since it's raining, I'll bring an umbrella."
+      },
+      {
+        "ja": "明日は早いので、もう寝ます。",
+        "en": "Since tomorrow is early, I'll go to bed now."
+      },
+      {
+        "ja": "お腹が空いたので、何か食べましょう。",
+        "en": "Since I'm hungry, let's eat something."
+      }
+    ]
   },
   {
     "id": "n5-056",
     "grammar": "しかし",
     "romaji": "shikashi",
     "meaning": "but; however ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "勉強しました。しかし、テストは難しかった。",
+        "en": "I studied. However, the test was hard."
+      },
+      {
+        "ja": "安いです。しかし、品質はいいです。",
+        "en": "It's cheap. However, the quality is good."
+      },
+      {
+        "ja": "努力した。しかし、合格できなかった。",
+        "en": "I tried hard. However, I couldn't pass."
+      }
+    ]
   },
   {
     "id": "n5-057",
     "grammar": "それから",
     "romaji": "sore kara",
     "meaning": "and; and then; after that",
-    "examples": []
+    "examples": [
+      {
+        "ja": "朝ご飯を食べました。それから学校に行きました。",
+        "en": "I ate breakfast. And then I went to school."
+      },
+      {
+        "ja": "買い物をしました。それから映画を見ました。",
+        "en": "I went shopping. And then I watched a movie."
+      },
+      {
+        "ja": "まず手を洗って、それから食べてください。",
+        "en": "First wash your hands, and then please eat."
+      }
+    ]
   },
   {
     "id": "n5-058",
     "grammar": "そして",
     "romaji": "soshite",
     "meaning": "and; and then; thus",
-    "examples": []
+    "examples": [
+      {
+        "ja": "雨が降りました。そして試合は中止になりました。",
+        "en": "It rained. And so the game was cancelled."
+      },
+      {
+        "ja": "大学を卒業しました。そして会社に入りました。",
+        "en": "I graduated from university. And then I joined a company."
+      },
+      {
+        "ja": "たくさん練習しました。そして上手になりました。",
+        "en": "I practiced a lot. And then I got better."
+      }
+    ]
   },
   {
     "id": "n5-059",
     "grammar": "すぎる",
     "romaji": "sugiru",
     "meaning": "too much",
-    "examples": []
+    "examples": [
+      {
+        "ja": "食べすぎてお腹が痛い。",
+        "en": "I ate too much and my stomach hurts."
+      },
+      {
+        "ja": "この荷物は重すぎます。",
+        "en": "This luggage is too heavy."
+      },
+      {
+        "ja": "昨日は飲みすぎました。",
+        "en": "I drank too much yesterday."
+      }
+    ]
   },
   {
     "id": "n5-060",
     "grammar": "たことがある",
     "romaji": "ta koto ga aru",
     "meaning": "to have done something before",
-    "examples": []
+    "examples": [
+      {
+        "ja": "富士山に登ったことがあります。",
+        "en": "I have climbed Mt. Fuji before."
+      },
+      {
+        "ja": "日本に行ったことがありますか。",
+        "en": "Have you ever been to Japan?"
+      },
+      {
+        "ja": "納豆を食べたことがありません。",
+        "en": "I have never eaten natto."
+      }
+    ]
   },
   {
     "id": "n5-061",
@@ -704,14 +1328,40 @@
     "grammar": "たり～たり",
     "romaji": "tari~tari",
     "meaning": "do such things as A and B",
-    "examples": []
+    "examples": [
+      {
+        "ja": "週末は映画を見たり、買い物をしたりします。",
+        "en": "On weekends I do things like watch movies and go shopping."
+      },
+      {
+        "ja": "休みの日は本を読んだり、散歩したりしています。",
+        "en": "On days off I read books and take walks, among other things."
+      },
+      {
+        "ja": "パーティーで歌ったり踊ったりしました。",
+        "en": "At the party we sang and danced and such."
+      }
+    ]
   },
   {
     "id": "n5-063",
     "grammar": "てある",
     "romaji": "te aru",
     "meaning": "is/has been done (resulting state)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "窓が開けてあります。",
+        "en": "The window has been opened (and is still open)."
+      },
+      {
+        "ja": "テーブルの上にお皿が並べてある。",
+        "en": "Plates have been arranged on the table."
+      },
+      {
+        "ja": "もう予約してあります。",
+        "en": "The reservation has already been made."
+      }
+    ]
   },
   {
     "id": "n5-064",
@@ -746,49 +1396,140 @@
     "grammar": "てから",
     "romaji": "te kara",
     "meaning": "after doing ~",
-    "examples": []
+    "examples": [
+      {
+        "ja": "手を洗ってから食べてください。",
+        "en": "Please eat after washing your hands."
+      },
+      {
+        "ja": "宿題をしてから遊びに行きなさい。",
+        "en": "Go play after you finish your homework."
+      },
+      {
+        "ja": "日本に来てから日本語を勉強し始めました。",
+        "en": "I started studying Japanese after coming to Japan."
+      }
+    ]
   },
   {
     "id": "n5-066",
     "grammar": "てください",
     "romaji": "te kudasai",
     "meaning": "please do",
-    "examples": []
+    "examples": [
+      {
+        "ja": "もう一度言ってください。",
+        "en": "Please say it one more time."
+      },
+      {
+        "ja": "ここに名前を書いてください。",
+        "en": "Please write your name here."
+      },
+      {
+        "ja": "静かにしてください。",
+        "en": "Please be quiet."
+      }
+    ]
   },
   {
     "id": "n5-067",
     "grammar": "てはいけない",
     "romaji": "te wa ikenai",
     "meaning": "must not; may not; cannot",
-    "examples": []
+    "examples": [
+      {
+        "ja": "ここで泳いではいけません。",
+        "en": "You must not swim here."
+      },
+      {
+        "ja": "授業中に携帯を使ってはいけない。",
+        "en": "You must not use your phone during class."
+      },
+      {
+        "ja": "嘘をついてはいけません。",
+        "en": "You must not lie."
+      }
+    ]
   },
   {
     "id": "n5-068",
     "grammar": "てもいいです",
     "romaji": "temo ii desu",
     "meaning": "is OK to ~; may I ~?",
-    "examples": []
+    "examples": [
+      {
+        "ja": "写真を撮ってもいいですか。",
+        "en": "May I take a photo?"
+      },
+      {
+        "ja": "ここに座ってもいいですよ。",
+        "en": "It's OK to sit here."
+      },
+      {
+        "ja": "窓を開けてもいいですか。",
+        "en": "May I open the window?"
+      }
+    ]
   },
   {
     "id": "n5-069",
     "grammar": "と",
     "romaji": "to",
     "meaning": "and; with; as; connecting particle",
-    "examples": []
+    "examples": [
+      {
+        "ja": "パンとコーヒーを買いました。",
+        "en": "I bought bread and coffee."
+      },
+      {
+        "ja": "友達と映画を見ました。",
+        "en": "I watched a movie with my friend."
+      },
+      {
+        "ja": "春になると桜が咲きます。",
+        "en": "When spring comes, cherry blossoms bloom."
+      }
+    ]
   },
   {
     "id": "n5-070",
     "grammar": "とき",
     "romaji": "toki",
     "meaning": "when; at this time",
-    "examples": []
+    "examples": [
+      {
+        "ja": "子供のとき、よく海に行きました。",
+        "en": "When I was a child, I often went to the beach."
+      },
+      {
+        "ja": "困ったとき、先生に聞いてください。",
+        "en": "When you're in trouble, please ask the teacher."
+      },
+      {
+        "ja": "暇なとき、何をしますか。",
+        "en": "What do you do when you're free?"
+      }
+    ]
   },
   {
     "id": "n5-071",
     "grammar": "とても",
     "romaji": "totemo",
     "meaning": "very; awfully; exceedingly",
-    "examples": []
+    "examples": [
+      {
+        "ja": "今日はとても暑いです。",
+        "en": "It's very hot today."
+      },
+      {
+        "ja": "この映画はとても面白かった。",
+        "en": "This movie was very interesting."
+      },
+      {
+        "ja": "日本語はとても難しいです。",
+        "en": "Japanese is very difficult."
+      }
+    ]
   },
   {
     "id": "n5-072",
@@ -823,41 +1564,119 @@
     "grammar": "は",
     "romaji": "wa",
     "meaning": "topic marker",
-    "examples": []
+    "examples": [
+      {
+        "ja": "私は学生です。",
+        "en": "I am a student."
+      },
+      {
+        "ja": "東京は大きい街です。",
+        "en": "Tokyo is a big city."
+      },
+      {
+        "ja": "明日は日曜日です。",
+        "en": "Tomorrow is Sunday."
+      }
+    ]
   },
   {
     "id": "n5-074",
     "grammar": "は〜より・・・です",
     "romaji": "wa ~yori... desu",
     "meaning": "[A] is more ~ than [B]",
-    "examples": []
+    "examples": [
+      {
+        "ja": "東京は大阪より大きいです。",
+        "en": "Tokyo is bigger than Osaka."
+      },
+      {
+        "ja": "夏は冬より暑いです。",
+        "en": "Summer is hotter than winter."
+      },
+      {
+        "ja": "電車はバスより速いです。",
+        "en": "The train is faster than the bus."
+      }
+    ]
   },
   {
     "id": "n5-075",
     "grammar": "はどうですか",
     "romaji": "wa dou desu ka",
     "meaning": "how about; how is",
-    "examples": []
+    "examples": [
+      {
+        "ja": "日本語の勉強はどうですか。",
+        "en": "How is your Japanese study?"
+      },
+      {
+        "ja": "週末はどうでしたか。",
+        "en": "How was the weekend?"
+      },
+      {
+        "ja": "この本はどうですか。",
+        "en": "How about this book?"
+      }
+    ]
   },
   {
     "id": "n5-076",
     "grammar": "や",
     "romaji": "ya",
     "meaning": "and; or; connecting particle",
-    "examples": []
+    "examples": [
+      {
+        "ja": "机の上にペンや本があります。",
+        "en": "There are pens and books on the desk."
+      },
+      {
+        "ja": "りんごやバナナを買いました。",
+        "en": "I bought apples and bananas (and such)."
+      },
+      {
+        "ja": "週末は映画や買い物をしました。",
+        "en": "On the weekend I watched movies and went shopping (and such)."
+      }
+    ]
   },
   {
     "id": "n5-077",
     "grammar": "よ",
     "romaji": "yo",
     "meaning": "you know; emphasis (ending particle)",
-    "examples": []
+    "examples": [
+      {
+        "ja": "もう遅いですよ。",
+        "en": "It's already late, you know."
+      },
+      {
+        "ja": "気をつけてくださいよ。",
+        "en": "Please be careful!"
+      },
+      {
+        "ja": "明日は休みですよ。",
+        "en": "Tomorrow is a holiday, you know."
+      }
+    ]
   },
   {
     "id": "n5-078",
     "grammar": "より～ほうが",
     "romaji": "yori ~hou ga",
     "meaning": "[2] is more than [1]",
-    "examples": []
+    "examples": [
+      {
+        "ja": "バスより電車のほうが速いです。",
+        "en": "The train is faster than the bus."
+      },
+      {
+        "ja": "肉より魚のほうが好きです。",
+        "en": "I like fish more than meat."
+      },
+      {
+        "ja": "冬より夏のほうが好きです。",
+        "en": "I like summer more than winter."
+      }
+    ]
   }
 ]
