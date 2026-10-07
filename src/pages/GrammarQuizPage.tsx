@@ -1,7 +1,9 @@
+import { useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import type { GrammarQuestion } from "../hooks/useGrammarSession";
 import { useGrammarSession } from "../hooks/useGrammarSession";
 import { useGrammarQuizByLevel } from "../hooks/useGrammarQuiz";
+import { recordAction } from "../lib/streak";
 
 const levelColors: Record<string, { badge: string; correct: string; wrong: string; accent: string }> = {
   N5: {
@@ -58,6 +60,14 @@ function QuizContent({ level, questions }: { level: string; questions: GrammarQu
   const colors = levelColors[level] ?? levelColors["N5"];
   const { question, index, total, selected, correct, done, answer, next } =
     useGrammarSession(questions, 20);
+
+  const recorded = useRef(false);
+  useEffect(() => {
+    if (done && !recorded.current) {
+      recorded.current = true;
+      recordAction();
+    }
+  }, [done]);
 
   if (done) {
     const pct = Math.round((correct / total) * 100);

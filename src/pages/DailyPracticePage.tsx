@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
+import { recordAction } from "../lib/streak";
 
 // ── Types ───────────────────────────────────────────────────────────────────
 
@@ -181,6 +182,7 @@ export default function DailyPracticePage() {
   const handleNext = useCallback(() => {
     if (currentIdx + 1 >= items.length) {
       setFinished(true);
+      recordAction();
       const rec: DailyRecord = { date: new Date().toISOString().split("T")[0], score, total: TOTAL, level: level! };
       saveDailyRecord(rec);
       setDailyRecord(rec);

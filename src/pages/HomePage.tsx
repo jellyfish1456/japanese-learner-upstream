@@ -6,6 +6,8 @@ import { getArticlesByLevel } from "../data/shadowing";
 import DatasetCard from "../components/DatasetCard";
 import FilterBar from "../components/FilterBar";
 import { loadReviewList } from "../lib/storage";
+import StreakBar from "../components/StreakBar";
+import DailyGrammar from "../components/DailyGrammar";
 
 export default function HomePage() {
   const [categoryFilter, setCategoryFilter] = useState("");
@@ -35,6 +37,25 @@ export default function HomePage() {
 
   return (
     <div>
+      {/* Streak + Daily Grammar + Quick Quiz */}
+      <StreakBar />
+      <DailyGrammar />
+
+      {/* Quick Quiz */}
+      <button
+        onClick={() => navigate("/quick-quiz")}
+        className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white rounded-2xl p-5 flex items-center gap-4 transition-colors tap-active shadow-sm mb-8"
+      >
+        <div className="text-4xl">⚡</div>
+        <div className="text-left">
+          <div className="text-lg font-bold">速測 5 題</div>
+          <div className="text-xs opacity-80 mt-0.5">隨機單字 + 文法，30 秒搞定</div>
+        </div>
+        <svg className="w-5 h-5 ml-auto opacity-60" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+        </svg>
+      </button>
+
       <div className="mb-6">
         <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1">學習集</h2>
         <p className="text-sm text-gray-500 dark:text-gray-400">選擇一個學習集開始複習</p>

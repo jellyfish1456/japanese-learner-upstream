@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useListeningSession } from "../hooks/useListeningSession";
+import { recordAction } from "../lib/streak";
 
 const levelColors: Record<string, { badge: string; correct: string; wrong: string }> = {
   N5: {
@@ -29,6 +30,14 @@ export default function ListeningSessionPage() {
 
   const { question, index, total, selected, correct, done, answer, next, replay } =
     useListeningSession(upperLevel, 100, speed);
+
+  const recorded = useRef(false);
+  useEffect(() => {
+    if (done && !recorded.current) {
+      recorded.current = true;
+      recordAction();
+    }
+  }, [done]);
 
   if (!question && !done) {
     return (
