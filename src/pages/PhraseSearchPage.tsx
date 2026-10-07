@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { shadowingArticles } from "../data/shadowing";
 import type { ShadowingArticle } from "../data/shadowing";
+import type { GrammarLesson, GrammarExample } from "../hooks/useGrammarLessons";
 
 interface DialogueLine {
   speaker: string;
@@ -28,10 +29,35 @@ const dialogueModules = import.meta.glob<DialogueDataset>(
   { eager: true, import: "default" }
 );
 
-const allDialogues: { level: string; dialogue: Dialogue; }[] = [];
+const allDialogues: { level: string; dialogue: Dialogue }[] = [];
 for (const mod of Object.values(dialogueModules)) {
   for (const d of mod.dialogues) {
     allDialogues.push({ level: mod.level, dialogue: d });
+  }
+}
+
+interface GrammarLessonDataset {
+  default?: GrammarLesson[];
+}
+
+const grammarModules = import.meta.glob<GrammarLessonDataset>(
+  "../../data/grammar-lessons/*.json",
+  { eager: true }
+);
+
+function getLevelFromPath(path: string): string {
+  const match = (path.split("/").pop() ?? "").match(/grammar-lessons-(n\d+)\.json/i);
+  return match ? match[1].toUpperCase() : "";
+}
+
+const allGrammar: { level: string; lesson: GrammarLesson }[] = [];
+for (const [path, mod] of Object.entries(grammarModules)) {
+  const level = getLevelFromPath(path);
+  const lessons = (mod as { default?: GrammarLesson[] }).default ?? (mod as unknown as GrammarLesson[]);
+  if (Array.isArray(lessons)) {
+    for (const lesson of lessons) {
+      allGrammar.push({ level, lesson });
+    }
   }
 }
 
@@ -53,7 +79,14 @@ interface DialogueMatch {
   zh: string;
 }
 
-type SearchMatch = ShadowingMatch | DialogueMatch;
+interface GrammarMatch {
+  type: "grammar";
+  level: string;
+  lesson: GrammarLesson;
+  example: GrammarExample;
+}
+
+type SearchMatch = ShadowingMatch | DialogueMatch | GrammarMatch;
 
 function highlightMatch(text: string, query: string): React.ReactNode {
   if (!query) return text;
@@ -120,20 +153,49 @@ export default function PhraseSearchPage() {
       }
     }
 
+    for (const { level, lesson } of allGrammar) {
+      for (const ex of lesson.examples) {
+        if (ex.ja.includes(q)) {
+          matches.push({
+            type: "grammar",
+            level,
+            lesson,
+            example: ex,
+          });
+        }
+      }
+    }
+
     return matches;
   }, [submitted]);
 
   const shadowingMatches = results.filter((r): r is ShadowingMatch => r.type === "shadowing");
   const dialogueMatches = results.filter((r): r is DialogueMatch => r.type === "dialogue");
+  const grammarMatches = results.filter((r): r is GrammarMatch => r.type === "grammar");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(query.trim());
   };
 
+  const immersionKitUrl = submitted
+    ? `https://www.immersionkit.com/dictionary?keyword=${encodeURIComponent(submitted)}`
+    : "";
+
   const youtubeSearchUrl = submitted
     ? `https://www.youtube.com/results?search_query=${encodeURIComponent(submitted + " 日本語")}`
     : "";
+
+  const openImmersionKit = () => {
+    if (!immersionKitUrl) return;
+    window.open(immersionKitUrl, "immersionkit", "width=900,height=700,scrollbars=yes,resizable=yes");
+  };
+
+  const summaryParts: string[] = [];
+  if (shadowingMatches.length > 0) summaryParts.push(`跟讀 ${shadowingMatches.length}`);
+  if (dialogueMatches.length > 0) summaryParts.push(`對話 ${dialogueMatches.length}`);
+  if (grammarMatches.length > 0) summaryParts.push(`文法 ${grammarMatches.length}`);
+  const totalInternal = results.length;
 
   return (
     <div className="pb-12">
@@ -149,7 +211,7 @@ export default function PhraseSearchPage() {
 
       <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-1">短語搜尋</h1>
       <p className="text-sm text-gray-500 dark:text-gray-400 mb-5">
-        輸入日文短語，從跟讀文章和對話中找出包含該用法的句子
+        輸入日文短語，從跟讀文章、對話和文法例句中搜尋
       </p>
 
       <form onSubmit={handleSubmit} className="flex gap-2 mb-6">
@@ -173,10 +235,8 @@ export default function PhraseSearchPage() {
         <>
           {/* Summary */}
           <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
-            找到 <span className="font-bold text-gray-900 dark:text-gray-100">{results.length}</span> 筆結果
-            {shadowingMatches.length > 0 && <span>（跟讀 {shadowingMatches.length} 筆</span>}
-            {dialogueMatches.length > 0 && <span>{shadowingMatches.length > 0 ? "、" : "（"}對話 {dialogueMatches.length} 筆</span>}
-            {results.length > 0 && "）"}
+            站內找到 <span className="font-bold text-gray-900 dark:text-gray-100">{totalInternal}</span> 筆
+            {summaryParts.length > 0 && `（${summaryParts.join("、")}）`}
           </div>
 
           {/* Shadowing results */}
@@ -241,27 +301,74 @@ export default function PhraseSearchPage() {
             </div>
           )}
 
-          {/* YouTube search link */}
+          {/* Grammar example results */}
+          {grammarMatches.length > 0 && (
+            <div className="mb-8">
+              <h2 className="text-lg font-bold text-gray-900 dark:text-gray-50 mb-3 flex items-center gap-2">
+                <span>📖</span> 文法例句
+              </h2>
+              <div className="space-y-3">
+                {grammarMatches.map((m, i) => (
+                  <button
+                    key={`g-${i}`}
+                    onClick={() => navigate(`/grammar-lessons/${m.level.toLowerCase()}`)}
+                    className="w-full text-left bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 tap-active hover:border-purple-400 dark:hover:border-purple-500 transition-colors"
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 font-semibold">
+                        {m.level}
+                      </span>
+                      <span className="text-xs font-medium text-gray-600 dark:text-gray-300">{m.lesson.grammar}</span>
+                      <span className="text-xs text-gray-400 dark:text-gray-500">— {m.lesson.meaning}</span>
+                    </div>
+                    <p className="text-base text-gray-900 dark:text-gray-100 leading-relaxed mb-1">
+                      {highlightMatch(m.example.ja, submitted)}
+                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{m.example.en}</p>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Immersion Kit - popup */}
           <div className="mt-6">
-            <h2 className="text-lg font-bold text-gray-900 dark:text-gray-50 mb-3 flex items-center gap-2">
-              <span>📺</span> 外部影片搜尋
+            <h2 className="text-lg font-bold text-gray-900 dark:text-gray-50 mb-2 flex items-center gap-2">
+              <span>🎬</span> 動漫 / 日劇例句
             </h2>
-            <a
-              href={youtubeSearchUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block w-full bg-red-500 hover:bg-red-600 text-white rounded-xl p-4 text-center font-semibold transition-colors tap-active"
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+              Immersion Kit — 50 萬筆動漫、日劇、遊戲的真實例句，附語音和截圖
+            </p>
+            <button
+              onClick={openImmersionKit}
+              className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-xl p-4 font-semibold transition-all tap-active flex items-center justify-center gap-2"
             >
-              在 YouTube 搜尋「{submitted}」的教學影片 →
-            </a>
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+              </svg>
+              在 Immersion Kit 搜尋「{submitted}」
+            </button>
+          </div>
+
+          {/* YouTube search link */}
+          <div className="mt-4">
+            <button
+              onClick={() => window.open(youtubeSearchUrl, "youtube", "width=1000,height=700,scrollbars=yes,resizable=yes")}
+              className="w-full bg-red-500 hover:bg-red-600 text-white rounded-xl p-4 text-center font-semibold transition-colors tap-active flex items-center justify-center gap-2"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+              </svg>
+              在 YouTube 搜尋「{submitted}」
+            </button>
           </div>
 
           {/* No results */}
-          {results.length === 0 && (
+          {totalInternal === 0 && (
             <div className="text-center py-12 text-gray-400 dark:text-gray-500">
               <div className="text-4xl mb-3">🔍</div>
               <p className="mb-2">站內沒有找到包含「{submitted}」的句子</p>
-              <p className="text-sm">試試上方的 YouTube 搜尋，或換一個短語</p>
+              <p className="text-sm">試試上方的 Immersion Kit 或 YouTube 搜尋</p>
             </div>
           )}
         </>
