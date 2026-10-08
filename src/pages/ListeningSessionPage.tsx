@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useListeningSession } from "../hooks/useListeningSession";
 import { recordAction } from "../lib/streak";
+import { getJapaneseVoices, getSavedVoiceName, saveVoiceName, pickBestVoice } from "../lib/ttsVoice";
 
 const levelColors: Record<string, { badge: string; correct: string; wrong: string }> = {
   N5: {
@@ -26,7 +27,41 @@ export default function ListeningSessionPage() {
   const navigate = useNavigate();
   const upperLevel = (level ?? "").toUpperCase();
   const colors = levelColors[upperLevel] ?? levelColors["N5"];
-  const [speed, setSpeed] = useState<number>(1.0);
+  const [speed, setSpeed] = useState<number>(0.9);
+  const [showVoicePicker, setShowVoicePicker] = useState(false);
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [currentVoice, setCurrentVoice] = useState<string>(getSavedVoiceName() ?? "");
+
+  useEffect(() => {
+    const load = () => {
+      const v = getJapaneseVoices();
+      setVoices(v);
+      if (!currentVoice && v.length > 0) {
+        const best = pickBestVoice();
+        if (best) setCurrentVoice(best.name);
+      }
+    };
+    load();
+    window.speechSynthesis.onvoiceschanged = load;
+    return () => { window.speechSynthesis.onvoiceschanged = null; };
+  }, []);
+
+  const previewVoice = (voiceName: string) => {
+    const voice = voices.find((v) => v.name === voiceName);
+    if (!voice) return;
+    window.speechSynthesis.cancel();
+    const utt = new SpeechSynthesisUtterance("こんにちは、日本語の練習です。");
+    utt.lang = "ja-JP";
+    utt.rate = speed;
+    utt.voice = voice;
+    window.speechSynthesis.speak(utt);
+  };
+
+  const selectVoice = (voiceName: string) => {
+    setCurrentVoice(voiceName);
+    saveVoiceName(voiceName);
+    previewVoice(voiceName);
+  };
 
   const { question, index, total, selected, correct, done, answer, next, replay } =
     useListeningSession(upperLevel, 100, speed);
@@ -139,6 +174,39 @@ export default function ListeningSessionPage() {
               {s}x
             </button>
           ))}
+        </div>
+
+        {/* Voice picker */}
+        <div className="mt-3">
+          <button
+            onClick={() => setShowVoicePicker(!showVoicePicker)}
+            className="text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+          >
+            🔊 {currentVoice ? `聲音：${currentVoice.replace(/^(Google |Microsoft |Apple )/, "")}` : "選擇聲音"}{" "}
+            <span className={`inline-block transition-transform ${showVoicePicker ? "rotate-180" : ""}`}>▾</span>
+          </button>
+          {showVoicePicker && voices.length > 0 && (
+            <div className="mt-2 max-h-40 overflow-y-auto space-y-1 text-left">
+              {voices.map((v) => (
+                <button
+                  key={v.name}
+                  onClick={() => selectVoice(v.name)}
+                  className={`w-full text-left px-3 py-2 rounded-lg text-xs transition-colors tap-active ${
+                    currentVoice === v.name
+                      ? "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-bold"
+                      : "bg-gray-50 dark:bg-gray-700/50 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  }`}
+                >
+                  <span>{v.name.replace(/^(Google |Microsoft |Apple )/, "")}</span>
+                  {!v.localService && <span className="ml-1 text-[10px] text-green-500">雲端</span>}
+                  {v.localService && <span className="ml-1 text-[10px] text-gray-400">本地</span>}
+                </button>
+              ))}
+            </div>
+          )}
+          {showVoicePicker && voices.length === 0 && (
+            <p className="mt-2 text-xs text-gray-400">未偵測到日文聲音</p>
+          )}
         </div>
 
         {/* Reveal Japanese after answering */}

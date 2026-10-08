@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useDialoguesByLevel } from "./useDialogues";
 import type { DialogueLine } from "../types/dialogue";
+import { pickBestVoice } from "../lib/ttsVoice";
 
 export interface ListeningQuestion {
   japanese: string;
@@ -67,7 +68,7 @@ export function useListeningSession(level: string, questionCount = 10, speed = 1
     const utt = new SpeechSynthesisUtterance(text);
     utt.lang = "ja-JP";
     utt.rate = speedRef.current;
-    const voice = window.speechSynthesis.getVoices().find((v) => v.lang.startsWith("ja"));
+    const voice = pickBestVoice();
     if (voice) utt.voice = voice;
     synthRef.current = utt;
     window.speechSynthesis.speak(utt);
