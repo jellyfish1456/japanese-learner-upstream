@@ -1,0 +1,467 @@
+{
+  "level": "N4",
+  "passages": [
+    {
+      "id": "n4-tg-p1",
+      "title": "日本の 電車　ソムチャイ",
+      "text": "日本に 来て 一番 おどろいた ことは、電車が 時間 （１） 来る ことです。わたしの 国では、電車が 十分や 二十分 遅れる ことは めずらしく ありません。（２）、日本では 一分 遅れただけでも、「電車が 遅れて、申し訳ございません」と いう アナウンスが あります。\nまた、日本の 電車の 中は とても 静かです。電話で 話す 人は ほとんど いません。わたしも 最初は 知りませんでしたが、今は 電車の 中で 電話を （３） ように して います。\n日本の 電車は 便利ですが、朝の 電車は とても こみます。わたしは 毎朝 こんだ 電車に 乗るのが 大変です。（４）、来月から 学校の 近くに 引っ越す ことに しました。"
+    },
+    {
+      "id": "n4-tg-p2",
+      "title": "わたしの 趣味　キム・ジヨン",
+      "text": "わたしの 趣味は 料理です。子どもの ころ、よく 母が 料理を する ところを 見て いました。母は いつも 「料理は 楽しいよ」と 言って いました。それで、わたしも 料理に 興味を （１）。\n高校生の とき、初めて 一人で カレーを 作りました。でも、塩を 入れすぎて、とても からく （２）。家族は 「おいしい」と 言って 全部 食べて くれましたが、わたしは 恥ずかしかったです。\n今は 毎週 日曜日に 新しい 料理を 作って みます。インターネットで 作り方を 調べる ことも あります。来年は 料理教室に （３） と 思って います。いつか 自分の レストランを 開く のが わたしの （４） です。"
+    }
+  ],
+  "questions": [
+    {
+      "id": "n4-gf-001",
+      "type": "GRAMMAR_FORM",
+      "prompt": "空が 暗く なって きました。雨が 降り（　　）です。",
+      "choices": [
+        "らしい",
+        "みたい",
+        "そう",
+        "よう"
+      ],
+      "answer": 2,
+      "explanation": "Verb stem + そうです means \"looks like it's about to\": 降りそうです."
+    },
+    {
+      "id": "n4-gf-002",
+      "type": "GRAMMAR_FORM",
+      "prompt": "この 本は やさしいので、子ども（　　） 読めます。",
+      "choices": [
+        "ばかり",
+        "でも",
+        "しか",
+        "まで"
+      ],
+      "answer": 1,
+      "explanation": "〜でも means \"even\": even a child can read it."
+    },
+    {
+      "id": "n4-gf-003",
+      "type": "GRAMMAR_FORM",
+      "prompt": "先生に 作文を （　　）。",
+      "choices": [
+        "見て いただきました",
+        "見て さしあげました",
+        "見て くださいました",
+        "見て あげました"
+      ],
+      "answer": 0,
+      "explanation": "Person に 〜て いただく means you received a favor from a superior. くださる would need 先生が."
+    },
+    {
+      "id": "n4-gf-004",
+      "type": "GRAMMAR_FORM",
+      "prompt": "窓が （　　） いますね。だれが 開けたんですか。",
+      "choices": [
+        "開けて",
+        "開いた",
+        "開けた",
+        "開いて"
+      ],
+      "answer": 3,
+      "explanation": "The state of the window uses the intransitive verb + て いる: 窓が 開いて いる."
+    },
+    {
+      "id": "n4-gf-005",
+      "type": "GRAMMAR_FORM",
+      "prompt": "明日 雨が （　　）、ピクニックは 中止です。",
+      "choices": [
+        "降るのに",
+        "降るし",
+        "降ったら",
+        "降っても"
+      ],
+      "answer": 2,
+      "explanation": "〜たら states a condition: if it rains, the picnic is cancelled."
+    },
+    {
+      "id": "n4-gf-006",
+      "type": "GRAMMAR_FORM",
+      "prompt": "弟は 掃除を したくなかったのに、母に 部屋を 掃除（　　）。",
+      "choices": [
+        "して くれました",
+        "させられました",
+        "させました",
+        "して あげました"
+      ],
+      "answer": 1,
+      "explanation": "The causative-passive させられる means he was made to clean."
+    },
+    {
+      "id": "n4-gf-007",
+      "type": "GRAMMAR_FORM",
+      "prompt": "日本へ 来て から、すしが 食べられる （　　） なりました。",
+      "choices": [
+        "ように",
+        "ことに",
+        "ために",
+        "そうに"
+      ],
+      "answer": 0,
+      "explanation": "〜ように なる describes a change in ability or habit."
+    },
+    {
+      "id": "n4-gf-008",
+      "type": "GRAMMAR_FORM",
+      "prompt": "母「ご飯の 前に 手を （　　） なさい。」",
+      "choices": [
+        "洗って",
+        "洗う",
+        "洗え",
+        "洗い"
+      ],
+      "answer": 3,
+      "explanation": "Verb stem + なさい is a command used by parents and teachers."
+    },
+    {
+      "id": "n4-gf-009",
+      "type": "GRAMMAR_FORM",
+      "prompt": "この かばんは 高すぎて、わたしには （　　）。",
+      "choices": [
+        "買われません",
+        "買っては いけません",
+        "買えません",
+        "買わせません"
+      ],
+      "answer": 2,
+      "explanation": "The potential form 買えない means \"can't afford to buy\"."
+    },
+    {
+      "id": "n4-gf-010",
+      "type": "GRAMMAR_FORM",
+      "prompt": "田中さんは 来ないと 言って いましたから、たぶん 来ない （　　）。",
+      "choices": [
+        "ください",
+        "ましょう",
+        "つもりです",
+        "でしょう"
+      ],
+      "answer": 3,
+      "explanation": "たぶん 〜でしょう expresses a guess."
+    },
+    {
+      "id": "n4-gf-011",
+      "type": "GRAMMAR_FORM",
+      "prompt": "今 ご飯を 食べた （　　） なので、おなかが いっぱいです。",
+      "choices": [
+        "ながら",
+        "ほど",
+        "ばかり",
+        "まま"
+      ],
+      "answer": 2,
+      "explanation": "〜た ばかり means \"have just done\"."
+    },
+    {
+      "id": "n4-gf-012",
+      "type": "GRAMMAR_FORM",
+      "prompt": "電気を つけた （　　） 寝て しまいました。",
+      "choices": [
+        "あいだ",
+        "まま",
+        "ばかり",
+        "ところ"
+      ],
+      "answer": 1,
+      "explanation": "〜た まま means \"leaving it as it is\": fell asleep with the light on."
+    },
+    {
+      "id": "n4-gf-013",
+      "type": "GRAMMAR_FORM",
+      "prompt": "宿題を （　　） あとで、テレビを 見ます。",
+      "choices": [
+        "した",
+        "する",
+        "して",
+        "し"
+      ],
+      "answer": 0,
+      "explanation": "〜た あとで means \"after doing\" and takes the past form."
+    },
+    {
+      "id": "n4-gf-014",
+      "type": "GRAMMAR_FORM",
+      "prompt": "わたしは 日本の アニメに 興味が （　　）。",
+      "choices": [
+        "います",
+        "します",
+        "なります",
+        "あります"
+      ],
+      "answer": 3,
+      "explanation": "The set phrase is 〜に 興味が ある (to be interested in)."
+    },
+    {
+      "id": "n4-gf-015",
+      "type": "GRAMMAR_FORM",
+      "prompt": "この 料理は 作り（　　）が 簡単です。",
+      "choices": [
+        "所",
+        "事",
+        "方",
+        "物"
+      ],
+      "answer": 2,
+      "explanation": "Verb stem + 方 (かた) means \"the way of doing\": 作り方."
+    },
+    {
+      "id": "n4-gf-016",
+      "type": "GRAMMAR_FORM",
+      "prompt": "すみません、この 辞書を （　　） くださいませんか。",
+      "choices": [
+        "借りられて",
+        "貸して",
+        "借りて",
+        "貸させて"
+      ],
+      "answer": 1,
+      "explanation": "You ask the other person to lend it: 貸して ください."
+    },
+    {
+      "id": "n4-gf-017",
+      "type": "GRAMMAR_FORM",
+      "prompt": "地震の ときは、エレベーターを 使っては （　　）。",
+      "choices": [
+        "いけません",
+        "いいです",
+        "かまいません",
+        "ありません"
+      ],
+      "answer": 0,
+      "explanation": "〜ては いけない means \"must not\"."
+    },
+    {
+      "id": "n4-gf-018",
+      "type": "GRAMMAR_FORM",
+      "prompt": "夏休みに 国へ 帰る （　　）です。",
+      "choices": [
+        "ほう",
+        "ばかり",
+        "ながら",
+        "つもり"
+      ],
+      "answer": 3,
+      "explanation": "Dictionary form + つもり states your plan or intention."
+    },
+    {
+      "id": "n4-gf-019",
+      "type": "GRAMMAR_FORM",
+      "prompt": "ニュースに よると、明日は 雪が 降る （　　）。",
+      "choices": [
+        "ことです",
+        "ためです",
+        "そうです",
+        "つもりです"
+      ],
+      "answer": 2,
+      "explanation": "〜に よると 〜そうです reports hearsay: \"according to the news\"."
+    },
+    {
+      "id": "n4-gf-020",
+      "type": "GRAMMAR_FORM",
+      "prompt": "もっと 早く 起きれ（　　）、電車に 間に合ったのに。",
+      "choices": [
+        "て",
+        "と",
+        "ても",
+        "ば"
+      ],
+      "answer": 3,
+      "explanation": "The conditional 起きれば + のに expresses regret: if only I had got up earlier."
+    },
+    {
+      "id": "n4-so-001",
+      "type": "SENTENCE_ORDER",
+      "prompt": "わたしは 一度 ＿＿＿ ＿＿＿ ★ ＿＿＿ が あります。",
+      "choices": [
+        "こと",
+        "登った",
+        "富士山",
+        "に"
+      ],
+      "answer": 1,
+      "explanation": "わたしは 一度 富士山 に 登った こと が あります (I have climbed Mt. Fuji once). The ★ is 登った."
+    },
+    {
+      "id": "n4-so-002",
+      "type": "SENTENCE_ORDER",
+      "prompt": "この ＿＿＿ ＿＿＿ ★ ＿＿＿ 教えて ください。",
+      "choices": [
+        "もう",
+        "漢字の",
+        "読み方を",
+        "一度"
+      ],
+      "answer": 0,
+      "explanation": "この 漢字の 読み方を もう 一度 教えて ください. The ★ is もう."
+    },
+    {
+      "id": "n4-so-003",
+      "type": "SENTENCE_ORDER",
+      "prompt": "雨が ＿＿＿ ＿＿＿ ★ ＿＿＿ 出かけました。",
+      "choices": [
+        "降って",
+        "いた",
+        "かさを 持たずに",
+        "のに"
+      ],
+      "answer": 3,
+      "explanation": "雨が 降って いた のに かさを 持たずに 出かけました (went out without an umbrella even though it was raining). The ★ is のに."
+    },
+    {
+      "id": "n4-so-004",
+      "type": "SENTENCE_ORDER",
+      "prompt": "母が ＿＿＿ ＿＿＿ ★ ＿＿＿ おいしかったです。",
+      "choices": [
+        "くれた",
+        "とても",
+        "ケーキは",
+        "作って"
+      ],
+      "answer": 2,
+      "explanation": "母が 作って くれた ケーキは とても おいしかったです. The ★ is ケーキは."
+    },
+    {
+      "id": "n4-so-005",
+      "type": "SENTENCE_ORDER",
+      "prompt": "この 服は ＿＿＿ ＿＿＿ ★ ＿＿＿ ので、買いませんでした。",
+      "choices": [
+        "高すぎる",
+        "けれど",
+        "デザインは",
+        "いい"
+      ],
+      "answer": 1,
+      "explanation": "この 服は デザインは いい けれど 高すぎる ので、買いませんでした. The ★ is けれど."
+    },
+    {
+      "id": "n4-so-006",
+      "type": "SENTENCE_ORDER",
+      "prompt": "日本語が ＿＿＿ ＿＿＿ ★ ＿＿＿ 練習して います。",
+      "choices": [
+        "ように",
+        "上手に",
+        "話せる",
+        "毎日"
+      ],
+      "answer": 0,
+      "explanation": "日本語が 上手に 話せる ように 毎日 練習して います (I practice every day so that I can speak Japanese well). The ★ is ように."
+    },
+    {
+      "id": "n4-tg-001",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（１）",
+      "choices": [
+        "ほどに",
+        "どおりに",
+        "までに",
+        "ように"
+      ],
+      "answer": 1,
+      "explanation": "時間どおりに means exactly on time.",
+      "passageId": "n4-tg-p1"
+    },
+    {
+      "id": "n4-tg-002",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（２）",
+      "choices": [
+        "しかし",
+        "そして",
+        "だから",
+        "それに"
+      ],
+      "answer": 0,
+      "explanation": "The writer contrasts trains back home with trains in Japan: しかし.",
+      "passageId": "n4-tg-p1"
+    },
+    {
+      "id": "n4-tg-003",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（３）",
+      "choices": [
+        "かける",
+        "かけた",
+        "かけて",
+        "かけない"
+      ],
+      "answer": 3,
+      "explanation": "〜ない ように して いる means making an effort not to do something: not making calls on the train.",
+      "passageId": "n4-tg-p1"
+    },
+    {
+      "id": "n4-tg-004",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（４）",
+      "choices": [
+        "ところで",
+        "または",
+        "それで",
+        "しかし"
+      ],
+      "answer": 2,
+      "explanation": "Crowded trains are the reason for the move: それで (so, therefore).",
+      "passageId": "n4-tg-p1"
+    },
+    {
+      "id": "n4-tg-005",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（１）",
+      "choices": [
+        "持って いきました",
+        "持つように なりました",
+        "持つことに しました",
+        "持たせました"
+      ],
+      "answer": 1,
+      "explanation": "〜ように なる shows a gradual change: she came to be interested in cooking.",
+      "passageId": "n4-tg-p2"
+    },
+    {
+      "id": "n4-tg-006",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（２）",
+      "choices": [
+        "なって しまいました",
+        "なって おきました",
+        "なって みました",
+        "なって あげました"
+      ],
+      "answer": 0,
+      "explanation": "〜て しまう shows an unwanted result: it ended up too salty.",
+      "passageId": "n4-tg-p2"
+    },
+    {
+      "id": "n4-tg-007",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（３）",
+      "choices": [
+        "通った",
+        "通って",
+        "通わない",
+        "通おう"
+      ],
+      "answer": 3,
+      "explanation": "The volitional form + と 思って いる states a plan: 通おうと 思って います.",
+      "passageId": "n4-tg-p2"
+    },
+    {
+      "id": "n4-tg-008",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（４）",
+      "choices": [
+        "経験",
+        "意見",
+        "夢",
+        "心配"
+      ],
+      "answer": 2,
+      "explanation": "Opening her own restaurant someday is her dream (夢).",
+      "passageId": "n4-tg-p2"
+    }
+  ]
+}

@@ -1,0 +1,368 @@
+{
+  "level": "N3",
+  "passages": [
+    {
+      "id": "n3-tg-p1",
+      "title": "ごみの 分別　ルイス・ガルシア",
+      "text": "日本に 来て、ごみの 捨て方が 複雑な ことに 驚いた。わたしの 住んで いる 町では、ごみを 「燃える ごみ」「燃えない ごみ」「資源ごみ」などに 分けなければ ならない。（１）、ごみを 出す 曜日も 決まって いる。\n最初は どの ごみが どれに 入るのか わからず、何度も 間違えた。ある 日、間違えて 出した ごみ袋に 「回収できません」と いう 紙が （２） 戻って きた。とても 恥ずかしかった。\nそこで、町の ホームページで 調べたり、となりの 人に 聞いたり して、少しずつ 覚えて いった。今では 間違える ことは ほとんど （３）。\n面倒だと 思う 人も いるかもしれないが、分別する ことで ごみが 減り、資源を 再利用する ことが できる。わたしの 国でも、こうした 取り組みが （４） と 思う。国に 帰ったら、家族にも 日本の 方法を （５） つもりだ。"
+    }
+  ],
+  "questions": [
+    {
+      "id": "n3-gf-001",
+      "type": "GRAMMAR_FORM",
+      "prompt": "彼は 日本に 十年も 住んで いる （　　）、日本語が あまり 話せない。",
+      "choices": [
+        "わりに",
+        "ために",
+        "とおりに",
+        "ように"
+      ],
+      "answer": 0,
+      "explanation": "〜わりに means \"considering\": he can't speak much Japanese considering he has lived there ten years."
+    },
+    {
+      "id": "n3-gf-002",
+      "type": "GRAMMAR_FORM",
+      "prompt": "雨が 降り（　　） うちに、帰りましょう。",
+      "choices": [
+        "出す",
+        "出した",
+        "出して",
+        "出さない"
+      ],
+      "answer": 3,
+      "explanation": "〜ない うちに means \"before something happens\": before it starts raining."
+    },
+    {
+      "id": "n3-gf-003",
+      "type": "GRAMMAR_FORM",
+      "prompt": "先生の おかげで、試験に 合格する （　　）。",
+      "choices": [
+        "ように しました",
+        "わけが ありません",
+        "ことが できました",
+        "ことに しました"
+      ],
+      "answer": 2,
+      "explanation": "〜ことが できる means \"was able to\": thanks to the teacher I was able to pass."
+    },
+    {
+      "id": "n3-gf-004",
+      "type": "GRAMMAR_FORM",
+      "prompt": "子どもの （　　）、よく この 川で 泳いだ ものだ。",
+      "choices": [
+        "ばかり",
+        "ころ",
+        "うち",
+        "あいだに"
+      ],
+      "answer": 1,
+      "explanation": "子どもの ころ means \"when I was a child\"; 〜た ものだ recalls past habits."
+    },
+    {
+      "id": "n3-gf-005",
+      "type": "GRAMMAR_FORM",
+      "prompt": "彼女は 何も 知らない （　　） 顔を して いた。",
+      "choices": [
+        "ような",
+        "らしい",
+        "そうな",
+        "ために"
+      ],
+      "answer": 0,
+      "explanation": "〜ような 顔 means \"a face as if\"."
+    },
+    {
+      "id": "n3-gf-006",
+      "type": "GRAMMAR_FORM",
+      "prompt": "この 薬は 一日 三回 飲む （　　） なって います。",
+      "choices": [
+        "ように",
+        "ために",
+        "ものに",
+        "ことに"
+      ],
+      "answer": 3,
+      "explanation": "〜ことに なって いる states a rule or arrangement."
+    },
+    {
+      "id": "n3-gf-007",
+      "type": "GRAMMAR_FORM",
+      "prompt": "部長「この 書類、明日までに （　　） くれないか。」",
+      "choices": [
+        "作らせて",
+        "作って いって",
+        "作って おいて",
+        "作られて"
+      ],
+      "answer": 2,
+      "explanation": "〜て おく means to do something in advance, ready for later."
+    },
+    {
+      "id": "n3-gf-008",
+      "type": "GRAMMAR_FORM",
+      "prompt": "母に 「早く 寝なさい」と （　　）。",
+      "choices": [
+        "言った",
+        "言われた",
+        "言わせた",
+        "言って あげた"
+      ],
+      "answer": 1,
+      "explanation": "Person に 〜られる is the passive: I was told by my mother."
+    },
+    {
+      "id": "n3-gf-009",
+      "type": "GRAMMAR_FORM",
+      "prompt": "彼が 来る （　　） どうか、まだ わからない。",
+      "choices": [
+        "か",
+        "と",
+        "が",
+        "の"
+      ],
+      "answer": 0,
+      "explanation": "〜か どうか means \"whether or not\"."
+    },
+    {
+      "id": "n3-gf-010",
+      "type": "GRAMMAR_FORM",
+      "prompt": "忙しくて、昼ご飯を 食べる （　　） なかった。",
+      "choices": [
+        "ばかり",
+        "暇も",
+        "ほど",
+        "うちに"
+      ],
+      "answer": 1,
+      "explanation": "〜暇も ない means \"not even have time to\"."
+    },
+    {
+      "id": "n3-gf-011",
+      "type": "GRAMMAR_FORM",
+      "prompt": "この 仕事は わたしに （　　） ください。",
+      "choices": [
+        "任せて",
+        "任されて",
+        "任せられて",
+        "任させて"
+      ],
+      "answer": 0,
+      "explanation": "任せて ください means \"leave it to me\"."
+    },
+    {
+      "id": "n3-gf-012",
+      "type": "GRAMMAR_FORM",
+      "prompt": "熱が ある （　　）、会社を 休んだ。",
+      "choices": [
+        "のに",
+        "けど",
+        "ても",
+        "ので"
+      ],
+      "answer": 3,
+      "explanation": "ので gives the reason: I had a fever, so I took the day off."
+    },
+    {
+      "id": "n3-gf-013",
+      "type": "GRAMMAR_FORM",
+      "prompt": "雨が 降っても 降らなくても、試合は 行う （　　）です。",
+      "choices": [
+        "ばかり",
+        "まま",
+        "予定",
+        "ところ"
+      ],
+      "answer": 2,
+      "explanation": "〜予定です states a schedule: the match is planned to go ahead."
+    },
+    {
+      "id": "n3-gf-014",
+      "type": "GRAMMAR_FORM",
+      "prompt": "駅に 着いた （　　）、雨が 降り出した。",
+      "choices": [
+        "までに",
+        "とたん",
+        "あいだ",
+        "うちに"
+      ],
+      "answer": 1,
+      "explanation": "〜た とたん means \"the moment that\"."
+    },
+    {
+      "id": "n3-gf-015",
+      "type": "GRAMMAR_FORM",
+      "prompt": "この レストランは 味（　　） 値段も 安い。",
+      "choices": [
+        "だけでなく",
+        "ほど",
+        "しか",
+        "までも"
+      ],
+      "answer": 0,
+      "explanation": "〜だけでなく 〜も means \"not only … but also\"."
+    },
+    {
+      "id": "n3-gf-016",
+      "type": "GRAMMAR_FORM",
+      "prompt": "試験の 結果が 心配で、夜も 眠れない （　　）。",
+      "choices": [
+        "ばかりだ",
+        "ことだ",
+        "ものだ",
+        "くらいだ"
+      ],
+      "answer": 3,
+      "explanation": "〜くらいだ shows degree: so worried that I can hardly sleep."
+    },
+    {
+      "id": "n3-so-001",
+      "type": "SENTENCE_ORDER",
+      "prompt": "彼は ＿＿＿ ＿＿＿ ★ ＿＿＿ 忙しいらしい。",
+      "choices": [
+        "寝る",
+        "時間",
+        "ない ほど",
+        "も"
+      ],
+      "answer": 3,
+      "explanation": "彼は 寝る 時間 も ない ほど 忙しいらしい (He seems too busy even to sleep). The ★ is も."
+    },
+    {
+      "id": "n3-so-002",
+      "type": "SENTENCE_ORDER",
+      "prompt": "この 本は ＿＿＿ ＿＿＿ ★ ＿＿＿ わかりやすい。",
+      "choices": [
+        "に",
+        "読める ほど",
+        "でも",
+        "子ども"
+      ],
+      "answer": 2,
+      "explanation": "この 本は 子ども に でも 読める ほど わかりやすい. The ★ is でも."
+    },
+    {
+      "id": "n3-so-003",
+      "type": "SENTENCE_ORDER",
+      "prompt": "田中さんが ＿＿＿ ＿＿＿ ★ ＿＿＿ 思いませんでした。",
+      "choices": [
+        "なんて",
+        "言う",
+        "そんな",
+        "ことを"
+      ],
+      "answer": 1,
+      "explanation": "田中さんが そんな ことを 言う なんて 思いませんでした. The ★ is 言う."
+    },
+    {
+      "id": "n3-so-004",
+      "type": "SENTENCE_ORDER",
+      "prompt": "駅に ＿＿＿ ＿＿＿ ★ ＿＿＿ 電車が 出て しまって いた。",
+      "choices": [
+        "には",
+        "着いた",
+        "とき",
+        "もう"
+      ],
+      "answer": 0,
+      "explanation": "駅に 着いた とき には もう 電車が 出て しまって いた. The ★ is には."
+    },
+    {
+      "id": "n3-so-005",
+      "type": "SENTENCE_ORDER",
+      "prompt": "仕事が ＿＿＿ ＿＿＿ ★ ＿＿＿ 帰っても いいですよ。",
+      "choices": [
+        "終わった",
+        "人",
+        "先に",
+        "から"
+      ],
+      "answer": 3,
+      "explanation": "仕事が 終わった 人 から 先に 帰っても いいですよ. The ★ is から."
+    },
+    {
+      "id": "n3-so-006",
+      "type": "SENTENCE_ORDER",
+      "prompt": "わたしは 医者に ＿＿＿ ＿＿＿ ★ ＿＿＿ して います。",
+      "choices": [
+        "お酒を",
+        "ように",
+        "飲まない",
+        "言われて"
+      ],
+      "answer": 2,
+      "explanation": "わたしは 医者に 言われて お酒を 飲まない ように して います. The ★ is 飲まない."
+    },
+    {
+      "id": "n3-tg-001",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（１）",
+      "choices": [
+        "しかし",
+        "つまり",
+        "ところが",
+        "さらに"
+      ],
+      "answer": 3,
+      "explanation": "さらに adds another complication: the collection days are fixed as well.",
+      "passageId": "n3-tg-p1"
+    },
+    {
+      "id": "n3-tg-002",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（２）",
+      "choices": [
+        "はらせて",
+        "はれて",
+        "はられて",
+        "はって"
+      ],
+      "answer": 2,
+      "explanation": "The bag came back with a notice stuck on it: 紙が はられて (passive).",
+      "passageId": "n3-tg-p1"
+    },
+    {
+      "id": "n3-tg-003",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（３）",
+      "choices": [
+        "なるだろう",
+        "なくなった",
+        "なった",
+        "なくなって いく"
+      ],
+      "answer": 1,
+      "explanation": "ほとんど + negative: mistakes have almost disappeared (今では … なくなった).",
+      "passageId": "n3-tg-p1"
+    },
+    {
+      "id": "n3-tg-004",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（４）",
+      "choices": [
+        "広がれば いい",
+        "広がって しまう",
+        "広がった ばかりだ",
+        "広がる はずが ない"
+      ],
+      "answer": 0,
+      "explanation": "〜ば いいと 思う expresses a hope: I hope it spreads in my country too.",
+      "passageId": "n3-tg-p1"
+    },
+    {
+      "id": "n3-tg-005",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（５）",
+      "choices": [
+        "伝わる",
+        "伝えられる",
+        "伝わらない",
+        "伝える"
+      ],
+      "answer": 3,
+      "explanation": "The writer will tell (transitive 伝える) their family about it.",
+      "passageId": "n3-tg-p1"
+    }
+  ]
+}

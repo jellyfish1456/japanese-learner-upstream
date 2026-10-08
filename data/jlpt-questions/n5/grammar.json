@@ -1,0 +1,493 @@
+{
+  "level": "N5",
+  "passages": [
+    {
+      "id": "n5-tg-p1",
+      "title": "わたしの しゅうまつ　マリア・ロペス",
+      "text": "わたしは どようびに ともだちと こうえんへ いきました。こうえんには 花が たくさん （１）。わたしたちは 花の しゃしんを とりました。（２）、こうえんの 近くの きっさてんで ケーキを 食べました。ケーキは とても （３）。\nにちようびは どこも いきませんでした。うちで そうじを したり、せんたくを （４） しました。"
+    },
+    {
+      "id": "n5-tg-p2",
+      "title": "日本の 生活　グエン・ミン",
+      "text": "わたしは 三か月まえに 日本へ （１）。いまは 大学の 近くの アパートに すんで います。まいにち 大学まで じてんしゃで いきます。\n日本の 生活は たのしいです。（２）、日本語は まだ あまり じょうずじゃ ありません。だから、まいばん 二時間 日本語を べんきょう （３）。\nらいげつ、クラスの ともだちと きょうとへ いきます。きょうとで おてらを たくさん （４）。"
+    }
+  ],
+  "questions": [
+    {
+      "id": "n5-gf-001",
+      "type": "GRAMMAR_FORM",
+      "prompt": "わたしは まいあさ パン（　　）たべます。",
+      "choices": [
+        "を",
+        "が",
+        "に",
+        "で"
+      ],
+      "answer": 0,
+      "explanation": "を marks the object of the verb: パンを たべます (I eat bread)."
+    },
+    {
+      "id": "n5-gf-002",
+      "type": "GRAMMAR_FORM",
+      "prompt": "きのう ともだち（　　）えいがを みました。",
+      "choices": [
+        "を",
+        "へ",
+        "や",
+        "と"
+      ],
+      "answer": 3,
+      "explanation": "と means \"with\" when doing something together: ともだちと みました."
+    },
+    {
+      "id": "n5-gf-003",
+      "type": "GRAMMAR_FORM",
+      "prompt": "この かさは だれ（　　）ですか。",
+      "choices": [
+        "を",
+        "に",
+        "の",
+        "が"
+      ],
+      "answer": 2,
+      "explanation": "だれの means \"whose\": この かさは だれのですか (Whose umbrella is this?)."
+    },
+    {
+      "id": "n5-gf-004",
+      "type": "GRAMMAR_FORM",
+      "prompt": "あした としょかんへ ほんを かえし（　　）いきます。",
+      "choices": [
+        "と",
+        "に",
+        "で",
+        "を"
+      ],
+      "answer": 1,
+      "explanation": "Verb stem + に いきます means \"go to do\": かえしに いきます (go to return)."
+    },
+    {
+      "id": "n5-gf-005",
+      "type": "GRAMMAR_FORM",
+      "prompt": "A「コーヒーと こうちゃと どちらが すきですか。」\nB「コーヒー（　　）すきです。」",
+      "choices": [
+        "のほうが",
+        "より",
+        "だけ",
+        "ぐらい"
+      ],
+      "answer": 0,
+      "explanation": "To answer a どちら question, use 〜のほうが: コーヒーのほうが すきです."
+    },
+    {
+      "id": "n5-gf-006",
+      "type": "GRAMMAR_FORM",
+      "prompt": "きのうは あめ（　　）。",
+      "choices": [
+        "です",
+        "じゃありません",
+        "でしょう",
+        "でした"
+      ],
+      "answer": 3,
+      "explanation": "きのう (yesterday) needs the past tense: あめでした."
+    },
+    {
+      "id": "n5-gf-007",
+      "type": "GRAMMAR_FORM",
+      "prompt": "へやの でんきを （　　）から、ねます。",
+      "choices": [
+        "けす",
+        "けさない",
+        "けして",
+        "けした"
+      ],
+      "answer": 2,
+      "explanation": "〜てから means \"after doing\": でんきを けしてから ねます."
+    },
+    {
+      "id": "n5-gf-008",
+      "type": "GRAMMAR_FORM",
+      "prompt": "この りんごは （　　）、おいしいです。",
+      "choices": [
+        "やすく",
+        "やすくて",
+        "やすい",
+        "やすいで"
+      ],
+      "answer": 1,
+      "explanation": "To join an い-adjective to what follows, change い to くて: やすくて おいしい."
+    },
+    {
+      "id": "n5-gf-009",
+      "type": "GRAMMAR_FORM",
+      "prompt": "にほんごの しゅくだいは もう （　　）か。",
+      "choices": [
+        "おわりました",
+        "おわります",
+        "おわって",
+        "おわる"
+      ],
+      "answer": 0,
+      "explanation": "もう 〜ましたか asks whether something has already happened."
+    },
+    {
+      "id": "n5-gf-010",
+      "type": "GRAMMAR_FORM",
+      "prompt": "A「いっしょに ひるごはんを たべ（　　）。」\nB「ええ、たべましょう。」",
+      "choices": [
+        "でしたか",
+        "ませんか",
+        "ましたか",
+        "ましたね"
+      ],
+      "answer": 1,
+      "explanation": "〜ませんか is an invitation: \"Won't you eat lunch with me?\""
+    },
+    {
+      "id": "n5-gf-011",
+      "type": "GRAMMAR_FORM",
+      "prompt": "まどを （　　）も いいですか。",
+      "choices": [
+        "あけて",
+        "あける",
+        "あけた",
+        "あけ"
+      ],
+      "answer": 0,
+      "explanation": "〜ても いいですか asks for permission and uses the て-form: あけても いいですか."
+    },
+    {
+      "id": "n5-gf-012",
+      "type": "GRAMMAR_FORM",
+      "prompt": "ここで しゃしんを （　　）ください。",
+      "choices": [
+        "とらなくて",
+        "とらない",
+        "とらず",
+        "とらないで"
+      ],
+      "answer": 3,
+      "explanation": "〜ないで ください means \"please don't\": とらないで ください."
+    },
+    {
+      "id": "n5-gf-013",
+      "type": "GRAMMAR_FORM",
+      "prompt": "がっこうまで バス（　　）いきます。",
+      "choices": [
+        "が",
+        "の",
+        "で",
+        "を"
+      ],
+      "answer": 2,
+      "explanation": "で marks the means of transport: バスで いきます."
+    },
+    {
+      "id": "n5-gf-014",
+      "type": "GRAMMAR_FORM",
+      "prompt": "つくえの 上に なに（　　）ありません。",
+      "choices": [
+        "か",
+        "も",
+        "が",
+        "を"
+      ],
+      "answer": 1,
+      "explanation": "なにも + negative means \"nothing\": なにも ありません."
+    },
+    {
+      "id": "n5-gf-015",
+      "type": "GRAMMAR_FORM",
+      "prompt": "あには わたし（　　）三さい 上です。",
+      "choices": [
+        "より",
+        "ほど",
+        "まで",
+        "から"
+      ],
+      "answer": 0,
+      "explanation": "より means \"than\": わたしより 三さい 上 (three years older than me)."
+    },
+    {
+      "id": "n5-gf-016",
+      "type": "GRAMMAR_FORM",
+      "prompt": "A「きのう どこか いきましたか。」\nB「いいえ、どこ（　　）いきませんでした。」",
+      "choices": [
+        "かへ",
+        "でも",
+        "には",
+        "へも"
+      ],
+      "answer": 3,
+      "explanation": "どこへも + negative means \"nowhere\": どこへも いきませんでした."
+    },
+    {
+      "id": "n5-gf-017",
+      "type": "GRAMMAR_FORM",
+      "prompt": "えいがが はじまる （　　）に、トイレに いきます。",
+      "choices": [
+        "とき",
+        "ながら",
+        "まえ",
+        "あと"
+      ],
+      "answer": 2,
+      "explanation": "Dictionary form + まえに means \"before\": はじまる まえに."
+    },
+    {
+      "id": "n5-gf-018",
+      "type": "GRAMMAR_FORM",
+      "prompt": "テレビを （　　）ながら ごはんを たべます。",
+      "choices": [
+        "みた",
+        "み",
+        "みて",
+        "みる"
+      ],
+      "answer": 1,
+      "explanation": "〜ながら (while) follows the verb stem: みながら."
+    },
+    {
+      "id": "n5-gf-019",
+      "type": "GRAMMAR_FORM",
+      "prompt": "あさ おきて、かおを （　　）、はを みがきます。",
+      "choices": [
+        "あらって",
+        "あらう",
+        "あらった",
+        "あらい"
+      ],
+      "answer": 0,
+      "explanation": "A string of actions in order uses the て-form: かおを あらって、はを みがきます."
+    },
+    {
+      "id": "n5-gf-020",
+      "type": "GRAMMAR_FORM",
+      "prompt": "この もんだいは （　　）ですね。 ぜんぜん わかりません。",
+      "choices": [
+        "むずかしさ",
+        "むずかしい",
+        "むずかしく",
+        "むずかしくて"
+      ],
+      "answer": 1,
+      "explanation": "An い-adjective comes before です in its plain form: むずかしいです."
+    },
+    {
+      "id": "n5-so-001",
+      "type": "SENTENCE_ORDER",
+      "prompt": "あそこで ＿＿＿ ＿＿＿ ★ ＿＿＿ は だれですか。",
+      "choices": [
+        "しんぶんを",
+        "よんで",
+        "ひと",
+        "いる"
+      ],
+      "answer": 3,
+      "explanation": "しんぶんを よんで いる ひと は だれですか (Who is the person reading a newspaper?). The ★ is いる."
+    },
+    {
+      "id": "n5-so-002",
+      "type": "SENTENCE_ORDER",
+      "prompt": "きのう ＿＿＿ ＿＿＿ ★ ＿＿＿ かいました。",
+      "choices": [
+        "で",
+        "かばんを",
+        "あかい",
+        "デパート"
+      ],
+      "answer": 2,
+      "explanation": "きのう デパート で あかい かばんを かいました. The ★ is あかい."
+    },
+    {
+      "id": "n5-so-003",
+      "type": "SENTENCE_ORDER",
+      "prompt": "わたしの ＿＿＿ ＿＿＿ ★ ＿＿＿ です。",
+      "choices": [
+        "てんぷら",
+        "は",
+        "すきな",
+        "たべもの"
+      ],
+      "answer": 1,
+      "explanation": "わたしの すきな たべもの は てんぷら です (My favorite food is tempura). The ★ is は."
+    },
+    {
+      "id": "n5-so-004",
+      "type": "SENTENCE_ORDER",
+      "prompt": "つくえの 上に ＿＿＿ ＿＿＿ ★ ＿＿＿ ですか。",
+      "choices": [
+        "だれの",
+        "ある",
+        "のは",
+        "ほん"
+      ],
+      "answer": 0,
+      "explanation": "つくえの 上に ある のは だれの ほん ですか (Whose book is the one on the desk?). The ★ is だれの."
+    },
+    {
+      "id": "n5-so-005",
+      "type": "SENTENCE_ORDER",
+      "prompt": "きょうは ＿＿＿ ＿＿＿ ★ ＿＿＿ いきません。",
+      "choices": [
+        "あめが",
+        "ふって",
+        "から",
+        "いる"
+      ],
+      "answer": 3,
+      "explanation": "きょうは あめが ふって いる から いきません (It's raining today, so I won't go). The ★ is いる."
+    },
+    {
+      "id": "n5-so-006",
+      "type": "SENTENCE_ORDER",
+      "prompt": "この ＿＿＿ ＿＿＿ ★ ＿＿＿ ください。",
+      "choices": [
+        "あそこ",
+        "おいて",
+        "に",
+        "にもつを"
+      ],
+      "answer": 2,
+      "explanation": "この にもつを あそこ に おいて ください (Please put this luggage over there). The ★ is に."
+    },
+    {
+      "id": "n5-so-007",
+      "type": "SENTENCE_ORDER",
+      "prompt": "たなかさんは ＿＿＿ ＿＿＿ ★ ＿＿＿ が じょうずです。",
+      "choices": [
+        "の",
+        "うたう",
+        "うた",
+        "を"
+      ],
+      "answer": 1,
+      "explanation": "たなかさんは うた を うたう の が じょうずです (Tanaka is good at singing). The ★ is うたう."
+    },
+    {
+      "id": "n5-so-008",
+      "type": "SENTENCE_ORDER",
+      "prompt": "きのう ＿＿＿ ＿＿＿ ★ ＿＿＿ を よみました。",
+      "choices": [
+        "かりた",
+        "としょかん",
+        "で",
+        "ほん"
+      ],
+      "answer": 0,
+      "explanation": "きのう としょかん で かりた ほん を よみました (I read the book I borrowed from the library). The ★ is かりた."
+    },
+    {
+      "id": "n5-tg-001",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（１）",
+      "choices": [
+        "いました",
+        "します",
+        "ありません",
+        "ありました"
+      ],
+      "answer": 3,
+      "explanation": "Flowers are things, so use ある, in the past tense because it was Saturday: ありました.",
+      "passageId": "n5-tg-p1"
+    },
+    {
+      "id": "n5-tg-002",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（２）",
+      "choices": [
+        "だから",
+        "じゃあ",
+        "それから",
+        "でも"
+      ],
+      "answer": 2,
+      "explanation": "それから (and then) links the next thing they did.",
+      "passageId": "n5-tg-p1"
+    },
+    {
+      "id": "n5-tg-003",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（３）",
+      "choices": [
+        "おいしかったでしょう",
+        "おいしかったです",
+        "おいしいでした",
+        "おいしくないです"
+      ],
+      "answer": 1,
+      "explanation": "The past of an い-adjective is 〜かったです. おいしいでした is incorrect.",
+      "passageId": "n5-tg-p1"
+    },
+    {
+      "id": "n5-tg-004",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（４）",
+      "choices": [
+        "したり",
+        "して",
+        "しても",
+        "したら"
+      ],
+      "answer": 0,
+      "explanation": "〜たり 〜たり する lists example activities: そうじを したり、せんたくを したり しました.",
+      "passageId": "n5-tg-p1"
+    },
+    {
+      "id": "n5-tg-005",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（１）",
+      "choices": [
+        "来ます",
+        "来て います",
+        "来るでしょう",
+        "来ました"
+      ],
+      "answer": 3,
+      "explanation": "三か月まえに (three months ago) needs the past tense: 来ました.",
+      "passageId": "n5-tg-p2"
+    },
+    {
+      "id": "n5-tg-006",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（２）",
+      "choices": [
+        "それから",
+        "だから",
+        "でも",
+        "そして"
+      ],
+      "answer": 2,
+      "explanation": "Life is fun, but Japanese is still weak: でも shows contrast.",
+      "passageId": "n5-tg-p2"
+    },
+    {
+      "id": "n5-tg-007",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（３）",
+      "choices": [
+        "しませんでした",
+        "して います",
+        "して いました",
+        "しません"
+      ],
+      "answer": 1,
+      "explanation": "まいばん (every night) describes a current habit, so use 〜て います.",
+      "passageId": "n5-tg-p2"
+    },
+    {
+      "id": "n5-tg-008",
+      "type": "TEXT_GRAMMAR",
+      "prompt": "（４）",
+      "choices": [
+        "見たいです",
+        "見たかったです",
+        "見て いました",
+        "見ませんでした"
+      ],
+      "answer": 0,
+      "explanation": "The trip is next month, so the writer says what they want to do: 見たいです.",
+      "passageId": "n5-tg-p2"
+    }
+  ]
+}

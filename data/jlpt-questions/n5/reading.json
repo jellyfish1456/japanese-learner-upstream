@@ -1,0 +1,185 @@
+{
+  "level": "N5",
+  "passages": [
+    {
+      "id": "n5-sp-p1",
+      "title": "（つくえの 上に メモが あります。）",
+      "text": "リンさんへ\nきょう、ヤンさんが 三時ごろ リンさんの へやに 来ます。わたしは 四時まで アルバイトですから、うちに いません。ヤンさんに この 本を わたして ください。それから、れいぞうこの ケーキを いっしょに 食べて ください。\nたかこ"
+    },
+    {
+      "id": "n5-sp-p2",
+      "text": "わたしの 家族は 四人です。父と 母と 兄と わたしです。父は 銀行で はたらいて います。母は りょうりが じょうずで、毎日 おいしい ばんごはんを つくります。兄は 東京の 大学の 学生で、いまは 東京に すんで います。"
+    },
+    {
+      "id": "n5-sp-p3",
+      "title": "日本語クラスの みなさんへ",
+      "text": "あしたの 日本語の テストは 九時からです。八時五十分までに 二〇三きょうしつに 来て ください。えんぴつと けしゴムを もって きて ください。じしょは つかわないで ください。"
+    },
+    {
+      "id": "n5-sp-p4",
+      "text": "きのうは わたしの たんじょうびでした。あさ、母が 「おめでとう」と 言って、あたらしい かさを くれました。ばんには 友だちが 三人 うちに 来て、いっしょに すきやきを 食べました。とても たのしい 日でした。"
+    },
+    {
+      "id": "n5-mp-p1",
+      "title": "わたしの すきな ところ",
+      "text": "わたしは 大学の 近くの こうえんが すきです。こうえんには 大きい いけが あって、とりが たくさん います。わたしは よく 日曜日の あさ、この こうえんを さんぽします。あさの こうえんは 人が 少なくて、しずかです。\n先週の 日曜日は あめでしたから、さんぽしませんでした。うちで 本を 読みました。でも、ほんとうは こうえんへ 行きたかったです。来週は はれると いいです。"
+    },
+    {
+      "id": "n5-mp-p2",
+      "title": "キムさんへの メール",
+      "text": "キムさん\nこんにちは。お元気ですか。わたしは 先月から 大阪の 会社で はたらいて います。しごとは いそがしいですが、おもしろいです。会社の 人たちは みんな しんせつです。\n大阪は 食べものが おいしい ところです。とくに たこやきが おいしいです。キムさんは 来月 日本へ 来ますね。そのとき、いっしょに たこやきを 食べに 行きましょう。大阪えきで まって います。\nさとう"
+    },
+    {
+      "id": "n5-ir-p1",
+      "title": "みどり市 プール",
+      "text": "■ あいて いる 日：火よう日〜日よう日（月よう日は 休み）\n■ 時間：午前９時〜午後８時\n■ おかね：大人 ５００円　子ども（中学生まで）２００円\n　※土よう日と 日よう日は、子どもは おかねが いりません。"
+    },
+    {
+      "id": "n5-ir-p2",
+      "title": "さくら食堂 ランチメニュー（11:00〜14:00）",
+      "text": "Ａランチ　カレーライス・サラダ　　　　　　　６５０円\nＢランチ　てんぷら・ごはん・みそしる　　　　８００円\nＣランチ　さかな・ごはん・みそしる・サラダ　９００円\n★ のみもの（コーヒー・こうちゃ）は ＋１００円"
+    }
+  ],
+  "questions": [
+    {
+      "id": "n5-sp-001",
+      "type": "SHORT_PASSAGE",
+      "prompt": "リンさんは ヤンさんが 来たら、なにを しますか。",
+      "choices": [
+        "たかこさんに 本を わたします。",
+        "四時まで たかこさんを まちます。",
+        "本を わたして、いっしょに ケーキを 食べます。",
+        "アルバイトに 行きます。"
+      ],
+      "answer": 2,
+      "explanation": "Takako asks Lin to give Yan the book and eat the cake in the fridge together.",
+      "passageId": "n5-sp-p1"
+    },
+    {
+      "id": "n5-sp-002",
+      "type": "SHORT_PASSAGE",
+      "prompt": "「わたし」と いっしょに すんで いる 人は だれですか。",
+      "choices": [
+        "兄だけ",
+        "父と 母",
+        "父と 母と 兄",
+        "母と 兄"
+      ],
+      "answer": 1,
+      "explanation": "The brother lives in Tokyo now, so the writer lives with their father and mother.",
+      "passageId": "n5-sp-p2"
+    },
+    {
+      "id": "n5-sp-003",
+      "type": "SHORT_PASSAGE",
+      "prompt": "あした なにを もって いきますか。",
+      "choices": [
+        "えんぴつと けしゴム",
+        "えんぴつと じしょ",
+        "けしゴムと じしょ",
+        "じしょだけ"
+      ],
+      "answer": 0,
+      "explanation": "Bring a pencil and an eraser. Dictionaries may not be used.",
+      "passageId": "n5-sp-p3"
+    },
+    {
+      "id": "n5-sp-004",
+      "type": "SHORT_PASSAGE",
+      "prompt": "きのうの ばん、「わたし」は なにを しましたか。",
+      "choices": [
+        "母と かさを かいに 行きました。",
+        "友だちの うちへ 行きました。",
+        "ひとりで ケーキを 食べました。",
+        "友だちと うちで すきやきを 食べました。"
+      ],
+      "answer": 3,
+      "explanation": "In the evening three friends came over and they ate sukiyaki together at home.",
+      "passageId": "n5-sp-p4"
+    },
+    {
+      "id": "n5-mp-001",
+      "type": "MID_PASSAGE",
+      "prompt": "「わたし」は よく いつ こうえんを さんぽしますか。",
+      "choices": [
+        "まいにち あさ",
+        "土曜日の ひる",
+        "日曜日の あさ",
+        "日曜日の ばん"
+      ],
+      "answer": 2,
+      "explanation": "わたしは よく 日曜日の あさ、この こうえんを さんぽします.",
+      "passageId": "n5-mp-p1"
+    },
+    {
+      "id": "n5-mp-002",
+      "type": "MID_PASSAGE",
+      "prompt": "先週の 日曜日、「わたし」は なにを しましたか。",
+      "choices": [
+        "大学で べんきょうしました。",
+        "うちで 本を 読みました。",
+        "こうえんを さんぽしました。",
+        "いけで とりを 見ました。"
+      ],
+      "answer": 1,
+      "explanation": "It rained, so the writer stayed home and read a book.",
+      "passageId": "n5-mp-p1"
+    },
+    {
+      "id": "n5-mp-003",
+      "type": "MID_PASSAGE",
+      "prompt": "さとうさんは いま なにを して いますか。",
+      "choices": [
+        "大阪の 会社で はたらいて います。",
+        "大阪の 大学で べんきょうして います。",
+        "たこやきの みせで はたらいて います。",
+        "キムさんの 国に すんで います。"
+      ],
+      "answer": 0,
+      "explanation": "わたしは 先月から 大阪の 会社で はたらいて います.",
+      "passageId": "n5-mp-p2"
+    },
+    {
+      "id": "n5-mp-004",
+      "type": "MID_PASSAGE",
+      "prompt": "キムさんは 来月 なにを しますか。",
+      "choices": [
+        "さとうさんに てがみを 書きます。",
+        "大阪の 会社で はたらきます。",
+        "えきで さとうさんを まちます。",
+        "さとうさんと たこやきを 食べます。"
+      ],
+      "answer": 3,
+      "explanation": "Sato invites Kim to eat takoyaki together next month. It is Sato who will wait at the station.",
+      "passageId": "n5-mp-p2"
+    },
+    {
+      "id": "n5-ir-001",
+      "type": "INFO_RETRIEVAL",
+      "prompt": "ワンさんは 大人です。土よう日に 小学生の おとうとと プールへ 行きます。二人で いくら はらいますか。",
+      "choices": [
+        "５００円",
+        "７００円",
+        "２００円",
+        "１，０００円"
+      ],
+      "answer": 0,
+      "explanation": "An adult pays 500 yen. On Saturdays children don't pay, so the total is 500 yen.",
+      "passageId": "n5-ir-p1"
+    },
+    {
+      "id": "n5-ir-002",
+      "type": "INFO_RETRIEVAL",
+      "prompt": "マリアさんは ごはんと みそしると サラダが ほしいです。コーヒーも のみたいです。いくら はらいますか。",
+      "choices": [
+        "７５０円",
+        "９００円",
+        "１，１００円",
+        "１，０００円"
+      ],
+      "answer": 3,
+      "explanation": "Only lunch C has rice, miso soup and salad (900 yen). Coffee adds 100 yen, so 1,000 yen.",
+      "passageId": "n5-ir-p2"
+    }
+  ]
+}

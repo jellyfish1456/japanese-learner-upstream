@@ -1,0 +1,603 @@
+{
+  "level": "N5",
+  "questions": [
+    {
+      "id": "n5-kr-001",
+      "type": "KANJI_READING",
+      "prompt": "<u>山</u>に のぼりました。",
+      "choices": [
+        "やま",
+        "かわ",
+        "うみ",
+        "そら"
+      ],
+      "answer": 0,
+      "explanation": "山 is read やま (mountain). かわ is 川, うみ is 海, そら is 空."
+    },
+    {
+      "id": "n5-kr-002",
+      "type": "KANJI_READING",
+      "prompt": "<u>毎朝</u> コーヒーを のみます。",
+      "choices": [
+        "まいにち",
+        "まいばん",
+        "けさ",
+        "まいあさ"
+      ],
+      "answer": 3,
+      "explanation": "毎朝 is read まいあさ (every morning). まいにち is 毎日, まいばん is 毎晩, けさ is 今朝."
+    },
+    {
+      "id": "n5-kr-003",
+      "type": "KANJI_READING",
+      "prompt": "この <u>本</u>は おもしろいです。",
+      "choices": [
+        "ぼん",
+        "ぽん",
+        "ほん",
+        "もと"
+      ],
+      "answer": 2,
+      "explanation": "On its own, 本 (book) is read ほん. ぼん and ぽん appear only after numbers, as in 三本 (さんぼん) or 一本 (いっぽん)."
+    },
+    {
+      "id": "n5-kr-004",
+      "type": "KANJI_READING",
+      "prompt": "<u>先週</u> ともだちに あいました。",
+      "choices": [
+        "せんげつ",
+        "せんしゅう",
+        "らいしゅう",
+        "こんしゅう"
+      ],
+      "answer": 1,
+      "explanation": "先週 is read せんしゅう (last week). らいしゅう is 来週, こんしゅう is 今週, せんげつ is 先月."
+    },
+    {
+      "id": "n5-kr-005",
+      "type": "KANJI_READING",
+      "prompt": "つくえの <u>上</u>に ねこが います。",
+      "choices": [
+        "うえ",
+        "した",
+        "なか",
+        "よこ"
+      ],
+      "answer": 0,
+      "explanation": "上 is read うえ (on, above). した is 下, なか is 中, よこ is 横."
+    },
+    {
+      "id": "n5-kr-006",
+      "type": "KANJI_READING",
+      "prompt": "<u>電車</u>で がっこうへ いきます。",
+      "choices": [
+        "でんしや",
+        "てんしゃ",
+        "でんき",
+        "でんしゃ"
+      ],
+      "answer": 3,
+      "explanation": "電車 is read でんしゃ (train), with a small ゃ. でんき is 電気 (electricity)."
+    },
+    {
+      "id": "n5-kr-007",
+      "type": "KANJI_READING",
+      "prompt": "りんごを <u>三つ</u> ください。",
+      "choices": [
+        "よっつ",
+        "みつ",
+        "みっつ",
+        "さんつ"
+      ],
+      "answer": 2,
+      "explanation": "三つ is read みっつ (three things), with a small っ. よっつ is 四つ."
+    },
+    {
+      "id": "n5-kr-008",
+      "type": "KANJI_READING",
+      "prompt": "<u>左</u>に まがって ください。",
+      "choices": [
+        "うしろ",
+        "ひだり",
+        "みぎ",
+        "まえ"
+      ],
+      "answer": 1,
+      "explanation": "左 is read ひだり (left). みぎ is 右, まえ is 前, うしろ is 後ろ."
+    },
+    {
+      "id": "n5-kr-009",
+      "type": "KANJI_READING",
+      "prompt": "<u>午後</u>から あめが ふります。",
+      "choices": [
+        "ごご",
+        "ごぜん",
+        "ごこ",
+        "ここ"
+      ],
+      "answer": 0,
+      "explanation": "午後 is read ごご (afternoon, p.m.). ごぜん is 午前 (morning, a.m.)."
+    },
+    {
+      "id": "n5-kr-010",
+      "type": "KANJI_READING",
+      "prompt": "<u>父</u>は かいしゃいんです。",
+      "choices": [
+        "あね",
+        "ちち",
+        "はは",
+        "あに"
+      ],
+      "answer": 1,
+      "explanation": "父 is read ちち when talking about your own father. はは is 母, あに is 兄, あね is 姉."
+    },
+    {
+      "id": "n5-kr-011",
+      "type": "KANJI_READING",
+      "prompt": "へやに <u>入って</u> ください。",
+      "choices": [
+        "はいって",
+        "いって",
+        "でて",
+        "きって"
+      ],
+      "answer": 0,
+      "explanation": "入って is read はいって (please come in). いって is 行って, でて is 出て."
+    },
+    {
+      "id": "n5-kr-012",
+      "type": "KANJI_READING",
+      "prompt": "<u>白い</u> シャツを かいました。",
+      "choices": [
+        "くろい",
+        "あかい",
+        "あおい",
+        "しろい"
+      ],
+      "answer": 3,
+      "explanation": "白い is read しろい (white). くろい is 黒い, あかい is 赤い, あおい is 青い."
+    },
+    {
+      "id": "n5-kr-013",
+      "type": "KANJI_READING",
+      "prompt": "<u>来年</u> にほんへ いきます。",
+      "choices": [
+        "ことし",
+        "らいげつ",
+        "らいねん",
+        "きょねん"
+      ],
+      "answer": 2,
+      "explanation": "来年 is read らいねん (next year). きょねん is 去年, ことし is 今年, らいげつ is 来月."
+    },
+    {
+      "id": "n5-kr-014",
+      "type": "KANJI_READING",
+      "prompt": "この みせは <u>安い</u>です。",
+      "choices": [
+        "おおい",
+        "やすい",
+        "たかい",
+        "ひくい"
+      ],
+      "answer": 1,
+      "explanation": "安い is read やすい (cheap). たかい is 高い, ひくい is 低い, おおい is 多い."
+    },
+    {
+      "id": "n5-kr-015",
+      "type": "KANJI_READING",
+      "prompt": "<u>水</u>を のみたいです。",
+      "choices": [
+        "みず",
+        "すい",
+        "こおり",
+        "おちゃ"
+      ],
+      "answer": 0,
+      "explanation": "On its own, 水 (water) is read みず. すい is the reading in 水よう日 (すいようび)."
+    },
+    {
+      "id": "n5-kr-016",
+      "type": "KANJI_READING",
+      "prompt": "えきの <u>前</u>で まって います。",
+      "choices": [
+        "うしろ",
+        "そと",
+        "となり",
+        "まえ"
+      ],
+      "answer": 3,
+      "explanation": "前 is read まえ (in front of). うしろ is 後ろ, そと is 外."
+    },
+    {
+      "id": "n5-or-001",
+      "type": "ORTHOGRAPHY",
+      "prompt": "<u>あめ</u>が ふって います。",
+      "choices": [
+        "雨",
+        "雲",
+        "電",
+        "雪"
+      ],
+      "answer": 0,
+      "explanation": "あめ (rain) is written 雨. 雲 is くも (cloud), 雪 is ゆき (snow), 電 is the でん in 電気."
+    },
+    {
+      "id": "n5-or-002",
+      "type": "ORTHOGRAPHY",
+      "prompt": "<u>みみ</u>が いたいです。",
+      "choices": [
+        "目",
+        "口",
+        "手",
+        "耳"
+      ],
+      "answer": 3,
+      "explanation": "みみ (ear) is written 耳. 目 is め, 口 is くち, 手 is て."
+    },
+    {
+      "id": "n5-or-003",
+      "type": "ORTHOGRAPHY",
+      "prompt": "<u>テスト</u>は あしたです。",
+      "choices": [
+        "ラスト",
+        "テスセ",
+        "テスト",
+        "テヌト"
+      ],
+      "answer": 2,
+      "explanation": "テスト (test) uses ス, not ヌ, and テ, not ラ."
+    },
+    {
+      "id": "n5-or-004",
+      "type": "ORTHOGRAPHY",
+      "prompt": "<u>やすみ</u>は なんようびですか。",
+      "choices": [
+        "木み",
+        "休み",
+        "体み",
+        "本み"
+      ],
+      "answer": 1,
+      "explanation": "やすみ (day off) is written 休み. Don't confuse 休 with 体 (からだ, body)."
+    },
+    {
+      "id": "n5-or-005",
+      "type": "ORTHOGRAPHY",
+      "prompt": "<u>みぎ</u>の ドアから はいって ください。",
+      "choices": [
+        "右",
+        "石",
+        "左",
+        "名"
+      ],
+      "answer": 0,
+      "explanation": "みぎ (right) is written 右. 石 is いし (stone) and 左 is ひだり (left)."
+    },
+    {
+      "id": "n5-or-006",
+      "type": "ORTHOGRAPHY",
+      "prompt": "<u>しんぶん</u>を よみます。",
+      "choices": [
+        "新間",
+        "親聞",
+        "新門",
+        "新聞"
+      ],
+      "answer": 3,
+      "explanation": "しんぶん (newspaper) is written 新聞. 聞 has 耳 (ear) inside the gate 門."
+    },
+    {
+      "id": "n5-or-007",
+      "type": "ORTHOGRAPHY",
+      "prompt": "<u>コーヒー</u>を のみませんか。",
+      "choices": [
+        "コーセー",
+        "ローヒー",
+        "コーヒー",
+        "ユーヒー"
+      ],
+      "answer": 2,
+      "explanation": "コーヒー (coffee) is written with コ and ヒ. Don't confuse コ with ユ or ロ."
+    },
+    {
+      "id": "n5-or-008",
+      "type": "ORTHOGRAPHY",
+      "prompt": "<u>がっこう</u>は 八じに はじまります。",
+      "choices": [
+        "学枚",
+        "学校",
+        "学板",
+        "字校"
+      ],
+      "answer": 1,
+      "explanation": "がっこう (school) is written 学校. 字 is じ (letter), and 板 and 枚 are different kanji."
+    },
+    {
+      "id": "n5-or-009",
+      "type": "ORTHOGRAPHY",
+      "prompt": "きょうは <u>てんき</u>が いいです。",
+      "choices": [
+        "天気",
+        "天汽",
+        "夫気",
+        "天木"
+      ],
+      "answer": 0,
+      "explanation": "てんき (weather) is written 天気. Don't confuse 天 with 夫, or 気 with 汽."
+    },
+    {
+      "id": "n5-or-010",
+      "type": "ORTHOGRAPHY",
+      "prompt": "ともだちと <u>はなし</u>を しました。",
+      "choices": [
+        "詰",
+        "話",
+        "語",
+        "読"
+      ],
+      "answer": 1,
+      "explanation": "はなし (talk) is written 話. 語 is ご (language) and 読 is よむ (read)."
+    },
+    {
+      "id": "n5-or-011",
+      "type": "ORTHOGRAPHY",
+      "prompt": "<u>おおきい</u> いえですね。",
+      "choices": [
+        "大きい",
+        "犬きい",
+        "太きい",
+        "天きい"
+      ],
+      "answer": 0,
+      "explanation": "おおきい (big) is written 大きい. 犬 is いぬ (dog) and 太 is ふとい (thick)."
+    },
+    {
+      "id": "n5-or-012",
+      "type": "ORTHOGRAPHY",
+      "prompt": "あそこに <u>くるま</u>が あります。",
+      "choices": [
+        "東",
+        "軍",
+        "連",
+        "車"
+      ],
+      "answer": 3,
+      "explanation": "くるま (car) is written 車. 東 is ひがし (east)."
+    },
+    {
+      "id": "n5-cx-001",
+      "type": "CONTEXT",
+      "prompt": "さむいですから、まどを （　　） ください。",
+      "choices": [
+        "つけて",
+        "けして",
+        "しめて",
+        "あけて"
+      ],
+      "answer": 2,
+      "explanation": "It's cold, so \"please close the window\": まどを しめて ください. あけて means open; つけて and けして are for lights or machines."
+    },
+    {
+      "id": "n5-cx-002",
+      "type": "CONTEXT",
+      "prompt": "わたしは まいばん 十一じに （　　）。",
+      "choices": [
+        "はじまります",
+        "ねます",
+        "おきます",
+        "あらいます"
+      ],
+      "answer": 1,
+      "explanation": "まいばん (every night) at 11 o'clock, you go to bed: ねます. おきます (get up) fits the morning."
+    },
+    {
+      "id": "n5-cx-003",
+      "type": "CONTEXT",
+      "prompt": "この かばんは （　　）ですね。 ものが たくさん はいります。",
+      "choices": [
+        "おおきい",
+        "ちいさい",
+        "みじかい",
+        "せまい"
+      ],
+      "answer": 0,
+      "explanation": "Many things fit in it, so the bag is おおきい (big)."
+    },
+    {
+      "id": "n5-cx-004",
+      "type": "CONTEXT",
+      "prompt": "きのうは あたまが （　　）、がっこうを やすみました。",
+      "choices": [
+        "たかくて",
+        "ひろくて",
+        "おもくて",
+        "いたくて"
+      ],
+      "answer": 3,
+      "explanation": "あたまが いたい means \"to have a headache\", a reason to stay home from school."
+    },
+    {
+      "id": "n5-cx-005",
+      "type": "CONTEXT",
+      "prompt": "えきで でんしゃの （　　）を かいました。",
+      "choices": [
+        "はがき",
+        "にもつ",
+        "きっぷ",
+        "きって"
+      ],
+      "answer": 2,
+      "explanation": "You buy a train ticket (きっぷ) at the station. きって is a postage stamp."
+    },
+    {
+      "id": "n5-cx-006",
+      "type": "CONTEXT",
+      "prompt": "あの （　　）を わたって、みぎに まがって ください。",
+      "choices": [
+        "ドア",
+        "はし",
+        "いす",
+        "まど"
+      ],
+      "answer": 1,
+      "explanation": "わたる means to cross, so the answer is はし (bridge)."
+    },
+    {
+      "id": "n5-cx-007",
+      "type": "CONTEXT",
+      "prompt": "いもうとは ピアノを （　　）のが じょうずです。",
+      "choices": [
+        "ひく",
+        "ふく",
+        "はく",
+        "かく"
+      ],
+      "answer": 0,
+      "explanation": "You play the piano with ひく (弾く). ふく is for wind instruments like the flute."
+    },
+    {
+      "id": "n5-cx-008",
+      "type": "CONTEXT",
+      "prompt": "（　　）で しゃしんを とりました。",
+      "choices": [
+        "ラジオ",
+        "テレビ",
+        "ストーブ",
+        "カメラ"
+      ],
+      "answer": 3,
+      "explanation": "You take photos (しゃしんを とる) with a カメラ."
+    },
+    {
+      "id": "n5-cx-009",
+      "type": "CONTEXT",
+      "prompt": "ともだちに てがみを （　　）。",
+      "choices": [
+        "つとめました",
+        "はじまりました",
+        "だしました",
+        "ならびました"
+      ],
+      "answer": 2,
+      "explanation": "てがみを だす means to send a letter. The other verbs cannot take てがみを."
+    },
+    {
+      "id": "n5-cx-010",
+      "type": "CONTEXT",
+      "prompt": "けさは （　　）ですから、コートを きて いきます。",
+      "choices": [
+        "あつい",
+        "あまい",
+        "からい",
+        "さむい"
+      ],
+      "answer": 3,
+      "explanation": "You wear a coat because it's cold: さむい. あまい and からい describe taste."
+    },
+    {
+      "id": "n5-cx-011",
+      "type": "CONTEXT",
+      "prompt": "この ケーキは とても （　　）です。 さとうが たくさん はいって います。",
+      "choices": [
+        "くらい",
+        "ひくい",
+        "あまい",
+        "からい"
+      ],
+      "answer": 2,
+      "explanation": "Lots of sugar makes the cake あまい (sweet)."
+    },
+    {
+      "id": "n5-cx-012",
+      "type": "CONTEXT",
+      "prompt": "しゅくだいを わすれましたから、あした （　　）。",
+      "choices": [
+        "すわって きます",
+        "もって きます",
+        "かして きます",
+        "かりて きます"
+      ],
+      "answer": 1,
+      "explanation": "\"I forgot my homework, so I'll bring it tomorrow\": もって きます."
+    },
+    {
+      "id": "n5-pa-001",
+      "type": "PARAPHRASE",
+      "prompt": "<u>おととい</u> デパートへ いきました。",
+      "choices": [
+        "せんしゅう デパートへ いきました。",
+        "ふつか まえに デパートへ いきました。",
+        "きのう デパートへ いきました。",
+        "みっか まえに デパートへ いきました。"
+      ],
+      "answer": 1,
+      "explanation": "おととい means the day before yesterday, which is ふつか まえ (two days ago)."
+    },
+    {
+      "id": "n5-pa-002",
+      "type": "PARAPHRASE",
+      "prompt": "この へやは <u>くらい</u>です。",
+      "choices": [
+        "この へやは あかるくないです。",
+        "この へやは ひろくないです。",
+        "この へやは しずかじゃないです。",
+        "この へやは さむくないです。"
+      ],
+      "answer": 0,
+      "explanation": "くらい (dark) means the same as あかるくない (not bright)."
+    },
+    {
+      "id": "n5-pa-003",
+      "type": "PARAPHRASE",
+      "prompt": "<u>としょかん</u>で べんきょうします。",
+      "choices": [
+        "りょうりを たべる ところで べんきょうします。",
+        "くすりを かう ところで べんきょうします。",
+        "てがみを だす ところで べんきょうします。",
+        "ほんを よんだり かりたり する ところで べんきょうします。"
+      ],
+      "answer": 3,
+      "explanation": "A としょかん (library) is a place where you read and borrow books."
+    },
+    {
+      "id": "n5-pa-004",
+      "type": "PARAPHRASE",
+      "prompt": "わたしは <u>りょうしん</u>と すんで います。",
+      "choices": [
+        "わたしは そふと そぼと すんで います。",
+        "わたしは おとうとと いもうとと すんで います。",
+        "わたしは ちちと ははと すんで います。",
+        "わたしは あにと あねと すんで います。"
+      ],
+      "answer": 2,
+      "explanation": "りょうしん means your parents: ちち (father) and はは (mother)."
+    },
+    {
+      "id": "n5-pa-005",
+      "type": "PARAPHRASE",
+      "prompt": "たなかさんは <u>ゆうめいな</u> ひとです。",
+      "choices": [
+        "たなかさんは まいにち いそがしいです。",
+        "みんな たなかさんを しって います。",
+        "たなかさんは いつも げんきです。",
+        "たなかさんは とても やさしいです。"
+      ],
+      "answer": 1,
+      "explanation": "ゆうめい (famous) means that everybody knows the person."
+    },
+    {
+      "id": "n5-pa-006",
+      "type": "PARAPHRASE",
+      "prompt": "あしたは <u>ひまです</u>。",
+      "choices": [
+        "あしたは いそがしくないです。",
+        "あしたは やすみじゃないです。",
+        "あしたは しごとが たくさん あります。",
+        "あしたは でかけます。"
+      ],
+      "answer": 0,
+      "explanation": "ひま means having free time, the same as いそがしくない (not busy)."
+    }
+  ]
+}

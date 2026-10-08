@@ -1,0 +1,538 @@
+{
+  "level": "N3",
+  "questions": [
+    {
+      "id": "n3-kr-001",
+      "type": "KANJI_READING",
+      "prompt": "会議の <u>資料</u>を 準備します。",
+      "choices": [
+        "しりょう",
+        "しりょ",
+        "じりょう",
+        "しいりょう"
+      ],
+      "answer": 0,
+      "explanation": "資料 is read しりょう (materials, documents)."
+    },
+    {
+      "id": "n3-kr-002",
+      "type": "KANJI_READING",
+      "prompt": "彼は <u>努力</u>して 試験に 合格した。",
+      "choices": [
+        "どりき",
+        "のうりょく",
+        "どうりょく",
+        "どりょく"
+      ],
+      "answer": 3,
+      "explanation": "努力 is read どりょく (effort). のうりょく is 能力 (ability)."
+    },
+    {
+      "id": "n3-kr-003",
+      "type": "KANJI_READING",
+      "prompt": "この 地域は <u>自然</u>が 豊かだ。",
+      "choices": [
+        "しねん",
+        "じねん",
+        "しぜん",
+        "じぜん"
+      ],
+      "answer": 2,
+      "explanation": "自然 is read しぜん (nature)."
+    },
+    {
+      "id": "n3-kr-004",
+      "type": "KANJI_READING",
+      "prompt": "駅に 荷物を <u>預けて</u> から、買い物に 行った。",
+      "choices": [
+        "とどけて",
+        "あずけて",
+        "あけて",
+        "さずけて"
+      ],
+      "answer": 1,
+      "explanation": "預ける is read あずける (to leave in someone's care)."
+    },
+    {
+      "id": "n3-kr-005",
+      "type": "KANJI_READING",
+      "prompt": "部長に 新しい 計画を <u>説明</u>した。",
+      "choices": [
+        "せつめい",
+        "せつめ",
+        "ぜつめい",
+        "せいめい"
+      ],
+      "answer": 0,
+      "explanation": "説明 is read せつめい (explanation)."
+    },
+    {
+      "id": "n3-kr-006",
+      "type": "KANJI_READING",
+      "prompt": "電車が 遅れた <u>原因</u>は 事故だった。",
+      "choices": [
+        "けんいん",
+        "げいいん",
+        "げんに",
+        "げんいん"
+      ],
+      "answer": 3,
+      "explanation": "原因 is read げんいん (cause)."
+    },
+    {
+      "id": "n3-kr-007",
+      "type": "KANJI_READING",
+      "prompt": "彼女は <u>親切</u>に 道を 教えて くれた。",
+      "choices": [
+        "おやせつ",
+        "しんぜつ",
+        "しんせつ",
+        "しんきり"
+      ],
+      "answer": 2,
+      "explanation": "親切 is read しんせつ (kind)."
+    },
+    {
+      "id": "n3-kr-008",
+      "type": "KANJI_READING",
+      "prompt": "窓から 海の 景色を <u>眺める</u>。",
+      "choices": [
+        "ほめる",
+        "ながめる",
+        "のぞめる",
+        "みとめる"
+      ],
+      "answer": 1,
+      "explanation": "眺める is read ながめる (to gaze at)."
+    },
+    {
+      "id": "n3-kr-009",
+      "type": "KANJI_READING",
+      "prompt": "最近、<u>物価</u>が 上がって いる。",
+      "choices": [
+        "ぶっか",
+        "ものか",
+        "ぶつか",
+        "もっか"
+      ],
+      "answer": 0,
+      "explanation": "物価 is read ぶっか (prices, cost of living)."
+    },
+    {
+      "id": "n3-kr-010",
+      "type": "KANJI_READING",
+      "prompt": "彼は 会議で 自分の 意見を 強く <u>主張</u>した。",
+      "choices": [
+        "しゅじょう",
+        "しゅちょう",
+        "しゅうちょう",
+        "しゅちょ"
+      ],
+      "answer": 1,
+      "explanation": "主張 is read しゅちょう (to insist, claim)."
+    },
+    {
+      "id": "n3-or-001",
+      "type": "ORTHOGRAPHY",
+      "prompt": "新しい 仕事に <u>なれる</u>まで 時間が かかった。",
+      "choices": [
+        "慣れる",
+        "貫れる",
+        "憤れる",
+        "情れる"
+      ],
+      "answer": 0,
+      "explanation": "なれる (to get used to) is written 慣れる."
+    },
+    {
+      "id": "n3-or-002",
+      "type": "ORTHOGRAPHY",
+      "prompt": "旅行の ために 毎月 <u>ちょきん</u>して いる。",
+      "choices": [
+        "貯全",
+        "預金",
+        "貯銀",
+        "貯金"
+      ],
+      "answer": 3,
+      "explanation": "ちょきん (savings) is written 貯金. 預金 is read よきん."
+    },
+    {
+      "id": "n3-or-003",
+      "type": "ORTHOGRAPHY",
+      "prompt": "駅で 国へ 帰る 友人を <u>みおくった</u>。",
+      "choices": [
+        "見迭った",
+        "見追った",
+        "見送った",
+        "見贈った"
+      ],
+      "answer": 2,
+      "explanation": "みおくる (to see someone off) is written 見送る."
+    },
+    {
+      "id": "n3-or-004",
+      "type": "ORTHOGRAPHY",
+      "prompt": "会社の <u>きそく</u>を 守って ください。",
+      "choices": [
+        "規測",
+        "規則",
+        "規側",
+        "観則"
+      ],
+      "answer": 1,
+      "explanation": "きそく (rule) is written 規則."
+    },
+    {
+      "id": "n3-or-005",
+      "type": "ORTHOGRAPHY",
+      "prompt": "この 薬は すぐに <u>こうか</u>が あった。",
+      "choices": [
+        "効果",
+        "効課",
+        "功果",
+        "効菓"
+      ],
+      "answer": 0,
+      "explanation": "こうか (effect) is written 効果."
+    },
+    {
+      "id": "n3-or-006",
+      "type": "ORTHOGRAPHY",
+      "prompt": "旅行の <u>ひよう</u>を 計算した。",
+      "choices": [
+        "貴用",
+        "費要",
+        "資用",
+        "費用"
+      ],
+      "answer": 3,
+      "explanation": "ひよう (cost) is written 費用. Don't confuse 費 with 貴 or 資."
+    },
+    {
+      "id": "n3-or-007",
+      "type": "ORTHOGRAPHY",
+      "prompt": "彼の 失礼な 態度に <u>おどろいた</u>。",
+      "choices": [
+        "敬いた",
+        "篤いた",
+        "驚いた",
+        "警いた"
+      ],
+      "answer": 2,
+      "explanation": "おどろく (to be surprised) is written 驚く, with 馬 (horse) at the bottom."
+    },
+    {
+      "id": "n3-cx-001",
+      "type": "CONTEXT",
+      "prompt": "電車が 遅れたので、会議に （　　） しまった。",
+      "choices": [
+        "出席して",
+        "到着して",
+        "遅刻して",
+        "参加して"
+      ],
+      "answer": 2,
+      "explanation": "Arriving late because of the train is 遅刻 (being late)."
+    },
+    {
+      "id": "n3-cx-002",
+      "type": "CONTEXT",
+      "prompt": "彼は 約束を 必ず （　　） 人なので、信用できる。",
+      "choices": [
+        "変える",
+        "守る",
+        "破る",
+        "忘れる"
+      ],
+      "answer": 1,
+      "explanation": "約束を 守る means to keep a promise, which makes someone trustworthy."
+    },
+    {
+      "id": "n3-cx-003",
+      "type": "CONTEXT",
+      "prompt": "この 仕事は 経験が なくても （　　） ですか。",
+      "choices": [
+        "大丈夫",
+        "確実",
+        "丁寧",
+        "正直"
+      ],
+      "answer": 0,
+      "explanation": "大丈夫ですか asks whether it is all right."
+    },
+    {
+      "id": "n3-cx-004",
+      "type": "CONTEXT",
+      "prompt": "昨日は 疲れていたので、朝まで （　　） 眠った。",
+      "choices": [
+        "がっかり",
+        "すっきり",
+        "はっきり",
+        "ぐっすり"
+      ],
+      "answer": 3,
+      "explanation": "ぐっすり 眠る means to sleep soundly."
+    },
+    {
+      "id": "n3-cx-005",
+      "type": "CONTEXT",
+      "prompt": "試験に 合格する ために、毎日 （　　） 勉強して いる。",
+      "choices": [
+        "一方的に",
+        "一時的に",
+        "一生懸命",
+        "一度に"
+      ],
+      "answer": 2,
+      "explanation": "一生懸命 means as hard as one can."
+    },
+    {
+      "id": "n3-cx-006",
+      "type": "CONTEXT",
+      "prompt": "この 服は サイズが （　　）ので、交換して もらった。",
+      "choices": [
+        "話し合わなかった",
+        "合わなかった",
+        "間に合わなかった",
+        "付き合わなかった"
+      ],
+      "answer": 1,
+      "explanation": "サイズが 合わない means the size doesn't fit."
+    },
+    {
+      "id": "n3-cx-007",
+      "type": "CONTEXT",
+      "prompt": "台風の 影響で、飛行機の 出発が （　　）された。",
+      "choices": [
+        "延期",
+        "延長",
+        "変化",
+        "移動"
+      ],
+      "answer": 0,
+      "explanation": "延期 means postponement. 延長 is an extension of time, which doesn't fit 出発."
+    },
+    {
+      "id": "n3-cx-008",
+      "type": "CONTEXT",
+      "prompt": "彼女は いつも （　　） 笑顔で あいさつして くれる。",
+      "choices": [
+        "細かい",
+        "険しい",
+        "鋭い",
+        "明るい"
+      ],
+      "answer": 3,
+      "explanation": "明るい 笑顔 is a bright, cheerful smile."
+    },
+    {
+      "id": "n3-cx-009",
+      "type": "CONTEXT",
+      "prompt": "部屋を 出る ときは、電気を 消すように （　　）して いる。",
+      "choices": [
+        "意味",
+        "意志",
+        "意識",
+        "意見"
+      ],
+      "answer": 2,
+      "explanation": "意識する means to be conscious of, to make a point of."
+    },
+    {
+      "id": "n3-cx-010",
+      "type": "CONTEXT",
+      "prompt": "レポートの （　　）は 来週の 金曜日です。",
+      "choices": [
+        "見送り",
+        "取り消し",
+        "引き出し",
+        "締め切り"
+      ],
+      "answer": 3,
+      "explanation": "締め切り is a deadline."
+    },
+    {
+      "id": "n3-cx-011",
+      "type": "CONTEXT",
+      "prompt": "長い 間 使って いなかった 自転車が （　　）、動かなく なった。",
+      "choices": [
+        "ほえて",
+        "かれて",
+        "さびて",
+        "ぬれて"
+      ],
+      "answer": 2,
+      "explanation": "さびる means to rust."
+    },
+    {
+      "id": "n3-cx-012",
+      "type": "CONTEXT",
+      "prompt": "子どもが 新しい 環境に （　　）できるか 心配だ。",
+      "choices": [
+        "相談",
+        "適応",
+        "反応",
+        "返事"
+      ],
+      "answer": 1,
+      "explanation": "環境に 適応する means to adapt to an environment."
+    },
+    {
+      "id": "n3-pa-001",
+      "type": "PARAPHRASE",
+      "prompt": "その 問題は <u>たちまち</u> 解決した。",
+      "choices": [
+        "何度も",
+        "すぐに",
+        "ゆっくり",
+        "やっと"
+      ],
+      "answer": 1,
+      "explanation": "たちまち means instantly: すぐに."
+    },
+    {
+      "id": "n3-pa-002",
+      "type": "PARAPHRASE",
+      "prompt": "仕事の あと、田中さんは <u>くたくた</u>だった。",
+      "choices": [
+        "とても 疲れて いた",
+        "とても 怒って いた",
+        "とても 喜んで いた",
+        "とても 急いで いた"
+      ],
+      "answer": 0,
+      "explanation": "くたくた means exhausted."
+    },
+    {
+      "id": "n3-pa-003",
+      "type": "PARAPHRASE",
+      "prompt": "来週の 会議は <u>延期</u>に なった。",
+      "choices": [
+        "会議が なくなった",
+        "会議の 時間が 長く なった",
+        "会議の 場所が 変わった",
+        "会議の 日が 後に 変わった"
+      ],
+      "answer": 3,
+      "explanation": "延期 means moved to a later date, not cancelled."
+    },
+    {
+      "id": "n3-pa-004",
+      "type": "PARAPHRASE",
+      "prompt": "この 商店街は いつも <u>にぎやか</u>だ。",
+      "choices": [
+        "店の 値段が 高い",
+        "店員が 親切だ",
+        "人が 多くて 活気が ある",
+        "静かで 落ち着いて いる"
+      ],
+      "answer": 2,
+      "explanation": "にぎやか means lively and bustling with people."
+    },
+    {
+      "id": "n3-pa-005",
+      "type": "PARAPHRASE",
+      "prompt": "彼女は <u>ようやく</u> 仕事を 終えた。",
+      "choices": [
+        "一度に",
+        "やっと",
+        "すぐに",
+        "もう少しで"
+      ],
+      "answer": 1,
+      "explanation": "ようやく means finally, after a long time: やっと."
+    },
+    {
+      "id": "n3-pa-006",
+      "type": "PARAPHRASE",
+      "prompt": "父は <u>あらゆる</u> 方法を 試した。",
+      "choices": [
+        "すべての",
+        "いくつかの",
+        "新しい",
+        "簡単な"
+      ],
+      "answer": 0,
+      "explanation": "あらゆる means every possible: すべての."
+    },
+    {
+      "id": "n3-us-001",
+      "type": "USAGE",
+      "prompt": "当然",
+      "choices": [
+        "当然 雨が 降って きたので、コンビニで かさを 買った。",
+        "当然に なって、道が 暗く なった。",
+        "長い 間 会って いない 友人に 駅で 当然 会った。",
+        "約束を 守るのは 当然の ことだ。"
+      ],
+      "answer": 3,
+      "explanation": "当然 means natural, as a matter of course. The others need 突然 (suddenly), 夜 and 偶然 (by chance)."
+    },
+    {
+      "id": "n3-us-002",
+      "type": "USAGE",
+      "prompt": "手間",
+      "choices": [
+        "彼は 手間が 大きいので、力が 強い。",
+        "会議の 手間に 資料を 配った。",
+        "この 料理は 手間が かかるが、とても おいしい。",
+        "手間が ないので、急いで 朝ご飯を 食べた。"
+      ],
+      "answer": 2,
+      "explanation": "手間が かかる means it takes time and effort. The others need 時間, 手 and 前."
+    },
+    {
+      "id": "n3-us-003",
+      "type": "USAGE",
+      "prompt": "夢中",
+      "choices": [
+        "彼は 夢中な 人で、よく 冗談を 言う。",
+        "子どもたちは ゲームに 夢中に なって いる。",
+        "夢中で 見た 夢を 覚えて いない。",
+        "道の 夢中に 車が 止まって いる。"
+      ],
+      "answer": 1,
+      "explanation": "〜に 夢中に なる means to be absorbed in something. The others need 夜中, 真ん中 and 面白い."
+    },
+    {
+      "id": "n3-us-004",
+      "type": "USAGE",
+      "prompt": "追いつく",
+      "choices": [
+        "先に 出発した 友達に 走って 追いついた。",
+        "彼の 意見に 追いついて、賛成した。",
+        "毎朝 七時の 電車に 追いついて 会社へ 行く。",
+        "仕事が 追いついて、とても 忙しい。"
+      ],
+      "answer": 0,
+      "explanation": "追いつく means to catch up with someone ahead. The others need 納得して, 乗って and たまって."
+    },
+    {
+      "id": "n3-us-005",
+      "type": "USAGE",
+      "prompt": "もったいない",
+      "choices": [
+        "この 映画は もったいないので、もう 一度 見たい。",
+        "彼は もったいない 性格で、みんなに 好かれて いる。",
+        "薬が もったいなくて、飲めなかった。",
+        "まだ 使えるのに 捨てるのは もったいない。"
+      ],
+      "answer": 3,
+      "explanation": "もったいない means wasteful. The others need 面白い, 明るい and 苦くて."
+    },
+    {
+      "id": "n3-us-006",
+      "type": "USAGE",
+      "prompt": "募集",
+      "choices": [
+        "友達に 旅行の お土産を 募集した。",
+        "毎朝 電車の 中で 新聞を 募集して いる。",
+        "この 店では アルバイトを 募集して いる。",
+        "図書館で 本を 三冊 募集した。"
+      ],
+      "answer": 2,
+      "explanation": "募集 means recruiting people. The others need 借りた, 頼んだ and 読んで."
+    }
+  ]
+}

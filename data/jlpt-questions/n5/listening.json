@@ -1,0 +1,727 @@
+{
+  "level": "N5",
+  "questions": [
+    {
+      "id": "n5-tk-001",
+      "type": "TASK",
+      "prompt": "学生は あした なにを もって きますか。",
+      "choices": [
+        "えんぴつと 紙と おべんとう",
+        "けしゴムと 紙と のみもの",
+        "えんぴつと おべんとうと のみもの",
+        "えんぴつと けしゴムと おべんとう"
+      ],
+      "answer": 3,
+      "explanation": "Students bring a pencil, an eraser and a boxed lunch. The teacher brings paper, and drinks can be bought at the park.",
+      "situation": "きょうしつで 先生が 話して います。",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "みなさん、あしたは こうえんで 絵を かきます。えんぴつと けしゴムを もって きて ください。紙は わたしが もって きます。それから、おべんとうも わすれないで ください。のみものは こうえんで かえます。"
+        }
+      ]
+    },
+    {
+      "id": "n5-tk-002",
+      "type": "TASK",
+      "prompt": "男の人は いすを どこに おきますか。",
+      "choices": [
+        "ドアの 近く",
+        "つくえの 上",
+        "まどの 近くの つくえの よこ",
+        "テレビの まえ"
+      ],
+      "answer": 2,
+      "explanation": "The woman says near the window, not in front of the TV but beside the desk.",
+      "situation": "男の人と 女の人が 話して います。",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "この いす、どこに おきましょうか。"
+        },
+        {
+          "speaker": "F",
+          "text": "そうですね。まどの 近くに おいて ください。"
+        },
+        {
+          "speaker": "M",
+          "text": "まどの 近くですね。テレビの まえですか。"
+        },
+        {
+          "speaker": "F",
+          "text": "いいえ、テレビの まえじゃなくて、つくえの よこに おねがいします。"
+        },
+        {
+          "speaker": "M",
+          "text": "はい、わかりました。"
+        }
+      ]
+    },
+    {
+      "id": "n5-tk-003",
+      "type": "TASK",
+      "prompt": "女の人は 何時に えきへ 行きますか。",
+      "choices": [
+        "二時",
+        "一時四十五分",
+        "一時",
+        "一時半"
+      ],
+      "answer": 1,
+      "explanation": "Half past one is difficult for her, so they agree to meet at 1:45.",
+      "situation": "女の人と 男の人が 電話で 話して います。",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "もしもし、あしたの えいが、何時からですか。"
+        },
+        {
+          "speaker": "M",
+          "text": "二時からです。一時半に えきで あいましょうか。"
+        },
+        {
+          "speaker": "F",
+          "text": "うーん、一時半は ちょっと…。一時まで じゅぎょうが ありますから。一時四十五分は どうですか。"
+        },
+        {
+          "speaker": "M",
+          "text": "いいですよ。じゃ、一時四十五分に えきの まえで。"
+        }
+      ]
+    },
+    {
+      "id": "n5-tk-004",
+      "type": "TASK",
+      "prompt": "男の人は なにを かいますか。",
+      "choices": [
+        "りんご 三つと みかん 五つ",
+        "りんご 五つと みかん 三つ",
+        "りんご 三つと バナナ",
+        "みかん 五つと バナナ"
+      ],
+      "answer": 0,
+      "explanation": "He buys three apples and five mandarins. バナナは いいです means he doesn't want bananas.",
+      "situation": "店で 男の人と 店の人が 話して います。",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "すみません、りんごは いくらですか。"
+        },
+        {
+          "speaker": "F",
+          "text": "一つ 百円です。みかんは 五つで 二百円ですよ。"
+        },
+        {
+          "speaker": "M",
+          "text": "じゃ、りんごを 三つと みかんを 五つ ください。"
+        },
+        {
+          "speaker": "F",
+          "text": "はい。バナナも やすいですよ。"
+        },
+        {
+          "speaker": "M",
+          "text": "バナナは いいです。"
+        }
+      ]
+    },
+    {
+      "id": "n5-tk-005",
+      "type": "TASK",
+      "prompt": "男の人は これから まず なにを しますか。",
+      "choices": [
+        "紙を コピーする",
+        "へやを そうじする",
+        "田中さんと 話す",
+        "メールを 読む"
+      ],
+      "answer": 3,
+      "explanation": "He is asked to read the e-mail before making the copies, so reading the e-mail comes first.",
+      "situation": "会社で 女の人と 男の人が 話して います。",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "山田さん、この 紙を 十まい コピーして ください。"
+        },
+        {
+          "speaker": "M",
+          "text": "はい。"
+        },
+        {
+          "speaker": "F",
+          "text": "それから、となりの へやの そうじも おねがいします。"
+        },
+        {
+          "speaker": "M",
+          "text": "わかりました。あ、でも、となりの へやは いま 田中さんたちが つかって いますよ。"
+        },
+        {
+          "speaker": "F",
+          "text": "そうですか。じゃ、そうじは あとで いいです。あ、コピーの まえに、この メールを 読んで ください。"
+        },
+        {
+          "speaker": "M",
+          "text": "はい、わかりました。"
+        }
+      ]
+    },
+    {
+      "id": "n5-tk-006",
+      "type": "TASK",
+      "prompt": "二人は 何で としょかんへ 行きますか。",
+      "choices": [
+        "バス",
+        "タクシー",
+        "じてんしゃ",
+        "あるいて"
+      ],
+      "answer": 2,
+      "explanation": "Walking is slow and the next bus is in 40 minutes, so they go by bicycle.",
+      "situation": "学校で 男の学生と 女の学生が 話して います。",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "としょかんまで あるいて 行きましょうか。"
+        },
+        {
+          "speaker": "F",
+          "text": "あるいて 三十分ぐらい かかりますよ。バスで 行きませんか。"
+        },
+        {
+          "speaker": "M",
+          "text": "バスは 一時間に 一本しか ありませんよ。つぎの バスは 四十分あとです。"
+        },
+        {
+          "speaker": "F",
+          "text": "そうですか。じゃ、じてんしゃは どうですか。あねの じてんしゃが ありますから。"
+        },
+        {
+          "speaker": "M",
+          "text": "いいですね。そう しましょう。"
+        }
+      ]
+    },
+    {
+      "id": "n5-tk-007",
+      "type": "TASK",
+      "prompt": "男の人は 何を 飲みますか。",
+      "choices": [
+        "みず",
+        "こうちゃ",
+        "コーヒー",
+        "ジュース"
+      ],
+      "answer": 1,
+      "explanation": "There is no coffee left, so he asks for tea (こうちゃ).",
+      "situation": "女の人と 男の人が 話して います。",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "なにか 飲みますか。コーヒーと こうちゃが ありますよ。"
+        },
+        {
+          "speaker": "M",
+          "text": "ありがとうございます。じゃ、コーヒーを おねがいします。"
+        },
+        {
+          "speaker": "F",
+          "text": "あ、すみません。コーヒーは もう ありませんでした。ジュースは どうですか。"
+        },
+        {
+          "speaker": "M",
+          "text": "じゃ、こうちゃを ください。"
+        }
+      ]
+    },
+    {
+      "id": "n5-tk-008",
+      "type": "TASK",
+      "prompt": "学生は しゅくだいを 何よう日に 出しますか。",
+      "choices": [
+        "木よう日",
+        "火よう日",
+        "水よう日",
+        "金よう日"
+      ],
+      "answer": 0,
+      "explanation": "The homework is due the day after tomorrow, Thursday (木よう日).",
+      "situation": "先生が 話して います。",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "きょうの しゅくだいは 教科書の 二十ページです。あしたは 休みですから、あさっての 木よう日に 出して ください。金よう日は テストが あります。"
+        }
+      ]
+    },
+    {
+      "id": "n5-pt-001",
+      "type": "POINT",
+      "prompt": "女の人の たんじょうびは いつですか。",
+      "choices": [
+        "七月 九日",
+        "八月 七日",
+        "七月 八日",
+        "七月 七日"
+      ],
+      "answer": 2,
+      "explanation": "Her birthday is July 8th, the day after tomorrow.",
+      "situation": "男の人と 女の人が 話して います。",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "山下さんの たんじょうびは いつですか。"
+        },
+        {
+          "speaker": "F",
+          "text": "七月 八日です。"
+        },
+        {
+          "speaker": "M",
+          "text": "え、あしたですね。"
+        },
+        {
+          "speaker": "F",
+          "text": "いいえ、ちがいますよ。あしたは 七日です。あさってです。"
+        }
+      ]
+    },
+    {
+      "id": "n5-pt-002",
+      "type": "POINT",
+      "prompt": "男の学生は きのう どうして 学校を 休みましたか。",
+      "choices": [
+        "アルバイトが あったから",
+        "はが いたかったから",
+        "かぜを ひいたから",
+        "ねつが あったから"
+      ],
+      "answer": 1,
+      "explanation": "He had a toothache and went to the dentist.",
+      "situation": "女の学生と 男の学生が 話して います。",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "きのう どうして 休みましたか。かぜですか。"
+        },
+        {
+          "speaker": "M",
+          "text": "いいえ。あさ、はが いたかったですから、はいしゃへ 行きました。"
+        },
+        {
+          "speaker": "F",
+          "text": "そうですか。もう だいじょうぶですか。"
+        },
+        {
+          "speaker": "M",
+          "text": "はい、もう いたくないです。"
+        }
+      ]
+    },
+    {
+      "id": "n5-pt-003",
+      "type": "POINT",
+      "prompt": "女の人の かばんは どれですか。",
+      "choices": [
+        "白くて 大きくて、ポケットが ない かばん",
+        "黒い かばん",
+        "白くて 大きくて、ポケットが ある かばん",
+        "白くて 小さい かばん"
+      ],
+      "answer": 0,
+      "explanation": "Her bag is white and big, with no pocket.",
+      "situation": "男の人と 女の人が 話して います。",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "キムさんの かばんは どれですか。この 黒い かばんですか。"
+        },
+        {
+          "speaker": "F",
+          "text": "いいえ、わたしのは 白くて 大きい かばんです。"
+        },
+        {
+          "speaker": "M",
+          "text": "あ、あの ポケットが ある かばんですか。"
+        },
+        {
+          "speaker": "F",
+          "text": "いいえ、ポケットは ありません。"
+        }
+      ]
+    },
+    {
+      "id": "n5-pt-004",
+      "type": "POINT",
+      "prompt": "男の人は きのう なんじかん べんきょうしましたか。",
+      "choices": [
+        "一時間",
+        "二時間",
+        "四時間",
+        "三時間"
+      ],
+      "answer": 3,
+      "explanation": "Two hours before dinner plus one hour before bed makes three hours.",
+      "situation": "女の人と 男の人が 話して います。",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "きのうは なんじかん べんきょうしましたか。"
+        },
+        {
+          "speaker": "M",
+          "text": "ばんごはんの まえに 二時間、それから、ねる まえに 一時間 しました。"
+        },
+        {
+          "speaker": "F",
+          "text": "たくさん しましたね。"
+        }
+      ]
+    },
+    {
+      "id": "n5-pt-005",
+      "type": "POINT",
+      "prompt": "男の人は 日曜日に なにを しましたか。",
+      "choices": [
+        "友だちの うちへ 行きました。",
+        "えいがを 見に 行きました。",
+        "うちで テレビを 見ました。",
+        "友だちと 山へ 行きました。"
+      ],
+      "answer": 2,
+      "explanation": "It rained, so he watched TV at home instead of going to the mountains.",
+      "situation": "女の人と 男の人が 話して います。",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "日曜日は なにを しましたか。"
+        },
+        {
+          "speaker": "M",
+          "text": "友だちと 山へ 行きたかったですが、あめでしたから、うちで テレビを 見ました。"
+        },
+        {
+          "speaker": "F",
+          "text": "そうですか。ざんねんでしたね。"
+        }
+      ]
+    },
+    {
+      "id": "n5-pt-006",
+      "type": "POINT",
+      "prompt": "女の人は どうやって 会社へ 来ますか。",
+      "choices": [
+        "電車と バスで",
+        "あるいて",
+        "電車で",
+        "バスで"
+      ],
+      "answer": 1,
+      "explanation": "She lives near the office and walks. The man is the one who takes the train and bus.",
+      "situation": "男の人と 女の人が 話して います。",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "林さんは まいにち 電車で 会社へ 来ますか。"
+        },
+        {
+          "speaker": "F",
+          "text": "いいえ、うちは 会社から 近いですから、あるいて 来ます。"
+        },
+        {
+          "speaker": "M",
+          "text": "そうですか。いいですね。ぼくは 電車と バスで 一時間 かかります。"
+        }
+      ]
+    },
+    {
+      "id": "n5-pt-007",
+      "type": "POINT",
+      "prompt": "女の人は ぜんぶで いくら はらいますか。",
+      "choices": [
+        "四百円",
+        "百五十円",
+        "二百五十円",
+        "三百円"
+      ],
+      "answer": 0,
+      "explanation": "Two notebooks at 150 yen plus a 100-yen pen make 400 yen.",
+      "situation": "店で 女の人と 店の人が 話して います。",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "この ノートは いくらですか。"
+        },
+        {
+          "speaker": "M",
+          "text": "一さつ 百五十円です。"
+        },
+        {
+          "speaker": "F",
+          "text": "じゃ、二さつ ください。それから、この ボールペンも。"
+        },
+        {
+          "speaker": "M",
+          "text": "ボールペンは 百円です。ぜんぶで 四百円です。"
+        }
+      ]
+    },
+    {
+      "id": "n5-ut-001",
+      "type": "UTTERANCE",
+      "prompt": "",
+      "choices": [
+        "いただきます。",
+        "いってきます。",
+        "おじゃましました。"
+      ],
+      "answer": 2,
+      "explanation": "When leaving someone's home, say おじゃましました.",
+      "situation": "友だちの 家の げんかんに いる 人（→）",
+      "script": [
+        {
+          "speaker": "N",
+          "text": "友だちの 家から 帰ります。何と 言いますか。"
+        }
+      ]
+    },
+    {
+      "id": "n5-ut-002",
+      "type": "UTTERANCE",
+      "prompt": "",
+      "choices": [
+        "ごちそうさまでした。",
+        "おやすみなさい。",
+        "いただきます。"
+      ],
+      "answer": 2,
+      "explanation": "Before eating, say いただきます. ごちそうさまでした is said after eating.",
+      "situation": "ごはんの 前に すわって いる 人（→）",
+      "script": [
+        {
+          "speaker": "N",
+          "text": "これから ごはんを 食べます。何と 言いますか。"
+        }
+      ]
+    },
+    {
+      "id": "n5-ut-003",
+      "type": "UTTERANCE",
+      "prompt": "",
+      "choices": [
+        "いらっしゃいませ。",
+        "おかえりなさい。",
+        "しつれいします。"
+      ],
+      "answer": 2,
+      "explanation": "When entering a teacher's or boss's room, say しつれいします.",
+      "situation": "先生の へやの ドアの 前に いる 学生（→）",
+      "script": [
+        {
+          "speaker": "N",
+          "text": "先生の へやに 入ります。何と 言いますか。"
+        }
+      ]
+    },
+    {
+      "id": "n5-ut-004",
+      "type": "UTTERANCE",
+      "prompt": "",
+      "choices": [
+        "ペンを かしましょうか。",
+        "ペンを かりて ください。",
+        "ペンを かして ください。"
+      ],
+      "answer": 2,
+      "explanation": "To borrow something, ask the other person to lend it: かして ください.",
+      "situation": "友だちの ペンを 見て いる 人（→）",
+      "script": [
+        {
+          "speaker": "N",
+          "text": "友だちの ペンを かりたいです。何と 言いますか。"
+        }
+      ]
+    },
+    {
+      "id": "n5-ut-005",
+      "type": "UTTERANCE",
+      "prompt": "",
+      "choices": [
+        "こんばんは。",
+        "さようなら。",
+        "おはようございます。"
+      ],
+      "answer": 2,
+      "explanation": "In the morning, greet people with おはようございます.",
+      "situation": "朝、会社の 入り口で 会った 二人（→）",
+      "script": [
+        {
+          "speaker": "N",
+          "text": "朝、会社の 人に 会いました。何と 言いますか。"
+        }
+      ]
+    },
+    {
+      "id": "n5-ut-006",
+      "type": "UTTERANCE",
+      "prompt": "",
+      "choices": [
+        "どういたしまして。",
+        "おさきに しつれいします。",
+        "おそく なって すみません。"
+      ],
+      "answer": 2,
+      "explanation": "Apologize for being late with おそく なって すみません.",
+      "situation": "やくそくの 時間に おくれて 来た 人（→）",
+      "script": [
+        {
+          "speaker": "N",
+          "text": "友だちとの やくそくに おくれました。何と 言いますか。"
+        }
+      ]
+    },
+    {
+      "id": "n5-qr-001",
+      "type": "QUICK_RESPONSE",
+      "prompt": "",
+      "choices": [
+        "はい、そうです。",
+        "こちらこそ、よろしく おねがいします。",
+        "いいえ、けっこうです。"
+      ],
+      "answer": 1,
+      "explanation": "Reply to どうぞ よろしく with こちらこそ、よろしく おねがいします.",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "はじめまして。どうぞ よろしく。"
+        }
+      ]
+    },
+    {
+      "id": "n5-qr-002",
+      "type": "QUICK_RESPONSE",
+      "prompt": "",
+      "choices": [
+        "三年です。",
+        "ベトナムです。",
+        "あちらです。"
+      ],
+      "answer": 1,
+      "explanation": "お国は どちらですか asks which country you are from.",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "お国は どちらですか。"
+        }
+      ]
+    },
+    {
+      "id": "n5-qr-003",
+      "type": "QUICK_RESPONSE",
+      "prompt": "",
+      "choices": [
+        "あそこに あります。",
+        "田中さんのです。",
+        "三千円です。"
+      ],
+      "answer": 1,
+      "explanation": "だれの asks whose it is, so answer with a person: 田中さんのです.",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "この かさ、だれのですか。"
+        }
+      ]
+    },
+    {
+      "id": "n5-qr-004",
+      "type": "QUICK_RESPONSE",
+      "prompt": "",
+      "choices": [
+        "テニスが すきです。",
+        "友だちと テニスを しました。",
+        "あした します。"
+      ],
+      "answer": 1,
+      "explanation": "The question is about yesterday, so answer in the past tense.",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "きのう、何を しましたか。"
+        }
+      ]
+    },
+    {
+      "id": "n5-qr-005",
+      "type": "QUICK_RESPONSE",
+      "prompt": "",
+      "choices": [
+        "いいえ、どういたしまして。",
+        "いいえ、もう けっこうです。",
+        "はい、いかがです。"
+      ],
+      "answer": 1,
+      "explanation": "To politely decline more, say もう けっこうです.",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "コーヒー、もう 一ぱい いかがですか。"
+        }
+      ]
+    },
+    {
+      "id": "n5-qr-006",
+      "type": "QUICK_RESPONSE",
+      "prompt": "",
+      "choices": [
+        "六日です。",
+        "六時からです。",
+        "六時間です。"
+      ],
+      "answer": 1,
+      "explanation": "何時から asks the starting time: 六時からです.",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "あしたの パーティーは 何時からですか。"
+        }
+      ]
+    },
+    {
+      "id": "n5-qr-007",
+      "type": "QUICK_RESPONSE",
+      "prompt": "",
+      "choices": [
+        "いいえ、帰りましょう。",
+        "すみません、まだ しごとが あります。",
+        "はい、帰りませんでした。"
+      ],
+      "answer": 1,
+      "explanation": "An invitation with 〜ませんか. The natural refusal gives a reason.",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "いっしょに 帰りませんか。"
+        }
+      ]
+    },
+    {
+      "id": "n5-qr-008",
+      "type": "QUICK_RESPONSE",
+      "prompt": "",
+      "choices": [
+        "いただきます。",
+        "おつかれさまでした。",
+        "いらっしゃい。"
+      ],
+      "answer": 1,
+      "explanation": "When a colleague leaves first, reply おつかれさまでした.",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "おさきに しつれいします。"
+        }
+      ]
+    }
+  ]
+}

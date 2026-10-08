@@ -1,0 +1,747 @@
+{
+  "level": "N4",
+  "questions": [
+    {
+      "id": "n4-tk-001",
+      "type": "TASK",
+      "prompt": "女の学生は このあと まず 何を しますか。",
+      "choices": [
+        "先生に 会いに 行く",
+        "グラフを 作る",
+        "資料を コピーする",
+        "発表の 練習を する"
+      ],
+      "answer": 1,
+      "explanation": "She must add a graph before copying the handout, and she will practice at home tonight.",
+      "situation": "大学で 男の学生と 女の学生が 話して います。",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "田中さん、明日の 発表の 準備、もう 終わった？"
+        },
+        {
+          "speaker": "F",
+          "text": "うん、資料は できたよ。あとは コピーするだけ。"
+        },
+        {
+          "speaker": "M",
+          "text": "そう。あ、でも 先生が 資料に グラフを 入れて ほしいって 言ってたよ。"
+        },
+        {
+          "speaker": "F",
+          "text": "え、本当？じゃ、コピーする 前に グラフを 作らなきゃ。"
+        },
+        {
+          "speaker": "M",
+          "text": "それから、発表の 練習も したほうが いいよ。"
+        },
+        {
+          "speaker": "F",
+          "text": "うん、それは 夜 家で する。"
+        }
+      ]
+    },
+    {
+      "id": "n4-tk-002",
+      "type": "TASK",
+      "prompt": "男の人は 何を 買って 来ますか。",
+      "choices": [
+        "お茶と お菓子",
+        "お茶と コーヒー",
+        "コーヒーと お菓子",
+        "お茶だけ"
+      ],
+      "answer": 0,
+      "explanation": "Tea and some snacks. They still have plenty of coffee.",
+      "situation": "会社で 女の人と 男の人が 話して います。",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "鈴木さん、午後の 会議で 飲み物が いるんだけど、買って 来て くれる？"
+        },
+        {
+          "speaker": "M",
+          "text": "はい。何を 買いましょうか。"
+        },
+        {
+          "speaker": "F",
+          "text": "お茶を 十本 お願い。あ、コーヒーは まだ たくさん あるから、いらないわ。"
+        },
+        {
+          "speaker": "M",
+          "text": "お菓子は どうしますか。"
+        },
+        {
+          "speaker": "F",
+          "text": "そうね…今日は 長い 会議だから、お菓子も 少し 買って 来て。"
+        },
+        {
+          "speaker": "M",
+          "text": "わかりました。"
+        }
+      ]
+    },
+    {
+      "id": "n4-tk-003",
+      "type": "TASK",
+      "prompt": "女の人は 何時に レストランに 行きますか。",
+      "choices": [
+        "六時",
+        "六時半",
+        "七時",
+        "八時半"
+      ],
+      "answer": 3,
+      "explanation": "Seven is full and she works until 6:30, so she books 8:30.",
+      "situation": "電話で レストランの 人と 女の人が 話して います。",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "はい、レストラン「ひかり」です。"
+        },
+        {
+          "speaker": "F",
+          "text": "あの、今晩 七時に 四人で 予約したいんですが。"
+        },
+        {
+          "speaker": "M",
+          "text": "申し訳ございません。七時は いっぱいなんです。六時か 八時半なら 空いて いますが…。"
+        },
+        {
+          "speaker": "F",
+          "text": "六時は ちょっと 早いですね。仕事が 六時半まで あるので。じゃ、八時半で お願いします。"
+        }
+      ]
+    },
+    {
+      "id": "n4-tk-004",
+      "type": "TASK",
+      "prompt": "息子は 出かける 前に 何を しなければ なりませんか。",
+      "choices": [
+        "洗濯を する",
+        "買い物に 行く",
+        "ごみを 出す",
+        "部屋の 掃除を する"
+      ],
+      "answer": 2,
+      "explanation": "He cleaned yesterday and his mother will do the laundry, so he only takes out the rubbish.",
+      "situation": "家で 母親と 息子が 話して います。",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "健太、出かける 前に 部屋の 掃除を して いきなさい。"
+        },
+        {
+          "speaker": "M",
+          "text": "昨日 したよ。"
+        },
+        {
+          "speaker": "F",
+          "text": "あら、そう。じゃ、ごみを 出して いって。今日は ごみの 日だから。"
+        },
+        {
+          "speaker": "M",
+          "text": "はーい。洗濯物は？"
+        },
+        {
+          "speaker": "F",
+          "text": "それは お母さんが するから いいわ。"
+        }
+      ]
+    },
+    {
+      "id": "n4-tk-005",
+      "type": "TASK",
+      "prompt": "学生が 必ず 持って 行く ものは 何ですか。",
+      "choices": [
+        "地図",
+        "上着",
+        "お弁当",
+        "カメラ"
+      ],
+      "answer": 1,
+      "explanation": "上着を 必ず 持って きて ください. Lunch is provided and a camera is optional.",
+      "situation": "学校で 先生が 話して います。",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "来週の 旅行の 持ち物に ついて 話します。お弁当は ホテルで 用意して くれるので、いりません。山を 歩くので、歩きやすい くつを はいて きて ください。それから、山の 上は 寒いので、上着を 必ず 持って きて ください。カメラは 持って きても いいですが、なくさないように 気を つけて ください。"
+        }
+      ]
+    },
+    {
+      "id": "n4-tk-006",
+      "type": "TASK",
+      "prompt": "女の人は どうやって 美術館へ 行きますか。",
+      "choices": [
+        "地下鉄に 乗って、駅から 歩く",
+        "バスに 乗る",
+        "タクシーに 乗る",
+        "ここから ずっと 歩く"
+      ],
+      "answer": 0,
+      "explanation": "The subway is faster, and the museum is a five-minute walk from the station.",
+      "situation": "駅で 女の人と 駅員が 話して います。",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "すみません、市立美術館へ 行きたいんですが、何番の バスに 乗れば いいですか。"
+        },
+        {
+          "speaker": "M",
+          "text": "美術館なら、バスより 地下鉄の ほうが 早いですよ。南線で 二つ目の 駅です。"
+        },
+        {
+          "speaker": "F",
+          "text": "そうですか。駅から 美術館まで 遠いですか。"
+        },
+        {
+          "speaker": "M",
+          "text": "歩いて 五分ぐらいです。"
+        },
+        {
+          "speaker": "F",
+          "text": "わかりました。ありがとうございます。"
+        }
+      ]
+    },
+    {
+      "id": "n4-tk-007",
+      "type": "TASK",
+      "prompt": "女の人は 明日 何時に 会社に 来ますか。",
+      "choices": [
+        "九時",
+        "十時",
+        "八時半",
+        "九時半"
+      ],
+      "answer": 3,
+      "explanation": "He agrees to 9:30 because she has a hospital appointment in the morning.",
+      "situation": "会社で 男の人と 女の人が 話して います。",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "明日は 大切な お客さんが 十時に 来るから、いつもより 早く 来て くれる？"
+        },
+        {
+          "speaker": "F",
+          "text": "はい。何時に 来れば いいですか。"
+        },
+        {
+          "speaker": "M",
+          "text": "準備が あるから、九時に 来て ほしいんだけど。"
+        },
+        {
+          "speaker": "F",
+          "text": "すみません、明日は 朝 病院に 行く ことに なって いて…九時半でも いいですか。"
+        },
+        {
+          "speaker": "M",
+          "text": "うーん、じゃ、それで いいよ。"
+        }
+      ]
+    },
+    {
+      "id": "n4-tk-008",
+      "type": "TASK",
+      "prompt": "女の人は まず 何を しますか。",
+      "choices": [
+        "カードを 作る",
+        "本を 選ぶ",
+        "紙に 名前と 住所を 書く",
+        "学生証を 見せる"
+      ],
+      "answer": 2,
+      "explanation": "まず この 紙に 名前と 住所を 書いて ください.",
+      "situation": "図書館で 女の人と 図書館の 人が 話して います。",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "すみません、本を 借りたいんですが。"
+        },
+        {
+          "speaker": "M",
+          "text": "図書館の カードは お持ちですか。"
+        },
+        {
+          "speaker": "F",
+          "text": "いいえ、初めてなんです。"
+        },
+        {
+          "speaker": "M",
+          "text": "では、まず この 紙に 名前と 住所を 書いて ください。それから、住所が わかる もの、たとえば 学生証か 保険証を 見せて ください。カードは その あとで 作ります。"
+        }
+      ]
+    },
+    {
+      "id": "n4-pt-001",
+      "type": "POINT",
+      "prompt": "男の人は どうして 引っ越しますか。",
+      "choices": [
+        "となりの 人が うるさいから",
+        "駅から 遠いから",
+        "家賃が 高いから",
+        "部屋が せまいから"
+      ],
+      "answer": 0,
+      "explanation": "His neighbor is noisy late at night and he can't sleep.",
+      "situation": "女の人と 男の人が 話して います。",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "引っ越すんですか。今の アパート、駅から 近くて 便利なのに。"
+        },
+        {
+          "speaker": "M",
+          "text": "ええ。便利なんですが、となりの 部屋の 人が 夜 遅くまで うるさくて、よく 眠れないんです。"
+        },
+        {
+          "speaker": "F",
+          "text": "それは 大変ですね。家賃は どうですか。"
+        },
+        {
+          "speaker": "M",
+          "text": "家賃は 安いので、それは 問題ないんですけどね。"
+        }
+      ]
+    },
+    {
+      "id": "n4-pt-002",
+      "type": "POINT",
+      "prompt": "女の人は 週末 何を しましたか。",
+      "choices": [
+        "友だちと 海に 行った。",
+        "家で 休んだ。",
+        "友だちの お見舞いに 行った。",
+        "一人で 美術館に 行った。"
+      ],
+      "answer": 3,
+      "explanation": "Her friend caught a cold, so she went to an art museum alone.",
+      "situation": "男の人と 女の人が 話して います。",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "週末は どこか 行った？"
+        },
+        {
+          "speaker": "F",
+          "text": "友だちと 海に 行く つもりだったんだけど、友だちが かぜを ひいちゃって。"
+        },
+        {
+          "speaker": "M",
+          "text": "そう。じゃあ、家に いたの？"
+        },
+        {
+          "speaker": "F",
+          "text": "ううん、一人で 美術館に 行ったよ。すごく よかった。"
+        }
+      ]
+    },
+    {
+      "id": "n4-pt-003",
+      "type": "POINT",
+      "prompt": "女の人は どうして くつを かえたいのですか。",
+      "choices": [
+        "デザインが よくないから",
+        "こわれて いたから",
+        "サイズが 小さかったから",
+        "色が 好きじゃないから"
+      ],
+      "answer": 2,
+      "explanation": "They were a little small. She likes the color and design.",
+      "situation": "店で 女の人と 店員が 話して います。",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "すみません、昨日 ここで この くつを 買ったんですが…。"
+        },
+        {
+          "speaker": "M",
+          "text": "はい、何か ございましたか。"
+        },
+        {
+          "speaker": "F",
+          "text": "家で はいて みたら、少し 小さかったんです。色や デザインは とても 気に 入って いるんですが。"
+        },
+        {
+          "speaker": "M",
+          "text": "かしこまりました。では、一つ 大きい サイズと お取りかえしますね。"
+        }
+      ]
+    },
+    {
+      "id": "n4-pt-004",
+      "type": "POINT",
+      "prompt": "男の人は 毎日 何時間 寝て いますか。",
+      "choices": [
+        "一時間",
+        "五時間",
+        "六時間",
+        "七時間"
+      ],
+      "answer": 1,
+      "explanation": "From one o'clock to six o'clock is five hours.",
+      "situation": "女の人と 男の人が 話して います。",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "眠そうですね。昨日 遅かったんですか。"
+        },
+        {
+          "speaker": "M",
+          "text": "ええ、最近 仕事が 忙しくて。毎晩 一時に 寝て、六時に 起きて います。"
+        },
+        {
+          "speaker": "F",
+          "text": "え、それじゃ 五時間しか 寝て いないんですか。体に よくないですよ。"
+        }
+      ]
+    },
+    {
+      "id": "n4-pt-005",
+      "type": "POINT",
+      "prompt": "男の学生は 何が 一番 大変だと 言って いますか。",
+      "choices": [
+        "朝 起きる こと",
+        "料理を 運ぶ こと",
+        "お客さんと 話す こと",
+        "料理を 作る こと"
+      ],
+      "answer": 0,
+      "explanation": "Working late makes getting up in the morning hard.",
+      "situation": "女の学生と 男の学生が 話して います。",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "アルバイト、どう？"
+        },
+        {
+          "speaker": "M",
+          "text": "レストランの 仕事は 楽しいよ。料理を 運ぶのは 慣れたし、お客さんも 優しいし。"
+        },
+        {
+          "speaker": "F",
+          "text": "そう、よかったね。"
+        },
+        {
+          "speaker": "M",
+          "text": "でも、夜 遅くまで 働くから、朝 起きるのが 大変なんだ。"
+        }
+      ]
+    },
+    {
+      "id": "n4-pt-006",
+      "type": "POINT",
+      "prompt": "二人は どこで 会いますか。",
+      "choices": [
+        "駅の 改札の 前",
+        "駅の となりの 本屋",
+        "駅の ホーム",
+        "本屋の 前の 喫茶店"
+      ],
+      "answer": 3,
+      "explanation": "The ticket gate is crowded and the bookshop is still closed, so they choose the café.",
+      "situation": "男の人と 女の人が 話して います。",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "明日、駅の 改札の 前で 会おうか。"
+        },
+        {
+          "speaker": "F",
+          "text": "改札の 前は 人が 多いから、わかりにくいよ。駅の となりの 本屋は どう？"
+        },
+        {
+          "speaker": "M",
+          "text": "本屋は 十時に 開くから、九時半は まだ 閉まってるよ。"
+        },
+        {
+          "speaker": "F",
+          "text": "そうか。じゃ、本屋の 前の 喫茶店に しよう。"
+        },
+        {
+          "speaker": "M",
+          "text": "うん、いいよ。"
+        }
+      ]
+    },
+    {
+      "id": "n4-pt-007",
+      "type": "POINT",
+      "prompt": "今日の テストで 使っても いい ものは 何ですか。",
+      "choices": [
+        "ノート",
+        "携帯電話の 辞書",
+        "紙の 辞書",
+        "教科書"
+      ],
+      "answer": 2,
+      "explanation": "Only paper dictionaries are allowed.",
+      "situation": "先生が 話して います。",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "これから テストを 始めます。教科書と ノートは かばんに しまって ください。辞書は 使っても いいですが、携帯電話の 辞書は だめです。紙の 辞書だけ 使って ください。"
+        }
+      ]
+    },
+    {
+      "id": "n4-ut-001",
+      "type": "UTTERANCE",
+      "prompt": "",
+      "choices": [
+        "一つ 持って もらいましょうか。",
+        "一つ 持ちましょうか。",
+        "一つ 持って くださいませんか。"
+      ],
+      "answer": 1,
+      "explanation": "〜ましょうか offers help: \"Shall I carry one?\"",
+      "situation": "重い 荷物を 持って いる 友だちと、その となりの 人（→）",
+      "script": [
+        {
+          "speaker": "N",
+          "text": "友だちが 重い 荷物を 持って います。手伝いたいです。何と 言いますか。"
+        }
+      ]
+    },
+    {
+      "id": "n4-ut-002",
+      "type": "UTTERANCE",
+      "prompt": "",
+      "choices": [
+        "いってらっしゃい。",
+        "お先に 失礼します。",
+        "お疲れさまでした。"
+      ],
+      "answer": 1,
+      "explanation": "When leaving before colleagues, say お先に 失礼します. お疲れさまでした is their reply.",
+      "situation": "仕事が 終わって、かばんを 持って 立って いる 人（→）",
+      "script": [
+        {
+          "speaker": "N",
+          "text": "仕事が 終わりました。先に 帰ります。何と 言いますか。"
+        }
+      ]
+    },
+    {
+      "id": "n4-ut-003",
+      "type": "UTTERANCE",
+      "prompt": "",
+      "choices": [
+        "これ、着て みて ください。",
+        "これ、着て みても いいですか。",
+        "これ、着て みましょうか。"
+      ],
+      "answer": 1,
+      "explanation": "〜ても いいですか asks for permission to try it on.",
+      "situation": "店で 服を 持って いる 客（→）",
+      "script": [
+        {
+          "speaker": "N",
+          "text": "店で この 服を 着て みたいです。何と 言いますか。"
+        }
+      ]
+    },
+    {
+      "id": "n4-ut-004",
+      "type": "UTTERANCE",
+      "prompt": "",
+      "choices": [
+        "おかげさまで。",
+        "お大事に。",
+        "お元気で。"
+      ],
+      "answer": 1,
+      "explanation": "お大事に is said to someone who is sick or injured.",
+      "situation": "病院の ベッドの 友だちと、帰る 人（→）",
+      "script": [
+        {
+          "speaker": "N",
+          "text": "友だちが 病気で 入院して います。帰る とき、何と 言いますか。"
+        }
+      ]
+    },
+    {
+      "id": "n4-ut-005",
+      "type": "UTTERANCE",
+      "prompt": "",
+      "choices": [
+        "すみません、窓が 閉まって います。",
+        "すみません、窓を 閉めて いただけませんか。",
+        "すみません、窓を 閉めましょうか。"
+      ],
+      "answer": 1,
+      "explanation": "〜て いただけませんか is a polite request.",
+      "situation": "窓の そばの 人を 見て いる、寒そうな 人（→）",
+      "script": [
+        {
+          "speaker": "N",
+          "text": "寒いです。窓の 近くの 人に 何と 言いますか。"
+        }
+      ]
+    },
+    {
+      "id": "n4-ut-006",
+      "type": "UTTERANCE",
+      "prompt": "",
+      "choices": [
+        "すみません、駅は 行きましたか。",
+        "すみません、駅へは どう 行けば いいですか。",
+        "すみません、駅へ 行って ください。"
+      ],
+      "answer": 1,
+      "explanation": "どう 行けば いいですか asks for directions.",
+      "situation": "地図を 持って 道に まよって いる 人（→）",
+      "script": [
+        {
+          "speaker": "N",
+          "text": "駅への 行き方が わかりません。何と 言いますか。"
+        }
+      ]
+    },
+    {
+      "id": "n4-qr-001",
+      "type": "QUICK_RESPONSE",
+      "prompt": "",
+      "choices": [
+        "たしか 十時からだったと 思うよ。",
+        "うん、会議に 出るよ。",
+        "明日は 休みたいな。"
+      ],
+      "answer": 0,
+      "explanation": "The question asks what time the meeting starts.",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "明日の 会議、何時からか 知ってる？"
+        }
+      ]
+    },
+    {
+      "id": "n4-qr-002",
+      "type": "QUICK_RESPONSE",
+      "prompt": "",
+      "choices": [
+        "はい、何部 必要ですか。",
+        "はい、コピーして いただきます。",
+        "いいえ、コピーしました。"
+      ],
+      "answer": 0,
+      "explanation": "Accept the request and ask how many copies are needed.",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "この 資料、コピーして おいて もらえますか。"
+        }
+      ]
+    },
+    {
+      "id": "n4-qr-003",
+      "type": "QUICK_RESPONSE",
+      "prompt": "",
+      "choices": [
+        "あ、すみません。ありがとうございます。",
+        "いいえ、どういたしまして。",
+        "はい、お先に どうぞ。"
+      ],
+      "answer": 0,
+      "explanation": "Someone lets you go first, so thank them.",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "お先に どうぞ。"
+        }
+      ]
+    },
+    {
+      "id": "n4-qr-004",
+      "type": "QUICK_RESPONSE",
+      "prompt": "",
+      "choices": [
+        "うん、おかげさまで よく なったよ。",
+        "うん、かぜを ひいたよ。",
+        "ううん、大丈夫だよ。"
+      ],
+      "answer": 0,
+      "explanation": "おかげさまで is the polite way to say you're better.",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "かぜ、もう 大丈夫？"
+        }
+      ]
+    },
+    {
+      "id": "n4-qr-005",
+      "type": "QUICK_RESPONSE",
+      "prompt": "",
+      "choices": [
+        "すみません、ここは ちょっと…。",
+        "はい、とめて いただきます。",
+        "いいえ、とめましょう。"
+      ],
+      "answer": 0,
+      "explanation": "ちょっと… is a soft way to say no.",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "ここに 車を とめても いいですか。"
+        }
+      ]
+    },
+    {
+      "id": "n4-qr-006",
+      "type": "QUICK_RESPONSE",
+      "prompt": "",
+      "choices": [
+        "歩いて 十分ぐらいです。",
+        "駅は あそこです。",
+        "二百円ぐらいです。"
+      ],
+      "answer": 0,
+      "explanation": "どのぐらい かかりますか asks how long it takes.",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "駅まで どのぐらい かかりますか。"
+        }
+      ]
+    },
+    {
+      "id": "n4-qr-007",
+      "type": "QUICK_RESPONSE",
+      "prompt": "",
+      "choices": [
+        "いいね。何を 見る？",
+        "映画が 見たかったの？",
+        "映画館で 会ったね。"
+      ],
+      "answer": 0,
+      "explanation": "Accept the invitation and ask which film.",
+      "script": [
+        {
+          "speaker": "M",
+          "text": "週末、いっしょに 映画でも どう？"
+        }
+      ]
+    },
+    {
+      "id": "n4-qr-008",
+      "type": "QUICK_RESPONSE",
+      "prompt": "",
+      "choices": [
+        "えっ、本当？知らなかった。",
+        "おめでとうございます、田中さん。",
+        "うん、結婚したいね。"
+      ],
+      "answer": 0,
+      "explanation": "〜んだって reports news; react with surprise. Tanaka isn't there to congratulate.",
+      "script": [
+        {
+          "speaker": "F",
+          "text": "田中さん、先週 結婚したんだって。"
+        }
+      ]
+    }
+  ]
+}

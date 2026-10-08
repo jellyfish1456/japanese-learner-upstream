@@ -1,0 +1,603 @@
+{
+  "level": "N4",
+  "questions": [
+    {
+      "id": "n4-kr-001",
+      "type": "KANJI_READING",
+      "prompt": "<u>昼</u>ごはんを いっしょに 食べましょう。",
+      "choices": [
+        "あさ",
+        "ばん",
+        "ひる",
+        "よる"
+      ],
+      "answer": 2,
+      "explanation": "昼 is read ひる (noon, daytime). 昼ごはん is lunch."
+    },
+    {
+      "id": "n4-kr-002",
+      "type": "KANJI_READING",
+      "prompt": "駅の <u>近く</u>に 住んで います。",
+      "choices": [
+        "ちがく",
+        "ちかく",
+        "とおく",
+        "きんく"
+      ],
+      "answer": 1,
+      "explanation": "近く is read ちかく (near). とおく is 遠く (far)."
+    },
+    {
+      "id": "n4-kr-003",
+      "type": "KANJI_READING",
+      "prompt": "この 町は とても <u>便利</u>です。",
+      "choices": [
+        "べんり",
+        "びんり",
+        "べんし",
+        "びんし"
+      ],
+      "answer": 0,
+      "explanation": "便利 is read べんり (convenient)."
+    },
+    {
+      "id": "n4-kr-004",
+      "type": "KANJI_READING",
+      "prompt": "毎日 日本語を <u>勉強</u>して います。",
+      "choices": [
+        "べんきょ",
+        "べんぎょう",
+        "めんきょう",
+        "べんきょう"
+      ],
+      "answer": 3,
+      "explanation": "勉強 is read べんきょう, with a long う at the end."
+    },
+    {
+      "id": "n4-kr-005",
+      "type": "KANJI_READING",
+      "prompt": "家族の <u>写真</u>を とりました。",
+      "choices": [
+        "しやしん",
+        "さしん",
+        "しゃしん",
+        "しゃじん"
+      ],
+      "answer": 2,
+      "explanation": "写真 is read しゃしん (photo), with a small ゃ."
+    },
+    {
+      "id": "n4-kr-006",
+      "type": "KANJI_READING",
+      "prompt": "来週 家族と <u>旅行</u>に 行きます。",
+      "choices": [
+        "りょうこ",
+        "りょこう",
+        "りょうこう",
+        "りょこ"
+      ],
+      "answer": 1,
+      "explanation": "旅行 is read りょこう (trip). Note the short りょ."
+    },
+    {
+      "id": "n4-kr-007",
+      "type": "KANJI_READING",
+      "prompt": "今日は <u>特別</u>な 日です。",
+      "choices": [
+        "とくべつ",
+        "とくへつ",
+        "どくべつ",
+        "とくべち"
+      ],
+      "answer": 0,
+      "explanation": "特別 is read とくべつ (special)."
+    },
+    {
+      "id": "n4-kr-008",
+      "type": "KANJI_READING",
+      "prompt": "わからない ところを 先生に <u>質問</u>しました。",
+      "choices": [
+        "しつもう",
+        "しちもん",
+        "じつもん",
+        "しつもん"
+      ],
+      "answer": 3,
+      "explanation": "質問 is read しつもん (question)."
+    },
+    {
+      "id": "n4-kr-009",
+      "type": "KANJI_READING",
+      "prompt": "時間が ないので、<u>急いで</u> ください。",
+      "choices": [
+        "ぬいで",
+        "さわいで",
+        "いそいで",
+        "およいで"
+      ],
+      "answer": 2,
+      "explanation": "急いで is read いそいで (hurry). およいで is 泳いで, ぬいで is 脱いで."
+    },
+    {
+      "id": "n4-kr-010",
+      "type": "KANJI_READING",
+      "prompt": "わたしの <u>兄弟</u>は 三人です。",
+      "choices": [
+        "きょうたい",
+        "けいだい",
+        "きょだい",
+        "きょうだい"
+      ],
+      "answer": 3,
+      "explanation": "兄弟 is read きょうだい (siblings)."
+    },
+    {
+      "id": "n4-kr-011",
+      "type": "KANJI_READING",
+      "prompt": "<u>去年</u>の 夏、海へ 行きました。",
+      "choices": [
+        "こねん",
+        "さくねん",
+        "きょねん",
+        "きょとし"
+      ],
+      "answer": 2,
+      "explanation": "去年 is read きょねん (last year)."
+    },
+    {
+      "id": "n4-kr-012",
+      "type": "KANJI_READING",
+      "prompt": "熱が あったので、<u>病院</u>へ 行きました。",
+      "choices": [
+        "びょいん",
+        "びょういん",
+        "びよういん",
+        "びょうい"
+      ],
+      "answer": 1,
+      "explanation": "病院 is read びょういん (hospital). びよういん (美容院) is a hair salon."
+    },
+    {
+      "id": "n4-or-001",
+      "type": "ORTHOGRAPHY",
+      "prompt": "健康の ために、毎朝 <u>うんどう</u>して います。",
+      "choices": [
+        "連動",
+        "運重",
+        "運動",
+        "運働"
+      ],
+      "answer": 2,
+      "explanation": "うんどう (exercise) is written 運動. Don't confuse 運 with 連, or 動 with 働."
+    },
+    {
+      "id": "n4-or-002",
+      "type": "ORTHOGRAPHY",
+      "prompt": "まだ 外は <u>あかるい</u>です。",
+      "choices": [
+        "晴るい",
+        "明るい",
+        "朝るい",
+        "暗るい"
+      ],
+      "answer": 1,
+      "explanation": "あかるい (bright) is written 明るい. 暗い is くらい (dark)."
+    },
+    {
+      "id": "n4-or-003",
+      "type": "ORTHOGRAPHY",
+      "prompt": "この 道を まっすぐ <u>すすんで</u> ください。",
+      "choices": [
+        "進んで",
+        "近んで",
+        "遅んで",
+        "送んで"
+      ],
+      "answer": 0,
+      "explanation": "すすむ (go forward) is written 進む."
+    },
+    {
+      "id": "n4-or-004",
+      "type": "ORTHOGRAPHY",
+      "prompt": "駅で 友だちを <u>まちました</u>。",
+      "choices": [
+        "持ちました",
+        "特ちました",
+        "時ちました",
+        "待ちました"
+      ],
+      "answer": 3,
+      "explanation": "まつ (wait) is written 待つ. 持つ is もつ (hold)."
+    },
+    {
+      "id": "n4-or-005",
+      "type": "ORTHOGRAPHY",
+      "prompt": "みなさんの <u>いけん</u>を 聞かせて ください。",
+      "choices": [
+        "音見",
+        "意現",
+        "意見",
+        "意兄"
+      ],
+      "answer": 2,
+      "explanation": "いけん (opinion) is written 意見."
+    },
+    {
+      "id": "n4-or-006",
+      "type": "ORTHOGRAPHY",
+      "prompt": "大学で 日本の <u>れきし</u>を 勉強して います。",
+      "choices": [
+        "歴使",
+        "歴史",
+        "暦史",
+        "歴吏"
+      ],
+      "answer": 1,
+      "explanation": "れきし (history) is written 歴史."
+    },
+    {
+      "id": "n4-or-007",
+      "type": "ORTHOGRAPHY",
+      "prompt": "国の 家族に 手紙を <u>おくりました</u>。",
+      "choices": [
+        "送りました",
+        "迭りました",
+        "途りました",
+        "追りました"
+      ],
+      "answer": 0,
+      "explanation": "おくる (send) is written 送る."
+    },
+    {
+      "id": "n4-or-008",
+      "type": "ORTHOGRAPHY",
+      "prompt": "この <u>ちず</u>を 見て ください。",
+      "choices": [
+        "池図",
+        "地区",
+        "他図",
+        "地図"
+      ],
+      "answer": 3,
+      "explanation": "ちず (map) is written 地図. 地区 is ちく (district)."
+    },
+    {
+      "id": "n4-or-009",
+      "type": "ORTHOGRAPHY",
+      "prompt": "新しい <u>じゅうしょ</u>を 教えて ください。",
+      "choices": [
+        "注所",
+        "住城",
+        "住所",
+        "往所"
+      ],
+      "answer": 2,
+      "explanation": "じゅうしょ (address) is written 住所."
+    },
+    {
+      "id": "n4-or-010",
+      "type": "ORTHOGRAPHY",
+      "prompt": "母は <u>りょうり</u>が 上手です。",
+      "choices": [
+        "科理",
+        "料里",
+        "斗理",
+        "料理"
+      ],
+      "answer": 3,
+      "explanation": "りょうり (cooking) is written 料理. Don't confuse 料 with 科."
+    },
+    {
+      "id": "n4-cx-001",
+      "type": "CONTEXT",
+      "prompt": "田中さんに 本を 借りたので、明日 （　　） つもりです。",
+      "choices": [
+        "かえす",
+        "かりる",
+        "かす",
+        "もらう"
+      ],
+      "answer": 0,
+      "explanation": "You borrowed it, so you intend to return it: かえす."
+    },
+    {
+      "id": "n4-cx-002",
+      "type": "CONTEXT",
+      "prompt": "大切な 書類を （　　） しまって、今 さがして います。",
+      "choices": [
+        "ひろって",
+        "そだてて",
+        "たおれて",
+        "なくして"
+      ],
+      "answer": 3,
+      "explanation": "You are searching because you lost it: なくして しまいました."
+    },
+    {
+      "id": "n4-cx-003",
+      "type": "CONTEXT",
+      "prompt": "この 道は 車が 多いので、（　　） ください。",
+      "choices": [
+        "気が ついて",
+        "気に 入って",
+        "気を つけて",
+        "気に して"
+      ],
+      "answer": 2,
+      "explanation": "気を つける means to be careful."
+    },
+    {
+      "id": "n4-cx-004",
+      "type": "CONTEXT",
+      "prompt": "雨が 降りそうですから、かさを （　　） 行きましょう。",
+      "choices": [
+        "かけて",
+        "持って",
+        "取って",
+        "入れて"
+      ],
+      "answer": 1,
+      "explanation": "持って 行く means to take something with you."
+    },
+    {
+      "id": "n4-cx-005",
+      "type": "CONTEXT",
+      "prompt": "先生の 話を よく 聞いて、（　　）を とりました。",
+      "choices": [
+        "メモ",
+        "メール",
+        "メニュー",
+        "メーター"
+      ],
+      "answer": 0,
+      "explanation": "メモを とる means to take notes."
+    },
+    {
+      "id": "n4-cx-006",
+      "type": "CONTEXT",
+      "prompt": "田中さんは いつも 約束の 時間に （　　）。",
+      "choices": [
+        "すすみます",
+        "ぬれます",
+        "かわきます",
+        "おくれます"
+      ],
+      "answer": 3,
+      "explanation": "時間に おくれる means to be late."
+    },
+    {
+      "id": "n4-cx-007",
+      "type": "CONTEXT",
+      "prompt": "この 薬は 一日 三回、食事の あとで （　　） ください。",
+      "choices": [
+        "すって",
+        "かんで",
+        "のんで",
+        "たべて"
+      ],
+      "answer": 2,
+      "explanation": "In Japanese you \"drink\" medicine: 薬を のむ."
+    },
+    {
+      "id": "n4-cx-008",
+      "type": "CONTEXT",
+      "prompt": "日本では、家に 入る とき、くつを （　　）。",
+      "choices": [
+        "かぶります",
+        "ぬぎます",
+        "はきます",
+        "しめます"
+      ],
+      "answer": 1,
+      "explanation": "You take off shoes: くつを ぬぐ. はく is to put them on."
+    },
+    {
+      "id": "n4-cx-009",
+      "type": "CONTEXT",
+      "prompt": "テストの 前に、（　　） 復習しました。",
+      "choices": [
+        "しっかり",
+        "はっきり",
+        "すっかり",
+        "にっこり"
+      ],
+      "answer": 0,
+      "explanation": "しっかり means thoroughly, properly."
+    },
+    {
+      "id": "n4-cx-010",
+      "type": "CONTEXT",
+      "prompt": "部屋が 暗いので、電気を （　　） ください。",
+      "choices": [
+        "しめて",
+        "つけて",
+        "けして",
+        "あけて"
+      ],
+      "answer": 1,
+      "explanation": "電気を つける means to turn on the light."
+    },
+    {
+      "id": "n4-cx-011",
+      "type": "CONTEXT",
+      "prompt": "京都は 古い お寺が 多くて、とても （　　） 町です。",
+      "choices": [
+        "有名な",
+        "簡単な",
+        "丁寧な",
+        "残念な"
+      ],
+      "answer": 0,
+      "explanation": "A city with many old temples is 有名 (famous)."
+    },
+    {
+      "id": "n4-cx-012",
+      "type": "CONTEXT",
+      "prompt": "デパートで この 服を （　　） みましたが、小さかったです。",
+      "choices": [
+        "はいて",
+        "かぶって",
+        "しめて",
+        "着て"
+      ],
+      "answer": 3,
+      "explanation": "Clothes for the upper body or whole body are 着る. はく is for shoes, trousers and skirts."
+    },
+    {
+      "id": "n4-pa-001",
+      "type": "PARAPHRASE",
+      "prompt": "兄は <u>さっき</u> 出かけました。",
+      "choices": [
+        "兄は もうすぐ 出かけます。",
+        "兄は ずっと 前に 出かけました。",
+        "兄は 一時間 あとに 出かけます。",
+        "兄は 少し 前に 出かけました。"
+      ],
+      "answer": 3,
+      "explanation": "さっき means a little while ago: 少し 前に."
+    },
+    {
+      "id": "n4-pa-002",
+      "type": "PARAPHRASE",
+      "prompt": "この 仕事は <u>簡単です</u>。",
+      "choices": [
+        "この 仕事は いそがしいです。",
+        "この 仕事は つまらないです。",
+        "この 仕事は やさしいです。",
+        "この 仕事は むずかしいです。"
+      ],
+      "answer": 2,
+      "explanation": "簡単 means easy, the same as やさしい here."
+    },
+    {
+      "id": "n4-pa-003",
+      "type": "PARAPHRASE",
+      "prompt": "父は <u>たばこを やめました</u>。",
+      "choices": [
+        "父は たばこを 買いに 行きました。",
+        "父は 今は たばこを すって いません。",
+        "父は たばこを すいはじめました。",
+        "父は たばこを たくさん すいます。"
+      ],
+      "answer": 1,
+      "explanation": "やめる means to quit, so he no longer smokes."
+    },
+    {
+      "id": "n4-pa-004",
+      "type": "PARAPHRASE",
+      "prompt": "田中さんは <u>うそを つきました</u>。",
+      "choices": [
+        "田中さんは 本当じゃない ことを 言いました。",
+        "田中さんは 何も 言いませんでした。",
+        "田中さんは 大きい 声で 話しました。",
+        "田中さんは 正しい ことを 言いました。"
+      ],
+      "answer": 0,
+      "explanation": "うそを つく means to tell a lie: to say something untrue."
+    },
+    {
+      "id": "n4-pa-005",
+      "type": "PARAPHRASE",
+      "prompt": "明日の 会議は <u>中止に なりました</u>。",
+      "choices": [
+        "明日の 会議は 始まりました。",
+        "明日の 会議は 長く なりました。",
+        "明日の 会議は 早く なりました。",
+        "明日の 会議は なくなりました。"
+      ],
+      "answer": 3,
+      "explanation": "中止 means cancellation, so the meeting won't take place."
+    },
+    {
+      "id": "n4-pa-006",
+      "type": "PARAPHRASE",
+      "prompt": "妹は <u>おしゃべり</u>です。",
+      "choices": [
+        "妹は よく 食べます。",
+        "妹は よく 笑います。",
+        "妹は よく 話します。",
+        "妹は あまり 話しません。"
+      ],
+      "answer": 2,
+      "explanation": "おしゃべり describes someone who talks a lot."
+    },
+    {
+      "id": "n4-us-001",
+      "type": "USAGE",
+      "prompt": "るす",
+      "choices": [
+        "買い物を して、さいふの 中が るすに なりました。",
+        "友だちの 家に 行きましたが、るすでした。",
+        "今日は 学校が るすなので、家で 休みます。",
+        "すみません、この 席は るすですか。"
+      ],
+      "answer": 1,
+      "explanation": "るす means nobody is home. The others need 休み (day off), 空いて (free) and 空 (empty)."
+    },
+    {
+      "id": "n4-us-002",
+      "type": "USAGE",
+      "prompt": "こまかい",
+      "choices": [
+        "野菜を こまかく 切って ください。",
+        "この 部屋は こまかいので、ソファが 入りません。",
+        "田中さんは いつも こまかい 声で 話します。",
+        "弟は まだ こまかいので、一人で 電車に 乗れません。"
+      ],
+      "answer": 0,
+      "explanation": "こまかい means fine or finely chopped. The others need せまい, 小さい and 小さい."
+    },
+    {
+      "id": "n4-us-003",
+      "type": "USAGE",
+      "prompt": "たおれる",
+      "choices": [
+        "階段から たおれて、けがを しました。",
+        "雨が たおれて きました。",
+        "値段が たおれて、安く なりました。",
+        "強い 風で 木が たおれました。"
+      ],
+      "answer": 3,
+      "explanation": "たおれる means to fall over. The others need 落ちて, 降って and 下がって."
+    },
+    {
+      "id": "n4-us-004",
+      "type": "USAGE",
+      "prompt": "したく",
+      "choices": [
+        "毎日 したくを して、体を じょうぶに します。",
+        "わたしの したくは 医者に なる ことです。",
+        "もう すぐ 出かけるので、したくを して ください。",
+        "先生の したくを よく 聞いて ください。"
+      ],
+      "answer": 2,
+      "explanation": "したく means getting ready. The others need 話, 運動 and 夢."
+    },
+    {
+      "id": "n4-us-005",
+      "type": "USAGE",
+      "prompt": "ひさしぶり",
+      "choices": [
+        "ひさしぶりに 宿題を 出して ください。",
+        "ひさしぶりに 高校の 友だちに 会いました。",
+        "田中さんは ひさしぶりに 来るので、もう 少し 待ちましょう。",
+        "電車が ひさしぶりに 来ないので、タクシーで 行きました。"
+      ],
+      "answer": 1,
+      "explanation": "ひさしぶり means for the first time in a long while. The others need 遅れて, なかなか and 早く."
+    },
+    {
+      "id": "n4-us-006",
+      "type": "USAGE",
+      "prompt": "ねっしん",
+      "choices": [
+        "学生たちは ねっしんに 先生の 話を 聞いて います。",
+        "今日は ねっしんが あるので、学校を 休みます。",
+        "この スープは ねっしんなので、気を つけて ください。",
+        "夏は ねっしんな 日が 続きます。"
+      ],
+      "answer": 0,
+      "explanation": "ねっしん means eager or keen. The others need 熱, 熱い and 暑い."
+    }
+  ]
+}

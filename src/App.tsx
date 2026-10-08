@@ -28,6 +28,7 @@ import NewsReaderPage from "./pages/NewsReaderPage";
 import DailyPracticePage from "./pages/DailyPracticePage";
 import PhraseSearchPage from "./pages/PhraseSearchPage";
 import QuickQuizPage from "./pages/QuickQuizPage";
+import JlptPracticePage from "./pages/JlptPracticePage";
 
 export default function App() {
   return (
@@ -54,6 +55,9 @@ export default function App() {
           <Route path="/daily-practice" element={<DailyPracticePage />} />
           <Route path="/phrase-search" element={<PhraseSearchPage />} />
           <Route path="/quick-quiz" element={<QuickQuizPage />} />
+          <Route path="/jlpt" element={<JlptPracticePage />} />
+          <Route path="/jlpt/:level" element={<JlptPracticePage />} />
+          <Route path="/jlpt/:level/:section" element={<JlptPracticePage />} />
           <Route path="/grammar/:level" element={<GrammarQuizPage />} />
           <Route path="/grammar-lessons/:level" element={<GrammarLessonPage />} />
           <Route path="/news-reader/:level/:articleId" element={<NewsReaderPage />} />

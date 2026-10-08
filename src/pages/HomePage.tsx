@@ -346,6 +346,27 @@ export default function HomePage() {
         </>
       )}
 
+      {/* JLPT 模擬練習 */}
+      <div className="mt-8 mb-8">
+        <div className="mb-4">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-1">JLPT 模擬練習</h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400">文字語彙・文法・読解，模擬正式考題型</p>
+        </div>
+        <button
+          onClick={() => navigate("/jlpt")}
+          className="w-full bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white rounded-2xl p-5 flex items-center gap-4 transition-colors tap-active shadow-sm"
+        >
+          <div className="text-4xl">📝</div>
+          <div className="text-left">
+            <div className="text-lg font-bold">JLPT 考古練習</div>
+            <div className="text-xs opacity-80 mt-0.5">N5 / N4 / N3 — 開源題庫</div>
+          </div>
+          <svg className="w-5 h-5 ml-auto opacity-60" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </button>
+      </div>
+
       {/* 日本旅遊推薦 — 移到最下面 */}
       <div className="mt-12 mb-8">
         <div className="mb-4">
