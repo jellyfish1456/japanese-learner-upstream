@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { recordAction } from "../lib/streak";
 
@@ -7,6 +7,8 @@ interface VocabItem {
   japanese: string;
   hiragana: string;
   simple_chinese: string;
+  full_explanation: string;
+  example_chinese?: string;
 }
 
 interface VocabDataset {
@@ -42,6 +44,19 @@ interface QuizQuestion {
   hint?: string;
   choices: string[];
   correctIndex: number;
+  explanation: string;
+  grammarName?: string;
+}
+
+interface AnswerRecord {
+  type: "vocab" | "grammar";
+  question: string;
+  hint?: string;
+  correctAnswer: string;
+  yourAnswer: string;
+  correct: boolean;
+  explanation: string;
+  grammarName?: string;
 }
 
 interface WrongRecord {
@@ -115,6 +130,7 @@ function buildQuestions(count: number): QuizQuestion[] {
       hint: v.hiragana,
       choices,
       correctIndex: choices.indexOf(v.simple_chinese),
+      explanation: v.full_explanation,
     });
   }
 
@@ -126,6 +142,8 @@ function buildQuestions(count: number): QuizQuestion[] {
       question: g.sentence,
       choices,
       correctIndex: choices.indexOf(g.answer),
+      explanation: g.explanation,
+      grammarName: g.grammar,
     });
   }
 
@@ -229,6 +247,96 @@ function HistoryView({ onStart }: { onStart: () => void }) {
   );
 }
 
+function ReviewScreen({
+  answers,
+  score,
+  total,
+  elapsed,
+  onRetry,
+  onHistory,
+}: {
+  answers: AnswerRecord[];
+  score: number;
+  total: number;
+  elapsed: number;
+  onRetry: () => void;
+  onHistory: () => void;
+}) {
+  const perfect = score === total;
+  return (
+    <div className="pb-12">
+      <div className="text-center mb-6">
+        <div className="text-6xl mb-3">{perfect ? "🎉" : score >= 3 ? "👍" : "💪"}</div>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-1">
+          {perfect ? "全對！" : `${score} / ${total}`}
+        </h2>
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          用時 {elapsed} 秒
+          <span className="mx-2">·</span>
+          {perfect ? "太厲害了！" : score >= 3 ? "不錯喔，繼續加油！" : "多練幾次就會進步！"}
+        </p>
+      </div>
+
+      <h3 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">每題解說</h3>
+      <div className="space-y-3 mb-8">
+        {answers.map((a, i) => (
+          <div
+            key={i}
+            className={`rounded-xl border-2 p-4 ${
+              a.correct
+                ? "bg-green-50 dark:bg-green-900/10 border-green-200 dark:border-green-800"
+                : "bg-red-50 dark:bg-red-900/10 border-red-200 dark:border-red-800"
+            }`}
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-lg">{a.correct ? "✅" : "❌"}</span>
+              <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
+                a.type === "vocab"
+                  ? "bg-blue-100 dark:bg-blue-800/40 text-blue-600 dark:text-blue-400"
+                  : "bg-purple-100 dark:bg-purple-800/40 text-purple-600 dark:text-purple-400"
+              }`}>
+                {a.type === "vocab" ? "單字" : "文法"}
+              </span>
+              {a.grammarName && (
+                <span className="text-xs text-purple-500 dark:text-purple-400 font-medium">{a.grammarName}</span>
+              )}
+            </div>
+
+            <p className="text-base font-bold text-gray-900 dark:text-gray-50">{a.question}</p>
+            {a.hint && <p className="text-xs text-gray-400 mt-0.5">{a.hint}</p>}
+
+            {!a.correct && (
+              <div className="mt-2 flex gap-4 text-xs">
+                <span><span className="text-red-500 font-bold">✗</span> {a.yourAnswer}</span>
+                <span><span className="text-green-600 dark:text-green-400 font-bold">✓</span> {a.correctAnswer}</span>
+              </div>
+            )}
+
+            <div className="mt-2 pt-2 border-t border-gray-200/50 dark:border-gray-700/50">
+              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{a.explanation}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex gap-3 justify-center">
+        <button
+          onClick={onRetry}
+          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-colors tap-active"
+        >
+          再來 5 題
+        </button>
+        <button
+          onClick={onHistory}
+          className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-xl font-semibold transition-colors tap-active"
+        >
+          查看紀錄
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function QuickQuizPage() {
   const navigate = useNavigate();
   const [quizzing, setQuizzing] = useState(false);
@@ -239,7 +347,7 @@ export default function QuickQuizPage() {
   const [done, setDone] = useState(false);
   const [startTime, setStartTime] = useState(0);
   const [elapsed, setElapsed] = useState(0);
-  const [wrongs, setWrongs] = useState<WrongRecord[]>([]);
+  const [answers, setAnswers] = useState<AnswerRecord[]>([]);
 
   const startQuiz = useCallback(() => {
     setQuestions(buildQuestions(5));
@@ -249,7 +357,7 @@ export default function QuickQuizPage() {
     setDone(false);
     setStartTime(Date.now());
     setElapsed(0);
-    setWrongs([]);
+    setAnswers([]);
     setQuizzing(true);
   }, []);
 
@@ -259,20 +367,23 @@ export default function QuickQuizPage() {
     (idx: number) => {
       if (selected !== null || !q) return;
       setSelected(idx);
-      if (idx === q.correctIndex) {
+      const isCorrect = idx === q.correctIndex;
+      if (isCorrect) {
         setScore((s) => s + 1);
-      } else {
-        setWrongs((prev) => [
-          ...prev,
-          {
-            type: q.type,
-            question: q.question,
-            hint: q.hint,
-            correctAnswer: q.choices[q.correctIndex],
-            yourAnswer: q.choices[idx],
-          },
-        ]);
       }
+      setAnswers((prev) => [
+        ...prev,
+        {
+          type: q.type,
+          question: q.question,
+          hint: q.hint,
+          correctAnswer: q.choices[q.correctIndex],
+          yourAnswer: q.choices[idx],
+          correct: isCorrect,
+          explanation: q.explanation,
+          grammarName: q.grammarName,
+        },
+      ]);
       setTimeout(() => {
         if (current + 1 >= questions.length) {
           setDone(true);
@@ -291,6 +402,11 @@ export default function QuickQuizPage() {
       setElapsed(sec);
       recordAction();
       const now = new Date();
+      const wrongs: WrongRecord[] = answers
+        .filter((a) => !a.correct)
+        .map(({ type, question, hint, correctAnswer, yourAnswer }) => ({
+          type, question, hint, correctAnswer, yourAnswer,
+        }));
       saveSession({
         date: now.toLocaleDateString("zh-TW", { month: "2-digit", day: "2-digit" }),
         time: now.toLocaleTimeString("zh-TW", { hour: "2-digit", minute: "2-digit", hour12: false }),
@@ -322,51 +438,15 @@ export default function QuickQuizPage() {
   if (!q) return null;
 
   if (done) {
-    const perfect = score === questions.length;
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
-        <div className="text-6xl mb-4">{perfect ? "🎉" : score >= 3 ? "👍" : "💪"}</div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-2">
-          {perfect ? "全對！" : `${score} / ${questions.length}`}
-        </h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
-          用時 {elapsed} 秒
-        </p>
-        <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">
-          {perfect ? "太厲害了！" : score >= 3 ? "不錯喔，繼續加油！" : "多練幾次就會進步！"}
-        </p>
-
-        {wrongs.length > 0 && (
-          <div className="w-full max-w-sm mb-6 text-left space-y-2">
-            <h3 className="text-xs font-bold text-red-400 uppercase tracking-wide text-center mb-2">錯題回顧</h3>
-            {wrongs.map((w, i) => (
-              <div key={i} className="bg-red-50 dark:bg-red-900/20 rounded-lg p-3">
-                <p className="text-sm font-bold text-gray-900 dark:text-gray-50">{w.question}</p>
-                {w.hint && <p className="text-xs text-gray-400">{w.hint}</p>}
-                <div className="mt-1 flex gap-4 text-xs">
-                  <span><span className="text-red-500">✗</span> {w.yourAnswer}</span>
-                  <span><span className="text-green-600 dark:text-green-400">✓</span> {w.correctAnswer}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        <div className="flex gap-3">
-          <button
-            onClick={startQuiz}
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-colors tap-active"
-          >
-            再來 5 題
-          </button>
-          <button
-            onClick={() => setQuizzing(false)}
-            className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-xl font-semibold transition-colors tap-active"
-          >
-            查看紀錄
-          </button>
-        </div>
-      </div>
+      <ReviewScreen
+        answers={answers}
+        score={score}
+        total={questions.length}
+        elapsed={elapsed}
+        onRetry={startQuiz}
+        onHistory={() => setQuizzing(false)}
+      />
     );
   }
 
