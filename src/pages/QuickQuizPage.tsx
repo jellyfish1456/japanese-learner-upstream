@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { recordAction } from "../lib/streak";
 
@@ -345,9 +345,10 @@ export default function QuickQuizPage() {
   const [selected, setSelected] = useState<number | null>(null);
   const [score, setScore] = useState(0);
   const [done, setDone] = useState(false);
-  const [startTime, setStartTime] = useState(0);
+  const startTimeRef = useRef(0);
   const [elapsed, setElapsed] = useState(0);
   const [answers, setAnswers] = useState<AnswerRecord[]>([]);
+  const savedRef = useRef(false);
 
   const startQuiz = useCallback(() => {
     setQuestions(buildQuestions(5));
@@ -355,7 +356,8 @@ export default function QuickQuizPage() {
     setSelected(null);
     setScore(0);
     setDone(false);
-    setStartTime(Date.now());
+    startTimeRef.current = Date.now();
+    savedRef.current = false;
     setElapsed(0);
     setAnswers([]);
     setQuizzing(true);
@@ -397,8 +399,9 @@ export default function QuickQuizPage() {
   );
 
   useEffect(() => {
-    if (done) {
-      const sec = Math.round((Date.now() - startTime) / 1000);
+    if (done && !savedRef.current) {
+      savedRef.current = true;
+      const sec = Math.round((Date.now() - startTimeRef.current) / 1000);
       setElapsed(sec);
       recordAction();
       const now = new Date();
@@ -416,7 +419,7 @@ export default function QuickQuizPage() {
         wrongs,
       });
     }
-  }, [done]);
+  }, [done, answers, score, questions.length]);
 
   if (!quizzing) {
     return (

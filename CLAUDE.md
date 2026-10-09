@@ -57,6 +57,8 @@ See `src/hooks/useDialogues.ts` and `src/hooks/useGrammarQuiz.ts` for reference.
 | YouTube 跟讀 | `/shadowing/youtube` | YouTube CC via proxy |
 | 動詞變化 | `/verb-conjugation` | `src/data/verbConjugation.ts` |
 | **克漏字測驗** | `/grammar/:level` | `data/grammar-quiz/grammar-quiz-n{5,4,3}.json` |
+| 速測五題 | `/quick-quiz` | random vocab+grammar, history in localStorage |
+| JLPT 模擬練習 | `/jlpt`, `/jlpt/:level`, `/jlpt/:level/:section` | `data/jlpt-questions/{n5,n4,n3}/*.json` (Open-JLPT) |
 | Settings | `/settings` | — |
 
 ---
@@ -111,8 +113,10 @@ data/
 
 ### TTS (Web Speech API)
 - `src/lib/tts.ts`: `getBestJapaneseVoice()` — priority: Kyoko > Google 日本語 > any `ja`
+- `src/lib/ttsVoice.ts`: `pickBestVoice()` — score-based voice ranking (cloud/premium preferred), user-selectable voice saved in localStorage
 - `src/components/SpeakButton.tsx`: reads `speechRate` from `loadSettings()`
 - Listening session speed: `useListeningSession(level, 100, speed)` — speedRef updated via `useEffect`
+- Voice picker in `ListeningSessionPage.tsx` — collapsible list, preview on select
 
 ### YouTube Caption Sync
 - Primary: `api/captions.js` Vercel serverless function
@@ -134,6 +138,10 @@ data/
 /shadowing/:level           → ShadowingListPage
 /shadowing/:level/:id       → ShadowingPage
 /verb-conjugation           → VerbConjugationPage
+/quick-quiz                 → QuickQuizPage
+/jlpt                       → JlptPracticePage
+/jlpt/:level                → JlptPracticePage
+/jlpt/:level/:section       → JlptPracticePage
 /settings                   → SettingsPage
 ```
 

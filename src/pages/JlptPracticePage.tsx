@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useMemo } from "react";
+import { useState, useCallback, useEffect, useMemo, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { recordAction } from "../lib/streak";
 
@@ -120,7 +120,7 @@ function LevelPicker() {
   const navigate = useNavigate();
   const levels = ["N5", "N4", "N3"];
 
-  const history = useMemo(loadJlptHistory, []);
+  const history = useMemo(() => loadJlptHistory(), []);
   const levelColors = ["bg-green-500", "bg-blue-500", "bg-purple-500"];
 
   return (
@@ -279,15 +279,22 @@ function QuizSession({ level, section }: { level: string; section: string }) {
   const [showExplanation, setShowExplanation] = useState(false);
   const [answers, setAnswers] = useState<AnswerRecord[]>([]);
   const [done, setDone] = useState(false);
-  const [startTime] = useState(Date.now());
+  const startTimeRef = useRef(0);
   const [elapsed, setElapsed] = useState(0);
+  const savedRef = useRef(false);
+
+  useEffect(() => {
+    startTimeRef.current = Date.now();
+    savedRef.current = false;
+  }, [questions]);
 
   const score = answers.filter((a) => a.correct).length;
   const q = questions[current];
 
   useEffect(() => {
-    if (done) {
-      const sec = Math.round((Date.now() - startTime) / 1000);
+    if (done && !savedRef.current) {
+      savedRef.current = true;
+      const sec = Math.round((Date.now() - startTimeRef.current) / 1000);
       setElapsed(sec);
       recordAction();
       const now = new Date();
@@ -300,7 +307,7 @@ function QuizSession({ level, section }: { level: string; section: string }) {
         total: questions.length,
       });
     }
-  }, [done]);
+  }, [done, level, section, score, questions.length]);
 
   const handleSelect = useCallback((idx: number) => {
     if (selected !== null) return;
